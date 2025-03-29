@@ -1,0 +1,3 @@
+trae
+cursor
+windsurf
