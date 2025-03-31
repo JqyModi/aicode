@@ -1,0 +1,4247 @@
+{
+  "data": {
+    "reviewCount": 269,
+    "reviews": [
+      {
+        "value": {
+          "id": 12373705799,
+          "rating": 2,
+          "title": "读音这么卡啥意思呢",
+          "review": "我请问一下 也是充了会员使用背词功能  例句点一下卡一下  使用体验十分糟糕 一句话 读音都听不全  第一遍在这个音卡  下一遍可能在另一个音卡  希望可以改进 词语更是卡 像网络无法加载的那种卡顿",
+          "created": null,
+          "nickname": "e啥意思",
+          "storeFront": "CN",
+          "appVersionString": "8.13.0",
+          "lastModified": 1740929665000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 2501995840,
+          "rating": 2,
+          "title": "更新后的问题",
+          "review": "点进去收藏之后不能退回搜索界面，那个关注功能不管是关注还是取消关注都没有任何反应，在收藏根目录点还会干脆直接跳出。\n而且之前创建的文件夹，里面只要有一个之前下载的词，就会整个文件夹都不能编辑，那还不如干脆直接自己找，不能继续收集还有什么意义？",
+          "created": null,
+          "nickname": "444455",
+          "storeFront": "CN",
+          "appVersionString": "2.3.0",
+          "lastModified": 1525404435000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10944135300,
+          "rating": 2,
+          "title": "老用户",
+          "review": "是做了很多新功能，但是内容上连音调这种最基础的东西都无法保证。我每天拿来背30个单词，每天都能发现标注的音调和语音不一致，由此可见这样的错误非常普遍。\n这样很不合格。\n很多时候发音如果不正确，表达出来会产生歧义，想要深入学习的家人们可以去找找能保证准确的资源，否则后期还要努力纠正，目前它不适合这样的学习。\n学着玩没有交流需求只是为了看懂的话倒还是可以用用的……",
+          "created": null,
+          "nickname": "赛赛的小羊浴衣衣",
+          "storeFront": "CN",
+          "appVersionString": "7.6.5",
+          "lastModified": 1708070002000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3621548701,
+          "rating": 2,
+          "title": "更新太频繁",
+          "review": "总是跳出来更新通知，跳出来就算了通知还那么长，好不容易更新过现在要我登录之前的账号我早就不记得了非常暴躁现在以前收藏的单词全没了就因为我不记得上一次是什么账号",
+          "created": null,
+          "nickname": "Ajhuih",
+          "storeFront": "CN",
+          "appVersionString": "5.1.0",
+          "lastModified": 1546837969000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5770783161,
+          "rating": 2,
+          "title": "越改版越难用，做好字典的本分",
+          "review": "原来可以很轻易的查到我想要的词，现在越来越难查到，经常还有词查不出，原来我可以直接输中文反查日语，或者简体也可以查到我想要的词，现在可能输错浊音清音或者振假名不对就查不出，我要是能记那么清楚我还查什么字典！页面花里胡哨，动不动就跳转外部网页，雅虎webi因为墙打半天又打不开，我自己不知道用百度是咋，我还不是因为百度翻译不行才自己查字典的",
+          "created": null,
+          "nickname": "青虾ayumi",
+          "storeFront": "CN",
+          "appVersionString": "6.0.10",
+          "lastModified": 1586175890000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5487260445,
+          "rating": 2,
+          "title": "希望提供一个基于旧版本的纯净版",
+          "review": "作为一个购买了pro版的用户，我在使用了一个月后就付费购买了moji的pro版，因为moji辞书真的是市面上最好用的辞书没有之一，但是最近升级了之后，添加了很多功能。作为开发商而言肯定是为了用户体验，但是对于使用者而言，辞书就是辞书，无论你怎么样增加社交功能他也只是一个辞书。当然希望社交功能的用户肯定是存在的，但是能不能推出一款旧版本的纯净版辞书给我们这种只为了查找单词的老用户呢？",
+          "created": null,
+          "nickname": "妮打野",
+          "storeFront": "CN",
+          "appVersionString": "6.0.5",
+          "lastModified": 1580828260000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7404896305,
+          "rating": 2,
+          "title": "没有点击单词或词组出现释义的功能让软件内置阅读很难受",
+          "review": "在遇到不认识的单词时，相较其他成熟的日语辞书能单击显示独立词组释义及读法超链接的弹窗，Moji的大段直接翻译和朗读让初学者难以学习及更深入了解软件内置的推送新闻及语句。",
+          "created": null,
+          "nickname": "Yuukang",
+          "storeFront": "CN",
+          "appVersionString": "6.8.1",
+          "lastModified": 1622354257000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3565550990,
+          "rating": 2,
+          "title": "升级后pro账户自动退出",
+          "review": "升级后账号不能平滑自动登录，需要重新登录，但是我忘记账号啦！！这个要怎么找回？账号已升级为pro版，现在登不进去了，只能选择忘记密码，但是不管输入什么邮箱都显示已发送邮件！一是不会判断该账号有没有注册，而且没有收到任何邮件！",
+          "created": null,
+          "nickname": "客官捡肥皂不",
+          "storeFront": "CN",
+          "appVersionString": "5.0.0",
+          "lastModified": 1545619550000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 6534343,
+            "response": "⚠️老用户移植方法：直接用自己的邮箱注册新用户即可，老板呢信息会自动移植，Pro没恢复的话，把注册邮箱告诉我就好。收藏数据，以前有云端同步过的，可以帮你恢复数据的",
+            "lastModified": 1545666762000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9054037931,
+          "rating": 2,
+          "title": "不管搜索什么都要联网",
+          "review": "moji现在太离谱了，不管搜什么都要联网转圈圈，关闭云端预测也不管用，感觉是上传数据以统计热门词汇用的，打开飞行模式才能正常流畅地搜索，这种为了搜集数据牺牲用户体验的行为实在太难看",
+          "created": null,
+          "nickname": "文桦枝",
+          "storeFront": "CN",
+          "appVersionString": "6.21.0",
+          "lastModified": 1662365360000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 31879328,
+            "response": "您好，很抱歉给您带来不便，使用上遇到问题您可以联系我们微信公众号【MOJi辞書】右下角【专属客服】，我们会有客服专员为您解决的~",
+            "lastModified": 1662513675000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7954974006,
+          "rating": 2,
+          "title": "点进单词详情页加载时间过长",
+          "review": "点进单词详情页加载时间过长，以前都不会。可以的话请离线保存我打开过的单词，不要每次点进去都加载个三秒，学习时间是很宝贵的。以前都可以秒出为什么更新了之后就要等……",
+          "created": null,
+          "nickname": "大头乔头很大",
+          "storeFront": "CN",
+          "appVersionString": "6.11.1",
+          "lastModified": 1635234596000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10289636679,
+          "rating": 2,
+          "title": "会员一月一涨价",
+          "review": "我真服了吃相很难看而且五段用法和平假名错误这些反馈了很多次很久也没改正，系统倒是天天更新，每次进去就问我升不升级版本真心烦",
+          "created": null,
+          "nickname": "モブ404",
+          "storeFront": "CN",
+          "appVersionString": "7.1.1",
+          "lastModified": 1692776579000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 2669682849,
+          "rating": 2,
+          "title": "刚下载就顺便买了12块的那个",
+          "review": "一开始感觉还不错，当成辞书用，结果很多词根本没有或者翻译错误，于是不敢用了，那个测试看起来好像还不错，但是没怎么用过",
+          "created": null,
+          "nickname": "卡掉线多少次算完！",
+          "storeFront": "CN",
+          "appVersionString": "3.1.1",
+          "lastModified": 1528607607000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6677352210,
+          "rating": 2,
+          "title": "不如不更新，何苦",
+          "review": "用了多年，让我出钱支持一下我完全可以。但是更新这么多没用的分散精力的功能是搞什么。我付了25元，还是找不到以前的搜索记录了，别给我推荐乱七八糟的收藏，我知道我要查什么。太无语了",
+          "created": null,
+          "nickname": "兔八个",
+          "storeFront": "CN",
+          "appVersionString": "6.5.0",
+          "lastModified": 1606142900000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6437766909,
+          "rating": 2,
+          "title": "测试部分不好用",
+          "review": "搞不懂为什么要设置什么鬼计划，啰里八嗦。设置的时候还不能直接选择默认文件夹，需要多点一下选择自定义文件夹，真的很烦",
+          "created": null,
+          "nickname": "舒坤111111",
+          "storeFront": "CN",
+          "appVersionString": "6.3.1",
+          "lastModified": 1600335878000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1972145561,
+          "rating": 2,
+          "title": "很多动词的类别标错了！请开发人员注意动词属于几类",
+          "review": "搜索功能还行，但是动词的归类出现很多错误，将许多五段动词归到一段动词？误人子弟啊……希望后续版本可以修改这个严重的错误！！",
+          "created": null,
+          "nickname": "心酸❤️",
+          "storeFront": "CN",
+          "appVersionString": "2.0.0",
+          "lastModified": 1512471891000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1941689082,
+          "rating": 2,
+          "title": "不推荐深度使用",
+          "review": "用了大半年，UI操作非常友好，但深度使用不禁让人怀疑单词意思的来源是否科学。\n为什么单词有很多意思和コトバンク、goo辞書之类的知名电子词典不一致？\n有些单词意思不全。\n有些单词写了两个意思，也有例句，但第二个意思的例句对应的是第一个意思的。\n还有用不同的方式来叙述同一个意思，当成两个意思的。",
+          "created": null,
+          "nickname": "一个人在雨声中静默",
+          "storeFront": "CN",
+          "appVersionString": "2.0.0",
+          "lastModified": 1511407484000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5564926354,
+          "rating": 2,
+          "title": "更新后很多BUG",
+          "review": "之前就是一个字典，超好，更新了很多花哨，字典功能却是bug频出。如收藏小星星无法点亮，就无法识别一个单词是否已收藏，没有联网时根本无法收藏单词，这太不方便… 真的不要其他的功能，就简简单单做个字典好吗！",
+          "created": null,
+          "nickname": "皮皮虾战士",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582368160000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9169267226,
+          "rating": 2,
+          "title": "吃相难看",
+          "review": "哪怕准确输入了词汇也不会显示词条 只显示联想词条 然而想看联想词条的话要开会员 被一些特色功能吸引过来 结果发现不仅特色功能要花钱 最基本的查单词竟然也要花钱 不花钱连基础词典功能都做不到 吃相过于难看了吧？",
+          "created": null,
+          "nickname": "berylnina",
+          "storeFront": "CN",
+          "appVersionString": "6.23.0",
+          "lastModified": 1665377094000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 32638111,
+            "response": "您好，很抱歉给您带来不便，目前该问题已修复，您尝试更新至最新版本看看呢。",
+            "lastModified": 1666081655000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5457314036,
+          "rating": 2,
+          "title": "升级变难用了",
+          "review": "都点了忽略升级的提示，居然还是自己给我升了级 花里胡哨，尽是些不必要的东西。原来用得好好的，那么多年，突然给我升级，难受得一批。真的非常非常难过。情绪直接崩溃了。大概也不会被理解吧。",
+          "created": null,
+          "nickname": "うっsthvxgjn",
+          "storeFront": "CN",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580189124000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7842716209,
+          "rating": 2,
+          "title": "单词吞音",
+          "review": "球球你们改进一下吧，记单词测试的时候几乎每个单词完了都会吞音，真的很难受，还有有时候单词标注假名跟发音完全不一样，都不知道哪个是对的",
+          "created": null,
+          "nickname": "dhbebstcuajabvdbfkeke",
+          "storeFront": "CN",
+          "appVersionString": "6.11.0",
+          "lastModified": 1632552561000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8232752182,
+          "rating": 2,
+          "title": "搜索空白能解决一下吗",
+          "review": "真的太难受了更新了这么多次还是这样\n和以前的使用体验大相径庭",
+          "created": null,
+          "nickname": "24·",
+          "storeFront": "CN",
+          "appVersionString": "6.15.0",
+          "lastModified": 1642005963000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9140312351,
+          "rating": 2,
+          "title": "更新以前很好用",
+          "review": "去年充的会员，当时功能很多，为了听歌充的。现在更完和以前完全不一样了，一点都不好用，都不想再打开这个软件了",
+          "created": null,
+          "nickname": "小困爆",
+          "storeFront": "CN",
+          "appVersionString": "6.22.0",
+          "lastModified": 1664635807000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6984215447,
+          "rating": 2,
+          "title": "每次更新移植数据都会有大量收藏的单词丢失",
+          "review": "每次更新移植数据都会有大量收藏的单词丢失，上次丢失三个文件夹，这次直接丢了整个大文件夹，我一年积累下来的词汇这下都找不回来了，还能不能行了啊？？？？？",
+          "created": null,
+          "nickname": "Zuifay",
+          "storeFront": "CN",
+          "appVersionString": "6.7.0",
+          "lastModified": 1613113364000,
+          "helpfulViews": 0,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21174640,
+            "response": "你好，app内“我的”界面，点击联系我们，选择喜欢的方式反馈。\r",
+            "lastModified": 1613786704000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3521478825,
+          "rating": 2,
+          "title": "恢复购买有BUG",
+          "review": "恢复购买后，没法添加收藏到自己建立的文件夹，只能收藏在默认根目录下面。希望可以尽快改进。",
+          "created": null,
+          "nickname": "nomadic_lycanthrope",
+          "storeFront": "CN",
+          "appVersionString": "4.4.0",
+          "lastModified": 1544594543000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 6534396,
+            "response": "设置里可以选择是否开启默认文件夹的",
+            "lastModified": 1545667164000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7933726512,
+          "rating": 2,
+          "title": "为什么发音和假名不一样",
+          "review": "为什么测试里面的例句发音好多都和假名不一样啊？而且经常闪退，我刚背了十几个词就已经被退出两次了。",
+          "created": null,
+          "nickname": "鬼一oo",
+          "storeFront": "CN",
+          "appVersionString": "6.11.1",
+          "lastModified": 1634713605000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1950106063,
+          "rating": 2,
+          "title": "怎么回事？",
+          "review": "原来收藏新单词在最上面，更新之后突然跑到最后面，之前收藏的还是原来的顺序，什么鬼啊！",
+          "created": null,
+          "nickname": "ddslkmhh",
+          "storeFront": "CN",
+          "appVersionString": "2.0.0",
+          "lastModified": 1511697334000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10825012636,
+          "rating": 2,
+          "title": "频繁闪退",
+          "review": "调试没问题再上线吧，另外b站账号我建议把那个运营开除，他知道自己是指着什么语吃饭吗，情商真的太低了。",
+          "created": null,
+          "nickname": "ykjinse",
+          "storeFront": "CN",
+          "appVersionString": "7.6.2",
+          "lastModified": 1705330144000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9795815834,
+          "rating": 2,
+          "title": "越来越商品化了",
+          "review": "以前买一个会员终身，什么都能用，现在更新一次，功能就减少很多，需要重新买另外的会员！",
+          "created": null,
+          "nickname": "看书的你很美",
+          "storeFront": "CN",
+          "appVersionString": "6.31.0",
+          "lastModified": 1680858503000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5434291157,
+          "rating": 2,
+          "title": "本末倒置",
+          "review": "启动速度变慢了，加了一堆功能有啥用，打开词典后等半天才能查词。",
+          "created": null,
+          "nickname": "HolyBlade",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579689256000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7988101754,
+          "rating": 2,
+          "title": "差评啊",
+          "review": "就算恢复了基本会员 但是只要不登陆就不能用只能用搜词功能 其他一概不能使用",
+          "created": null,
+          "nickname": "因懒惰而无颜落色",
+          "storeFront": "CN",
+          "appVersionString": "6.12.0",
+          "lastModified": 1636035839000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5445428329,
+          "rating": 2,
+          "title": "希望恢复老版本",
+          "review": "之前的界面简洁，非常好，现在搞得花里胡哨，想退回老版本，感觉很不上手",
+          "created": null,
+          "nickname": "个h国以及vv",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579928160000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7849111298,
+          "rating": 2,
+          "title": "拜托干正事儿吧",
+          "review": "更新以后加载不出来啊，别的花里胡哨弄那么多，作为一个词典词条加载不出来，那不是舍本逐末么",
+          "created": null,
+          "nickname": "别烦人了行不行",
+          "storeFront": "CN",
+          "appVersionString": "6.11.0",
+          "lastModified": 1632705940000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7834823633,
+          "rating": 2,
+          "title": "更新建议",
+          "review": "新更新的版本太容易误触到收藏了，屏幕上的字数也变少了，希望改回原来的样子",
+          "created": null,
+          "nickname": "ダンムシン",
+          "storeFront": "CN",
+          "appVersionString": "6.11.0",
+          "lastModified": 1632357995000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 25318349,
+            "response": "您好，已经建议反馈，会在后续版本优化的~",
+            "lastModified": 1632622861000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6965061313,
+          "rating": 2,
+          "title": "不反对收费 但是收费前起码优化好吧",
+          "review": "在网页端上怎么也登不上去 邮箱也绑定不了 微信扫码也没有反应",
+          "created": null,
+          "nickname": ".39",
+          "storeFront": "CN",
+          "appVersionString": "6.6.0",
+          "lastModified": 1612699700000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1967543333,
+          "rating": 2,
+          "title": "喂喂我还不如不更新呢！！",
+          "review": "现在每日推送把以前的记录给删了也就罢了，还点不进去，一点就闪退，有没有搞错啊！！",
+          "created": null,
+          "nickname": "臣伏晞",
+          "storeFront": "CN",
+          "appVersionString": "2.0.0",
+          "lastModified": 1512312963000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6532091855,
+          "rating": 2,
+          "title": "求你了别再让我登陆了",
+          "review": "很失望，我只想查单词，不想参与任何社群活动，可以不要再打开就要我登陆吗。",
+          "created": null,
+          "nickname": ".Constellation.",
+          "storeFront": "CN",
+          "appVersionString": "6.4.0",
+          "lastModified": 1602624493000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5484654488,
+          "rating": 2,
+          "title": "更新以后的版本太垃圾了",
+          "review": "使用感很差就算了，查个单词还经常闪退。。。我寻思这更新来干什么？？",
+          "created": null,
+          "nickname": "Kiajik",
+          "storeFront": "CN",
+          "appVersionString": "6.0.5",
+          "lastModified": 1580774124000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5591448887,
+          "rating": 2,
+          "title": "查询单词非常卡顿",
+          "review": "我的手机是ip7，用moji也一年多了，这次大更新到6.0.0之后，我查询单词十分卡顿，输入单词至少需要五秒以上反应时间，之前都是秒出现。希望早日改进该问题",
+          "created": null,
+          "nickname": "qiangqingxi",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582886559000,
+          "helpfulViews": 0,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1390768463,
+          "rating": 2,
+          "title": "“专业”体现在哪里？",
+          "review": "单词的语音朗读，误读实在太多，令人失望。而且语音朗读过于生硬，应该不是日语母语使用者的录音。遗憾。",
+          "created": null,
+          "nickname": "Sigeru2008",
+          "storeFront": "CN",
+          "appVersionString": "1.2.0",
+          "lastModified": 1465361784000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5621298916,
+          "rating": 2,
+          "title": "闪退",
+          "review": "跟新之后之前收藏找不到了，还会精彩出现闪退的情况。\n又出现bug了，收藏整理的单词混乱有的还找不见了。",
+          "created": null,
+          "nickname": "hdべv",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1583450058000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5438906228,
+          "rating": 2,
+          "title": "我的收藏什么时候回来？？",
+          "review": "这次更新怎么回事，我的pro还要移植数据。移植要多久啊？？今天测试都还没做，收藏都没了搞个毛线球球",
+          "created": null,
+          "nickname": "啊伯茨的呢佛歌",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579788771000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5501184101,
+          "rating": 2,
+          "title": "老版本没升级的千万别升级",
+          "review": "老版本没升级暂时不要升级，界面改版了各种问题，查单词声音延迟，让人很难受",
+          "created": null,
+          "nickname": "Liulangshu",
+          "storeFront": "CN",
+          "appVersionString": "6.0.6",
+          "lastModified": 1581118775000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5431517800,
+          "rating": 2,
+          "title": "记录没了",
+          "review": "更新之后以前的历史记录都没了",
+          "created": null,
+          "nickname": "理财顾客",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579624259000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5432739975,
+          "rating": 2,
+          "title": "建议提供经典版",
+          "review": "新版太复杂了，希望提供选择",
+          "created": null,
+          "nickname": "我真是阿克苏市",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579653062000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": true,
+          "developerResponse": {
+            "responseId": 6549038,
+            "response": "直接注册，用自己的邮箱就好，然后信息会自动移植的，Pro没恢复的话，请通过app设置里的“联系我们”联系我哈",
+            "lastModified": 1545795117000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5455673241,
+          "rating": 2,
+          "title": "强烈建议不要更新！",
+          "review": "更新之前真的是很纯粹的词典软件，更完很杂乱跟有道似的，差评！",
+          "created": null,
+          "nickname": "嘻嘻嘻kk",
+          "storeFront": "CN",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580148054000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6397173172,
+          "rating": 2,
+          "title": "云端预测",
+          "review": "云端预测，这个功能做得太烂了，等半天都等不到个结果，还是之前的版本好用。",
+          "created": null,
+          "nickname": "lecia10111",
+          "storeFront": "CN",
+          "appVersionString": "6.3.0",
+          "lastModified": 1599298257000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7656055875,
+          "rating": 2,
+          "title": "花了25买完了，然后查单词还是要花钱订阅，要不要点脸啊，里面错误多得很，你去搜否这个字，下面例句读音没一个对的，错误太多了",
+          "review": "花了25买完了，然后查单词还是要花钱订阅，要不要点脸啊，里面错误多得很，你去搜否这个字，下面例句读音没一个对的，错误太多了",
+          "created": null,
+          "nickname": "alidre357",
+          "storeFront": "CN",
+          "appVersionString": "6.9.1",
+          "lastModified": 1628127366000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5485173298,
+          "rating": 2,
+          "title": "更新之后一直闪退",
+          "review": "希望快点修复",
+          "created": null,
+          "nickname": "Kougfs",
+          "storeFront": "CN",
+          "appVersionString": "6.0.5",
+          "lastModified": 1580786088000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11431603607,
+          "rating": 2,
+          "title": "不付月費看不到完整意思？",
+          "review": "等下最近更新好像一個詞彙只能看到其中一個意思？其他都被遮掉了要買會員才可以，強迫付費喔，會員福利應該是有更多的例句或是其他進階功能，現在是把基本字義直接閹割掉欸",
+          "created": null,
+          "nickname": "joker-build",
+          "storeFront": "TW",
+          "appVersionString": "8.2.8",
+          "lastModified": 1719550645000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 45158867,
+            "response": "您好，我们会不断听取建议，继续优化的！",
+            "lastModified": 1720573098000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7934624253,
+          "rating": 2,
+          "title": "账户禁用",
+          "review": "为什么我现在更新不了了，显示账户禁用，什么原因啊，其他的都可以下载啊",
+          "created": null,
+          "nickname": "远山深深",
+          "storeFront": "CN",
+          "appVersionString": "6.11.1",
+          "lastModified": 1634735307000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5556016835,
+          "rating": 2,
+          "title": "更新之后之前的数据都没啦",
+          "review": "有毒。之前辛辛苦苦手动输入的单词没有了。",
+          "created": null,
+          "nickname": "Sb小yuzi",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582195214000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6784287914,
+          "rating": 2,
+          "title": "建议不要把pro专享词条放在第一条",
+          "review": "更新了之后搜索词出来的第一条都是pro专享 很烦 每次都第一反应点进去 然后又要点两下才能退出来……无语😓",
+          "created": null,
+          "nickname": "pro词条可以不要放在第一条吗老点错",
+          "storeFront": "CN",
+          "appVersionString": "6.6.0",
+          "lastModified": 1608720163000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7062074438,
+          "rating": 2,
+          "title": "我之前买的会员账号忘记了",
+          "review": "找都找不回来 也太惨了吧",
+          "created": null,
+          "nickname": "还是很好用的一个软件的 支持你哦",
+          "storeFront": "CN",
+          "appVersionString": "6.7.0",
+          "lastModified": 1614814705000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21645222,
+            "response": "你好，在app内“我的”界面 - 联系我们 - 选择你认为方便的方式向我们反馈。",
+            "lastModified": 1615788157000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3289909033,
+          "rating": 2,
+          "title": "反正我是进不去了",
+          "review": "一点进去就闪退，更新后就没能进去过。如何破？我的查询记录呀，😢",
+          "created": null,
+          "nickname": "有一只大肥猪的玛丽玛丽",
+          "storeFront": "CN",
+          "appVersionString": "4.0.1",
+          "lastModified": 1539272089000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 5484753,
+            "response": "等xcode10.1正式版上线，9.2的闪退问题即可解决，目前苹果xcode已经更新到10.1 beta2了，应该快了。不好意思哈",
+            "lastModified": 1539435374000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11175594553,
+          "rating": 2,
+          "title": "三不五時就卡一下讓手機當機",
+          "review": "翻個一兩句就整個卡死，想要退出程式也不行整台手機都當掉，雖然等一下就會恢復，但頻率實在太高，用起來體驗很不好\n還有中國台灣是什麼鬼",
+          "created": null,
+          "nickname": "等很久了==",
+          "storeFront": "TW",
+          "appVersionString": "8.2.0",
+          "lastModified": 1713500087000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9142317720,
+          "rating": 2,
+          "title": "不是 你们是不是想钱想疯了",
+          "review": "之前买过20块会员了，那些以前就算不需要开通会员也能查到的词，现在就算买了20块会员也查不到了，非得一个月一个月买会员，牛啊！",
+          "created": null,
+          "nickname": "某宝疯了吗？",
+          "storeFront": "CN",
+          "appVersionString": "6.23.0",
+          "lastModified": 1664686577000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 32462194,
+            "response": "您好，购买过永久会员是不会失效的，您可以点击购买界面右上角【恢复购买】试试看呢，如果还是不行您可以联系我们微信公众号【MOJi辞書】右下角【专属客服】，我们会有客服专员为您解决的~",
+            "lastModified": 1665282319000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5548263139,
+          "rating": 2,
+          "title": "新版不行",
+          "review": "现在更新后的版本完全不行，反应速度慢，不如老版一看就知道 惯用语、谚语 什么之类的！",
+          "created": null,
+          "nickname": "不信-拉到",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582035669000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1657213585,
+          "rating": 2,
+          "title": "闪退！",
+          "review": "处于信任更新结果疯狂闪退，根本查不了词了",
+          "created": null,
+          "nickname": "蕾朵",
+          "storeFront": "CN",
+          "appVersionString": "1.7.0",
+          "lastModified": 1498399451000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10530370712,
+          "rating": 2,
+          "title": "客服未積極處理問題",
+          "review": "帳號密碼不能登錄，已提供訂閱的證明，依客服回覆的處理方式做，還是無法登錄，之後聯絡客服就沒有回應了！",
+          "created": null,
+          "nickname": "RitaKimo",
+          "storeFront": "TW",
+          "appVersionString": "7.4.1",
+          "lastModified": 1698641912000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5450055696,
+          "rating": 2,
+          "title": "希望之前的搜索记录恢复",
+          "review": "恢复",
+          "created": null,
+          "nickname": "Juiuyi",
+          "storeFront": "CN",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580026736000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12265108125,
+          "rating": 2,
+          "title": "本來很好用但是常常翻譯不順暢",
+          "review": "時常當機不給翻譯，或是中翻日時，中文變成漢字發音，狀況越來越頻繁發生，越來越不好用",
+          "created": null,
+          "nickname": "リオさん：）",
+          "storeFront": "TW",
+          "appVersionString": "8.12.2",
+          "lastModified": 1738578127000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10464890978,
+          "rating": 2,
+          "title": "体验变差",
+          "review": "查词功能越来越退化，收费项目越来越多",
+          "created": null,
+          "nickname": "hakihaki_m",
+          "storeFront": "CN",
+          "appVersionString": "7.3.1",
+          "lastModified": 1697091223000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6234203320,
+          "rating": 2,
+          "title": "更新之后打不开了，快点修复吧",
+          "review": "更新之后打不开了，一直在闪退",
+          "created": null,
+          "nickname": "lyusui",
+          "storeFront": "CN",
+          "appVersionString": "6.2.0",
+          "lastModified": 1595553103000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11636082747,
+          "rating": 2,
+          "title": "手機國碼886寫成中國台灣感覺被矮化🥲",
+          "review": "本來覺得介面還不錯，結果一看到綁定手機號碼直接寫中國台灣，強國軟體就算在台灣蘋果商店上架都要吃台灣人豆腐嗎？",
+          "created": null,
+          "nickname": "91242",
+          "storeFront": "TW",
+          "appVersionString": "8.2.14",
+          "lastModified": 1724254389000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11632260240,
+          "rating": 2,
+          "title": "十分甚至九分的难用（悲）",
+          "review": "能不能不要老弹出一些没用又烦人的东西",
+          "created": null,
+          "nickname": "美丽迷人刘富贵",
+          "storeFront": "CN",
+          "appVersionString": "8.2.14",
+          "lastModified": 1724169744000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6963451691,
+          "rating": 2,
+          "title": "隐私问题",
+          "review": "你没事老读我粘贴板干嘛？有病吧",
+          "created": null,
+          "nickname": "湖工猛男",
+          "storeFront": "CN",
+          "appVersionString": "6.6.0",
+          "lastModified": 1612665119000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5913742646,
+          "rating": 2,
+          "title": "更新了没法推测？！",
+          "review": "好像更新之后再也没有帮我推测词的原型，之前买全套很大一部分是因为它推测得很准，很方便，现在不推测了，我一些崩溃😭😭😭😭",
+          "created": null,
+          "nickname": "林시긴",
+          "storeFront": "CN",
+          "appVersionString": "6.1.0",
+          "lastModified": 1588837346000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 15256376,
+            "response": "下个版本会恢复“变形还原”预测功能",
+            "lastModified": 1589254364000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6621927341,
+          "rating": 2,
+          "title": "复制粘贴总是失效",
+          "review": "复制粘贴总是失效，必须重启软件才能用。。有时候还不行。能进行修复吗？",
+          "created": null,
+          "nickname": "林空深见木",
+          "storeFront": "CN",
+          "appVersionString": "6.5.0",
+          "lastModified": 1604832435000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 19014896,
+            "response": "你好，私信微博@MOJI_SERIES。",
+            "lastModified": 1605002072000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10053607761,
+          "rating": 2,
+          "title": "收藏都要收费？",
+          "review": "收藏都要收费，绑定号码 不知道会有多少骚扰信息来",
+          "created": null,
+          "nickname": "哼哼嗯？",
+          "storeFront": "CN",
+          "appVersionString": "6.33.2",
+          "lastModified": 1687270238000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9155523792,
+          "rating": 2,
+          "title": "付費訂閱卻無效",
+          "review": "之前一直使用免費版自學日文，非常便利好用。本週更新後，無法像以往一樣查閱單字與發音，所以付費購買（忘了付費後截圖），沒想到功能與未付費時相同，不知道是付費訂閱程序錯誤，還是⋯⋯？雖然付費訂閱錢數少，但有被騙的感覺。",
+          "created": null,
+          "nickname": "Liao 3780",
+          "storeFront": "TW",
+          "appVersionString": "6.23.0",
+          "lastModified": 1665022219000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 32462171,
+            "response": "您好，很抱歉给您带来不便，使用上遇到问题您可以联系我们微信公众号【MOJi辞書】右下角【专属客服】，我们会有客服专员为您解决的~",
+            "lastModified": 1665282120000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5534518701,
+          "rating": 2,
+          "title": "为什么要更新成这样…",
+          "review": "之前的软件简介好用 我最喜欢用了\n没想到升级完以后跟市面上其他的花里胡哨的软件一样了…\n现在搜索词都没有之前流畅了\n不懂为什么要进行这种没有意义的更改\n词典不就是为了进入界面就可以直接查词么？\n为什么要变成这样…\n唉\n不修改我就告辞了…我真的非常非常不喜欢这样的…",
+          "created": null,
+          "nickname": "安徒洛洛",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1581772312000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7998088791,
+          "rating": 2,
+          "title": "越更新越难用",
+          "review": "本来挺好的词典 更新以后花里胡哨的很难用",
+          "created": null,
+          "nickname": "mm108876",
+          "storeFront": "CN",
+          "appVersionString": "6.12.0",
+          "lastModified": 1636279173000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5464009727,
+          "rating": 2,
+          "title": "改的没以前便利。",
+          "review": "先超级难用，有卸载的想法",
+          "created": null,
+          "nickname": "110120315",
+          "storeFront": "CN",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580344073000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5615942863,
+          "rating": 2,
+          "title": "更新後 原本的收藏資料夾都不見了",
+          "review": "一直是很好用的線上字典，所以付費購買了。但是最近更新後原本收藏的單字資料夾都不見了。怎麼做都找不回來，真的有點難過。原本的介面簡單好用，新介面其實在使用者經驗上有點複雜難懂。另外在其他裝置上要同步也很麻煩，這也是很可惜的地方。",
+          "created": null,
+          "nickname": "dyrfdhfd",
+          "storeFront": "TW",
+          "appVersionString": "6.0.7",
+          "lastModified": 1583342382000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 4963104856,
+          "rating": 2,
+          "title": "我一个刚学了50音的菜13，你让我怎么学？",
+          "review": "自己找词？练个背词功能都没？界面很丑，很多没用的选项！",
+          "created": null,
+          "nickname": "无极逍遥大自在天",
+          "storeFront": "CN",
+          "appVersionString": "5.4.0",
+          "lastModified": 1571362890000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6231944912,
+          "rating": 2,
+          "title": "更新后闪退",
+          "review": "软件不错。就是更新后不能用了",
+          "created": null,
+          "nickname": "广东 v 打扰你童年",
+          "storeFront": "CN",
+          "appVersionString": "6.2.0",
+          "lastModified": 1595504764000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5482724862,
+          "rating": 2,
+          "title": "更新出错",
+          "review": "今天的更新，一更新完就不停闪退，出问题了",
+          "created": null,
+          "nickname": "谁来占用我昵称",
+          "storeFront": "CN",
+          "appVersionString": "6.0.4",
+          "lastModified": 1580732458000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5432771265,
+          "rating": 2,
+          "title": "，",
+          "review": "更新完了以前的收藏啥都找不到了",
+          "created": null,
+          "nickname": "白川zm",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579653809000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9110319680,
+          "rating": 2,
+          "title": "Many functions still need to subscription after you paid the app",
+          "review": "Before is a great app.\nBut now. After you paid it.\nMany functions still need to subscription.\nAnd need to charge again monthly.\nAnd some function is I can use it before.\nBut now, it become sub function…\nSad.",
+          "created": null,
+          "nickname": "Tee Lok",
+          "storeFront": "HK",
+          "appVersionString": "6.21.0",
+          "lastModified": 1663855722000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9066140984,
+          "rating": 2,
+          "title": "身為字典，錯誤率也太高了吧⋯🥲",
+          "review": "我一開始還會熱心寫糾錯給你們，後來發現錯誤處根本太多，不是平假名標錯，就是發音和例句對不上，你們的更新是真的有在修正嗎？？",
+          "created": null,
+          "nickname": "阿雪靴",
+          "storeFront": "TW",
+          "appVersionString": "6.21.0",
+          "lastModified": 1662694295000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 31981225,
+            "response": "您好，很抱歉给您带来不便，目前注音和发音都是系统自动标注的，我们正在尽最大努力进行人工审核优化，如果您有遇到错误的地方欢迎反馈给客服哦",
+            "lastModified": 1663032859000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8187421979,
+          "rating": 2,
+          "title": "空白搜索",
+          "review": "更新内容写着修复怎么还没修复，求求快修复吧受不了了",
+          "created": null,
+          "nickname": "是小龙阿",
+          "storeFront": "CN",
+          "appVersionString": "6.14.2",
+          "lastModified": 1640936039000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9040172359,
+          "rating": 2,
+          "title": "发音问题",
+          "review": "背词功能，发音延迟非常严重，且有发音错误。希望及时修复。",
+          "created": null,
+          "nickname": "zgguvjjftetfibhc",
+          "storeFront": "CN",
+          "appVersionString": "6.20.2",
+          "lastModified": 1662014435000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 31824597,
+            "response": "您好，很抱歉给您带来不便，使用上遇到问题您可以联系我们微信公众号【MOJi辞書】右下角【专属客服】，我们会有客服专员为您解决的~",
+            "lastModified": 1662342909000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9010558317,
+          "rating": 2,
+          "title": "火大",
+          "review": "背词闪退啊真无语了",
+          "created": null,
+          "nickname": "kannanya",
+          "storeFront": "CN",
+          "appVersionString": "6.20.2",
+          "lastModified": 1661311754000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 31667640,
+            "response": "您好，很抱歉给您带来不便，使用上遇到问题您可以联系我们微信公众号【MOJi辞書】右下角【专属客服】，我们会有客服专员为您解决的~",
+            "lastModified": 1661478165000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6233854721,
+          "rating": 2,
+          "title": "为什么一直闪退？？？？",
+          "review": "更新后直接打不开一直闪退，这么多bug的版本都上传的吗",
+          "created": null,
+          "nickname": "io8866532",
+          "storeFront": "CN",
+          "appVersionString": "6.2.0",
+          "lastModified": 1595544435000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1633357604,
+          "rating": 2,
+          "title": "bug",
+          "review": "I've downloaded and paid for the right to save new words, but now after an update all the histories are gone... \n\n觉得免费的好用 就付费了为了能收藏生词 但是现在全没了",
+          "created": null,
+          "nickname": "MMMufan",
+          "storeFront": "FR",
+          "appVersionString": "1.6.1",
+          "lastModified": 1496576792000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9220830458,
+          "rating": 2,
+          "title": "新手慎用，词库有大量错误",
+          "review": "优点：\n年费不贵。\n可以自己建词库、造词、造句。（自动共享，别人能搜索到）\n适合自己造词，作为背单词的辅助工具。（查词不太建议用，查出来也不知道对错）\n\n缺点：\n用户造词造句无审核就直接公开可搜索，导致大量拼写错误、解释错误、内容重复。\n官方词库太小、靠用户的自主造词充数。\n大量发音错误，是根据单词拼写匹配固定的发音，只能自己造词调整拼写来避开错误的发音。\n官方词库也存在很多错词，特别是动词的各种变形。",
+          "created": null,
+          "nickname": "提示评价后才能免费用",
+          "storeFront": "CN",
+          "appVersionString": "6.24.1",
+          "lastModified": 1666711303000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 32812546,
+            "response": "您好，非常感谢您的反馈，我们会针对该问题不断进行优化的！",
+            "lastModified": 1666855489000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5814296748,
+          "rating": 2,
+          "title": "收回前面的",
+          "review": "还有很多要改进",
+          "created": null,
+          "nickname": "谦虚樱花4275",
+          "storeFront": "CN",
+          "appVersionString": "6.0.10",
+          "lastModified": 1586943197000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 14728373,
+            "response": "私信微博MOJI_SERIES",
+            "lastModified": 1587117515000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5771690678,
+          "rating": 2,
+          "title": "自创功能升级以后都是vip了？",
+          "review": "辣是真滴流批",
+          "created": null,
+          "nickname": "昵称个鸡儿全都有人用",
+          "storeFront": "CN",
+          "appVersionString": "6.0.10",
+          "lastModified": 1586189328000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5577260040,
+          "rating": 2,
+          "title": "越更新越不好用，先是闪退，现在是搜搜迟钝。",
+          "review": "越更新越不好用，先是闪退，现在是搜搜迟钝。",
+          "created": null,
+          "nickname": "呆萌傻笨二",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582612873000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5551520467,
+          "rating": 2,
+          "title": "收藏夹",
+          "review": "手机端不能往pad端建的收藏夹里加词",
+          "created": null,
+          "nickname": "abc321as",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582104486000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11046101142,
+          "rating": 2,
+          "title": "越修改越差",
+          "review": "还不如上年的版本好，上年的简便易用",
+          "created": null,
+          "nickname": "冇理头",
+          "storeFront": "CN",
+          "appVersionString": "8.0.1",
+          "lastModified": 1710489510000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3381623260,
+          "rating": 2,
+          "title": "9.0系统仍闪退，求解决",
+          "review": "11月2号更新内容显示9.0闪退已修复好，但是我下载后仍然出现了闪退……求解决…谢谢",
+          "created": null,
+          "nickname": "小鱼仙官er",
+          "storeFront": "CN",
+          "appVersionString": "4.2.0",
+          "lastModified": 1541374283000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10876347797,
+          "rating": 2,
+          "title": "闪退",
+          "review": "为啥现在一直闪退啊啊啊啊啊",
+          "created": null,
+          "nickname": "吃了吗骑手",
+          "storeFront": "CN",
+          "appVersionString": "7.6.4",
+          "lastModified": 1706509215000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 1607446261,
+          "rating": 2,
+          "title": "不发音",
+          "review": "单个单词点击不发音啊！",
+          "created": null,
+          "nickname": "DLUT1501hh",
+          "storeFront": "CN",
+          "appVersionString": "1.6.1",
+          "lastModified": 1494147072000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9363193009,
+          "rating": 2,
+          "title": "错的地方比较多 有待改进",
+          "review": "错的地方比较多 有待改进",
+          "created": null,
+          "nickname": "舞187644",
+          "storeFront": "CN",
+          "appVersionString": "6.26.1",
+          "lastModified": 1670243264000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 33578906,
+            "response": "您好，非常感谢您的反馈，我们会继续不断优化的！",
+            "lastModified": 1670384650000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3791007316,
+          "rating": 2,
+          "title": "词典发音不准 0调词最后音节都读成降调了",
+          "review": "特别对比了沪江小D，像 渡る 触る 明明写的是0调，发音却是2调，望改进",
+          "created": null,
+          "nickname": "干鸟222",
+          "storeFront": "CN",
+          "appVersionString": "5.3.0",
+          "lastModified": 1550628776000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10548962728,
+          "rating": 2,
+          "title": "什么都收费",
+          "review": "基本使用都收费，",
+          "created": null,
+          "nickname": "😡,",
+          "storeFront": "CN",
+          "appVersionString": "7.4.1",
+          "lastModified": 1699101364000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5532657330,
+          "rating": 2,
+          "title": "重复收费",
+          "review": "昨天购买Pro版，连续收了两次费用，25元和21元，想请官方解释下是咋回事？",
+          "created": null,
+          "nickname": "アサフミ",
+          "storeFront": "CN",
+          "appVersionString": "6.0.6",
+          "lastModified": 1581738636000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8056989164,
+          "rating": 2,
+          "title": "更新的提醒很煩",
+          "review": "催促更新的通知很煩，每次打開都跳出來。",
+          "created": null,
+          "nickname": "江川さち",
+          "storeFront": "TW",
+          "appVersionString": "6.13.1",
+          "lastModified": 1637731964000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5608243205,
+          "rating": 2,
+          "title": "更新完慢的一批",
+          "review": "查单词真的很慢真的很慢真的很慢…………",
+          "created": null,
+          "nickname": "bornforlightBH56",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1583196556000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5453969732,
+          "rating": 2,
+          "title": "更新後單字黃色便條裡的紀錄全都消失了",
+          "review": "一直很喜歡能在每個單字裡附加註解的功能（黃色便條），但這次更新後全都不見了，那些都是嘔心瀝血做的筆記，真的覺得很遺憾。",
+          "created": null,
+          "nickname": "Kinoko521",
+          "storeFront": "TW",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580110980000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11741138371,
+          "rating": 2,
+          "title": "顯示註銷會員",
+          "review": "郵件聯繫但沒有回應。（沒有微信）",
+          "created": null,
+          "nickname": "羅。，",
+          "storeFront": "TW",
+          "appVersionString": "8.4.0",
+          "lastModified": 1726754746000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5438629242,
+          "rating": 2,
+          "title": "求求你变回单纯的词典",
+          "review": "新版本也太花哨了吧！过分了真的！！！！！！",
+          "created": null,
+          "nickname": "龙文威",
+          "storeFront": "CN",
+          "appVersionString": "6.0.0",
+          "lastModified": 1579784036000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5453879446,
+          "rating": 2,
+          "title": "更新有感",
+          "review": "功能繁琐累赘，界面花里胡哨。",
+          "created": null,
+          "nickname": "202001271605",
+          "storeFront": "CN",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580108712000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11820127562,
+          "rating": 2,
+          "title": "改版使用體驗差",
+          "review": "1. 以前的版本，有存了大量的單字跟筆記，改版之後，單字跟筆記全不見\n\n2. 要買永久會員，結果購買3次，皆失敗，不知道到底有沒有買成功，是不是會扣款3次\n\n3. 人工客服的功能有夠爛，還以為是有真人客服可以協助，結果只是一個智能客服，講了好多遍問題，都說辨識不出來，根本解決不了問題\n\n怎麼越改版越爛……..",
+          "created": null,
+          "nickname": "lol.........",
+          "storeFront": "TW",
+          "appVersionString": "8.4.3",
+          "lastModified": 1728611435000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7104631389,
+          "rating": 2,
+          "title": "😭",
+          "review": "为什么老是连不上网 为什么为什么为什么！",
+          "created": null,
+          "nickname": "Erkuiiiiiii",
+          "storeFront": "CN",
+          "appVersionString": "6.7.1",
+          "lastModified": 1615791487000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21747928,
+            "response": "你好，在app内“我的”界面 - 联系我们 - 选择你认为方便的方式向我们反馈。",
+            "lastModified": 1616134614000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6231260898,
+          "rating": 2,
+          "title": "为什么客户端更新了就闪退了出bug了？",
+          "review": "？？",
+          "created": null,
+          "nickname": "伊利酸酸乳音乐",
+          "storeFront": "CN",
+          "appVersionString": "6.2.0",
+          "lastModified": 1595490228000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5705143476,
+          "rating": 2,
+          "title": "繁體中文",
+          "review": "如果可選擇繁體中文的話就一定升級，可惜不能設置。",
+          "created": null,
+          "nickname": "millermong",
+          "storeFront": "TW",
+          "appVersionString": "6.0.8",
+          "lastModified": 1585039751000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5566284410,
+          "rating": 2,
+          "title": "声音🔊点击无反应",
+          "review": "声音🔊点击无反应",
+          "created": null,
+          "nickname": "哦跑来接你的电话",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582389722000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8131550952,
+          "rating": 2,
+          "title": "更新後，很多無法發音，也無法顯示",
+          "review": "更新後，很多無法發音，也無法顯示",
+          "created": null,
+          "nickname": "Wanjhu",
+          "storeFront": "TW",
+          "appVersionString": "6.14.0",
+          "lastModified": 1639548081000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 2067634270,
+          "rating": 2,
+          "title": "背單詞亂七八糟",
+          "review": "背單詞亂七八糟的設定，無法任意選擇要背的分類？搞得好複雜。",
+          "created": null,
+          "nickname": "nnnnate",
+          "storeFront": "TW",
+          "appVersionString": "2.1.1",
+          "lastModified": 1515378856000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 3714718187,
+          "rating": 2,
+          "title": "A user discretion is advised",
+          "review": "可以带着怀疑用做查词参考。但里面的例句除了“新年好”这样的基本都是错，日本人完全听不懂的假日语",
+          "created": null,
+          "nickname": "Nisumono",
+          "storeFront": "CN",
+          "appVersionString": "5.3.0",
+          "lastModified": 1548904291000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6231704371,
+          "rating": 2,
+          "title": "会闪退",
+          "review": "会闪退\n为什么啊！！",
+          "created": null,
+          "nickname": "噜噜啦啦_",
+          "storeFront": "CN",
+          "appVersionString": "6.2.0",
+          "lastModified": 1595499958000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5569491837,
+          "rating": 2,
+          "title": "越更新越爛啊",
+          "review": "整個就是lag到一個不行，超級遲緩，打字也lag，打完字等頁面搜尋也lag，畫面空白啊⋯⋯超慢，功能開越多問題越大，拜託不要在亂搞了......",
+          "created": null,
+          "nickname": "會爬樹的企鵝",
+          "storeFront": "TW",
+          "appVersionString": "6.0.7",
+          "lastModified": 1582455631000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9140490337,
+          "rating": 2,
+          "title": "iphone14pro 手写功能失效了",
+          "review": "这次升级竟然还没好",
+          "created": null,
+          "nickname": "lim6o",
+          "storeFront": "CN",
+          "appVersionString": "6.22.0",
+          "lastModified": 1664639101000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 32462210,
+            "response": "您好，您卸载重装App试试呢",
+            "lastModified": 1665282673000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6281099857,
+          "rating": 2,
+          "title": "不要买pro版",
+          "review": "买了pro版！翻译！结果还不如Google翻译的好呢！太不值了",
+          "created": null,
+          "nickname": "天上掉的小仙女1234）",
+          "storeFront": "CN",
+          "appVersionString": "6.2.1",
+          "lastModified": 1596594433000,
+          "helpfulViews": 0,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8751807680,
+          "rating": 2,
+          "title": "不好用",
+          "review": "真的不好用",
+          "created": null,
+          "nickname": "hwozhhwo",
+          "storeFront": "CN",
+          "appVersionString": "6.18.0",
+          "lastModified": 1654646654000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5449546570,
+          "rating": 2,
+          "title": "資料消失",
+          "review": "更新版本後。保存的資料夾都消失了。\n後悔付費。",
+          "created": null,
+          "nickname": "tyun peng",
+          "storeFront": "TW",
+          "appVersionString": "6.0.1",
+          "lastModified": 1580014316000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 2959808665,
+          "rating": 2,
+          "title": "簡中看了很痛苦",
+          "review": "如何改繁體中文？",
+          "created": null,
+          "nickname": "噗78",
+          "storeFront": "TW",
+          "appVersionString": "3.2.0",
+          "lastModified": 1532420693000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6193125662,
+          "rating": 2,
+          "title": "不能发音",
+          "review": "什么情况",
+          "created": null,
+          "nickname": "W Clay",
+          "storeFront": "CN",
+          "appVersionString": "6.1.3",
+          "lastModified": 1594649482000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 16612359,
+            "response": "私信微博@MOJI_SERIES",
+            "lastModified": 1594711604000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 5543464362,
+          "rating": 2,
+          "title": "新版真的不好用",
+          "review": "。。。",
+          "created": null,
+          "nickname": "乐天哈",
+          "storeFront": "CN",
+          "appVersionString": "6.0.7",
+          "lastModified": 1581943413000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6234995330,
+          "rating": 2,
+          "title": "无语了",
+          "review": "老闪退 我晕了 。。",
+          "created": null,
+          "nickname": "津田诗织",
+          "storeFront": "CN",
+          "appVersionString": "6.2.1",
+          "lastModified": 1595571383000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 16882292,
+            "response": "你好，私信微博@MOJI_SERIES。",
+            "lastModified": 1595818102000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6170822050,
+          "rating": 2,
+          "title": "？",
+          "review": "全然用が無い",
+          "created": null,
+          "nickname": "Xhgzsghdx123",
+          "storeFront": "CN",
+          "appVersionString": "6.1.3",
+          "lastModified": 1594184202000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12431548484,
+          "rating": 2,
+          "title": "变着法的赚钱",
+          "review": "识别单词一个单词会变成好几个，不准确，之前的翻译就很好很实用，加入了ai要另外充值才能使用而且实用性还不大，下意识的会点到ai里面去，如果有其他的app我会立刻马上离开这个app， 我也不是这方面的人才，希望有别的app能通知我一下感谢🙏",
+          "created": null,
+          "nickname": "大舅翻江倒海好的",
+          "storeFront": "CN",
+          "appVersionString": "8.15.0",
+          "lastModified": 1742223475000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11857546354,
+          "rating": 2,
+          "title": "排序功能缺失，更新后没有了",
+          "review": "收藏功能的排序怎么没有了，以前有按不同需要排序的为什么没有了，默认都是新加的在后面，一般都是新加的才不熟系啊，翻老半天才到最下面，那个手动置顶要干嘛！我先添加一个单词难不成要手动置顶吗？",
+          "created": null,
+          "nickname": "dice1106",
+          "storeFront": "CN",
+          "appVersionString": "8.5.0",
+          "lastModified": 1729490926000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11304405633,
+          "rating": 2,
+          "title": "不好用",
+          "review": "我真的服了，作为一个词典最重要的难道不是纠正自己的词库吗？会员价格一直涨，给的反馈过了很久也没得到纠正和反馈，错误一大堆，语调混乱，翻译也很拉垮",
+          "created": null,
+          "nickname": "奇迹婉婉.",
+          "storeFront": "CN",
+          "appVersionString": "8.2.3",
+          "lastModified": 1716618976000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10730139731,
+          "rating": 2,
+          "title": "更新了以后更不好用了",
+          "review": "更新了以后，很不好用了，背单词点发声半天没反应，练习的时候，还老出现不知道读了哪里的单词声，程序员要抓紧修复下",
+          "created": null,
+          "nickname": "寸二口袋",
+          "storeFront": "CN",
+          "appVersionString": "7.5.6",
+          "lastModified": 1703234151000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11029078856,
+          "rating": 2,
+          "title": "新版本页面加载问题",
+          "review": "今天更新新版本，单词界面与以前不同了。但单词的全部意思无法一次性加载完全，需要额外下拉刷新一下才能看到完整的意思，较影响体验。",
+          "created": null,
+          "nickname": "王者真爱粉",
+          "storeFront": "CN",
+          "appVersionString": "8.0.0",
+          "lastModified": 1710074333000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10377187725,
+          "rating": 2,
+          "title": "背词功能能不能考虑一下外接键盘使用的情况",
+          "review": "为什么背词功能里面，用外接键盘打完假名不能用回车键确认了，还要手动点提交。搞什么鬼，越更新越后退了",
+          "created": null,
+          "nickname": "愿望一定会实现",
+          "storeFront": "CN",
+          "appVersionString": "7.2.1",
+          "lastModified": 1694942524000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12000260166,
+          "rating": 2,
+          "title": "iOS最新18.1.1系统更新后app无法适配CarPlay，车载播放异常卡顿",
+          "review": "iOS最新18.1.1系统更新后app无法适配CarPlay，车载播放异常卡顿，尽快推出修复版本。",
+          "created": null,
+          "nickname": "Pallllld",
+          "storeFront": "CN",
+          "appVersionString": "8.8.0",
+          "lastModified": 1732772546000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11687187365,
+          "rating": 2,
+          "title": "搜索越来越差了",
+          "review": "同样的词在moji词典搜不出来 mojitest搜的出来；而且搜出来的关联排序，乱七八遭；模糊搜索，也完全不行。。。。",
+          "created": null,
+          "nickname": "shdjfjfjfhf",
+          "storeFront": "CN",
+          "appVersionString": "8.3.0",
+          "lastModified": 1725439163000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12426253287,
+          "rating": 2,
+          "title": "更新太频繁",
+          "review": "几天就要更新 一次 想查个单词而已 一点不想更新软件 烦的要命 我开个会员 只想要一个安静的app 不是天天提醒我更新的app",
+          "created": null,
+          "nickname": "Mikolann",
+          "storeFront": "CN",
+          "appVersionString": "8.15.0",
+          "lastModified": 1742104836000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12027315746,
+          "rating": 2,
+          "title": "收了费却没有开通会员",
+          "review": "我真服了 一会说账号不一致 登陆了appleid 还是没有会员 你说说你充哪里了？？换了几个账号都没有我真服了",
+          "created": null,
+          "nickname": "巴西端碗艺术家",
+          "storeFront": "CN",
+          "appVersionString": "8.8.1",
+          "lastModified": 1733379880000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11649600404,
+          "rating": 2,
+          "title": "能不能修复一下bug",
+          "review": "买了会员每天都有各种各样的bug 拍照翻译文字直接消失 根本翻译不了\n关机重启 大退软件都不行",
+          "created": null,
+          "nickname": "小熊要买雨衣嘛",
+          "storeFront": "CN",
+          "appVersionString": "8.2.14",
+          "lastModified": 1724555450000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11068264637,
+          "rating": 2,
+          "title": "买完会员就来这套，私域词条装死是吧",
+          "review": "单词单词搜不出来，自己搜的几百个单词动不动转成私域不给看，复习20个里七八个打不开，还背你喵的单词？",
+          "created": null,
+          "nickname": "学号6143988",
+          "storeFront": "CN",
+          "appVersionString": "8.0.1",
+          "lastModified": 1711014030000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11694074490,
+          "rating": 2,
+          "title": "更新时望测试基本的搜索功能是否可用",
+          "review": "本次更新又出现未知错误导致基本的搜索功能无法使用。\n这并不是偶发事件了，从4年前开始平均每3次更新就会有一次出现无法搜索或hit的bug。\n添加更多功能不是坏事，但这本质上是个辞典，连辞典最基本的功能都做不到，再多的花里胡哨有什么意义呢。",
+          "created": null,
+          "nickname": "dswayvujctib",
+          "storeFront": "JP",
+          "appVersionString": "8.3.0",
+          "lastModified": 1725607857000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": true,
+          "developerResponse": {
+            "responseId": 35953171,
+            "response": "您好，您联系微信【专属客服】，反馈一下具体情况呢",
+            "lastModified": 1681463618000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11427915537,
+          "rating": 2,
+          "title": "Free functions are limited",
+          "review": "Free functions are very limited, and interface full of chinese along with english, not good.",
+          "created": null,
+          "nickname": "Anh2305",
+          "storeFront": "JP",
+          "appVersionString": "8.2.8",
+          "lastModified": 1719467594000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12417857168,
+          "rating": 2,
+          "title": "很好用",
+          "review": "很好用，但就是多出付费档次，每年续费让人很不舒服",
+          "created": null,
+          "nickname": "子墨兼爱",
+          "storeFront": "CN",
+          "appVersionString": "8.14.0",
+          "lastModified": 1741923089000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11475610548,
+          "rating": 2,
+          "title": "第一遍查必须只能看到Pro和广告",
+          "review": "大概也不给用了，卸了省空间。",
+          "created": null,
+          "nickname": "求推荐另一款",
+          "storeFront": "JP",
+          "appVersionString": "8.2.8",
+          "lastModified": 1720589905000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9987617139,
+          "rating": 2,
+          "title": "会员",
+          "review": "翻译都要会员……无语，下载的意义在哪里",
+          "created": null,
+          "nickname": "矢奈尤姬",
+          "storeFront": "CN",
+          "appVersionString": "6.33.0",
+          "lastModified": 1685623895000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11750368660,
+          "rating": 2,
+          "title": "为什么ipad pro一直用不了手写",
+          "review": "反映好多次了，每次更新都没有！",
+          "created": null,
+          "nickname": "jychstar",
+          "storeFront": "JP",
+          "appVersionString": "8.4.1",
+          "lastModified": 1726967595000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11025256943,
+          "rating": 2,
+          "title": "自建词库？！",
+          "review": "以前收藏的其他用户的自建词库全没了，又得重新整理一遍😓",
+          "created": null,
+          "nickname": "wwwvk",
+          "storeFront": "CN",
+          "appVersionString": "8.0.0",
+          "lastModified": 1709989123000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11899003242,
+          "rating": 2,
+          "title": "测试",
+          "review": "建议moji测试和辞书结合一下不然还要跳转才能看的详细真的麻烦",
+          "created": null,
+          "nickname": "这是个昵称吗",
+          "storeFront": "JP",
+          "appVersionString": "8.6.0",
+          "lastModified": 1730458823000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11858771113,
+          "rating": 2,
+          "title": "有点太臃肿了，服务器又差",
+          "review": "怎么把收藏夹排序功能整没了，能按时间排序很重要啊。",
+          "created": null,
+          "nickname": "janzo1213",
+          "storeFront": "CN",
+          "appVersionString": "8.5.0",
+          "lastModified": 1729520074000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12404089048,
+          "rating": 2,
+          "title": "💢",
+          "review": "充了会员，还要充币，不然还不能用😡",
+          "created": null,
+          "nickname": "hadaradawww",
+          "storeFront": "CN",
+          "appVersionString": "8.14.0",
+          "lastModified": 1741608764000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11742780729,
+          "rating": 2,
+          "title": "升級了之後查詞都要給錢，吃相太難看。",
+          "review": "升級了之後查詞都要給錢，吃相太難看。",
+          "created": null,
+          "nickname": "BUG—-BUG",
+          "storeFront": "CN",
+          "appVersionString": "8.4.0",
+          "lastModified": 1726791296000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11045764339,
+          "rating": 2,
+          "title": "出bug了",
+          "review": "为什么背词打不开了，点了也没反应。",
+          "created": null,
+          "nickname": "只会读书的人",
+          "storeFront": "CN",
+          "appVersionString": "8.0.1",
+          "lastModified": 1710479532000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12452961004,
+          "rating": 2,
+          "title": "无奈的选择",
+          "review": "即便是选择付费，使用体验上也比沪江小D差很多，存在不少错误，不完整的释义以及查不到的单词。",
+          "created": null,
+          "nickname": "MM07XX",
+          "storeFront": "JP",
+          "appVersionString": "8.15.1",
+          "lastModified": 1742699342000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8134694458,
+          "rating": 2,
+          "title": "充了会员突然搞个大会员",
+          "review": "纯粹因为习惯没卸载 \n怎么 是做成b站了吗 \n吃相难看",
+          "created": null,
+          "nickname": "タカバシ788",
+          "storeFront": "JP",
+          "appVersionString": "6.14.1",
+          "lastModified": 1639625482000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7275520395,
+          "rating": 2,
+          "title": "密碼遭外洩",
+          "review": "因為蠻好用的，前些日子綁定帳號加入會員，想著要付費使用，但收到手機通知密碼遭外洩，這讓人雖然想付費，但已經不敢加入會員了，希望能更注重用戶資料安全性",
+          "created": null,
+          "nickname": "QQkimi",
+          "storeFront": "TW",
+          "appVersionString": "6.8.0",
+          "lastModified": 1619661378000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6976805133,
+          "rating": 2,
+          "title": "新版本单词无法发音",
+          "review": "以上",
+          "created": null,
+          "nickname": "风吹树叶一地枯",
+          "storeFront": "CN",
+          "appVersionString": "6.7.0",
+          "lastModified": 1612951792000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21174688,
+            "response": "你好，打开手机的铃声音量就可以了，也就是取消静音模式。这个版本为了不影响后台其他媒体的播放修改了音频。下一个版本会恢复之前的模式。\r",
+            "lastModified": 1613786949000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6780102462,
+          "rating": 2,
+          "title": "读音错的太多了吧 改了也没用",
+          "review": "呵呵",
+          "created": null,
+          "nickname": "效果会把头发",
+          "storeFront": "CN",
+          "appVersionString": "6.5.0",
+          "lastModified": 1608615444000,
+          "helpfulViews": 1,
+          "totalViews": 1,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 19974217,
+            "response": "你好，建议更新到目前的最新版本 v6.6.0 ，可以通过私信微博@MOJI_SERIES 反馈错误发音。",
+            "lastModified": 1608797602000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12300842951,
+          "rating": 2,
+          "title": "这垃圾软件还能用吗",
+          "review": "总是出现各种错误提示，已经好久了，能不能退钱啊",
+          "created": null,
+          "nickname": "东近，。",
+          "storeFront": "JP",
+          "appVersionString": "8.12.3",
+          "lastModified": 1739337675000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10823542888,
+          "rating": 2,
+          "title": "闪退",
+          "review": "一直闪退？！",
+          "created": null,
+          "nickname": "師走_睦月",
+          "storeFront": "CN",
+          "appVersionString": "7.6.2",
+          "lastModified": 1705293863000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12147589565,
+          "rating": 2,
+          "title": "使いやすい",
+          "review": "いい辞書ですね",
+          "created": null,
+          "nickname": "楽館",
+          "storeFront": "JP",
+          "appVersionString": "8.11.1",
+          "lastModified": 1736078441000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10498263658,
+          "rating": 2,
+          "title": "笔记无法更改",
+          "review": "麻烦修复！",
+          "created": null,
+          "nickname": "wsczjs",
+          "storeFront": "CN",
+          "appVersionString": "7.4.0",
+          "lastModified": 1697871557000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10966286941,
+          "rating": 2,
+          "title": "贵",
+          "review": "228也太贵了吧？",
+          "created": null,
+          "nickname": "青青穗",
+          "storeFront": "CN",
+          "appVersionString": "7.6.5",
+          "lastModified": 1708591228000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11293300764,
+          "rating": 2,
+          "title": "不给搜单词了",
+          "review": "这样不好",
+          "created": null,
+          "nickname": "发件人 创建昵称。",
+          "storeFront": "CN",
+          "appVersionString": "8.2.2",
+          "lastModified": 1716349946000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11963298670,
+          "rating": 2,
+          "title": "更新了还更卡了",
+          "review": "不如不更新",
+          "created": null,
+          "nickname": "含珩",
+          "storeFront": "CN",
+          "appVersionString": "8.7.1",
+          "lastModified": 1731918557000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12298394846,
+          "rating": 2,
+          "title": "最近一直顯示數據不穩 什麼時候要更新！！！！",
+          "review": "拜託修復一下問題 已經這樣維持很久了！！！我還有買會員拜託不要鬧！！我連moji閱讀都有會員 我真的求求你快點快點更新好不好\n你再不更新我可能就要轉app了，因為學習日文真的每天都花很多時間，尤其數據不穩不會一下就解決有時候都要等一段時間真的很不方便！",
+          "created": null,
+          "nickname": "Exo0408weareone",
+          "storeFront": "TW",
+          "appVersionString": "8.12.2",
+          "lastModified": 1739285334000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 12066185757,
+          "rating": 2,
+          "title": "语音识别真的是一坨",
+          "review": "说段句子识别的都是什么啊",
+          "created": null,
+          "nickname": "Sayorichi",
+          "storeFront": "HK",
+          "appVersionString": "8.9.0",
+          "lastModified": 1734267494000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11821660811,
+          "rating": 2,
+          "title": "一直出現未知錯誤",
+          "review": "最近更新完一直出現未知錯誤",
+          "created": null,
+          "nickname": "WardLi2016",
+          "storeFront": "TW",
+          "appVersionString": "8.4.3",
+          "lastModified": 1728651998000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11736908117,
+          "rating": 2,
+          "title": "一直收不到登入驗證碼",
+          "review": "如題，請問怎麼處理呢？ 謝謝",
+          "created": null,
+          "nickname": "台灣地區用戶者",
+          "storeFront": "TW",
+          "appVersionString": "8.4.0",
+          "lastModified": 1726654573000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11582035394,
+          "rating": 2,
+          "title": "突然不能查單字了",
+          "review": "原本用好好的，重載也沒用",
+          "created": null,
+          "nickname": "是在哭ㄟ",
+          "storeFront": "TW",
+          "appVersionString": "8.2.12",
+          "lastModified": 1723025681000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11028027361,
+          "rating": 2,
+          "title": "5段動詞的顯示功能不見了",
+          "review": "自動更新至新版v8後，五段動詞的顯示功能沒了，使用上真的很不方便啊！拜托請改善！",
+          "created": null,
+          "nickname": "Snowkawa",
+          "storeFront": "TW",
+          "appVersionString": "8.0.0",
+          "lastModified": 1710049419000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 11007419348,
+          "rating": 2,
+          "title": "功能限制？",
+          "review": "已經購買基礎會員一陣子，為什麼最近查詢單字後還需要登錄解鎖完整內容？ \n而且之前登錄後，基礎會員的權限也不行使用，才未使用登錄功能\n不解！",
+          "created": null,
+          "nickname": "bbcatch",
+          "storeFront": "TW",
+          "appVersionString": "7.6.6",
+          "lastModified": 1709562195000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10823081428,
+          "rating": 2,
+          "title": "使用時閃退，無法使用！",
+          "review": "iPhone15pro今天使用時一直閃退（約使用10-15秒寄閃退）重開機也沒有用🥲",
+          "created": null,
+          "nickname": "齊嘎",
+          "storeFront": "TW",
+          "appVersionString": "7.6.0",
+          "lastModified": 1705282017000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10734638576,
+          "rating": 2,
+          "title": "老是卡崩掉",
+          "review": "现在优化怎么做的？更新到最新版本进入软件老是卡得程序崩溃，程序员不干事吗？这么久了，起码10天了，问题还没解决，重新安装也没用",
+          "created": null,
+          "nickname": "Canonazy",
+          "storeFront": "JP",
+          "appVersionString": "7.5.6",
+          "lastModified": 1703328966000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10380434685,
+          "rating": 2,
+          "title": "更新完了闪退",
+          "review": "ios13.5.1",
+          "created": null,
+          "nickname": "为什么一直提醒更新",
+          "storeFront": "CN",
+          "appVersionString": "7.2.2",
+          "lastModified": 1695023927000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10224530157,
+          "rating": 2,
+          "title": "使用感受",
+          "review": "基本上每天都要用的辞書，中文和日语都可以收索这点确实很方便，也陆续买了他家的好几款软件，但是使用中有几点问题\n1，收索很多单词的释义 例句都和小学馆的词典一模一样，这点到不影响使用\n2，有一次更新后使用有问题，发邮件给客服，回信态度很恶劣\n3，几年前有一次更新后，所有的收藏夹和单词都没了，恢复不了\n4，最近更新后发现，新建一个收藏文件夹要求去完善各种手机号之类的个人信息，一个字典要搞的这么复杂吗",
+          "created": null,
+          "nickname": "🤔😵‍💫🙄",
+          "storeFront": "JP",
+          "appVersionString": "6.34.1",
+          "lastModified": 1691289423000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10212975371,
+          "rating": 2,
+          "title": "充了会员后发现会员还分级别",
+          "review": "四五年前发现这个很好用索性就买断会员了，结果这个app越做越好，忘了群众基础，又搞了个高级会员，查单词有些单词都看不到意思了，qnmd吧",
+          "created": null,
+          "nickname": "wrr111",
+          "storeFront": "JP",
+          "appVersionString": "6.34.1",
+          "lastModified": 1691020307000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 10081442985,
+          "rating": 2,
+          "title": "最近总是出现“服务器访问过多”的情况，单词都收藏不了",
+          "review": "换无线，流量都不行",
+          "created": null,
+          "nickname": "Jjfhj854",
+          "storeFront": "JP",
+          "appVersionString": "6.33.2",
+          "lastModified": 1687955789000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 37466288,
+            "response": "您好，您可以在App内联系【微信专属客服】，输入【人工】接入，反馈一下具体问题，我们会有客服专员为您跟进的。",
+            "lastModified": 1688537776000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9906867117,
+          "rating": 2,
+          "title": "隔三差五就要求请求剪贴板",
+          "review": "就算app从来不开，还是会每隔一阵子就要求从剪贴板复制粘贴，设置里也没有选项关掉。这个问题持续一年都还没修复，这是在干什么？每隔一阵子就要读剪贴板，我真的分不清是流氓软件还是单纯出 bug。",
+          "created": null,
+          "nickname": "Tix's Device",
+          "storeFront": "US",
+          "appVersionString": "6.32.0",
+          "lastModified": 1683581214000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 36514127,
+            "response": "您好，您可能是从辞書复制了内容，然后去其他app的时候，其他app请求了剪贴板哦。由于iOS的机制，没有任何app能在后台读剪切板的。",
+            "lastModified": 1684117560000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 9799949312,
+          "rating": 2,
+          "title": "非要绑手机就离谱",
+          "review": "会员都买了，不绑手机还不能创建新收藏夹\n输入验证码之后显示手机号已被绑定，后续也没有指导\n我买会员是为了搁这儿浪费学习时间的吗😅\n暂时二星 后续待补充",
+          "created": null,
+          "nickname": "漱玉辞",
+          "storeFront": "JP",
+          "appVersionString": "6.31.0",
+          "lastModified": 1680958304000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 35853870,
+            "response": "您好，您可以先登录手机账号确认无购买任何特权后申请注销，再进行绑定哦。",
+            "lastModified": 1681096326000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8966877988,
+          "rating": 2,
+          "title": "现在全是广告",
+          "review": "输入到一半突然弹出广告，很影响体验",
+          "created": null,
+          "nickname": "ChikaInami",
+          "storeFront": "JP",
+          "appVersionString": "6.20.2",
+          "lastModified": 1660201403000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8720773603,
+          "rating": 2,
+          "title": "高階會員無法手寫輸入",
+          "review": "請排除這個問題",
+          "created": null,
+          "nickname": "rifleman-k",
+          "storeFront": "TW",
+          "appVersionString": "6.17.3",
+          "lastModified": 1653846693000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8687137173,
+          "rating": 2,
+          "title": "更新後的多個問題",
+          "review": "-不能恢復購買，再買也不能 iOS 版本最新，app已更新",
+          "created": null,
+          "nickname": "好撚肚餓",
+          "storeFront": "HK",
+          "appVersionString": "6.17.3",
+          "lastModified": 1652977680000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": true,
+          "developerResponse": {
+            "responseId": 22674412,
+            "response": "您好，麻烦联系一下微信客服mojidict003呢。",
+            "lastModified": 1620376498000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8563032592,
+          "rating": 2,
+          "title": "辞書の網頁搜尋",
+          "review": "詞語文法這些真的有很好的在翻譯，\n但自從上個月更新後強制性換成百度，\n在日本外出時根本就用不了網頁搜尋這個功能。\n浪費我故意在這個app上面花的費用了。\n希望可以重新換回以前的網頁搜尋引擎。",
+          "created": null,
+          "nickname": "Hazel0128",
+          "storeFront": "JP",
+          "appVersionString": "6.17.2",
+          "lastModified": 1649860588000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8561939391,
+          "rating": 2,
+          "title": "找不到看動詞變化的頁面",
+          "review": "原本有購買且可以看單詞的動詞變化，但現在看動詞變化的權限被取消且要求要重新付費訂閱",
+          "created": null,
+          "nickname": "kogiema",
+          "storeFront": "TW",
+          "appVersionString": "6.17.2",
+          "lastModified": 1649836095000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8561245853,
+          "rating": 2,
+          "title": "改回谷歌雅虎就换好评",
+          "review": "用百度真的是认真的吗😅😅换个bing都觉得好一点",
+          "created": null,
+          "nickname": "電気確保",
+          "storeFront": "JP",
+          "appVersionString": "6.17.2",
+          "lastModified": 1649816426000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8145137340,
+          "rating": 2,
+          "title": "多工視窗時無法正常打字",
+          "review": "在iPad更新前，原本多工視窗都很正常的，更新後多工視窗時常完全無法打字，總是被迫要關掉重開，屢試不爽。現在都只能使用alt+tab切換，非常非常不方便。這情況已經持續一兩個月了，希望能盡快改善。",
+          "created": null,
+          "nickname": "沮喪的使用者",
+          "storeFront": "TW",
+          "appVersionString": "6.14.1",
+          "lastModified": 1639881093000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 27004697,
+            "response": "给您带来不便实在抱歉，麻烦您联系一下微信客服（MOJI_SERIES）呢",
+            "lastModified": 1640222910000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8134632909,
+          "rating": 2,
+          "title": "搜尋功能怪怪的耶",
+          "review": "搜尋結果有些項目都看不到字\n是怎麼回事？\n而且還有一些點進去會說錯誤\n或是什麼內容都沒有\n突然整個內容都變得很亂欸",
+          "created": null,
+          "nickname": "Reiieon",
+          "storeFront": "TW",
+          "appVersionString": "6.14.1",
+          "lastModified": 1639623877000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 8132795328,
+          "rating": 2,
+          "title": "改版後有bug 很多字都看不到",
+          "review": "請立即修正",
+          "created": null,
+          "nickname": "PPBRY7966",
+          "storeFront": "HK",
+          "appVersionString": "6.14.0",
+          "lastModified": 1639578251000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7890188278,
+          "rating": 2,
+          "title": "界面越来越复杂，使用感受越来越差",
+          "review": "现在打开moji会有一种不知道往哪下手的感觉。\n收藏单词收费我可以理解，也愿意付费支持。\n可是那些莫名其妙的看日剧学日语啊朋友圈一样的功能啊完全不需要。\n信息整合做的差，内容/功能越来越多，完全是在给自己减分。",
+          "created": null,
+          "nickname": "Shixiaojun5",
+          "storeFront": "JP",
+          "appVersionString": "6.11.0",
+          "lastModified": 1633663440000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7886498661,
+          "rating": 2,
+          "title": "更新完了后，很差",
+          "review": "这次更新完了后，搜索单词点击后就一直在转圈，看不到，反而把网络关了，点击后会直接进入，看见词的解释",
+          "created": null,
+          "nickname": "GOURIAEI",
+          "storeFront": "JP",
+          "appVersionString": "6.11.0",
+          "lastModified": 1633575328000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7886034145,
+          "rating": 2,
+          "title": "退回旧版",
+          "review": "为什么还没有旧版好用阿门？\n为什么不退回旧版阿门？\n本来想给1颗星\n我给你两颗星是为了相互闪耀阿门。",
+          "created": null,
+          "nickname": "IT.YOU",
+          "storeFront": "JP",
+          "appVersionString": "6.11.0",
+          "lastModified": 1633563382000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7828754756,
+          "rating": 2,
+          "title": "App图标太丑了",
+          "review": "App图标真的太丑了，廉价感爆棚。内容包括App内部都是很棒很好用的。一个app图标丑到整体。",
+          "created": null,
+          "nickname": "TonyLighter",
+          "storeFront": "JP",
+          "appVersionString": "6.11.0",
+          "lastModified": 1632206368000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7296292804,
+          "rating": 2,
+          "title": "无网打开闪退",
+          "review": "新版更新后,无网络打开就闪退。请恢复无网络离线查询功能",
+          "created": null,
+          "nickname": "yg@sh",
+          "storeFront": "US",
+          "appVersionString": "6.8.0",
+          "lastModified": 1620118322000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7281285253,
+          "rating": 2,
+          "title": "更新后复习单词重复出现",
+          "review": "最近一次更新之后每日复习里的单词会重复出现。我就说怎么每天复习的单词数一下多了这么多，点进去仔细一看前一半和后一半一模一样的单词顺序都一样",
+          "created": null,
+          "nickname": "bravegirlj",
+          "storeFront": "US",
+          "appVersionString": "6.8.0",
+          "lastModified": 1619795282000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7070560199,
+          "rating": 2,
+          "title": "买断加订阅？",
+          "review": "在线新版本增加了订阅，之前的买断用户也要订阅才能使用。看来是到了该收割韭菜的时候了。",
+          "created": null,
+          "nickname": "リョウスケケケケ",
+          "storeFront": "JP",
+          "appVersionString": "6.7.1",
+          "lastModified": 1615007496000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 7052641081,
+          "rating": 2,
+          "title": "更新后为什么没有发音了",
+          "review": "更新到最新版没有声音了\n我用的iPad也没有静音",
+          "created": null,
+          "nickname": "垃圾投诉者",
+          "storeFront": "CA",
+          "appVersionString": "6.7.0",
+          "lastModified": 1614602483000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": true,
+          "developerResponse": {
+            "responseId": 21354149,
+            "response": "你好，打开手机的铃声音量就可以了，也就是取消静音模式。这个版本为了不影响后台其他媒体的播放修改了音频。下一个版本会恢复之前的模式。\r",
+            "lastModified": 1614563516000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6995542875,
+          "rating": 2,
+          "title": "发音",
+          "review": "为什么moji的喇叭无法发音？",
+          "created": null,
+          "nickname": "よくできる",
+          "storeFront": "JP",
+          "appVersionString": "6.7.0",
+          "lastModified": 1613357904000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21174613,
+            "response": "你好，打开手机的铃声音量就可以了，也就是取消静音模式。这个版本为了不影响后台其他媒体的播放修改了音频。下一个版本会恢复之前的模式。",
+            "lastModified": 1613786535000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6985538320,
+          "rating": 2,
+          "title": "版本6.7.0 單詞完全不能發聲",
+          "review": "之前的版本沒有這個問題！失望！",
+          "created": null,
+          "nickname": "Shirleyhoo17",
+          "storeFront": "HK",
+          "appVersionString": "6.7.0",
+          "lastModified": 1613141219000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 21174629,
+            "response": "你好，打开手机的铃声音量就可以了，也就是取消静音模式。这个版本为了不影响后台其他媒体的播放修改了音频。下一个版本会恢复之前的模式。",
+            "lastModified": 1613786642000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6759561851,
+          "rating": 2,
+          "title": "更新以后bug太多了",
+          "review": "更新之后动词变形就一直被搜索🔍的图标挡着，一直都点不了，完全没必要用了，亏之前还买了。更新效率太低",
+          "created": null,
+          "nickname": "あまりようくない",
+          "storeFront": "JP",
+          "appVersionString": "6.5.0",
+          "lastModified": 1608129430000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 19887228,
+            "response": "你好，按住图标可以移动到其他位置。",
+            "lastModified": 1608521347000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6728946472,
+          "rating": 2,
+          "title": "客服人員太差勁👎",
+          "review": "尤其是QQ群裡的那個管理員、解釋半天都看不懂客戶的問題⋯⋯自以為是、態度惡劣、腦子還不好👎",
+          "created": null,
+          "nickname": "文清宝贝",
+          "storeFront": "JP",
+          "appVersionString": "6.5.0",
+          "lastModified": 1607391539000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6554309894,
+          "rating": 2,
+          "title": "越来越不像词典",
+          "review": "现在还加了新闻，加了粉丝等等……失望",
+          "created": null,
+          "nickname": "Beifu174",
+          "storeFront": "US",
+          "appVersionString": "6.4.0",
+          "lastModified": 1603183132000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6034375224,
+          "rating": 2,
+          "title": "登陆了以后之前的查询词汇都没了",
+          "review": "还无法退出登录，找不回之前的记录，我为什么要登录呢",
+          "created": null,
+          "nickname": "真夜子こ",
+          "storeFront": "JP",
+          "appVersionString": "6.1.2",
+          "lastModified": 1591279924000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 15867893,
+            "response": "私信微博：MOJI_SERIES",
+            "lastModified": 1591690792000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6030813912,
+          "rating": 2,
+          "title": "買了Vip卻無法開通",
+          "review": "買了Vip卻無法開通",
+          "created": null,
+          "nickname": "simonlai1995",
+          "storeFront": "HK",
+          "appVersionString": "6.1.1",
+          "lastModified": 1591204495000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 15867949,
+            "response": "私信微博：MOJI_SERIES",
+            "lastModified": 1591690865000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6017758473,
+          "rating": 2,
+          "title": "以前的搜索背景自定义功能请改回来！！",
+          "review": "说实话新版本觉得有点花哨 还是喜欢旧版本！！",
+          "created": null,
+          "nickname": "Kiridousssssss",
+          "storeFront": "JP",
+          "appVersionString": "6.1.1",
+          "lastModified": 1590931635000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": null
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      },
+      {
+        "value": {
+          "id": 6007340884,
+          "rating": 2,
+          "title": "是好用",
+          "review": "購買升級版了但無法使用裡面內容，是哪裡出錯了嗎？",
+          "created": null,
+          "nickname": "Tasi mei",
+          "storeFront": "TW",
+          "appVersionString": "6.1.1",
+          "lastModified": 1590718723000,
+          "helpfulViews": 0,
+          "totalViews": 0,
+          "edited": false,
+          "developerResponse": {
+            "responseId": 15868011,
+            "response": "私信微博：MOJI_SERIES",
+            "lastModified": 1591690964000,
+            "isHidden": false,
+            "pendingState": "NONE"
+          }
+        },
+        "isEditable": false,
+        "isRequired": false,
+        "errorKeys": null
+      }
+    ]
+  },
+  "messages": {
+    "warn": null,
+    "error": null,
+    "info": null
+  },
+  "statusCode": "SUCCESS"
+}
