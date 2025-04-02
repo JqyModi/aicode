@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日语学习APP原型</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-center mb-8 text-purple-700">日语学习APP原型设计</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        <!-- 首页 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">首页</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:41</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 首页内容 -->
+                <div class="screen-content home-screen">
+                    <!-- 顶部问候区 -->
+                    <div class="greeting-section">
+                        <div class="greeting-text">
+                            <h3 class="text-xl font-bold text-gray-800">こんにちは、ユーザー</h3>
+                            <p class="text-sm text-gray-600">今天是学习的好日子</p>
+                        </div>
+                        <div class="user-avatar">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=64&h=64&q=80" alt="用户头像" class="rounded-full">
+                        </div>
+                    </div>
+                    
+                    <!-- 搜索区 -->
+                    <div class="search-section">
+                        <div class="search-bar">
+                            <i class="fas fa-search text-gray-400"></i>
+                            <input type="text" placeholder="输入日语、中文或罗马音..." class="search-input">
+                            <i class="fas fa-microphone text-purple-500"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 学习卡片流 -->
+                    <div class="learning-cards">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">今日学习</h4>
+                        <div class="daily-card">
+                            <div class="progress-info">
+                                <div class="progress-text">
+                                    <span class="text-lg font-bold text-purple-700">7/10</span>
+                                    <span class="text-xs text-gray-600">每日目标</span>
+                                </div>
+                                <div class="progress-ring">
+                                    <svg width="40" height="40" viewBox="0 0 120 120">
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#E2E8F0" stroke-width="12"/>
+                                        <circle cx="60" cy="60" r="50" fill="none" stroke="#903AF4" stroke-width="12" stroke-dasharray="314" stroke-dashoffset="94"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="streak-info">
+                                <i class="fas fa-fire text-orange-500"></i>
+                                <span class="text-sm text-gray-700">连续学习 5 天</span>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-sm font-semibold text-gray-700 mt-4 mb-2">最近学习</h4>
+                        <div class="recent-words">
+                            <div class="word-card">
+                                <div class="word-info">
+                                    <div class="word-japanese">食べる</div>
+                                    <div class="word-reading">たべる</div>
+                                </div>
+                                <div class="word-meaning">吃，食用</div>
+                            </div>
+                            <div class="word-card">
+                                <div class="word-info">
+                                    <div class="word-japanese">勉強</div>
+                                    <div class="word-reading">べんきょう</div>
+                                </div>
+                                <div class="word-meaning">学习，研究</div>
+                            </div>
+                            <div class="word-card">
+                                <div class="word-info">
+                                    <div class="word-japanese">美しい</div>
+                                    <div class="word-reading">うつくしい</div>
+                                </div>
+                                <div class="word-meaning">美丽的，漂亮的</div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-sm font-semibold text-gray-700 mt-4 mb-2">收藏夹</h4>
+                        <div class="collections-preview">
+                            <div class="collection-item">
+                                <div class="collection-icon">
+                                    <i class="fas fa-book text-purple-600"></i>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-name">N5词汇</div>
+                                    <div class="collection-count">42个单词</div>
+                                </div>
+                            </div>
+                            <div class="collection-item">
+                                <div class="collection-icon">
+                                    <i class="fas fa-book text-teal-600"></i>
+                                </div>
+                                <div class="collection-info">
+                                    <div class="collection-name">常用动词</div>
+                                    <div class="collection-count">18个单词</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 流动导航控制器 -->
+                    <div class="flow-nav-controller">
+                        <div class="nav-button">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 词典详情页 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">词典详情页</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:42</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 词典详情内容 -->
+                <div class="screen-content dictionary-detail">
+                    <!-- 顶部导航 -->
+                    <div class="top-nav">
+                        <button class="back-button">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="favorite-button">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 单词信息 -->
+                    <div class="word-header">
+                        <div class="word-main">
+                            <h2 class="word-title">食べる</h2>
+                            <div class="word-pronunciation">
+                                <span class="reading">たべる</span>
+                                <button class="sound-button">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="word-tags">
+                            <span class="tag verb">动词</span>
+                            <span class="tag jlpt">N5</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 释义部分 -->
+                    <div class="definitions-section">
+                        <h3 class="section-title">释义</h3>
+                        <div class="definition-item">
+                            <div class="definition-number">1</div>
+                            <div class="definition-content">
+                                <div class="definition-text">吃，食用</div>
+                                <div class="definition-notes">用于描述进食行为</div>
+                            </div>
+                        </div>
+                        <div class="definition-item">
+                            <div class="definition-number">2</div>
+                            <div class="definition-content">
+                                <div class="definition-text">消耗，花费</div>
+                                <div class="definition-notes">比喻用法，如"花费时间"</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 例句部分 -->
+                    <div class="examples-section">
+                        <h3 class="section-title">例句</h3>
+                        <div class="example-item">
+                            <div class="example-japanese">
+                                <span class="japanese-text">私は毎日朝ごはんを食べます。</span>
+                                <button class="sound-button-small">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="example-chinese">我每天都吃早饭。</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-japanese">
+                                <span class="japanese-text">何を食べたいですか？</span>
+                                <button class="sound-button-small">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="example-chinese">你想吃什么？</div>
+                        </div>
+                        <button class="more-examples-button">
+                            查看更多例句
+                        </button>
+                    </div>
+                    
+                    <!-- 相关词汇 -->
+                    <div class="related-words-section">
+                        <h3 class="section-title">相关词汇</h3>
+                        <div class="related-words-list">
+                            <div class="related-word-item">
+                                <div class="related-word-japanese">飲む</div>
+                                <div class="related-word-reading">のむ</div>
+                                <div class="related-word-meaning">喝</div>
+                            </div>
+                            <div class="related-word-item">
+                                <div class="related-word-japanese">料理</div>
+                                <div class="related-word-reading">りょうり</div>
+                                <div class="related-word-meaning">料理</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 笔记部分 -->
+                    <div class="notes-section">
+                        <h3 class="section-title">笔记</h3>
+                        <div class="notes-editor">
+                            <textarea placeholder="添加个人笔记..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 收藏夹页面 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">收藏夹页面</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:43</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 收藏夹内容 -->
+                <div class="screen-content collections-screen">
+                    <!-- 顶部标题 -->
+                    <div class="page-header">
+                        <h2 class="page-title">我的收藏</h2>
+                        <button class="add-button">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 收藏夹列表 -->
+                    <div class="collections-list">
+                        <div class="collection-card">
+                            <div class="collection-cover">
+                                <i class="fas fa-book"></i>
+                                <span class="collection-count">42</span>
+                            </div>
+                            <div class="collection-details">
+                                <h3 class="collection-title">N5词汇</h3>
+                                <p class="collection-date">最后更新: 今天</p>
+                            </div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-cover">
+                                <i class="fas fa-book"></i>
+                                <span class="collection-count">18</span>
+                            </div>
+                            <div class="collection-details">
+                                <h3 class="collection-title">常用动词</h3>
+                                <p class="collection-date">最后更新: 昨天</p>
+                            </div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-cover">
+                                <i class="fas fa-book"></i>
+                                <span class="collection-count">24</span>
+                            </div>
+                            <div class="collection-details">
+                                <h3 class="collection-title">形容词</h3>
+                                <p class="collection-date">最后更新: 3天前</p>
+                            </div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-cover">
+                                <i class="fas fa-book"></i>
+                                <span class="collection-count">15</span>
+                            </div>
+                            <div class="collection-details">
+                                <h3 class="collection-title">旅行用语</h3>
+                                <p class="collection-date">最后更新: 上周</p>
+                            </div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-cover">
+                                <i class="fas fa-book"></i>
+                                <span class="collection-count">8</span>
+                            </div>
+                            <div class="collection-details">
+                                <h3 class="collection-title">难记单词</h3>
+                                <p class="collection-date">最后更新: 2周前</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 流动导航控制器 -->
+                    <div class="flow-nav-controller">
+                        <div class="nav-button">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 收藏夹内容页面 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">收藏夹内容</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:44</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 收藏夹内容 -->
+                <div class="screen-content collection-detail-screen">
+                    <!-- 顶部导航 -->
+                    <div class="top-nav">
+                        <button class="back-button">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="collection-title-nav">N5词汇</div>
+                        <button class="more-button">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 收藏夹信息 -->
+                    <div class="collection-info-header">
+                        <div class="collection-big-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="collection-stats">
+                            <div class="stats-item">
+                                <div class="stats-number">42</div>
+                                <div class="stats-label">单词</div>
+                            </div>
+                            <div class="stats-item">
+                                <div class="stats-number">28</div>
+                                <div class="stats-label">已学习</div>
+                            </div>
+                            <div class="stats-item">
+                                <div class="stats-number">14</div>
+                                <div class="stats-label">待学习</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 搜索和筛选 -->
+                    <div class="search-filter-section">
+                        <div class="search-bar-small">
+                            <i class="fas fa-search text-gray-400"></i>
+                            <input type="text" placeholder="搜索收藏夹..." class="search-input-small">
+                        </div>
+                        <button class="filter-button">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 单词列表 -->
+                    <div class="words-list">
+                        <div class="word-list-item">
+                            <div class="word-list-info">
+                                <div class="word-list-japanese">食べる</div>
+                                <div class="word-list-reading">たべる</div>
+                                <div class="word-list-meaning">吃，食用</div>
+                            </div>
+                            <div class="word-list-actions">
+                                <button class="sound-button-list">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="learned-indicator learned">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="word-list-item">
+                            <div class="word-list-info">
+                                <div class="word-list-japanese">飲む</div>
+                                <div class="word-list-reading">のむ</div>
+                                <div class="word-list-meaning">喝</div>
+                            </div>
+                            <div class="word-list-actions">
+                                <button class="sound-button-list">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="learned-indicator learned">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="word-list-item">
+                            <div class="word-list-info">
+                                <div class="word-list-japanese">見る</div>
+                                <div class="word-list-reading">みる</div>
+                                <div class="word-list-meaning">看，观看</div>
+                            </div>
+                            <div class="word-list-actions">
+                                <button class="sound-button-list">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="learned-indicator">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="word-list-item">
+                            <div class="word-list-info">
+                                <div class="word-list-japanese">行く</div>
+                                <div class="word-list-reading">いく</div>
+                                <div class="word-list-meaning">去，前往</div>
+                            </div>
+                            <div class="word-list-actions">
+                                <button class="sound-button-list">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="learned-indicator learned">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="word-list-item">
+                            <div class="word-list-info">
+                                <div class="word-list-japanese">来る</div>
+                                <div class="word-list-reading">くる</div>
+                                <div class="word-list-meaning">来，到来</div>
+                            </div>
+                            <div class="word-list-actions">
+                                <button class="sound-button-list">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="learned-indicator">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 设置页面 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">设置页面</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:45</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 设置内容 -->
+                <div class="screen-content settings-screen">
+                    <!-- 顶部标题 -->
+                    <div class="page-header">
+                        <h2 class="page-title">设置</h2>
+                    </div>
+                    
+                    <!-- 用户信息 -->
+                    <div class="user-profile-section">
+                        <div class="user-avatar-large">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=64&h=64&q=80" alt="用户头像">
+                        </div>
+                        <div class="user-info">
+                            <h3 class="user-name">用户名</h3>
+                            <p class="user-email">user@example.com</p>
+                        </div>
+                        <button class="edit-profile-button">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 设置列表 -->
+                    <div class="settings-list">
+                        <div class="settings-group">
+                            <h4 class="settings-group-title">应用设置</h4>
+                            <div class="settings-item">
+                                <div class="settings-item-icon theme">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <div class="settings-item-text">深色模式</div>
+                                <div class="settings-item-control">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon notification">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="settings-item-text">通知</div>
+                                <div class="settings-item-control">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon language">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <div class="settings-item-text">应用语言</div>
+                                <div class="settings-item-value">
+                                    <span>简体中文</span>
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4 class="settings-group-title">词库管理</h4>
+                            <div class="settings-item">
+                                <div class="settings-item-icon dictionary">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="settings-item-text">词库版本</div>
+                                <div class="settings-item-value">
+                                    <span>基础版 v1.2</span>
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon download">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="settings-item-text">下载扩展词库</div>
+                                <div class="settings-item-control">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4 class="settings-group-title">账户与数据</h4>
+                            <div class="settings-item">
+                                <div class="settings-item-icon sync">
+                                    <i class="fas fa-sync"></i>
+                                </div>
+                                <div class="settings-item-text">同步数据</div>
+                                <div class="settings-item-value">
+                                    <span>最后同步: 今天 09:30</span>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon backup">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="settings-item-text">备份与恢复</div>
+                                <div class="settings-item-control">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon logout">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                                <div class="settings-item-text">退出登录</div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4 class="settings-group-title">关于</h4>
+                            <div class="settings-item">
+                                <div class="settings-item-icon about">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="settings-item-text">关于应用</div>
+                                <div class="settings-item-control">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon privacy">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="settings-item-text">隐私政策</div>
+                                <div class="settings-item-control">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-icon version">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="settings-item-text">版本</div>
+                                <div class="settings-item-value">
+                                    <span>1.0.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 流动导航控制器 -->
+                    <div class="flow-nav-controller">
+                        <div class="nav-button">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 搜索结果页面 -->
+        <div class="prototype-container">
+            <h2 class="text-xl font-semibold mb-3 text-gray-800">搜索结果页面</h2>
+            <div class="iphone-frame">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="time">9:46</div>
+                    <div class="icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                
+                <!-- 搜索结果内容 -->
+                <div class="screen-content search-results-screen">
+                    <!-- 顶部搜索栏 -->
+                    <div class="search-bar-with-back">
+                        <button class="back-button-search">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="search-bar-active">
+                            <i class="fas fa-search text-gray-400"></i>
+                            <input type="text" value="食べる" class="search-input-active">
+                            <i class="fas fa-times-circle text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 搜索结果列表 -->
+                    <div class="search-results-list">
+                        <div class="search-result-item active">
+                            <div class="result-word-info">
+                                <div class="result-word-japanese">食べる</div>
+                                <div class="result-word-reading">たべる</div>
+                                <div class="result-word-meaning">吃，食用</div>
+                            </div>
+                            <div class="result-word-tags">
+                                <span class="tag verb">动词</span>
+                                <span class="tag jlpt">N5</span>
+                            </div>
+                        </div>
+                        
+                        <div class="search-result-item">
+                            <div class="result-word-info">
+                                <div class="result-word-japanese">食べ物</div>
+                                <div class="result-word-reading">たべもの</div>
+                                <div class="result-word-meaning">食物</div>
+                            </div>
+                            <div class="result-word-tags">
+                                <span class="tag noun">名词</span>
+                                <span class="tag jlpt">N5</span>
+                            </div>
+                        </div>
+                        
+                        <div class="search-result-item">
+                            <div class="result-word-info">
+                                <div class="result-word-japanese">食べ方</div>
+                                <div class="result-word-reading">たべかた</div>
+                                <div class="result-word-meaning">吃法，食用方法</div>
+                            </div>
+                            <div class="result-word-tags">
+                                <span class="tag noun">名词</span>
+                                <span class="tag jlpt">N4</span>
+                            </div>
+                        </div>
+                        
+                        <div class="search-result-item">
+                            <div class="result-word-info">
+                                <div class="result-word-japanese">食べ放題</div>
+                                <div class="result-word-reading">たべほうだい</div>
+                                <div class="result-word-meaning">自助餐，吃到饱</div>
+                            </div>
+                            <div class="result-word-tags">
+                                <span class="tag noun">名词</span>
+                                <span class="tag jlpt">N3</span>
+                            </div>
+                        </div>
+                        
+                        <div class="search-result-item">
+                            <div class="result-word-info">
+                                <div class="result-word-japanese">食べ残す</div>
+                                <div class="result-word-reading">たべのこす</div>
+                                <div class="result-word-meaning">剩饭，吃剩</div>
+                            </div>
+                            <div class="result-word-tags">
+                                <span class="tag verb">动词</span>
+                                <span class="tag jlpt">N3</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 搜索历史标签 -->
+                    <div class="search-history-section">
+                        <h3 class="section-title-small">搜索历史</h3>
+                        <div class="history-tags">
+                            <div class="history-tag">
+                                <span>飲む</span>
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="history-tag">
+                                <span>行く</span>
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="history-tag">
+                                <span>美しい</span>
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="history-tag">
+                                <span>勉強</span>
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 流动导航展开状态 -->
+<div class="prototype-container">
+    <h2 class="text-xl font-semibold mb-3 text-gray-800">流动导航展开状态</h2>
+    <div class="iphone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="time">9:47</div>
+            <div class="icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+        
+        <!-- 首页内容（模糊背景） -->
+        <div class="screen-content home-screen blur-bg">
+            <!-- 顶部问候区 -->
+            <div class="greeting-section">
+                <div class="greeting-text">
+                    <h3 class="text-xl font-bold text-gray-800">こんにちは、ユーザー</h3>
+                    <p class="text-sm text-gray-600">今天是学习的好日子</p>
+                </div>
+                <div class="user-avatar">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=64&h=64&q=80" alt="用户头像" class="rounded-full">
+                </div>
+            </div>
+            
+            <!-- 搜索区 -->
+            <div class="search-section">
+                <div class="search-bar">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input type="text" placeholder="输入日语、中文或罗马音..." class="search-input">
+                    <i class="fas fa-microphone text-purple-500"></i>
+                </div>
+            </div>
+            
+            <!-- 学习卡片流（模糊状态） -->
+            <div class="learning-cards blur-content">
+                <!-- 内容与首页相同，但添加模糊效果 -->
+            </div>
+        </div>
+        
+        <!-- 流动导航展开菜单 -->
+        <div class="flow-nav-expanded">
+            <div class="nav-center-button active">
+                <i class="fas fa-th-large"></i>
+            </div>
+            
+            <div class="nav-menu-items">
+                <div class="nav-menu-item">
+                    <div class="nav-item-icon dictionary">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="nav-item-label">词典</div>
+                </div>
+                
+                <div class="nav-menu-item">
+                    <div class="nav-item-icon collection">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div class="nav-item-label">收藏</div>
+                </div>
+                
+                <div class="nav-menu-item">
+                    <div class="nav-item-icon study">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="nav-item-label">学习</div>
+                </div>
+                
+                <div class="nav-menu-item">
+                    <div class="nav-item-icon settings">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="nav-item-label">设置</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 学习页面 -->
+<div class="prototype-container">
+    <h2 class="text-xl font-semibold mb-3 text-gray-800">学习页面</h2>
+    <div class="iphone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="time">9:48</div>
+            <div class="icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+        
+        <!-- 学习页面内容 -->
+        <div class="screen-content study-screen">
+            <!-- 顶部标题 -->
+            <div class="page-header">
+                <h2 class="page-title">学习</h2>
+            </div>
+            
+            <!-- 学习进度 -->
+            <div class="study-progress-section">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3 class="progress-title">今日学习进度</h3>
+                        <div class="progress-date">6月15日</div>
+                    </div>
+                    <div class="progress-stats">
+                        <div class="progress-circle">
+                            <svg width="80" height="80" viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#E2E8F0" stroke-width="12"/>
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#903AF4" stroke-width="12" stroke-dasharray="314" stroke-dashoffset="94"/>
+                                <text x="60" y="65" text-anchor="middle" fill="#903AF4" font-size="24" font-weight="bold">70%</text>
+                            </svg>
+                        </div>
+                        <div class="progress-details">
+                            <div class="progress-detail-item">
+                                <div class="detail-label">已学习</div>
+                                <div class="detail-value">7个单词</div>
+                            </div>
+                            <div class="progress-detail-item">
+                                <div class="detail-label">目标</div>
+                                <div class="detail-value">10个单词</div>
+                            </div>
+                            <div class="progress-detail-item">
+                                <div class="detail-label">连续学习</div>
+                                <div class="detail-value">
+                                    <i class="fas fa-fire text-orange-500"></i>
+                                    <span>5天</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学习模式 -->
+            <div class="study-modes-section">
+                <h3 class="section-title">学习模式</h3>
+                <div class="study-modes-grid">
+                    <div class="study-mode-card">
+                        <div class="mode-icon flashcard">
+                            <i class="fas fa-clone"></i>
+                        </div>
+                        <div class="mode-info">
+                            <h4 class="mode-title">闪卡学习</h4>
+                            <p class="mode-description">通过卡片快速记忆单词</p>
+                        </div>
+                    </div>
+                    
+                    <div class="study-mode-card">
+                        <div class="mode-icon quiz">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="mode-info">
+                            <h4 class="mode-title">测验模式</h4>
+                            <p class="mode-description">测试你的记忆程度</p>
+                        </div>
+                    </div>
+                    
+                    <div class="study-mode-card">
+                        <div class="mode-icon listening">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                        <div class="mode-info">
+                            <h4 class="mode-title">听力练习</h4>
+                            <p class="mode-description">提高听力辨识能力</p>
+                        </div>
+                    </div>
+                    
+                    <div class="study-mode-card">
+                        <div class="mode-icon writing">
+                            <i class="fas fa-pen"></i>
+                        </div>
+                        <div class="mode-info">
+                            <h4 class="mode-title">书写练习</h4>
+                            <p class="mode-description">练习日语文字书写</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学习计划 -->
+            <div class="study-plan-section">
+                <h3 class="section-title">学习计划</h3>
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h4 class="plan-title">JLPT N5 词汇</h4>
+                        <div class="plan-progress">
+                            <div class="plan-progress-bar">
+                                <div class="progress-fill" style="width: 35%;"></div>
+                            </div>
+                            <div class="plan-progress-text">35%</div>
+                        </div>
+                    </div>
+                    <div class="plan-details">
+                        <div class="plan-detail-item">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>已学习: 245个单词</span>
+                        </div>
+                        <div class="plan-detail-item">
+                            <i class="fas fa-hourglass-half text-amber-500"></i>
+                            <span>剩余: 455个单词</span>
+                        </div>
+                    </div>
+                    <button class="continue-button">
+                        继续学习
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 流动导航控制器 -->
+            <div class="flow-nav-controller">
+                <div class="nav-button">
+                    <i class="fas fa-th-large"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 闪卡学习页面 -->
+<div class="prototype-container">
+    <h2 class="text-xl font-semibold mb-3 text-gray-800">闪卡学习页面</h2>
+    <div class="iphone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="time">9:49</div>
+            <div class="icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+        
+        <!-- 闪卡学习内容 -->
+        <div class="screen-content flashcard-screen">
+            <!-- 顶部导航 -->
+            <div class="top-nav">
+                <button class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="flashcard-progress">3/10</div>
+                <button class="more-button">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+            
+            <!-- 闪卡区域 -->
+            <div class="flashcard-container">
+                <div class="flashcard">
+                    <div class="flashcard-front active">
+                        <div class="card-japanese">食べる</div>
+                        <div class="card-reading">たべる</div>
+                        <div class="card-hint">点击查看释义</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="card-meaning">吃，食用</div>
+                        <div class="card-type">动词 (る型)</div>
+                        <div class="card-example">
+                            <div class="example-japanese">私は朝ごはんを食べます。</div>
+                            <div class="example-chinese">我吃早饭。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 控制按钮 -->
+            <div class="flashcard-controls">
+                <button class="control-button sound">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="control-button flip">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>翻转</span>
+                </button>
+                <button class="control-button favorite">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+            
+            <!-- 学习进度指示器 -->
+            <div class="learning-progress-indicator">
+                <div class="progress-dots">
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
+            
+            <!-- 记忆评估按钮 -->
+            <div class="memory-evaluation">
+                <button class="memory-button hard">
+                    <i class="fas fa-frown"></i>
+                    <span>困难</span>
+                </button>
+                <button class="memory-button medium">
+                    <i class="fas fa-meh"></i>
+                    <span>一般</span>
+                </button>
+                <button class="memory-button easy">
+                    <i class="fas fa-smile"></i>
+                    <span>简单</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
