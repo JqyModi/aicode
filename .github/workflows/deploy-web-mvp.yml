@@ -1,0 +1,105 @@
+name: 部署 Web MVP 示例站点
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Docs/MVP/web_mvp/**'
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      - name: 安装依赖
+        run: |
+          if [ -f "Docs/MVP/web_mvp/package.json" ]; then
+            cd Docs/MVP/web_mvp
+            npm install
+          fi
+      
+      - name: 构建站点
+        run: |
+          if [ -f "Docs/MVP/web_mvp/package.json" ]; then
+            cd Docs/MVP/web_mvp
+            npm run build
+          fi
+          
+      - name: 准备部署目录
+        run: |
+          mkdir -p dist
+          
+          # 复制 prototype 目录
+          if [ -d "Docs/MVP/web_mvp/prototype" ]; then
+            mkdir -p dist/prototype
+            cp -r Docs/MVP/web_mvp/prototype/* dist/prototype/
+          fi
+          
+          # 复制 ux 目录
+          if [ -d "Docs/MVP/web_mvp/ux" ]; then
+            mkdir -p dist/ux
+            cp -r Docs/MVP/web_mvp/ux/* dist/ux/
+          fi
+          
+          # 复制其他可能的 MVP 目录
+          for dir in Docs/MVP/web_mvp/*/; do
+            dir_name=$(basename "$dir")
+            if [ "$dir_name" != "prototype" ] && [ "$dir_name" != "ux" ] && [ "$dir_name" != "node_modules" ]; then
+              mkdir -p "dist/$dir_name"
+              cp -r "$dir"* "dist/$dir_name/"
+            fi
+          done
+          
+          # 创建索引页面
+          echo '<!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>日语学习 MVP 示例</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+              h1 { color: #333; }
+              ul { list-style-type: none; padding: 0; }
+              li { margin: 10px 0; }
+              a { color: #0066cc; text-decoration: none; font-size: 18px; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>日语学习 MVP 示例站点</h1>
+            <ul id="demo-list"></ul>
+            
+            <script>
+              const demos = [
+                { name: "原型设计", path: "prototype/" },
+                { name: "用户体验", path: "ux/" }
+              ];
+              
+              const demoList = document.getElementById("demo-list");
+              demos.forEach(demo => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = demo.path;
+                a.textContent = demo.name;
+                li.appendChild(a);
+                demoList.appendChild(li);
+              });
+            </script>
+          </body>
+          </html>' > dist/index.html
+      
+      - name: 部署到 GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
