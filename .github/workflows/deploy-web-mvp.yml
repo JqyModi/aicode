@@ -103,6 +103,14 @@ jobs:
           </body>
           </html>' > dist/index.html
       
+      # 添加这个新步骤来检查部署目录内容
+      - name: 检查部署目录内容
+        run: |
+          echo "检查部署目录内容:"
+          ls -la dist/
+          echo "检查 index.html 是否存在:"
+          cat dist/index.html | head -n 5
+      
       - name: 部署到 GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
