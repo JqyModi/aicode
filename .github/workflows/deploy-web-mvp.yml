@@ -132,3 +132,9 @@ jobs:
           branch: gh-pages
           clean: true  # 确保清理旧文件
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
+
+
+
+# 添加多个推送地址
+# git remote set-url --add --push origin https://github.com/JqyModi/aicode-ios.git
+# git remote set-url --add --push origin https://github.com/JqyModi/aicode.git
