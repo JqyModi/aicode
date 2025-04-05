@@ -43,24 +43,33 @@ jobs:
         run: |
           mkdir -p dist
           
+          # 确保创建一个测试文件，以便至少有一个文件可以部署
+          echo "测试页面" > dist/test.html
+          
           # 复制 prototype 目录
           if [ -d "Docs/MVP/web_mvp/prototype" ]; then
             mkdir -p dist/prototype
-            cp -r Docs/MVP/web_mvp/prototype/* dist/prototype/
+            cp -r Docs/MVP/web_mvp/prototype/* dist/prototype/ || echo "复制 prototype 失败"
+          else
+            echo "prototype 目录不存在"
           fi
           
           # 复制 ux 目录
           if [ -d "Docs/MVP/web_mvp/ux" ]; then
             mkdir -p dist/ux
-            cp -r Docs/MVP/web_mvp/ux/* dist/ux/
+            cp -r Docs/MVP/web_mvp/ux/* dist/ux/ || echo "复制 ux 失败"
+          else
+            echo "ux 目录不存在"
           fi
           
           # 复制其他可能的 MVP 目录
           for dir in Docs/MVP/web_mvp/*/; do
-            dir_name=$(basename "$dir")
-            if [ "$dir_name" != "prototype" ] && [ "$dir_name" != "ux" ] && [ "$dir_name" != "node_modules" ]; then
-              mkdir -p "dist/$dir_name"
-              cp -r "$dir"* "dist/$dir_name/"
+            if [ -d "$dir" ]; then
+              dir_name=$(basename "$dir")
+              if [ "$dir_name" != "prototype" ] && [ "$dir_name" != "ux" ] && [ "$dir_name" != "node_modules" ]; then
+                mkdir -p "dist/$dir_name"
+                cp -r "$dir"* "dist/$dir_name/" || echo "复制 $dir_name 失败"
+              fi
             fi
           done
           
@@ -82,12 +91,14 @@ jobs:
           </head>
           <body>
             <h1>日语学习 MVP 示例站点</h1>
+            <p>更新时间: '$(date)'</p>
             <ul id="demo-list"></ul>
             
             <script>
               const demos = [
                 { name: "原型设计", path: "prototype/" },
-                { name: "用户体验", path: "ux/" }
+                { name: "用户体验", path: "ux/" },
+                { name: "测试页面", path: "test.html" }
               ];
               
               const demoList = document.getElementById("demo-list");
@@ -103,11 +114,12 @@ jobs:
           </body>
           </html>' > dist/index.html
       
-      # 添加这个新步骤来检查部署目录内容
       - name: 检查部署目录内容
         run: |
           echo "检查部署目录内容:"
           ls -la dist/
+          echo "部署目录文件数量:"
+          find dist -type f | wc -l
           echo "检查 index.html 是否存在:"
           cat dist/index.html | head -n 5
       
@@ -116,4 +128,5 @@ jobs:
         with:
           folder: dist
           branch: gh-pages
+          clean: true  # 确保清理旧文件
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
