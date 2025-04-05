@@ -1,3 +1,7 @@
+# 添加多个推送地址
+# git remote set-url --add --push origin https://github.com/JqyModi/aicode-ios.git
+# git remote set-url --add --push origin https://github.com/JqyModi/aicode.git
+
 # 部署完成访问链接：https://jqymodi.github.io/aicode/
 
 name: 部署 Web MVP 示例站点
@@ -98,8 +102,9 @@ jobs:
             
             <script>
               const demos = [
-                { name: "原型设计", path: "prototype/" },
-                { name: "用户体验", path: "ux/" },
+                { name: "高保真-清新湖水蓝", path: "prototype/" },
+                { name: "高保真-天空蓝", path: "prototype_v1/" },
+                { name: "高保真-紫色", path: "ux/" },
                 { name: "测试页面", path: "test.html" }
               ];
               
@@ -132,9 +137,3 @@ jobs:
           branch: gh-pages
           clean: true  # 确保清理旧文件
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
-
-
-
-# 添加多个推送地址
-# git remote set-url --add --push origin https://github.com/JqyModi/aicode-ios.git
-# git remote set-url --add --push origin https://github.com/JqyModi/aicode.git
