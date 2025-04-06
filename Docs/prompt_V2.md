@@ -168,3 +168,167 @@
 4. 如果团队已有Swift/SwiftUI经验 ：考虑直接使用SwiftUI创建原型，这样可以直接复用到最终产品中
 总的来说，您当前选择的技术栈已经很好，关键是要根据项目的具体需求和团队的技术背景来选择最合适的方案。
 ```
+
+
+## 编码阶段提问
+
+Q:
+我正在进行文档驱动开发阶段性验证，ddd_v3.md列举了开发过程必要文档，product_define.md是产品定义文档，tec_architecture.md是技术架构文档，feature_list.md是核心功能文档，detailed_design.md详细功能规格说明文档，uiux_v2.md是UI/UX设计规范文档，api_v1.md是API接口文档，在此基础上我将开始编码阶段，如何结构化表达让AI准确理解且遵循现有文档来开发代码？
+
+A:
+# 结构化表达指南：让AI准确理解并遵循现有文档开发代码
+在进入编码阶段时，为了确保AI能够准确理解并遵循您已有的文档进行开发，我建议采用以下结构化表达方式：
+
+## 1. 明确开发上下文
+```plaintext
+我正在基于以下文档进行日语学习APP的开发：
+- <mcfile name="DDD_V3.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/DDD_V3.md"></mcfile>：开发过程必要文档清单
+- <mcfile name="product_define.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/product_define.md"></mcfile>：产品定义文档
+- <mcfile name="tec_architecture.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/tec_architecture.md"></mcfile>：技术架构文档
+- <mcfile name="feature_list.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/feature_list.md"></mcfile>：核心功能文档
+- <mcfile name="detailed_design.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/detailed_design.md"></mcfile>：详细功能规格说明
+- <mcfile name="uiux_v2.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/uiux_v2.md"></mcfile>：UI/UX设计规范
+- <mcfile name="api_v1.md" path="/Users/modi/Documents/Modi/ai_code/aicode-ios/Docs/MVP/api_v1.md"></mcfile>：API接口文档
+
+现在我需要开始编码实现阶段。
+ ``
+```
+
+## 2. 明确当前任务
+```plaintext
+当前任务：[具体描述当前需要实现的功能模块或组件]
+参考文档：[指明与当前任务最相关的1-2个文档]
+ ```
+
+例如：
+
+```plaintext
+当前任务：实现基础词典查询功能的数据层
+参考文档：tec_architecture.md的RealmManager接口设计和api_v1.md的DictionaryRepositoryProtocol
+ ``
+```
+
+## 3. 提供具体实现要求
+```plaintext
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的MVVM+Clean Architecture架构
+2. 实现[具体功能]的[具体层级]代码
+3. 代码需符合[相关文档]中定义的接口规范
+4. 使用Swift语言，支持iOS 14.0及以上版本
+5. [其他特定要求]
+ ```
+
+## 4. 请求特定文件的创建或修改
+```plaintext
+请创建以下文件：
+
+1. [文件路径和名称]：实现[具体功能]
+   - 需要实现的关键功能：[列出要点]
+   - 需要遵循的接口：[接口名称]
+   - 依赖的其他组件：[组件名称]
+
+2. [文件路径和名称]：实现[具体功能]
+   ...
+ ```
+
+## 5. 阶段性验证请求
+```plaintext
+完成上述文件后，请说明：
+1. 代码如何满足文档中的要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能
+ ```
+
+## 具体示例
+以下是一个完整的请求示例：
+
+```plaintext
+我正在基于已有文档进行日语学习APP的开发，现在需要开始实现数据层的基础代码。
+
+当前任务：创建RealmManager和基础数据模型
+参考文档：tec_architecture.md的数据层设计和api_v1.md的数据层接口
+
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的数据层设计
+2. 实现Realm数据模型和RealmManager基础类
+3. 代码需符合api_v1.md中定义的DictionaryRepositoryProtocol接口
+4. 使用Swift语言，支持iOS 14.0及以上版本
+5. 实现离线优先策略
+
+请创建以下文件：
+
+1. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Models/DictModels.swift：
+   - 实现词典相关的Realm数据模型
+   - 包括DictEntry、Definition、Example等模型
+   - 参考api_v1.md中的数据模型设计
+
+2. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/RealmManager.swift：
+   - 实现RealmManager基础类
+   - 提供Realm实例管理
+   - 实现数据库初始化和配置
+
+3. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/DictionaryRepository.swift：
+   - 实现DictionaryRepositoryProtocol接口
+   - 提供词典查询相关功能
+   - 实现离线词库管理
+
+完成上述文件后，请说明：
+1. 代码如何满足tec_architecture.md中的数据层设计要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能
+ ``
+```
+
+## 建议
+1. 分阶段请求 ：按照架构分层逐步实现，例如先实现数据层，再实现业务层，最后实现表现层
+2. 关注依赖关系 ：明确指出当前实现依赖哪些已有组件或将被哪些组件依赖
+3. 引用文档中的具体部分 ：在请求中引用文档的具体章节或页码，帮助AI定位相关信息
+4. 提供清晰的文件结构 ：明确指出文件应该放在项目的哪个位置，遵循什么命名规范
+5. 设置验收标准 ：明确说明如何判断实现是否符合要求，例如需要通过哪些测试或满足哪些条件
+通过这种结构化的表达方式，AI能够更准确地理解您的需求，并基于现有文档生成符合要求的代码。
+
+
+## 编码阶段提问示例1
+```markdown
+我正在基于以下文档进行日语学习APP的开发，现在我需要开始编码实现阶段：
+- ：产品定义文档
+- ：详细功能规格说明
+- ：技术架构文档
+- ：UI/UX设计规范
+- ：本地API接口文档(无后端架构)
+
+当前任务：创建RealmManager和基础数据模型
+参考文档：的数据层设计和的数据层接口
+
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的数据层设计
+2. 实现Realm数据模型和RealmManager基础类
+3. 代码需符合中定义的DictionaryRepositoryProtocol接口
+4. 使用Swift语言，支持iOS 14.0及以上版本
+5. 实现离线优先策略
+
+请创建以下文件：
+
+1. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Models/DictModels.swift：
+   - 实现词典相关的Realm数据模型
+   - 包括DictEntry、Definition、Example等模型
+   - 参考中的数据模型设计
+
+2. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/RealmManager.swift：
+   - 实现RealmManager基础类
+   - 提供Realm实例管理
+   - 实现数据库初始化和配置
+
+3. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/DictionaryRepository.swift：
+   - 实现DictionaryRepositoryProtocol接口
+   - 提供词典查询相关功能
+   - 实现离线词库管理
+
+完成上述文件后，请说明：
+1. 代码如何满足中的数据层设计要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能
+```
