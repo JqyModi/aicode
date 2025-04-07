@@ -8,6 +8,23 @@
 import Foundation
 import Combine
 
+protocol DictionaryServiceProtocol {
+    // 搜索单词
+    func searchWords(query: String, type: SearchType?, limit: Int, offset: Int) -> AnyPublisher<SearchResult, DictionaryError>
+    
+    // 获取单词详情
+    func getWordDetails(id: String) -> AnyPublisher<WordDetails, DictionaryError>
+    
+    // 获取单词发音
+    func getWordPronunciation(id: String, speed: Float) -> AnyPublisher<URL, DictionaryError>
+    
+    // 获取搜索历史
+    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItem], DictionaryError>
+    
+    // 清除搜索历史
+    func clearSearchHistory() -> AnyPublisher<Bool, DictionaryError>
+}
+
 /// 词典服务协议实现
 public class DictionaryService: DictionaryServiceProtocol {
     
