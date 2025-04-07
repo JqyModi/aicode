@@ -332,3 +332,126 @@ A:
 2. 实现了哪些核心功能
 3. 下一步应该实现什么功能
 ```
+
+Q:
+下一步要实现的功能是：
+
+收藏功能实现 ：
+- 创建收藏夹和收藏项的数据模型
+- 实现FavoriteRepositoryProtocol接口
+- 提供收藏管理相关功能
+
+参考以上示例改写为`收藏功能实现`的具体要求
+
+A:
+# 收藏功能实现需求
+
+我将为您提供实现收藏功能的结构化表达，以便AI能准确理解并遵循现有文档进行开发。
+
+```
+我正在基于已有文档进行日语学习APP的开发，现在需要实现收藏功能相关代码。
+
+当前任务：实现收藏功能的数据层
+参考文档：tec_architecture.md的数据模型设计和api_v1.md的FavoriteRepositoryProtocol接口
+
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的数据层设计
+2. 实现收藏夹和收藏项的Realm数据模型
+3. 实现FavoriteRepositoryProtocol接口
+4. 使用Swift语言，支持iOS 14.0及以上版本
+5. 实现离线优先策略，支持后续云同步
+
+请创建以下文件：
+
+1. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Models/FavoriteModels.swift：
+   - 实现收藏相关的Realm数据模型
+   - 包括Folder、FavoriteItem等模型
+   - 参考api_v1.md和tec_architecture.md中的数据模型设计
+
+2. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/FavoriteRepository.swift：
+   - 实现FavoriteRepositoryProtocol接口
+   - 提供收藏夹管理功能（创建、更新、删除）
+   - 提供收藏项管理功能（添加、更新、删除）
+   - 实现收藏状态查询功能
+   - 使用RealmManager进行数据操作
+
+完成上述文件后，请说明：
+1. 代码如何满足tec_architecture.md中的数据层设计要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能
+```
+
+这个结构化表达包含了：
+1. 明确的开发上下文和当前任务
+2. 参考的关键文档
+3. 具体的实现要求
+4. 需要创建的文件及其功能
+5. 验收标准
+
+通过这种方式，AI将能够更准确地理解您的需求，并基于现有文档生成符合要求的收藏功能相关代码。
+
+
+Q:
+下一步要实现的功能是：
+
+用户认证模块 ：
+   - 实现Sign in with Apple功能
+   - 创建用户数据模型
+   - 实现用户设置存储功能
+
+参考以上示例改写为`用户认证模块`的具体要求
+
+A:
+# 用户认证模块实现需求
+我将为您提供实现用户认证模块的结构化表达，以便AI能准确理解并遵循现有文档进行开发。
+
+```plaintext
+我正在基于已有文档进行日语学习APP的开发，现在需要实现用户认证模块相关代码。
+
+当前任务：实现用户认证模块的数据层
+参考文档：tec_architecture.md的用户认证设计和api_v1.md的UserAuthRepositoryProtocol接口
+
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的数据层设计
+2. 实现用户和用户设置的Realm数据模型
+3. 实现UserAuthRepositoryProtocol接口
+4. 集成Sign in with Apple功能
+5. 使用Swift语言，支持iOS 14.0及以上版本
+6. 实现用户数据的本地存储，为后续云同步做准备
+
+请创建以下文件：
+
+1. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Models/UserModels.swift：
+   - 实现用户相关的Realm数据模型
+   - 包括User、UserSettings等模型
+   - 参考api_v1.md和tec_architecture.md中的数据模型设计
+
+2. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/UserAuthRepository.swift：
+   - 实现UserAuthRepositoryProtocol接口
+   - 提供Sign in with Apple功能
+   - 提供用户信息管理功能
+   - 提供用户设置存储功能
+   - 使用RealmManager进行数据操作
+
+3. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Services/AppleAuthService.swift：
+   - 实现与Apple认证服务的交互
+   - 处理认证回调和令牌验证
+   - 提供用户标识符和基本信息获取
+
+完成上述文件后，请说明：
+1. 代码如何满足tec_architecture.md中的数据层设计要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能
+ ```
+```
+
+这个结构化表达包含了：
+
+1. 明确的开发上下文和当前任务
+2. 参考的关键文档
+3. 具体的实现要求
+4. 需要创建的文件及其功能
+5. 验收标准
+通过这种方式，AI将能够更准确地理解您的需求，并基于现有文档生成符合要求的用户认证模块相关代码。
