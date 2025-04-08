@@ -89,3 +89,34 @@ class FavoriteItem: Object {
     // 反向链接到所属文件夹，不存储在Realm中
     var linkingObjects = LinkingObjects(fromType: Folder.self, property: "items")
 }
+
+// MARK: - 用户模块数据模型
+
+// 用户模型
+class User: Object {
+    @Persisted(primaryKey: true) var id: String  // Apple ID标识符
+    @Persisted var nickname: String?             // 昵称
+    @Persisted var email: String?                // 邮箱
+    @Persisted var settings: UserSettings?       // 用户设置
+    @Persisted var lastSyncTime: Date?           // 最后同步时间
+    @Persisted var createdAt: Date = Date()      // 创建时间
+    @Persisted var syncStatus: Int = SyncStatus.pendingUpload.rawValue // 同步状态
+}
+
+// 用户设置
+class UserSettings: EmbeddedObject {
+    @Persisted var darkMode: Bool = false        // 深色模式
+    @Persisted var fontSize: Int = 2             // 字体大小
+    @Persisted var autoSync: Bool = true         // 自动同步
+    @Persisted var notificationsEnabled: Bool = true // 通知开关
+    @Persisted var syncFrequency: Int = 1        // 同步频率（小时）
+}
+
+// 认证令牌
+class AuthToken: Object {
+    @Persisted(primaryKey: true) var id: String = "auth_token"
+    @Persisted var identityToken: Data?          // 身份令牌
+    @Persisted var authorizationCode: String?    // 授权码
+    @Persisted var expiresAt: Date?              // 过期时间
+    @Persisted var refreshToken: String?         // 刷新令牌
+}
