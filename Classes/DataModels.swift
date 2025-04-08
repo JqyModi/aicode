@@ -52,3 +52,40 @@ class SearchHistoryItem: Object {
     @Persisted var reading: String?          // 读音
     @Persisted var searchDate: Date          // 搜索日期
 }
+
+// MARK: - 收藏模块数据模型
+
+// 同步状态枚举
+enum SyncStatus: Int {
+    case synced = 0        // 已同步
+    case pendingUpload = 1 // 待上传
+    case pendingDelete = 2 // 待删除
+    case conflict = 3      // 冲突
+}
+
+// 收藏夹模型
+class Folder: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var name: String                  // 收藏夹名称
+    @Persisted var createdAt: Date = Date()      // 创建时间
+    @Persisted var items: List<FavoriteItem>     // 收藏项目
+    @Persisted var syncStatus: Int = SyncStatus.pendingUpload.rawValue // 同步状态
+    @Persisted var lastModified: Date = Date()   // 最后修改时间
+    @Persisted var isDefault: Bool = false       // 是否为默认收藏夹
+}
+
+// 收藏项目
+class FavoriteItem: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var wordId: String                // 词条ID
+    @Persisted var word: String                  // 单词
+    @Persisted var reading: String               // 读音
+    @Persisted var meaning: String               // 简要释义
+    @Persisted var note: String?                 // 个人笔记
+    @Persisted var addedAt: Date = Date()        // 添加时间
+    @Persisted var syncStatus: Int = SyncStatus.pendingUpload.rawValue // 同步状态
+    @Persisted var lastModified: Date = Date()   // 最后修改时间
+    
+    // 反向链接到所属文件夹，不存储在Realm中
+    var linkingObjects = LinkingObjects(fromType: Folder.self, property: "items")
+}

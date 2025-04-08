@@ -10,6 +10,7 @@
 		C592EF632DA5290100784427 /* Realm in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF602DA5290100784427 /* Realm */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C592EF682DA5305900784427 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C592EF672DA5305900784427 /* FavoriteRepository.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C592EF672DA5305900784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteRepository.swift; path = Data/Repositories/FavoriteRepository.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		C5E6A15A2DA51718006BF779 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C592EF672DA5305900784427 /* FavoriteRepository.swift */,
 				C5E6A1582DA51718006BF779 /* Data */,
 				C5E6A1592DA51718006BF779 /* DataModels.swift */,
 			);
@@ -206,6 +209,7 @@
 				C5E6A15C2DA51718006BF779 /* RealmManager.swift in Sources */,
 				C5E6A15D2DA51718006BF779 /* DataModels.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
+				C592EF682DA5305900784427 /* FavoriteRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
