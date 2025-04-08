@@ -11,26 +11,6 @@
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
 		C5AEDA552DA261560031B210 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA542DA261560031B210 /* Preview Assets.xcassets */; };
-		C5E8F0682DA49646008C7156 /* SyncConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F04D2DA49646008C7156 /* SyncConflictResolver.swift */; };
-		C5E8F0692DA49646008C7156 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F04F2DA49646008C7156 /* RealmManager.swift */; };
-		C5E8F06A2DA49646008C7156 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0502DA49646008C7156 /* FavoriteRepository.swift */; };
-		C5E8F06B2DA49646008C7156 /* SyncRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0512DA49646008C7156 /* SyncRepository.swift */; };
-		C5E8F06C2DA49646008C7156 /* UserAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0522DA49646008C7156 /* UserAuthRepository.swift */; };
-		C5E8F06D2DA49646008C7156 /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0532DA49646008C7156 /* DictionaryRepository.swift */; };
-		C5E8F06E2DA49646008C7156 /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0552DA49646008C7156 /* UserModels.swift */; };
-		C5E8F06F2DA49646008C7156 /* DictModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0562DA49646008C7156 /* DictModels.swift */; };
-		C5E8F0702DA49646008C7156 /* FavoriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0572DA49646008C7156 /* FavoriteModels.swift */; };
-		C5E8F0712DA49646008C7156 /* SyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0582DA49646008C7156 /* SyncModels.swift */; };
-		C5E8F0722DA49646008C7156 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F05A2DA49646008C7156 /* CloudKitService.swift */; };
-		C5E8F0732DA49646008C7156 /* AppleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F05B2DA49646008C7156 /* AppleAuthService.swift */; };
-		C5E8F0742DA49646008C7156 /* FavoriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F05E2DA49646008C7156 /* FavoriteModels.swift */; };
-		C5E8F0752DA49646008C7156 /* DictionaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F05F2DA49646008C7156 /* DictionaryModels.swift */; };
-		C5E8F0762DA49646008C7156 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0612DA49646008C7156 /* SearchUseCase.swift */; };
-		C5E8F0772DA49646008C7156 /* FavoriteManagementUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0622DA49646008C7156 /* FavoriteManagementUseCase.swift */; };
-		C5E8F0782DA49646008C7156 /* WordDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0632DA49646008C7156 /* WordDetailsUseCase.swift */; };
-		C5E8F0792DA49646008C7156 /* FolderManagementUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0642DA49646008C7156 /* FolderManagementUseCase.swift */; };
-		C5E8F07A2DA49646008C7156 /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0662DA49646008C7156 /* DictionaryService.swift */; };
-		C5E8F07B2DA49646008C7156 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F0672DA49646008C7156 /* FavoriteService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,26 +19,6 @@
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C5AEDA512DA261560031B210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5AEDA542DA261560031B210 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C5E8F04D2DA49646008C7156 /* SyncConflictResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncConflictResolver.swift; sourceTree = "<group>"; };
-		C5E8F04F2DA49646008C7156 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		C5E8F0502DA49646008C7156 /* FavoriteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
-		C5E8F0512DA49646008C7156 /* SyncRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncRepository.swift; sourceTree = "<group>"; };
-		C5E8F0522DA49646008C7156 /* UserAuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
-		C5E8F0532DA49646008C7156 /* DictionaryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
-		C5E8F0552DA49646008C7156 /* UserModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
-		C5E8F0562DA49646008C7156 /* DictModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictModels.swift; sourceTree = "<group>"; };
-		C5E8F0572DA49646008C7156 /* FavoriteModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteModels.swift; sourceTree = "<group>"; };
-		C5E8F0582DA49646008C7156 /* SyncModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncModels.swift; sourceTree = "<group>"; };
-		C5E8F05A2DA49646008C7156 /* CloudKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
-		C5E8F05B2DA49646008C7156 /* AppleAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthService.swift; sourceTree = "<group>"; };
-		C5E8F05E2DA49646008C7156 /* FavoriteModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteModels.swift; sourceTree = "<group>"; };
-		C5E8F05F2DA49646008C7156 /* DictionaryModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryModels.swift; sourceTree = "<group>"; };
-		C5E8F0612DA49646008C7156 /* SearchUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
-		C5E8F0622DA49646008C7156 /* FavoriteManagementUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteManagementUseCase.swift; sourceTree = "<group>"; };
-		C5E8F0632DA49646008C7156 /* WordDetailsUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailsUseCase.swift; sourceTree = "<group>"; };
-		C5E8F0642DA49646008C7156 /* FolderManagementUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderManagementUseCase.swift; sourceTree = "<group>"; };
-		C5E8F0662DA49646008C7156 /* DictionaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
-		C5E8F0672DA49646008C7156 /* FavoriteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +51,6 @@
 		C5AEDA4C2DA261520031B210 /* JapaneseLearnApp */ = {
 			isa = PBXGroup;
 			children = (
-				C5E8F04A2DA49646008C7156 /* JapaneseApp */,
 				C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */,
 				C5AEDA4F2DA261520031B210 /* ContentView.swift */,
 				C5AEDA512DA261560031B210 /* Assets.xcassets */,
@@ -106,105 +65,6 @@
 				C5AEDA542DA261560031B210 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		C5E8F04A2DA49646008C7156 /* JapaneseApp */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F04B2DA49646008C7156 /* Data */,
-				C5E8F05C2DA49646008C7156 /* Domain */,
-			);
-			path = JapaneseApp;
-			sourceTree = SOURCE_ROOT;
-		};
-		C5E8F04B2DA49646008C7156 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F04C2DA49646008C7156 /* Utils */,
-				C5E8F04E2DA49646008C7156 /* Repositories */,
-				C5E8F0542DA49646008C7156 /* Models */,
-				C5E8F0592DA49646008C7156 /* Services */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		C5E8F04C2DA49646008C7156 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F04D2DA49646008C7156 /* SyncConflictResolver.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		C5E8F04E2DA49646008C7156 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F04F2DA49646008C7156 /* RealmManager.swift */,
-				C5E8F0502DA49646008C7156 /* FavoriteRepository.swift */,
-				C5E8F0512DA49646008C7156 /* SyncRepository.swift */,
-				C5E8F0522DA49646008C7156 /* UserAuthRepository.swift */,
-				C5E8F0532DA49646008C7156 /* DictionaryRepository.swift */,
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		C5E8F0542DA49646008C7156 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F0552DA49646008C7156 /* UserModels.swift */,
-				C5E8F0562DA49646008C7156 /* DictModels.swift */,
-				C5E8F0572DA49646008C7156 /* FavoriteModels.swift */,
-				C5E8F0582DA49646008C7156 /* SyncModels.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		C5E8F0592DA49646008C7156 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F05A2DA49646008C7156 /* CloudKitService.swift */,
-				C5E8F05B2DA49646008C7156 /* AppleAuthService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		C5E8F05C2DA49646008C7156 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F05D2DA49646008C7156 /* Models */,
-				C5E8F0602DA49646008C7156 /* UseCases */,
-				C5E8F0652DA49646008C7156 /* Services */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		C5E8F05D2DA49646008C7156 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F05E2DA49646008C7156 /* FavoriteModels.swift */,
-				C5E8F05F2DA49646008C7156 /* DictionaryModels.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		C5E8F0602DA49646008C7156 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F0612DA49646008C7156 /* SearchUseCase.swift */,
-				C5E8F0622DA49646008C7156 /* FavoriteManagementUseCase.swift */,
-				C5E8F0632DA49646008C7156 /* WordDetailsUseCase.swift */,
-				C5E8F0642DA49646008C7156 /* FolderManagementUseCase.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
-		C5E8F0652DA49646008C7156 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				C5E8F0662DA49646008C7156 /* DictionaryService.swift */,
-				C5E8F0672DA49646008C7156 /* FavoriteService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +111,8 @@
 				Base,
 			);
 			mainGroup = C5AEDA412DA261520031B210;
+			packageReferences = (
+			);
 			productRefGroup = C5AEDA4B2DA261520031B210 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,28 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5E8F0682DA49646008C7156 /* SyncConflictResolver.swift in Sources */,
-				C5E8F0692DA49646008C7156 /* RealmManager.swift in Sources */,
-				C5E8F06C2DA49646008C7156 /* UserAuthRepository.swift in Sources */,
-				C5E8F07B2DA49646008C7156 /* FavoriteService.swift in Sources */,
-				C5E8F0702DA49646008C7156 /* FavoriteModels.swift in Sources */,
-				C5E8F0782DA49646008C7156 /* WordDetailsUseCase.swift in Sources */,
-				C5E8F06D2DA49646008C7156 /* DictionaryRepository.swift in Sources */,
-				C5E8F06B2DA49646008C7156 /* SyncRepository.swift in Sources */,
-				C5E8F0722DA49646008C7156 /* CloudKitService.swift in Sources */,
-				C5E8F06F2DA49646008C7156 /* DictModels.swift in Sources */,
-				C5E8F06A2DA49646008C7156 /* FavoriteRepository.swift in Sources */,
-				C5E8F0712DA49646008C7156 /* SyncModels.swift in Sources */,
-				C5E8F07A2DA49646008C7156 /* DictionaryService.swift in Sources */,
-				C5E8F0732DA49646008C7156 /* AppleAuthService.swift in Sources */,
-				C5E8F0752DA49646008C7156 /* DictionaryModels.swift in Sources */,
-				C5E8F0762DA49646008C7156 /* SearchUseCase.swift in Sources */,
-				C5E8F0792DA49646008C7156 /* FolderManagementUseCase.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
-				C5E8F06E2DA49646008C7156 /* UserModels.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
-				C5E8F0772DA49646008C7156 /* FavoriteManagementUseCase.swift in Sources */,
-				C5E8F0742DA49646008C7156 /* FavoriteModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
