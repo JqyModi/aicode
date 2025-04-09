@@ -37,12 +37,22 @@ class DictEntry: Object {
 class Definition: EmbeddedObject {
     @Persisted var meaning: String           // 中文释义
     @Persisted var notes: String?            // 注释
+    
+    init(meaning: String, notes: String? = nil) {
+        self.meaning = meaning
+        self.notes = notes
+    }
 }
 
 // 例句模型
 class Example: EmbeddedObject {
     @Persisted var sentence: String          // 日语例句
     @Persisted var translation: String       // 中文翻译
+    
+    init(sentence: String, translation: String) {
+        self.sentence = sentence
+        self.translation = translation
+    }
 }
 
 // 搜索历史项
@@ -286,3 +296,88 @@ class SyncConflict: Object {
 //     case pendingUpload = "pendingUpload" // 待上传
 //     case conflict = "conflict"           // 冲突
 // }
+
+// 在文件末尾添加以下模型定义
+
+// MARK: - 业务层模型
+
+// 搜索结果模型
+struct SearchResult {
+    let query: String
+    let totalCount: Int
+    let items: [WordListItem]
+}
+
+// 词条列表项
+struct WordListItem {
+    let id: String
+    let word: String
+    let reading: String
+    let partOfSpeech: String
+    let briefMeaning: String
+}
+
+// 词条详情
+struct WordDetails {
+    let id: String
+    let word: String
+    let reading: String
+    let partOfSpeech: String
+    let definitions: [Definition]
+    let examples: [Example]
+    let tags: [String]
+}
+
+// 搜索历史项（业务层）
+struct SearchHistoryDTO {
+    let id: String
+    let word: String
+    let timestamp: Date
+    
+    init(id: String = UUID().uuidString, word: String, timestamp: Date = Date()) {
+        self.id = id
+        self.word = word
+        self.timestamp = timestamp
+    }
+    
+    // 从数据层模型转换
+    init(from model: SearchHistoryItem) {
+        self.id = model.id
+        self.word = model.word
+        self.timestamp = model.searchDate
+    }
+}
+
+// MARK: - 词典服务错误类型
+enum DictionaryError: Error {
+    case notFound
+    case invalidQuery
+    case databaseError(Error)
+    case audioError
+    case networkError
+    case unknown
+    
+    var localizedDescription: String {
+        switch self {
+        case .notFound:
+            return "未找到相关词条"
+        case .invalidQuery:
+            return "无效的搜索查询"
+        case .databaseError(let error):
+            return "数据库错误: \(error.localizedDescription)"
+        case .audioError:
+            return "音频处理错误"
+        case .networkError:
+            return "网络连接错误"
+        case .unknown:
+            return "未知错误"
+        }
+    }
+}
+
+// 音频服务错误
+enum AudioError: Error {
+    case synthesisError
+    case fileError
+    case playbackError
+}
