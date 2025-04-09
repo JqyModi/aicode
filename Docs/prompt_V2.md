@@ -507,3 +507,50 @@ A:
 2. 实现了哪些核心功能
 3. 下一步应该实现什么功能
 
+
+# 云同步数据层实现需求
+我正在基于已有文档进行日语学习APP的开发，现在需要实现CloudKit云同步相关代码。
+
+当前任务：实现CloudKit云同步的数据层
+参考文档：tec_architecture.md的云同步设计和api_v1.md的SyncRepositoryProtocol接口
+
+请根据以下要求实现代码：
+
+1. 遵循技术架构文档中的数据层设计
+2. 实现CloudKit同步管理器
+3. 实现SyncRepositoryProtocol接口
+4. 提供数据同步和冲突解决策略
+5. 实现增量同步功能
+6. 使用Swift语言，支持iOS 14.0及以上版本
+7. 确保离线优先策略，保证在无网络环境下应用仍能正常使用
+
+请创建以下文件：
+
+1. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Models/SyncModels.swift：
+   - 实现同步相关的数据模型
+   - 包括SyncStatus、SyncOperation、SyncProgress等模型
+   - 参考api_v1.md中的同步相关数据模型设计
+
+2. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Services/CloudKitService.swift：
+   - 实现与CloudKit的底层交互
+   - 提供记录的增删改查功能
+   - 处理CloudKit错误和权限问题
+   - 实现数据转换（Realm对象与CloudKit记录之间的转换）
+
+3. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Repositories/SyncRepository.swift：
+   - 实现SyncRepositoryProtocol接口
+   - 提供同步状态查询功能
+   - 实现增量同步策略
+   - 提供冲突检测和解决机制
+   - 使用CloudKitService进行云端数据操作
+
+4. /Users/modi/Documents/Modi/ai_code/aicode-ios/JapaneseApp/Data/Utils/SyncConflictResolver.swift：
+   - 实现同步冲突解决策略
+   - 提供基于时间戳的冲突检测
+   - 实现自动合并和手动选择机制
+   - 处理各种冲突场景
+
+完成上述文件后，请说明：
+1. 代码如何满足tec_architecture.md中的数据同步策略要求
+2. 实现了哪些核心功能
+3. 下一步应该实现什么功能

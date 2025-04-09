@@ -60,7 +60,7 @@ class UserAuthRepository: UserAuthRepositoryProtocol {
                         }
                         
                         user.lastSyncTime = Date()
-                        user.syncStatus = SyncStatus.pendingUpload.rawValue
+                        user.syncStatus = SyncStatusType.pendingUpload.rawValue
                         
                         // 保存认证令牌
                         let token = AuthToken()
@@ -153,14 +153,14 @@ class UserAuthRepository: UserAuthRepositoryProtocol {
                         existingSettings.notificationsEnabled = settings.notificationsEnabled
                         existingSettings.syncFrequency = settings.syncFrequency
                         
-                        user.syncStatus = SyncStatus.pendingUpload.rawValue
+                        user.syncStatus = SyncStatusType.pendingUpload.rawValue
                         
                         return existingSettings
                     } else {
                         // 如果用户没有设置，创建新设置
                         let newSettings = settings
                         user.settings = newSettings
-                        user.syncStatus = SyncStatus.pendingUpload.rawValue
+                        user.syncStatus = SyncStatusType.pendingUpload.rawValue
                         
                         return newSettings
                     }

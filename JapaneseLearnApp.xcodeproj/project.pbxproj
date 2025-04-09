@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52000DE2DA58BB0007BC24D /* SyncConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52000DB2DA58BB0007BC24D /* SyncConflictResolver.swift */; };
+		C52000DF2DA58BB0007BC24D /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52000DA2DA58BB0007BC24D /* CloudKitService.swift */; };
+		C52000E02DA58BB0007BC24D /* SyncRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52000DC2DA58BB0007BC24D /* SyncRepository.swift */; };
+		C52000E12DA58BB0007BC24D /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52000DD2DA58BB0007BC24D /* SyncService.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C592EF682DA5305900784427 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C592EF672DA5305900784427 /* FavoriteRepository.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C52000DA2DA58BB0007BC24D /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CloudKitService.swift; path = Data/Services/CloudKitService.swift; sourceTree = "<group>"; };
+		C52000DB2DA58BB0007BC24D /* SyncConflictResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncConflictResolver.swift; path = Data/Utils/SyncConflictResolver.swift; sourceTree = "<group>"; };
+		C52000DC2DA58BB0007BC24D /* SyncRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncRepository.swift; path = Data/Repositories/SyncRepository.swift; sourceTree = "<group>"; };
+		C52000DD2DA58BB0007BC24D /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncService.swift; path = Domain/Services/SyncService.swift; sourceTree = "<group>"; };
 		C592EF672DA5305900784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteRepository.swift; path = Data/Repositories/FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF692DA5772500784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF6A2DA5772500784427 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
@@ -129,6 +137,10 @@
 		C5E6A15A2DA51718006BF779 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C52000DA2DA58BB0007BC24D /* CloudKitService.swift */,
+				C52000DB2DA58BB0007BC24D /* SyncConflictResolver.swift */,
+				C52000DC2DA58BB0007BC24D /* SyncRepository.swift */,
+				C52000DD2DA58BB0007BC24D /* SyncService.swift */,
 				C592EF6D2DA5774100784427 /* AppleAuthService.swift */,
 				C592EF672DA5305900784427 /* FavoriteRepository.swift */,
 				C5E6A1582DA51718006BF779 /* Data */,
@@ -213,6 +225,10 @@
 			files = (
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C5E6A15B2DA51718006BF779 /* DictionaryRepository.swift in Sources */,
+				C52000DE2DA58BB0007BC24D /* SyncConflictResolver.swift in Sources */,
+				C52000DF2DA58BB0007BC24D /* CloudKitService.swift in Sources */,
+				C52000E02DA58BB0007BC24D /* SyncRepository.swift in Sources */,
+				C52000E12DA58BB0007BC24D /* SyncService.swift in Sources */,
 				C5E6A15C2DA51718006BF779 /* RealmManager.swift in Sources */,
 				C592EF6E2DA5774100784427 /* AppleAuthService.swift in Sources */,
 				C5E6A15D2DA51718006BF779 /* DataModels.swift in Sources */,

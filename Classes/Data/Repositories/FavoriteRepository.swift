@@ -81,7 +81,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             folder.name = name
             folder.createdAt = Date()
             folder.lastModified = Date()
-            folder.syncStatus = SyncStatus.pendingUpload.rawValue
+            folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             realm.add(folder)
             return folder
@@ -97,7 +97,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             
             folder.name = name
             folder.lastModified = Date()
-            folder.syncStatus = SyncStatus.pendingUpload.rawValue
+            folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             return folder
         }
@@ -156,7 +156,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
                 if let newNote = note, existingItem.note != newNote {
                     existingItem.note = newNote
                     existingItem.lastModified = Date()
-                    existingItem.syncStatus = SyncStatus.pendingUpload.rawValue
+                    existingItem.syncStatus = SyncStatusType.pendingUpload.rawValue
                 }
                 return existingItem
             }
@@ -177,12 +177,12 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             item.note = note
             item.addedAt = Date()
             item.lastModified = Date()
-            item.syncStatus = SyncStatus.pendingUpload.rawValue
+            item.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             // 添加到收藏夹
             folder.items.append(item)
             folder.lastModified = Date()
-            folder.syncStatus = SyncStatus.pendingUpload.rawValue
+            folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             return item
         }
@@ -197,12 +197,12 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             
             item.note = note
             item.lastModified = Date()
-            item.syncStatus = SyncStatus.pendingUpload.rawValue
+            item.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             // 更新所属文件夹的修改时间和同步状态
             if let folder = item.linkingObjects.first {
                 folder.lastModified = Date()
-                folder.syncStatus = SyncStatus.pendingUpload.rawValue
+                folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             }
             
             return item
@@ -219,7 +219,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             // 更新所属文件夹的修改时间和同步状态
             if let folder = item.linkingObjects.first {
                 folder.lastModified = Date()
-                folder.syncStatus = SyncStatus.pendingUpload.rawValue
+                folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             }
             
             // 删除收藏项
