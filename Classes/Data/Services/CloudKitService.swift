@@ -242,7 +242,7 @@ class CloudKitService {
         record["lastModified"] = item.lastModified as CKRecordValue
         
         // 设置与文件夹的关系
-        if let folder = item.linkingObjects.first {
+        if let folder = item.folderObject {
             let folderReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: folder.id), action: .deleteSelf)
             record["folder"] = folderReference
         }

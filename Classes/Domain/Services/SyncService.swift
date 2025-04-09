@@ -7,13 +7,13 @@ protocol SyncServiceProtocol {
     func getSyncStatus() -> AnyPublisher<SyncStatusInfo, SyncError>
     
     // 触发同步
-    func startSync(type: SyncType) -> AnyPublisher<SyncOperationInfo, SyncError>
+    func startSync() -> AnyPublisher<SyncOperationInfo, SyncError>
     
     // 获取同步进度
-    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgressInfo, SyncError>
+    func getSyncProgress(operationId: String) -> AnyPublisher<SyncOperationInfo, SyncError>
     
-    // 解决同步冲突
-    func resolveSyncConflict(conflictId: String, resolution: ConflictResolution) -> AnyPublisher<Bool, SyncError>
+    // 启用/禁用自动同步
+    func setAutoSync(enabled: Bool) -> AnyPublisher<Bool, SyncError>
 }
 
 class SyncService: SyncServiceProtocol {
@@ -28,131 +28,76 @@ class SyncService: SyncServiceProtocol {
     func getSyncStatus() -> AnyPublisher<SyncStatusInfo, SyncError> {
         return syncRepository.getSyncStatus()
             .map { status -> SyncStatusInfo in
+                let operationInfo = status.currentOperation.map { self.mapToOperationInfo($0) }
+                
                 return SyncStatusInfo(
                     lastSyncTime: status.lastSyncTime,
-                    pendingChanges: self.countPendingChanges(),
-                    syncStatus: status.currentOperation != nil ? "syncing" : "idle",
-                    availableOffline: status.cloudKitAvailable
+                    isCloudKitAvailable: status.cloudKitAvailable,
+                    isAutoSyncEnabled: status.autoSyncEnabled,
+                    currentOperation: operationInfo
                 )
             }
             .mapError { error -> SyncError in
-                return self.mapError(error)
+                return .repositoryError(error)
             }
             .eraseToAnyPublisher()
     }
     
     // 触发同步
-    func startSync(type: SyncType) -> AnyPublisher<SyncOperationInfo, SyncError> {
-        let repoSyncType: SyncOperationType
-        
-        switch type {
-        case .full:
-            repoSyncType = .full
-        case .favorites:
-            // 对应原来的incremental类型
-            repoSyncType = .incremental
-        case .settings:
-            // 对应原来的download类型
-            repoSyncType = .download
-        }
-        
-        return syncRepository.startSync(type: repoSyncType)
+    func startSync() -> AnyPublisher<SyncOperationInfo, SyncError> {
+        return syncRepository.startSync()
             .map { operation -> SyncOperationInfo in
-                return SyncOperationInfo(
-                    syncId: operation.id,
-                    startedAt: operation.startTime,
-                    status: operation.status,
-                    estimatedTimeRemaining: self.calculateEstimatedTime(operation)
-                )
+                return self.mapToOperationInfo(operation)
             }
             .mapError { error -> SyncError in
-                return self.mapError(error)
+                if let nsError = error as NSError? {
+                    if nsError.domain == "SyncRepository" && nsError.code == 409 {
+                        return .operationInProgress
+                    } else if nsError.domain == "CloudKitService" && nsError.code == 503 {
+                        return .notAvailable
+                    }
+                }
+                return .repositoryError(error)
             }
             .eraseToAnyPublisher()
     }
     
     // 获取同步进度
-    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgressInfo, SyncError> {
+    func getSyncProgress(operationId: String) -> AnyPublisher<SyncOperationInfo, SyncError> {
         return syncRepository.getSyncProgress(operationId: operationId)
-            .map { operation -> SyncProgressInfo in
-                return SyncProgressInfo(
-                    syncId: operation.id,
-                    progress: operation.progress,
-                    status: operation.status,
-                    itemsSynced: operation.itemsProcessed,
-                    totalItems: operation.totalItems,
-                    estimatedTimeRemaining: self.calculateEstimatedTime(operation)
-                )
+            .map { operation -> SyncOperationInfo in
+                return self.mapToOperationInfo(operation)
             }
             .mapError { error -> SyncError in
-                return self.mapError(error)
+                if let nsError = error as NSError?, nsError.domain == "SyncRepository" && nsError.code == 404 {
+                    return .operationNotFound
+                }
+                return .repositoryError(error)
             }
             .eraseToAnyPublisher()
     }
     
-    // 解决同步冲突
-    func resolveSyncConflict(conflictId: String, resolution: ConflictResolution) -> AnyPublisher<Bool, SyncError> {
-        let repoResolution: ConflictResolution
-        
-        switch resolution {
-        case .useLocal:
-            repoResolution = .useLocal
-        case .useRemote:
-            repoResolution = .useRemote
-        case .merge:
-            repoResolution = .merge
-        case .manual:
-            repoResolution = .manual
-        }
-        
-        return syncRepository.resolveSyncConflict(conflictId: conflictId, resolution: repoResolution)
+    // 启用/禁用自动同步
+    func setAutoSync(enabled: Bool) -> AnyPublisher<Bool, SyncError> {
+        return syncRepository.setAutoSync(enabled: enabled)
             .mapError { error -> SyncError in
-                return self.mapError(error)
+                return .repositoryError(error)
             }
             .eraseToAnyPublisher()
     }
     
-    // 计算待同步的更改数量
-    private func countPendingChanges() -> Int {
-        // 这里应该查询Realm数据库中待同步的项目数量
-        // 简化实现，返回一个固定值
-        return 0
-    }
-    
-    // 计算估计剩余时间（秒）
-    private func calculateEstimatedTime(_ operation: SyncOperation) -> Int? {
-        guard operation.progress > 0, operation.startTime != nil else {
-            return nil
-        }
-        
-        let elapsedTime = Date().timeIntervalSince(operation.startTime)
-        let estimatedTotalTime = elapsedTime / operation.progress
-        let remainingTime = estimatedTotalTime - elapsedTime
-        
-        return Int(remainingTime)
-    }
-    
-    // 错误映射
-    private func mapError(_ error: Error) -> SyncError {
-        if let nsError = error as NSError? {
-            if nsError.domain == "CloudKitErrorDomain" {
-                return .cloudKitError
-            } else if nsError.domain == "NSURLErrorDomain" {
-                return .networkUnavailable
-            }
-        }
-        
-        // 根据错误类型映射到适当的SyncError
-        if let _ = error as? CKError {
-            return .cloudKitError
-        } else if (error.localizedDescription.contains("conflict")) {
-            return .conflictDetected
-        } else if (error.localizedDescription.contains("sync")) {
-            return .syncInProgress
-        } else if (error.localizedDescription.contains("auth")) {
-            return .authenticationRequired
-        }
-        
-        return .cloudKitError
+    // 将数据层的SyncOperation映射为业务层的SyncOperationInfo
+    private func mapToOperationInfo(_ operation: SyncOperation) -> SyncOperationInfo {
+        return SyncOperationInfo(
+            id: operation.id,
+            type: operation.type,
+            status: operation.status,
+            startTime: operation.startTime,
+            endTime: operation.endTime,
+            progress: operation.progress,
+            itemsProcessed: operation.itemsProcessed,
+            totalItems: operation.totalItems,
+            errorMessage: operation.errorMessage
+        )
     }
 }

@@ -88,7 +88,12 @@ class FavoriteItem: Object {
     @Persisted var lastModified: Date = Date()   // 最后修改时间
     
     // 反向链接到所属文件夹，不存储在Realm中
-    var linkingObjects = LinkingObjects(fromType: Folder.self, property: "items")
+    // var linkingObjects = LinkingObjects(fromType: Folder.self, property: "items")
+    @Persisted(originProperty: "items") var folder: LinkingObjects<Folder>
+    
+    var folderObject: Folder? {
+        return folder.first
+    }
 }
 
 // MARK: - 用户模块数据模型
@@ -124,107 +129,160 @@ class AuthToken: Object {
 
 // MARK: - 同步模块数据模型
 
-enum SyncType: Int {
-    case full = 0       // 全量同步
-    case favorites = 1  // 仅同步收藏
-    case settings = 2   // 仅同步设置
-}
+// enum SyncType: Int {
+//     case full = 0       // 全量同步
+//     case favorites = 1  // 仅同步收藏
+//     case settings = 2   // 仅同步设置
+// }
 
-// 同步操作类型枚举
-enum SyncOperationType: Int {
-    case full = 0          // 全量同步
-    case incremental = 1   // 增量同步
-    case upload = 2        // 仅上传
-    case download = 3      // 仅下载
-}
+// // 同步操作类型枚举
+// enum SyncOperationType: Int {
+//     case full = 0          // 全量同步
+//     case incremental = 1   // 增量同步
+//     case upload = 2        // 仅上传
+//     case download = 3      // 仅下载
+// }
 
-// 冲突解决策略枚举
-enum ConflictResolution: Int {
-    case useLocal = 0      // 使用本地版本
-    case useRemote = 1     // 使用远程版本
-    case merge = 2         // 合并两个版本
-    case manual = 3        // 手动解决
-}
+// // 冲突解决策略枚举
+// enum ConflictResolution: Int {
+//     case useLocal = 0      // 使用本地版本
+//     case useRemote = 1     // 使用远程版本
+//     case merge = 2         // 合并两个版本
+//     case manual = 3        // 手动解决
+// }
 
-// 同步操作记录
-class SyncOperation: Object {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var type: Int                     // 同步类型 (对应SyncOperationType的rawValue)
-    @Persisted var startTime: Date = Date()      // 开始时间
-    @Persisted var endTime: Date?                // 结束时间
-    @Persisted var status: String = "pending"    // 状态：pending, running, completed, failed
-    @Persisted var progress: Double = 0.0        // 进度：0.0-1.0
-    @Persisted var itemsProcessed: Int = 0       // 已处理项目数
-    @Persisted var totalItems: Int = 0           // 总项目数
-    @Persisted var errorMessage: String?         // 错误信息
-}
+// // 同步操作记录
+// class SyncOperation: Object {
+//     @Persisted(primaryKey: true) var id: String = UUID().uuidString
+//     @Persisted var type: Int                     // 同步类型 (对应SyncOperationType的rawValue)
+//     @Persisted var startTime: Date = Date()      // 开始时间
+//     @Persisted var endTime: Date?                // 结束时间
+//     @Persisted var status: String = "pending"    // 状态：pending, running, completed, failed
+//     @Persisted var progress: Double = 0.0        // 进度：0.0-1.0
+//     @Persisted var itemsProcessed: Int = 0       // 已处理项目数
+//     @Persisted var totalItems: Int = 0           // 总项目数
+//     @Persisted var errorMessage: String?         // 错误信息
+// }
 
-// 同步冲突记录
-class SyncConflict: Object {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var recordType: String            // 记录类型：folder, favorite, user
-    @Persisted var recordId: String              // 记录ID
-    @Persisted var localModified: Date           // 本地修改时间
-    @Persisted var remoteModified: Date          // 远程修改时间
-    @Persisted var resolved: Bool = false        // 是否已解决
-    @Persisted var resolution: Int?              // 解决方式
-    @Persisted var localData: Data?              // 本地数据（JSON）
-    @Persisted var remoteData: Data?             // 远程数据（JSON）
-    @Persisted var detectedAt: Date = Date()     // 检测时间
-}
+// // 同步冲突记录
+// class SyncConflict: Object {
+//     @Persisted(primaryKey: true) var id: String = UUID().uuidString
+//     @Persisted var recordType: String            // 记录类型：folder, favorite, user
+//     @Persisted var recordId: String              // 记录ID
+//     @Persisted var localModified: Date           // 本地修改时间
+//     @Persisted var remoteModified: Date          // 远程修改时间
+//     @Persisted var resolved: Bool = false        // 是否已解决
+//     @Persisted var resolution: Int?              // 解决方式
+//     @Persisted var localData: Data?              // 本地数据（JSON）
+//     @Persisted var remoteData: Data?             // 远程数据（JSON）
+//     @Persisted var detectedAt: Date = Date()     // 检测时间
+// }
 
-// 同步状态记录
+// // 同步状态记录
+// class SyncStatus: Object {
+//     @Persisted(primaryKey: true) var id: String = "sync_status"
+//     @Persisted var lastSyncTime: Date?           // 最后同步时间
+//     @Persisted var lastOperation: SyncOperation? // 最后同步操作
+//     @Persisted var pendingChanges: Int = 0       // 待同步变更数
+//     @Persisted var availableOffline: Bool = true // 是否可离线使用
+//     @Persisted var autoSyncEnabled: Bool = true  // 是否启用自动同步
+//     @Persisted var currentOperation: SyncOperation? // 当前同步操作
+//     @Persisted var syncFrequency: Int = 60       // 同步频率（分钟）
+//     @Persisted var lastError: String?            // 最后错误信息
+//     @Persisted var cloudKitAvailable: Bool = false // CloudKit是否可用
+//     @Persisted var serverChangeTokenData: Data?  // CloudKit服务器变更令牌
+// }
+
+// // 同步记录标记
+// class SyncRecord: Object {
+//     @Persisted(primaryKey: true) var id: String  // 记录ID（与原记录ID相同）
+//     @Persisted var recordType: String            // 记录类型：folder, favorite, user
+//     @Persisted var lastSynced: Date?             // 最后同步时间
+//     @Persisted var cloudKitRecordID: String?     // CloudKit记录ID
+//     @Persisted var cloudKitRecordChangeTag: String? // CloudKit变更标签
+//     @Persisted var deleted: Bool = false         // 是否已删除
+// }
+
+ // 同步错误类型
+ enum SyncError: Error {
+     case repositoryError(Error)
+     case notAvailable
+     case operationInProgress
+     case operationNotFound
+     case unknown
+ }
+
+ // 同步状态信息
+ struct SyncStatusInfo {
+     let lastSyncTime: Date?
+     let isCloudKitAvailable: Bool
+     let isAutoSyncEnabled: Bool
+     let currentOperation: SyncOperationInfo?
+ }
+
+ // 同步操作信息
+ struct SyncOperationInfo {
+     let id: String
+     let type: String
+     let status: String
+     let startTime: Date
+     let endTime: Date?
+     let progress: Double
+     let itemsProcessed: Int
+     let totalItems: Int
+     let errorMessage: String?
+ }
+
+// 同步状态
 class SyncStatus: Object {
     @Persisted(primaryKey: true) var id: String = "sync_status"
-    @Persisted var lastSyncTime: Date?           // 最后同步时间
-    @Persisted var lastOperation: SyncOperation? // 最后同步操作
-    @Persisted var pendingChanges: Int = 0       // 待同步变更数
-    @Persisted var availableOffline: Bool = true // 是否可离线使用
-    @Persisted var autoSyncEnabled: Bool = true  // 是否启用自动同步
-    @Persisted var currentOperation: SyncOperation? // 当前同步操作
-    @Persisted var syncFrequency: Int = 60       // 同步频率（分钟）
-    @Persisted var lastError: String?            // 最后错误信息
-    @Persisted var cloudKitAvailable: Bool = false // CloudKit是否可用
-    @Persisted var serverChangeTokenData: Data?  // CloudKit服务器变更令牌
+    @Persisted var lastSyncTime: Date?
+    @Persisted var cloudKitAvailable: Bool = false
+    @Persisted var autoSyncEnabled: Bool = true
+    @Persisted var serverChangeTokenData: Data?
+    @Persisted var currentOperation: SyncOperation?
+    @Persisted var lastOperation: SyncOperation?
 }
 
-// 同步记录标记
+// 同步操作
+class SyncOperation: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var type: String = "full"
+    @Persisted var status: String = "pending"
+    @Persisted var startTime: Date = Date()
+    @Persisted var endTime: Date?
+    @Persisted var progress: Double = 0.0
+    @Persisted var itemsProcessed: Int = 0
+    @Persisted var totalItems: Int = 0
+    @Persisted var errorMessage: String?
+}
+
+// 同步记录
 class SyncRecord: Object {
-    @Persisted(primaryKey: true) var id: String  // 记录ID（与原记录ID相同）
-    @Persisted var recordType: String            // 记录类型：folder, favorite, user
-    @Persisted var lastSynced: Date?             // 最后同步时间
-    @Persisted var cloudKitRecordID: String?     // CloudKit记录ID
-    @Persisted var cloudKitRecordChangeTag: String? // CloudKit变更标签
-    @Persisted var deleted: Bool = false         // 是否已删除
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var recordType: String = ""
+    @Persisted var lastSynced: Date = Date()
+    @Persisted var cloudKitRecordID: String?
+    @Persisted var cloudKitRecordChangeTag: String?
+    @Persisted var deleted: Bool = false
 }
 
-struct SyncStatusInfo {
-    let lastSyncTime: Date?
-    let pendingChanges: Int
-    let syncStatus: String
-    let availableOffline: Bool
+// 同步冲突
+class SyncConflict: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var recordId: String = ""
+    @Persisted var recordType: String = ""
+    @Persisted var localData: Data?
+    @Persisted var remoteData: Data?
+    @Persisted var localModified: Date = Date()
+    @Persisted var remoteModified: Date = Date()
+    @Persisted var resolved: Bool = false
+    @Persisted var resolutionType: String?
 }
 
-struct SyncOperationInfo {
-    let syncId: String
-    let startedAt: Date
-    let status: String
-    let estimatedTimeRemaining: Int?
-}
-
-struct SyncProgressInfo {
-    let syncId: String
-    let progress: Double
-    let status: String
-    let itemsSynced: Int
-    let totalItems: Int
-    let estimatedTimeRemaining: Int?
-}
-
-enum SyncError: Error {
-    case networkUnavailable
-    case cloudKitError
-    case authenticationRequired
-    case conflictDetected
-    case syncInProgress
-}
+// 同步状态类型
+// enum SyncStatusType: String {
+//     case synced = "synced"               // 已同步
+//     case pendingUpload = "pendingUpload" // 待上传
+//     case conflict = "conflict"           // 冲突
+// }

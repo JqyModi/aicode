@@ -200,7 +200,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             item.syncStatus = SyncStatusType.pendingUpload.rawValue
             
             // 更新所属文件夹的修改时间和同步状态
-            if let folder = item.linkingObjects.first {
+            if let folder = item.folderObject {
                 folder.lastModified = Date()
                 folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             }
@@ -217,7 +217,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
             }
             
             // 更新所属文件夹的修改时间和同步状态
-            if let folder = item.linkingObjects.first {
+            if let folder = item.folderObject {
                 folder.lastModified = Date()
                 folder.syncStatus = SyncStatusType.pendingUpload.rawValue
             }
@@ -251,7 +251,7 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
                 
                 var folders: [Folder] = []
                 for item in items {
-                    if let folder = item.linkingObjects.first, !folders.contains(where: { $0.id == folder.id }) {
+                    if let folder = item.folderObject, !folders.contains(where: { $0.id == folder.id }) {
                         folders.append(folder)
                     }
                 }
