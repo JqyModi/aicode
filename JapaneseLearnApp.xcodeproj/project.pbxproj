@@ -14,6 +14,7 @@
 		C520013D2DA66ABF007BC24D /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001392DA66ABF007BC24D /* SyncService.swift */; };
 		C520013E2DA66ABF007BC24D /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001382DA66ABF007BC24D /* DictionaryService.swift */; };
 		C520013F2DA66ABF007BC24D /* DictionaryServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001352DA66ABF007BC24D /* DictionaryServiceFactory.swift */; };
+		C52001412DA6C7A6007BC24D /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001402DA6C7A6007BC24D /* FavoriteService.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C592EF682DA5305900784427 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C592EF672DA5305900784427 /* FavoriteRepository.swift */; };
@@ -51,6 +52,7 @@
 		C52001372DA66ABF007BC24D /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		C52001382DA66ABF007BC24D /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
 		C52001392DA66ABF007BC24D /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		C52001402DA6C7A6007BC24D /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		C592EF672DA5305900784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteRepository.swift; path = Data/Repositories/FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF692DA5772500784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF6A2DA5772500784427 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		C520013A2DA66ABF007BC24D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C52001402DA6C7A6007BC24D /* FavoriteService.swift */,
 				C52001372DA66ABF007BC24D /* AudioService.swift */,
 				C52001382DA66ABF007BC24D /* DictionaryService.swift */,
 				C52001392DA66ABF007BC24D /* SyncService.swift */,
@@ -258,6 +261,7 @@
 			files = (
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C520013C2DA66ABF007BC24D /* AudioService.swift in Sources */,
+				C52001412DA6C7A6007BC24D /* FavoriteService.swift in Sources */,
 				C520013D2DA66ABF007BC24D /* SyncService.swift in Sources */,
 				C520013E2DA66ABF007BC24D /* DictionaryService.swift in Sources */,
 				C520013F2DA66ABF007BC24D /* DictionaryServiceFactory.swift in Sources */,

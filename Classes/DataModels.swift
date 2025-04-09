@@ -68,10 +68,16 @@ class SearchHistoryItem: Object {
 
 // 同步状态枚举
 enum SyncStatusType: Int {
-    case synced = 0        // 已同步
-    case pendingUpload = 1 // 待上传
-    case pendingDelete = 2 // 待删除
-    case conflict = 3      // 冲突
+//    case synced = 0        // 已同步
+//    case pendingUpload = 1 // 待上传
+//    case pendingDelete = 2 // 待删除
+//    case conflict = 3      // 冲突
+     case synced            // 已同步
+     case pendingUpload     // 待上传
+     case pendingDownload   // 待下载
+     case pendingDelete     // 待删除
+     case conflict          // 冲突
+     case error             // 错误
 }
 
 // 收藏夹模型
@@ -381,3 +387,48 @@ enum AudioError: Error {
     case fileError
     case playbackError
 }
+
+
+// MARK: - 收藏服务错误类型
+enum FavoriteError: Error {
+    case folderNotFound
+    case itemNotFound
+    case duplicateName
+    case databaseError(Error)
+    case syncError
+    case unknown
+}
+
+
+// MARK: - 收藏服务数据模型
+struct FolderSummary {
+    let id: String
+    let name: String
+    let createdAt: Date
+    let itemCount: Int
+    let syncStatus: SyncStatusType
+}
+
+struct FolderContent {
+    let total: Int
+    let items: [FavoriteItemDetail]
+}
+
+struct FavoriteItemDetail {
+    let id: String
+    let wordId: String
+    let word: String
+    let reading: String
+    let meaning: String
+    let note: String?
+    let addedAt: Date
+    let syncStatus: SyncStatusType
+}
+
+// enum SyncStatus {
+//     case synced        // 已同步
+//     case pendingUpload // 待上传
+//     case pendingDownload // 待下载
+//     case conflict      // 冲突
+//     case error         // 错误
+// }
