@@ -445,6 +445,8 @@ struct FavoriteItemDetail {
 enum UserError: Error {
     case authenticationFailed
     case userNotFound
+    case settingsUpdateFailed
+    case signOutFailed
     case networkError
     case databaseError(Error)
     case syncError
@@ -455,7 +457,7 @@ enum UserError: Error {
 struct UserProfile {
     let userId: String
     let nickname: String?
-    let settings: UserPreferences
+    var settings: UserPreferences
     let lastSyncTime: Date?
     let favoriteCount: Int
     let folderCount: Int
