@@ -26,6 +26,9 @@
 		C52001C82DA7C30A007BC24D /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001B12DA7C30A007BC24D /* FavoriteViewModel.swift */; };
 		C52001C92DA7C30A007BC24D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001B32DA7C30A007BC24D /* UserViewModel.swift */; };
 		C52001CA2DA7C30A007BC24D /* UserAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C520019F2DA7C30A007BC24D /* UserAuthRepository.swift */; };
+		C52001CE2DA7CEE1007BC24D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001CB2DA7CEE1007BC24D /* HomeView.swift */; };
+		C52001D12DA7D655007BC24D /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001CF2DA7D655007BC24D /* EntryDetailView.swift */; };
+		C52001D22DA7D655007BC24D /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001D02DA7D655007BC24D /* SearchResultsView.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
@@ -68,6 +71,9 @@
 		C52001B22DA7C30A007BC24D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C52001B32DA7C30A007BC24D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		C52001B62DA7C30A007BC24D /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		C52001CB2DA7CEE1007BC24D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C52001CF2DA7D655007BC24D /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailView.swift; sourceTree = "<group>"; };
+		C52001D02DA7D655007BC24D /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,6 +191,7 @@
 		C52001B72DA7C30A007BC24D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C52001CD2DA7CEE1007BC24D /* Views */,
 				C52001A62DA7C30A007BC24D /* Data */,
 				C52001AF2DA7C30A007BC24D /* Domain */,
 				C52001B52DA7C30A007BC24D /* Presentation */,
@@ -192,6 +199,25 @@
 			);
 			path = Classes;
 			sourceTree = "<group>";
+		};
+		C52001CC2DA7CEE1007BC24D /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				C52001CF2DA7D655007BC24D /* EntryDetailView.swift */,
+				C52001D02DA7D655007BC24D /* SearchResultsView.swift */,
+				C52001CB2DA7CEE1007BC24D /* HomeView.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		C52001CD2DA7CEE1007BC24D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C52001CC2DA7CEE1007BC24D /* Dictionary */,
+			);
+			name = Views;
+			path = JapaneseLearnApp/Views;
+			sourceTree = SOURCE_ROOT;
 		};
 		C592EF5F2DA5290100784427 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -316,11 +342,14 @@
 				C52001B82DA7C30A007BC24D /* SyncRepository.swift in Sources */,
 				C52001B92DA7C30A007BC24D /* CloudKitService.swift in Sources */,
 				C52001BA2DA7C30A007BC24D /* RealmManager.swift in Sources */,
+				C52001CE2DA7CEE1007BC24D /* HomeView.swift in Sources */,
 				C52001BB2DA7C30A007BC24D /* FavoriteService.swift in Sources */,
 				C52001BC2DA7C30A007BC24D /* FavoriteRepository.swift in Sources */,
 				C52001BD2DA7C30A007BC24D /* AppleAuthService.swift in Sources */,
 				C52001BE2DA7C30A007BC24D /* DataModels.swift in Sources */,
 				C52001BF2DA7C30A007BC24D /* SyncService.swift in Sources */,
+				C52001D12DA7D655007BC24D /* EntryDetailView.swift in Sources */,
+				C52001D22DA7D655007BC24D /* SearchResultsView.swift in Sources */,
 				C52001C02DA7C30A007BC24D /* SearchViewModel.swift in Sources */,
 				C52001C12DA7C30A007BC24D /* DictionaryServiceFactory.swift in Sources */,
 				C52001C22DA7C30A007BC24D /* DetailViewModel.swift in Sources */,

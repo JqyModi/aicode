@@ -68,10 +68,6 @@ class SearchHistoryItem: Object {
 
 // 同步状态枚举
 enum SyncStatusType: Int {
-//    case synced = 0        // 已同步
-//    case pendingUpload = 1 // 待上传
-//    case pendingDelete = 2 // 待删除
-//    case conflict = 3      // 冲突
      case synced            // 已同步
      case pendingUpload     // 待上传
      case pendingDownload   // 待下载
@@ -505,3 +501,175 @@ struct SearchHistoryDTO {
 //     let total: Int
 //     let items: [WordSummary]
 // }
+
+// MARK: - 收藏模块数据模型
+
+// 同步状态枚举
+// enum SyncStatusType: Int {
+//      case synced            // 已同步
+//      case pendingUpload     // 待上传
+//      case pendingDownload   // 待下载
+//      case pendingDelete     // 待删除
+//      case conflict          // 冲突
+//      case error             // 错误
+// }
+
+// 收藏夹分类模型
+class FavoriteCategory: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var name: String              // 分类名称
+    @Persisted var iconName: String          // 图标名称
+    @Persisted var count: Int = 0            // 包含的单词数量
+    @Persisted var createdAt: Date = Date()  // 创建时间
+    @Persisted var updatedAt: Date = Date()  // 更新时间
+    @Persisted var syncStatus: Int = SyncStatusType.pendingUpload.rawValue // 同步状态
+    
+    // 便捷初始化方法
+    convenience init(name: String, iconName: String) {
+        self.init()
+        self.name = name
+        self.iconName = iconName
+    }
+}
+
+// MARK: - 学习模块数据模型
+
+// 学习进度模型
+class LearningProgress: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var userId: String?           // 用户ID
+    @Persisted var completedCount: Int = 0   // 已完成单词数
+    @Persisted var targetCount: Int = 10     // 目标单词数
+    @Persisted var streakDays: Int = 0       // 连续学习天数
+    @Persisted var lastStudyDate: Date?      // 最后学习日期
+    @Persisted var updatedAt: Date = Date()  // 更新时间
+}
+
+// MARK: - 词云模型
+
+// 词云项模型
+struct WordCloudItem: Identifiable {
+    var id: String { word }
+    var word: String                         // 单词
+    var size: Int                            // 显示大小 (13-20)
+    var frequency: Int                       // 使用频率
+    
+    init(word: String, frequency: Int) {
+        self.word = word
+        self.frequency = frequency
+        // 根据频率计算显示大小，范围13-20
+        self.size = min(max(13, 13 + frequency / 2), 20)
+    }
+}
+
+// MARK: - 视图模型
+
+// 词典视图模型
+class DictionaryViewModel: ObservableObject {
+    // 用户相关
+    @Published var currentUser: User?
+    
+    // 词典相关
+    @Published var searchResults: [DictEntry] = []
+    @Published var recentSearches: [DictEntry] = []
+    @Published var relatedWords: [DictEntry] = []
+    
+    // 收藏相关
+    @Published var favoriteCategories: [FavoriteCategory] = []
+    
+    // 学习相关
+    @Published var learningProgress: LearningProgress = LearningProgress()
+    
+    // 词云相关
+    @Published var wordCloudItems: [WordCloudItem] = []
+    
+    // 初始化方法
+    init() {
+        loadInitialData()
+    }
+    
+    // 加载初始数据
+    private func loadInitialData() {
+        // 这里应该从数据库或网络加载数据
+        // 为了演示，我们创建一些模拟数据
+        createMockData()
+    }
+    
+    // 创建模拟数据
+    private func createMockData() {
+        // 模拟学习进度
+        learningProgress.completedCount = 3
+        learningProgress.targetCount = 10
+        learningProgress.streakDays = 5
+        
+        // 模拟收藏分类
+        favoriteCategories = [
+            FavoriteCategory(name: "常用动词", iconName: "book"),
+            FavoriteCategory(name: "旅行用语", iconName: "airplane"),
+            FavoriteCategory(name: "食物", iconName: "fork.knife"),
+            FavoriteCategory(name: "N5词汇", iconName: "graduationcap")
+        ]
+        
+        // 更新分类中的单词数量
+        for i in 0..<favoriteCategories.count {
+            favoriteCategories[i].count = Int.random(in: 5...30)
+        }
+        
+        // 模拟词云数据
+        let words = ["食べる", "飲む", "行く", "来る", "見る", "聞く", "話す", "読む", "書く", "寝る"]
+        wordCloudItems = words.map { WordCloudItem(word: $0, frequency: Int.random(in: 1...14)) }
+    }
+    
+    // 搜索方法
+    func search(query: String) {
+        // 实际应用中应该从数据库搜索
+        // 这里仅作演示
+        searchResults = []
+    }
+    
+    // 选择词条
+    func selectEntry(_ entry: DictEntry) {
+        // 处理词条选择逻辑
+    }
+    
+    // 加载相关词汇
+    func loadRelatedWords(for entry: DictEntry) {
+        // 加载与当前词条相关的词汇
+        relatedWords = []
+    }
+    
+    // 收藏相关方法
+    func addToFavorites(_ entry: DictEntry) {
+        // 添加到收藏
+    }
+    
+    func removeFromFavorites(_ entry: DictEntry) {
+        // 从收藏中移除
+    }
+    
+    func isInFavorites(_ entry: DictEntry) -> Bool {
+        // 检查是否已收藏
+        return false
+    }
+    
+    // 播放发音
+    func playPronunciation(for entry: DictEntry) {
+        // 播放单词发音
+    }
+}
+
+// 用户模型
+//class User: Object {
+//    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+//    @Persisted var username: String
+//    @Persisted var email: String?
+//    @Persisted var avatarUrl: String?
+//    @Persisted var createdAt: Date = Date()
+//    @Persisted var lastLoginAt: Date = Date()
+//    
+//    convenience init(username: String, email: String? = nil) {
+//        self.init()
+//        self.username = username
+//        self.email = email
+//    }
+//}
