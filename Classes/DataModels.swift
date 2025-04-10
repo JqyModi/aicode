@@ -332,6 +332,7 @@ struct WordDetails {
     let definitions: [Definition]
     let examples: [Example]
     let tags: [String]
+    let isFavorited: Bool
 }
 
 // 搜索历史项（业务层）
@@ -362,6 +363,8 @@ enum DictionaryError: Error {
     case audioError
     case networkError
     case unknown
+    case searchFailed
+    case pronunciationFailed
     
     var localizedDescription: String {
         switch self {
@@ -377,6 +380,10 @@ enum DictionaryError: Error {
             return "网络连接错误"
         case .unknown:
             return "未知错误"
+        case .searchFailed:
+            return "搜索错误"
+        case .pronunciationFailed:
+            return "发音错误"
         }
     }
 }

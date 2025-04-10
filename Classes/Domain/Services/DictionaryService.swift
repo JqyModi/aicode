@@ -83,7 +83,8 @@ class DictionaryService: DictionaryServiceProtocol {
                     partOfSpeech: entry.partOfSpeech,
                     definitions: Array(definitions),
                     examples: Array(examples),
-                    tags: []
+                    tags: [],
+                    isFavorited: false      // 待拆分：从收藏中查询
                 )
             }
             .tryMap { wordDetails -> WordDetails in

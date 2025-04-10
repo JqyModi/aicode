@@ -17,6 +17,7 @@
 		C52001412DA6C7A6007BC24D /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001402DA6C7A6007BC24D /* FavoriteService.swift */; };
 		C52001432DA75352007BC24D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001422DA75352007BC24D /* UserService.swift */; };
 		C52001472DA765F8007BC24D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001442DA765F8007BC24D /* SearchViewModel.swift */; };
+		C52001642DA7707A007BC24D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001632DA7707A007BC24D /* DetailViewModel.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C592EF682DA5305900784427 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C592EF672DA5305900784427 /* FavoriteRepository.swift */; };
@@ -57,6 +58,7 @@
 		C52001402DA6C7A6007BC24D /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		C52001422DA75352007BC24D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C52001442DA765F8007BC24D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C52001632DA7707A007BC24D /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		C592EF672DA5305900784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteRepository.swift; path = Data/Repositories/FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF692DA5772500784427 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
 		C592EF6A2DA5772500784427 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		C52001452DA765F8007BC24D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C52001632DA7707A007BC24D /* DetailViewModel.swift */,
 				C52001442DA765F8007BC24D /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
@@ -284,6 +287,7 @@
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C520013C2DA66ABF007BC24D /* AudioService.swift in Sources */,
 				C52001432DA75352007BC24D /* UserService.swift in Sources */,
+				C52001642DA7707A007BC24D /* DetailViewModel.swift in Sources */,
 				C52001412DA6C7A6007BC24D /* FavoriteService.swift in Sources */,
 				C52001472DA765F8007BC24D /* SearchViewModel.swift in Sources */,
 				C520013D2DA66ABF007BC24D /* SyncService.swift in Sources */,
