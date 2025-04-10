@@ -335,24 +335,24 @@ struct WordDetails {
 }
 
 // 搜索历史项（业务层）
-struct SearchHistoryDTO {
-    let id: String
-    let word: String
-    let timestamp: Date
+// struct SearchHistoryDTO {
+//     let id: String
+//     let word: String
+//     let timestamp: Date
     
-    init(id: String = UUID().uuidString, word: String, timestamp: Date = Date()) {
-        self.id = id
-        self.word = word
-        self.timestamp = timestamp
-    }
+//     init(id: String = UUID().uuidString, word: String, timestamp: Date = Date()) {
+//         self.id = id
+//         self.word = word
+//         self.timestamp = timestamp
+//     }
     
-    // 从数据层模型转换
-    init(from model: SearchHistoryItem) {
-        self.id = model.id
-        self.word = model.word
-        self.timestamp = model.searchDate
-    }
-}
+//     // 从数据层模型转换
+//     init(from model: SearchHistoryItem) {
+//         self.id = model.id
+//         self.word = model.word
+//         self.timestamp = model.searchDate
+//     }
+// }
 
 // MARK: - 词典服务错误类型
 enum DictionaryError: Error {
@@ -431,4 +431,68 @@ struct FavoriteItemDetail {
 //     case pendingDownload // 待下载
 //     case conflict      // 冲突
 //     case error         // 错误
+// }
+
+
+// MARK: - 用户服务错误类型
+enum UserError: Error {
+    case authenticationFailed
+    case userNotFound
+    case networkError
+    case databaseError(Error)
+    case syncError
+    case unknown
+}
+
+// MARK: - 用户服务数据模型
+struct UserProfile {
+    let userId: String
+    let nickname: String?
+    let settings: UserPreferences
+    let lastSyncTime: Date?
+    let favoriteCount: Int
+    let folderCount: Int
+}
+
+struct UserPreferences {
+    let darkMode: Bool
+    let fontSize: Int
+    let autoSync: Bool
+}
+
+
+// 如果DataModels.swift中尚未定义以下模型，则需要添加
+
+// MARK: - 搜索视图模型数据类型
+
+// 搜索历史DTO
+struct SearchHistoryDTO {
+    let id: String
+    let wordId: String
+    let word: String
+    let reading: String
+    let searchDate: Date
+
+    init(id: String, wordId: String, word: String, reading: String, searchDate: Date) {
+        self.id = id
+        self.wordId = wordId
+        self.word = word
+        self.reading = reading
+        self.searchDate = searchDate
+    }
+}
+
+// 单词摘要
+// struct WordSummary {
+//     let id: String
+//     let word: String
+//     let reading: String
+//     let partOfSpeech: String
+//     let briefMeaning: String
+// }
+
+// 搜索结果
+// struct SearchResult {
+//     let total: Int
+//     let items: [WordSummary]
 // }

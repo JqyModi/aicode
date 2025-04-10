@@ -121,11 +121,12 @@ class DictionaryService: DictionaryServiceProtocol {
         return dictionaryRepository.getSearchHistory(limit: limit)
             .map { items in
                 return items.map { item in
-                    return SearchHistoryDTO(
-                        id: item.id,
-                        word: item.word,
-                        timestamp: item.searchDate
-                    )
+//                    return SearchHistoryDTO(
+//                        id: item.id,
+//                        word: item.word,
+//                        timestamp: item.searchDate
+//                    )
+                    return SearchHistoryDTO(id: item.id, wordId: item.wordId, word: item.word, reading: item.reading ?? "", searchDate: item.searchDate)
                 }
             }
             .mapError { error in
