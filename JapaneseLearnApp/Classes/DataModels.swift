@@ -623,13 +623,78 @@ class DictionaryViewModel: ObservableObject {
     // 搜索方法
     func search(query: String) {
         // 实际应用中应该从数据库搜索
-        // 这里仅作演示
-        searchResults = []
+        // 这里仅作演示，添加两条模拟搜索结果以便展示。
+        
+        // 创建第一个模拟词条
+//        let entry1 = DictEntry()
+//        entry1.id = UUID().uuidString
+//        entry1.word = "食べる"
+//        entry1.reading = "たべる"
+//        entry1.partOfSpeech = "动词"
+//        
+//        let def1 = Definition(meaning: "吃；食用", notes: "一类动词")
+//        let def2 = Definition(meaning: "消耗；花费", notes: nil)
+//        entry1.definitions.append(def1)
+//        entry1.definitions.append(def2)
+//        
+//        let example1 = Example(sentence: "毎日朝ごはんを食べます。", translation: "我每天都吃早饭。")
+//        let example2 = Example(sentence: "お寿司を食べたことがありますか？", translation: "你吃过寿司吗？")
+//        entry1.examples.append(example1)
+//        entry1.examples.append(example2)
+//        
+//        entry1.jlptLevel = "N5"
+//        entry1.commonWord = true
+//        
+//        // 创建第二个模拟词条
+//        let entry2 = DictEntry()
+//        entry2.id = UUID().uuidString
+//        entry2.word = "飲む"
+//        entry2.reading = "のむ"
+//        entry2.partOfSpeech = "动词"
+//        
+//        let def3 = Definition(meaning: "喝；饮用", notes: "一类动词")
+//        let def4 = Definition(meaning: "吞咽（药物等）", notes: nil)
+//        entry2.definitions.append(def3)
+//        entry2.definitions.append(def4)
+//        
+//        let example3 = Example(sentence: "水をたくさん飲みます。", translation: "我喝很多水。")
+//        let example4 = Example(sentence: "薬を飲んでください。", translation: "请服药。")
+//        entry2.examples.append(example3)
+//        entry2.examples.append(example4)
+//        
+//        entry2.jlptLevel = "N5"
+//        entry2.commonWord = true
+//        
+//        // 将模拟词条添加到搜索结果中
+//        searchResults = [entry1, entry2]
+//        
+//        // 如果查询内容与某个词条匹配，可以调整搜索结果的顺序
+//        if query.lowercased() == "飲む" || query.lowercased() == "のむ" {
+//            searchResults = [entry2, entry1]
+//        }
     }
     
     // 选择词条
     func selectEntry(_ entry: DictEntry) {
-        // 处理词条选择逻辑
+        // 将选中的词条添加到最近查询记录
+        if !recentSearches.contains(where: { $0.id == entry.id }) {
+            // 如果不在最近查询中，添加到最前面
+            recentSearches.insert(entry, at: 0)
+            // 限制最近查询数量
+            if recentSearches.count > 10 {
+                recentSearches.removeLast()
+            }
+            
+            // 在实际应用中，这里应该将查询记录保存到数据库
+            // saveSearchHistory(entry)
+        } else if let index = recentSearches.firstIndex(where: { $0.id == entry.id }) {
+            // 如果已在最近查询中，将其移到最前面
+            let item = recentSearches.remove(at: index)
+            recentSearches.insert(item, at: 0)
+            
+            // 在实际应用中，这里应该更新数据库中的查询时间
+            // updateSearchHistoryTimestamp(entry)
+        }
     }
     
     // 加载相关词汇

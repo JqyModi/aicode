@@ -127,7 +127,7 @@ import SwiftUI
 //     }
 // }
 
-// 返回按钮
+// 添加返回按钮组件
 struct BackButton: View {
     let action: () -> Void
     
@@ -135,11 +135,11 @@ struct BackButton: View {
         Button(action: action) {
             HStack(spacing: 4) {
                 Image(systemName: "chevron.left")
-                    .foregroundColor(Color(hex: "00D2DD"))
-                
+                    .font(.system(size: 17, weight: .semibold))
                 Text("返回")
-                    .foregroundColor(Color(hex: "00D2DD"))
+                    .font(.system(size: 17))
             }
+            .foregroundColor(Color(hex: "00D2DD"))
         }
     }
 }
