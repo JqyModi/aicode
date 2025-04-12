@@ -6,6 +6,15 @@ class RealmManager {
     // 单例模式
     static let shared = RealmManager()
     
+    /// **本地 Realm 存储路径**
+    private var localRealmPath: URL {
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("realm")
+        if !FileManager.default.fileExists(atPath: directory.path) {
+            try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        }
+        return directory.appendingPathComponent("word-core.realm")
+    }
+    
     private init() {
         setupRealm()
     }
@@ -17,7 +26,7 @@ class RealmManager {
     
     // 设置Realm配置
     private func setupRealm() {
-        let config = Realm.Configuration(
+        var config = Realm.Configuration(
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
@@ -26,6 +35,35 @@ class RealmManager {
             },
             deleteRealmIfMigrationNeeded: false
         )
+        config.fileURL = localRealmPath
+//        config.objectTypes = [
+//            DBWord.self,
+//            DBWordDetail.self,
+//            DBSubdetail.self,
+//            DBExample.self,
+//            DBConjugate.self,
+//            DBFormData.self,
+//            DBFormRow.self,
+//            DBRelatedWord.self,
+//            DBSynonym.self,
+//            
+//            DictionaryVersion.self,
+//            DictEntry.self,
+//            Definition.self,
+//            Example.self,
+//            UserSettings.self,
+//            SearchHistoryItem.self,
+//            Folder.self,
+//            FavoriteItem.self,
+//            User.self,
+//            AuthToken.self,
+//            SyncStatus.self,
+//            SyncOperation.self,
+//            SyncRecord.self,
+//            SyncConflict.self,
+//            FavoriteCategory.self,
+//            LearningProgress.self,
+//        ]
         
         Realm.Configuration.defaultConfiguration = config
         

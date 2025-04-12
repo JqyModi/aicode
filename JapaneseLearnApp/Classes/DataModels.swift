@@ -38,7 +38,13 @@ class Definition: EmbeddedObject {
     @Persisted var meaning: String           // 中文释义
     @Persisted var notes: String?            // 注释
     
+    // 添加无参数初始化器
+    override init() {
+        super.init()
+    }
+    
     init(meaning: String, notes: String? = nil) {
+        super.init()
         self.meaning = meaning
         self.notes = notes
     }
@@ -49,7 +55,13 @@ class Example: EmbeddedObject {
     @Persisted var sentence: String          // 日语例句
     @Persisted var translation: String       // 中文翻译
     
+    // 添加无参数初始化器
+    override init() {
+        super.init()
+    }
+    
     init(sentence: String, translation: String) {
+        super.init()
         self.sentence = sentence
         self.translation = translation
     }
