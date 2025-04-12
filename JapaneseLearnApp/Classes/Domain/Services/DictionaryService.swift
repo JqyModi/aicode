@@ -155,7 +155,7 @@ class DictionaryService: DictionaryServiceProtocol {
     // 添加搜索历史
     func addSearchHistory(item: SearchHistoryDTO) -> AnyPublisher<Bool, DictionaryError> {
         // 首先获取词条信息
-        return dictionaryRepository.getWordDetails(id: item.id)
+        return dictionaryRepository.getWordDetails(id: item.wordId)
             .flatMap { entry -> AnyPublisher<Void, Error> in
                 guard let entry = entry else {
                     return Fail(error: DictionaryError.notFound).eraseToAnyPublisher()

@@ -16,7 +16,39 @@ class RealmManager {
     }
     
     private init() {
+        copyBundleRealmToDocuments()
         setupRealm()
+    }
+    
+    // 将Bundle中的Realm文件复制到沙盒中
+    private func copyBundleRealmToDocuments() {
+        let fileManager = FileManager.default
+        
+        // 检查目标文件是否已存在
+        if fileManager.fileExists(atPath: localRealmPath.path) {
+            print("Realm文件已存在于沙盒中，无需复制")
+            return
+        }
+        
+        // 获取Bundle中的Realm文件路径
+        guard let bundleRealmPath = Bundle.main.path(forResource: "word-core", ofType: "realm") else {
+            print("在Bundle中找不到Realm文件")
+            return
+        }
+        
+        do {
+            // 创建目录（如果不存在）
+            let directory = localRealmPath.deletingLastPathComponent()
+            if !fileManager.fileExists(atPath: directory.path) {
+                try fileManager.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            // 复制文件
+            try fileManager.copyItem(atPath: bundleRealmPath, toPath: localRealmPath.path)
+            print("成功将Realm文件从Bundle复制到沙盒: \(localRealmPath.path)")
+        } catch {
+            print("复制Realm文件失败: \(error.localizedDescription)")
+        }
     }
     
     // 获取默认Realm实例
@@ -27,7 +59,7 @@ class RealmManager {
     // 设置Realm配置
     private func setupRealm() {
         var config = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 11,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                     // 未来版本升级时的迁移逻辑
