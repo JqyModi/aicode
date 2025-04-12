@@ -1,10 +1,168 @@
 import SwiftUI
 
+// struct HomeView: View {
+//     @ObservedObject var dictionaryViewModel: DictionaryViewModel
+//     @ObservedObject var searchViewModel: SearchViewModel
+//     @State private var searchText: String = ""
+//     @State private var isSearching: Bool = false
+//     @State private var showLearningCenter: Bool = false
+//     @State private var selectedEntry: DictEntry? = nil
+    
+//     // 获取当前时间段的问候语
+//     private var greetingText: String {
+//         let hour = Calendar.current.component(.hour, from: Date())
+//         switch hour {
+//         case 0..<6: return "晚上好"
+//         case 6..<12: return "早上好"
+//         case 12..<18: return "下午好"
+//         default: return "晚上好"
+//         }
+//     }
+    
+//     var body: some View {
+//         NavigationView {
+//             ZStack {
+//                 ScrollView {
+//                     VStack(spacing: 24) {
+//                         // 顶部区域
+//                         HStack {
+//                             // 用户头像
+//                             Button(action: {
+//                                 // 进入设置页面
+//                             }) {
+//                                 Image(systemName: "person.circle.fill")
+//                                     .resizable()
+//                                     .frame(width: 40, height: 40)
+//                                     .foregroundColor(Color(hex: "00D2DD"))
+//                             }
+                            
+//                             // 问候语
+//                             VStack(alignment: .leading) {
+//                                 Text(greetingText)
+//                                     .font(.system(size: 17, weight: .semibold))
+//                                     .foregroundColor(Color(hex: "2C3E50"))
+                                
+//                                 if let user = dictionaryViewModel.userProfile {
+//                                     Text("今天学习3个新词")
+//                                         .font(.system(size: 13))
+//                                         .foregroundColor(Color(hex: "5D6D7E"))
+//                                 } else {
+//                                     Text("今天学习日语的好日子")
+//                                         .font(.system(size: 13))
+//                                         .foregroundColor(Color(hex: "5D6D7E"))
+//                                 }
+//                             }
+                            
+//                             Spacer()
+                            
+//                             // 设置按钮
+//                             Button(action: {
+//                                 // 进入设置页面
+//                             }) {
+//                                 Image(systemName: "gearshape")
+//                                     .resizable()
+//                                     .frame(width: 24, height: 24)
+//                                     .foregroundColor(Color(hex: "8A9199"))
+//                             }
+//                         }
+//                         .padding(.horizontal, 16)
+//                         .padding(.top, 16)
+                        
+//                         // 搜索区域
+//                         SearchBar(text: $searchText, isSearching: $isSearching)
+//                             .padding(.horizontal, 16)
+                        
+//                         // 学习流区域
+//                         if !isSearching {
+//                             // 学习进度卡片
+//                             LearningProgressCard(progress: dictionaryViewModel.learningProgress)
+//                                 .padding(.horizontal, 16)
+                            
+//                             // 最近查询词汇
+//                             if !dictionaryViewModel.recentSearches.isEmpty {
+//                                 RecentSearchesCard(entries: dictionaryViewModel.recentSearches) { historyItem in
+//                                     // 使用 historyItem.wordId 加载详情
+//                                     dictionaryViewModel.loadWordDetails(id: historyItem.wordId)
+//                                     // 这里需要修改为通过 wordId 获取 DictEntry 的逻辑
+//                                     // 可能需要先加载详情，然后在回调中设置 selectedEntry
+//                                 }
+//                                 .padding(.horizontal, 16)
+//                             }
+                            
+//                             // 收藏夹快速访问
+//                             if !dictionaryViewModel.favoriteCategories.isEmpty {
+//                                 FavoriteCategoriesCard(categories: dictionaryViewModel.favoriteCategories)
+//                                     .padding(.horizontal, 16)
+//                             }
+                            
+//                             // 个性化词云
+//                             if !dictionaryViewModel.wordCloudItems.isEmpty {
+//                                 WordCloudCard(items: dictionaryViewModel.wordCloudItems) { word in
+//                                     searchText = word
+//                                     isSearching = true
+//                                 }
+//                                 .padding(.horizontal, 16)
+//                             }
+//                         } else {
+//                             // 搜索结果
+//                             SearchResultsView(
+//                                 viewModel: searchViewModel,
+//                                 onSelectEntry: { entry in
+//                                     selectedEntry = entry
+//                                 }
+//                             )
+//                         }
+//                     }
+//                     .padding(.bottom, 80) // 为浮动学习中心留出空间
+//                 }
+                
+//                 // 浮动学习中心按钮
+//                 LearningCenterButton(isExpanded: $showLearningCenter)
+//                     .padding(.trailing, 24)
+//                     .padding(.bottom, 24)
+//             }
+//             .onChange(of: searchText) { newValue in
+//                 if !newValue.isEmpty {
+//                     searchViewModel.searchQuery = newValue
+//                     searchViewModel.search()
+//                     isSearching = true
+//                 } else {
+//                     isSearching = false
+//                 }
+//             }
+//             .navigationBarHidden(true)
+//             .background(
+//                 NavigationLink(
+//                     destination: Group {
+//                         if let entry = selectedEntry {
+//                             EntryDetailView(
+//                                 viewModel: DetailViewModel(
+//                                     dictionaryService: DependencyContainer.shared.dictionaryService,
+//                                     favoriteService: DependencyContainer.shared.favoriteService
+//                                 ),
+//                                 entry: entry
+//                             )
+//                         }
+//                     },
+//                     isActive: Binding(
+//                         get: { selectedEntry != nil },
+//                         set: { if !$0 { selectedEntry = nil } }
+//                     )
+//                 ) {
+//                     EmptyView()
+//                 }
+//             )
+//         }
+//     }
+// }
+
 struct HomeView: View {
-    @ObservedObject var viewModel: DictionaryViewModel
+    @ObservedObject var dictionaryViewModel: DictionaryViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     @State private var searchText: String = ""
     @State private var isSearching: Bool = false
     @State private var showLearningCenter: Bool = false
+    @State private var selectedEntry: DictEntry? = nil
     
     // 获取当前时间段的问候语
     private var greetingText: String {
@@ -18,94 +176,27 @@ struct HomeView: View {
     }
     
     var body: some View {
+        NavigationView {
+            mainContent
+        }
+    }
+    
+    // 主内容区域
+    private var mainContent: some View {
         ZStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    // 顶部区域
-                    HStack {
-                        // 用户头像
-                        Button(action: {
-                            // 进入设置页面
-                        }) {
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color(hex: "00D2DD"))
-                        }
-                        
-                        // 问候语
-                        VStack(alignment: .leading) {
-                            Text(greetingText)
-                                .font(.system(size: 17, weight: .semibold))
-                                .foregroundColor(Color(hex: "2C3E50"))
-                            
-                            if let user = viewModel.currentUser {
-                                Text("今天学习3个新词")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(Color(hex: "5D6D7E"))
-                            } else {
-                                Text("今天学习日语的好日子")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(Color(hex: "5D6D7E"))
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        // 设置按钮
-                        Button(action: {
-                            // 进入设置页面
-                        }) {
-                            Image(systemName: "gearshape")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(Color(hex: "8A9199"))
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 16)
+                    headerSection
                     
                     // 搜索区域
                     SearchBar(text: $searchText, isSearching: $isSearching)
                         .padding(.horizontal, 16)
                     
-                    // 学习流区域
+                    // 根据搜索状态显示不同内容
                     if !isSearching {
-                        // 学习进度卡片
-                        LearningProgressCard(progress: viewModel.learningProgress)
-                            .padding(.horizontal, 16)
-                        
-                        // 最近查询词汇
-                        if !viewModel.recentSearches.isEmpty {
-                            RecentSearchesCard(entries: viewModel.recentSearches) { entry in
-                                viewModel.selectEntry(entry)
-                            }
-                            .padding(.horizontal, 16)
-                        }
-                        
-                        // 收藏夹快速访问
-                        if !viewModel.favoriteCategories.isEmpty {
-                            FavoriteCategoriesCard(categories: viewModel.favoriteCategories)
-                                .padding(.horizontal, 16)
-                        }
-                        
-                        // 个性化词云
-                        if !viewModel.wordCloudItems.isEmpty {
-                            WordCloudCard(items: viewModel.wordCloudItems) { word in
-                                searchText = word
-                                isSearching = true
-                            }
-                            .padding(.horizontal, 16)
-                        }
+                        learningContentSection
                     } else {
-                        // 搜索结果
-                        SearchResultsView(
-                            searchText: searchText,
-                            results: viewModel.searchResults,
-                            onSelectEntry: { entry in
-                                viewModel.selectEntry(entry)
-                            }
-                        )
+                        searchResultsSection
                     }
                 }
                 .padding(.bottom, 80) // 为浮动学习中心留出空间
@@ -118,13 +209,141 @@ struct HomeView: View {
         }
         .onChange(of: searchText) { newValue in
             if !newValue.isEmpty {
-                viewModel.search(query: newValue)
+                searchViewModel.searchQuery = newValue
+                searchViewModel.search()
                 isSearching = true
             } else {
                 isSearching = false
             }
         }
         .navigationBarHidden(true)
+        .background(navigationLinks)
+    }
+    
+    // 头部区域
+    private var headerSection: some View {
+        HStack {
+            // 用户头像
+            Button(action: {
+                // 进入设置页面
+            }) {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color(hex: "00D2DD"))
+            }
+            
+            // 问候语
+            VStack(alignment: .leading) {
+                Text(greetingText)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(Color(hex: "2C3E50"))
+                
+                if let user = dictionaryViewModel.userProfile {
+                    Text("今天学习3个新词")
+                        .font(.system(size: 13))
+                        .foregroundColor(Color(hex: "5D6D7E"))
+                } else {
+                    Text("今天学习日语的好日子")
+                        .font(.system(size: 13))
+                        .foregroundColor(Color(hex: "5D6D7E"))
+                }
+            }
+            
+            Spacer()
+            
+            // 设置按钮
+            Button(action: {
+                // 进入设置页面
+            }) {
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(Color(hex: "8A9199"))
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+    }
+    
+    // 学习内容区域
+    private var learningContentSection: some View {
+        VStack(spacing: 24) {
+            // 学习进度卡片
+            LearningProgressCard(progress: dictionaryViewModel.learningProgress)
+                .padding(.horizontal, 16)
+            
+            // 最近查询词汇
+            if !dictionaryViewModel.recentSearches.isEmpty {
+                RecentSearchesCard(entries: dictionaryViewModel.recentSearches) { historyItem in
+                    // 使用 historyItem.wordId 加载详情
+                    dictionaryViewModel.loadWordDetails(id: historyItem.wordId)
+                }
+                .padding(.horizontal, 16)
+            }
+            
+            // 收藏夹快速访问
+            if !dictionaryViewModel.favoriteCategories.isEmpty {
+                FavoriteCategoriesCard(categories: dictionaryViewModel.favoriteCategories)
+                    .padding(.horizontal, 16)
+            }
+            
+            // 个性化词云
+            if !dictionaryViewModel.wordCloudItems.isEmpty {
+                WordCloudCard(items: dictionaryViewModel.wordCloudItems) { word in
+                    searchText = word
+                    isSearching = true
+                }
+                .padding(.horizontal, 16)
+            }
+        }
+    }
+    
+    // 搜索结果区域
+    private var searchResultsSection: some View {
+        // 创建 SearchResultsViewModel 实例
+        let searchResultsViewModel = SearchResultsViewModel(
+            dictionaryViewModel: dictionaryViewModel,
+            detailViewModel: DetailViewModel(
+                dictionaryService: DependencyContainer.shared.dictionaryService,
+                favoriteService: DependencyContainer.shared.favoriteService
+            )
+        )
+        
+        return SearchResultsView(
+            viewModel: searchResultsViewModel,
+            onSelectEntry: { wordItem in
+                // 不能直接赋值，需要通过 wordId 加载详情
+                dictionaryViewModel.loadWordDetails(id: wordItem.id) { entry in
+                    if let entry = entry {
+                        selectedEntry = entry
+                    }
+                }
+            }
+        )
+    }
+    
+    // 导航链接
+    private var navigationLinks: some View {
+        NavigationLink(
+            destination: Group {
+                if let entry = selectedEntry {
+                    EntryDetailView(
+                        viewModel: DetailViewModel(
+                            dictionaryService: DependencyContainer.shared.dictionaryService,
+                            favoriteService: DependencyContainer.shared.favoriteService
+                        ),
+                        entry: entry
+                    )
+                }
+            },
+            isActive: Binding(
+                get: { selectedEntry != nil },
+                set: { if !$0 { selectedEntry = nil } }
+            )
+        ) {
+            EmptyView()
+        }
     }
 }
 
@@ -251,8 +470,8 @@ struct ProgressBar: View {
 
 // 最近搜索卡片
 struct RecentSearchesCard: View {
-    let entries: [DictEntry]
-    let onSelect: (DictEntry) -> Void
+    let entries: [SearchHistoryDTO]  // 修改为 SearchHistoryDTO 类型
+    let onSelect: (SearchHistoryDTO) -> Void  // 修改为 SearchHistoryDTO 类型
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -275,12 +494,11 @@ struct RecentSearchesCard: View {
                                     .font(.system(size: 13))
                                     .foregroundColor(Color(hex: "5D6D7E"))
                                 
-                                if let definition = entry.definitions.first {
-                                    Text(definition.meaning)
-                                        .font(.system(size: 13))
-                                        .foregroundColor(Color(hex: "8A9199"))
-                                        .lineLimit(1)
-                                }
+                                // 简化显示，因为 SearchHistoryDTO 没有 definitions
+                                Text("最近搜索")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(Color(hex: "8A9199"))
+                                    .lineLimit(1)
                             }
                             
                             Spacer()

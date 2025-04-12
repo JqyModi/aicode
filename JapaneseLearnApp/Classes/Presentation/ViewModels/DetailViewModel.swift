@@ -9,6 +9,7 @@ protocol DetailViewModelProtocol: ObservableObject {
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     var isFavorited: Bool { get }
+    var relatedWords: [WordListItem] { get }  // 添加相关词汇属性
     
     // 方法
     func loadWordDetails(id: String)
@@ -24,6 +25,7 @@ class DetailViewModel: ObservableObject, DetailViewModelProtocol {
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorMessage: String?
     @Published private(set) var isFavorited: Bool = false
+    @Published private(set) var relatedWords: [WordListItem] = []  // 添加相关词汇属性
     
     // MARK: - 私有属性
     private var currentWordId: String?
@@ -45,29 +47,35 @@ class DetailViewModel: ObservableObject, DetailViewModelProtocol {
     /// 加载单词详情
     func loadWordDetails(id: String) {
         guard id != currentWordId || wordDetails == nil else {
-            return // 避免重复加载相同的单词
+            return
         }
         
         currentWordId = id
         isLoading = true
         errorMessage = nil
         
-        dictionaryService.getWordDetails(id: id)
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    self?.isLoading = false
-                    
-                    if case .failure(let error) = completion {
-                        self?.handleError(error)
-                    }
-                },
-                receiveValue: { [weak self] details in
-                    self?.wordDetails = details
-                    self?.isFavorited = details.isFavorited
+        // 创建一个组合发布者来同时获取详情和相关词汇
+        Publishers.Zip(
+            dictionaryService.getWordDetails(id: id),
+            dictionaryService.getRelatedWords(id: id)
+        )
+        .receive(on: DispatchQueue.main)
+        .sink(
+            receiveCompletion: { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.handleError(error)
                 }
-            )
-            .store(in: &cancellables)
+            },
+            receiveValue: { [weak self] details, related in
+                var updatedDetails = details
+                updatedDetails.relatedWords = related  // 更新相关词汇
+                self?.wordDetails = updatedDetails
+                self?.relatedWords = related
+                self?.isFavorited = details.isFavorited
+            }
+        )
+        .store(in: &cancellables)
     }
     
     /// 播放单词发音

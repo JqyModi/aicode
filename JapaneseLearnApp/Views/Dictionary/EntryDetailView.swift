@@ -154,8 +154,8 @@ struct ConjugationView: View {
 
 // 添加一个相关词汇部分
 struct RelatedWordsSection: View {
-    let relatedWords: [DictEntry]
-    let onSelect: (DictEntry) -> Void
+    let relatedWords: [WordListItem]
+    let onSelect: (WordListItem) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -178,12 +178,12 @@ struct RelatedWordsSection: View {
                                     .font(.system(size: 13))
                                     .foregroundColor(Color(hex: "5D6D7E"))
                                 
-                                if let definition = entry.definitions.first {
-                                    Text(definition.meaning)
-                                        .font(.system(size: 13))
-                                        .foregroundColor(Color(hex: "8A9199"))
-                                        .lineLimit(1)
-                                }
+//                                if let definition = entry.definitions.first {
+//                                    Text(definition.meaning)
+//                                        .font(.system(size: 13))
+//                                        .foregroundColor(Color(hex: "8A9199"))
+//                                        .lineLimit(1)
+//                                }
                             }
                             .padding(12)
                             .frame(width: 160)
@@ -267,49 +267,37 @@ struct LearningStatusSection: View {
 
 // 更新EntryDetailView以包含新添加的组件
 struct EntryDetailView: View {
+    @ObservedObject var viewModel: DetailViewModel
     let entry: DictEntry
-    @State private var isFavorite: Bool = false
-    @State private var selectedTab: Int = 0
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel: DictionaryViewModel
+    @State private var selectedTab: Int = 0
+    @State private var noteText: String = ""
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 顶部区域
+                // 返回按钮
+                BackButton(action: {
+                    presentationMode.wrappedValue.dismiss()
+                })
+                .padding(.horizontal, 16)
+                
+                // 词条标题区域
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text(entry.word)
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.system(size: 28, weight: .bold))
                             .foregroundColor(Color(hex: "2C3E50"))
                         
                         Spacer()
                         
-                        // 发音按钮
-                        Button(action: {
-                            viewModel.playPronunciation(for: entry)
-                        }) {
-                            Image(systemName: "speaker.wave.2.fill")
-                                .foregroundColor(Color.white)
-                                .padding(10)
-                                .background(Color(hex: "00D2DD"))
-                                .clipShape(Circle())
-                        }
-                        
                         // 收藏按钮
                         Button(action: {
-                            isFavorite.toggle()
-                            if isFavorite {
-                                viewModel.addToFavorites(entry)
-                            } else {
-                                viewModel.removeFromFavorites(entry)
-                            }
+                            viewModel.toggleFavorite()
                         }) {
-                            Image(systemName: isFavorite ? "heart.fill" : "heart")
-                                .foregroundColor(Color.white)
-                                .padding(10)
-                                .background(Color(hex: isFavorite ? "FF6B6B" : "8A9199"))
-                                .clipShape(Circle())
+                            Image(systemName: viewModel.isFavorited ? "heart.fill" : "heart")
+                                .font(.system(size: 22))
+                                .foregroundColor(viewModel.isFavorited ? Color(hex: "FF6B6B") : Color(hex: "8A9199"))
                         }
                     }
                     
@@ -317,21 +305,61 @@ struct EntryDetailView: View {
                         .font(.system(size: 17))
                         .foregroundColor(Color(hex: "5D6D7E"))
                     
-                    Text(entry.partOfSpeech)
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(hex: "8A9199"))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background(Color(hex: "F5F7FA"))
-                        .cornerRadius(4)
+                    HStack(spacing: 16) {
+                        // 词性标签
+                        Text(entry.partOfSpeech)
+                            .font(.system(size: 13))
+                            .foregroundColor(Color(hex: "8A9199"))
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(Color(hex: "F5F7FA"))
+                            .cornerRadius(4)
+                        
+                        // JLPT级别
+                        if let level = entry.jlptLevel {
+                            Text(level)
+                                .font(.system(size: 13))
+                                .foregroundColor(Color.white)
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
+                                .background(Color(hex: "00D2DD"))
+                                .cornerRadius(4)
+                        }
+                        
+                        // 常用词标记
+                        if entry.commonWord {
+                            Text("常用词")
+                                .font(.system(size: 13))
+                                .foregroundColor(Color.white)
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
+                                .background(Color(hex: "FF6B6B"))
+                                .cornerRadius(4)
+                        }
+                        
+                        Spacer()
+                        
+                        // 发音按钮
+                        Button(action: {
+                            viewModel.playPronunciation()
+                        }) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "speaker.wave.2")
+                                Text("发音")
+                            }
+                            .font(.system(size: 15))
+                            .foregroundColor(Color.white)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 12)
+                            .background(Color(hex: "00D2DD"))
+                            .cornerRadius(16)
+                        }
+                    }
                 }
-                .padding(16)
-                .background(Color.white)
-                .cornerRadius(16)
-                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+                .padding(.horizontal, 16)
                 
                 // 选项卡
-                HStack {
+                HStack(spacing: 0) {
                     TabButton(title: "释义", isSelected: selectedTab == 0) {
                         selectedTab = 0
                     }
@@ -346,49 +374,80 @@ struct EntryDetailView: View {
                 }
                 .padding(.horizontal, 16)
                 
-                // 内容区域
+                // 选项卡内容
                 VStack(alignment: .leading, spacing: 16) {
                     if selectedTab == 0 {
-                        // 释义
-                        ForEach(entry.definitions.indices, id: \.self) { index in
-                            DefinitionRow(index: index + 1, definition: entry.definitions[index])
+                        // 释义内容
+                        ForEach(Array(entry.definitions.enumerated()), id: \.element) { index, definition in
+                            DefinitionRow(index: index + 1, definition: definition)
                         }
+                        .padding(.horizontal, 16)
                     } else if selectedTab == 1 {
-                        // 例句
-                        ForEach(entry.examples.indices, id: \.self) { index in
-                            ExampleRow(example: entry.examples[index])
+                        // 例句内容
+                        ForEach(entry.examples, id: \.sentence) { example in
+                            ExampleRow(example: example)
                         }
+                        .padding(.horizontal, 16)
                     } else {
-                        // 变形
+                        // 变形内容
                         ConjugationView(word: entry.word)
+                            .padding(.horizontal, 16)
                     }
                 }
-                .padding(16)
-                .background(Color.white)
-                .cornerRadius(16)
-                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
                 
-                // 学习状态
-                LearningStatusSection()
+                // 笔记区域
+                if viewModel.isFavorited {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("个人笔记")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(Color(hex: "2C3E50"))
+                        
+                        TextEditor(text: $noteText)
+                            .font(.system(size: 15))
+                            .foregroundColor(Color(hex: "5D6D7E"))
+                            .frame(minHeight: 100)
+                            .padding(12)
+                            .background(Color(hex: "F5F7FA"))
+                            .cornerRadius(8)
+                        
+                        Button(action: {
+                            viewModel.addNote(note: noteText)
+                        }) {
+                            Text("保存笔记")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .background(Color(hex: "00D2DD"))
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
                 
                 // 相关词汇
-                if !viewModel.relatedWords.isEmpty {
-                    RelatedWordsSection(relatedWords: viewModel.relatedWords) { relatedEntry in
-                        viewModel.selectEntry(relatedEntry)
+                if let wordDetails = viewModel.wordDetails, !wordDetails.relatedWords.isEmpty {
+                    RelatedWordsSection(relatedWords: wordDetails.relatedWords) { relatedEntry in
+                        viewModel.loadWordDetails(id: relatedEntry.id)
                     }
+                    .padding(.horizontal, 16)
                 }
             }
-            .padding(16)
+            .padding(.vertical, 24)
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton {
-            presentationMode.wrappedValue.dismiss()
-        })
         .onAppear {
-            // 检查是否已收藏
-            isFavorite = viewModel.isInFavorites(entry)
-            // 加载相关词汇
-            viewModel.loadRelatedWords(for: entry)
+            viewModel.loadWordDetails(id: entry.id)
+        }
+        .alert(item: Binding<AlertItem?>(
+            get: { viewModel.errorMessage != nil ? AlertItem(message: viewModel.errorMessage!) : nil },
+            set: { _ in }
+        )) { alertItem in
+            Alert(title: Text("提示"), message: Text(alertItem.message), dismissButton: .default(Text("确定")))
         }
     }
+}
+
+struct AlertItem: Identifiable {
+    var id = UUID()
+    var message: String
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            HomeView(viewModel: DictionaryViewModel())
+            HomeView(dictionaryViewModel: DependencyContainer.shared.dictionaryViewModel, searchViewModel: DependencyContainer.shared.searchViewModel)
         }
         .padding()
     }

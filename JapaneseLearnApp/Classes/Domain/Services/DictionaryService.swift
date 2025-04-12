@@ -21,6 +21,9 @@ protocol DictionaryServiceProtocol {
     
     // 添加搜索历史
     func addSearchHistory(item: SearchHistoryDTO) -> AnyPublisher<Bool, DictionaryError>
+    
+    // 获取相关词汇
+    func getRelatedWords(id: String) -> AnyPublisher<[WordListItem], DictionaryError>
 }
 
 // MARK: - 词典服务实现
@@ -84,7 +87,8 @@ class DictionaryService: DictionaryServiceProtocol {
                     definitions: Array(definitions),
                     examples: Array(examples),
                     tags: [],
-                    isFavorited: false      // 待拆分：从收藏中查询
+                    isFavorited: false, // 待拆分：从收藏中查询
+                    relatedWords: []    // 待查询真实数据
                 )
             }
             .tryMap { wordDetails -> WordDetails in
@@ -162,6 +166,45 @@ class DictionaryService: DictionaryServiceProtocol {
                 return true
             }
             .mapError { error in
+                return .databaseError(error)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    // 获取相关词汇
+    func getRelatedWords(id: String) -> AnyPublisher<[WordListItem], DictionaryError> {
+        return dictionaryRepository.getWordDetails(id: id)
+            .flatMap { entry -> AnyPublisher<[DictEntry], Error> in
+                guard let entry = entry else {
+                    return Fail(error: DictionaryError.notFound).eraseToAnyPublisher()
+                }
+                // 使用词条的词性和单词来查找相关词
+                let query = entry.word
+                return self.dictionaryRepository.searchWords(
+                    query: query,
+                    type: .auto,  // 使用自动搜索类型
+                    limit: 10,
+                    offset: 0
+                )
+            }
+            .map { entries in
+                // 过滤掉原词条，并转换为列表项
+                return entries
+                    .filter { $0.id != id }
+                    .map { entry in
+                        return WordListItem(
+                            id: entry.id,
+                            word: entry.word,
+                            reading: entry.reading,
+                            partOfSpeech: entry.partOfSpeech,
+                            briefMeaning: entry.definitions.first?.meaning ?? ""
+                        )
+                    }
+            }
+            .mapError { error in
+                if let dictError = error as? DictionaryError {
+                    return dictError
+                }
                 return .databaseError(error)
             }
             .eraseToAnyPublisher()

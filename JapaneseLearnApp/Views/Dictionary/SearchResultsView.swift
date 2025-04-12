@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct SearchResultsView: View {
-    let searchText: String
-    let results: [DictEntry]
-    let onSelectEntry: (DictEntry) -> Void
+    @ObservedObject var viewModel: SearchResultsViewModel  // 修改为新的视图模型
+    let onSelectEntry: (WordListItem) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if results.isEmpty {
+            if viewModel.searchResults.isEmpty {
                 VStack(spacing: 24) {
                     Image(systemName: "magnifyingglass")
                         .resizable()
@@ -32,11 +31,11 @@ struct SearchResultsView: View {
                     .foregroundColor(Color(hex: "2C3E50"))
                     .padding(.horizontal, 16)
                 
-                ForEach(results, id: \.id) { entry in
+                ForEach(viewModel.searchResults, id: \.id) { entry in
                     Button(action: {
                         onSelectEntry(entry)
                     }) {
-                        SearchResultRow(entry: entry)
+                        SearchResultRow(entry: entry, viewModel: viewModel)
                     }
                 }
             }
@@ -45,8 +44,8 @@ struct SearchResultsView: View {
 }
 
 struct SearchResultRow: View {
-    let entry: DictEntry
-    @State private var isFavorite: Bool = false
+    let entry: WordListItem
+    @ObservedObject var viewModel: SearchResultsViewModel  // 修改为新的视图模型
     
     var body: some View {
         HStack {
@@ -61,12 +60,10 @@ struct SearchResultRow: View {
                         .foregroundColor(Color(hex: "5D6D7E"))
                 }
                 
-                if let definition = entry.definitions.first {
-                    Text(definition.meaning)
-                        .font(.system(size: 15))
-                        .foregroundColor(Color(hex: "8A9199"))
-                        .lineLimit(1)
-                }
+                Text(entry.briefMeaning)  // 使用 briefMeaning 替代 definitions
+                    .font(.system(size: 15))
+                    .foregroundColor(Color(hex: "8A9199"))
+                    .lineLimit(1)
             }
             
             Spacer()
@@ -74,7 +71,7 @@ struct SearchResultRow: View {
             HStack(spacing: 16) {
                 // 发音按钮
                 Button(action: {
-                    // 播放发音
+                    viewModel.playPronunciation(for: entry)
                 }) {
                     Image(systemName: "speaker.wave.2")
                         .foregroundColor(Color(hex: "00D2DD"))
@@ -82,10 +79,10 @@ struct SearchResultRow: View {
                 
                 // 收藏按钮
                 Button(action: {
-                    isFavorite.toggle()
+                    viewModel.toggleFavorite(entry)
                 }) {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(isFavorite ? Color(hex: "FF6B6B") : Color(hex: "8A9199"))
+                    Image(systemName: viewModel.isFavorited(entry.id) ? "heart.fill" : "heart")
+                        .foregroundColor(viewModel.isFavorited(entry.id) ? Color(hex: "FF6B6B") : Color(hex: "8A9199"))
                 }
             }
         }
