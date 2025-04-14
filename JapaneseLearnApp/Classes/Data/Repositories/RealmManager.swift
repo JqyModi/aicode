@@ -1,10 +1,30 @@
 import Foundation
 import RealmSwift
 import Combine
+import ZIPFoundation
 
 class RealmManager {
     // 单例模式
     static let shared = RealmManager()
+    
+    private let githubMyRealmDBToken = "Bearer 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"
+    private var cancellables = Set<AnyCancellable>()
+    /// **GitHub Releases API (获取最新版本)**
+    private let releasesAPI = "https://api.github.com/repos/JqyModi/my-realm-db/releases/latest"
+    
+    /// **远程 Realm ZIP 数据库文件 URL (GitHub Releases 直链)**
+    private let realmDownloadBaseURL = "https://github.com/JqyModi/my-realm-db/releases/download"
+    
+    /// **本地 ZIP 存储路径**
+    private var localZipPath: URL {
+        FileManager.default.temporaryDirectory.appendingPathComponent("word-core.realm.zip")
+    }
+    
+    /// **本地存储的数据库版本**
+    private var localVersion: String? {
+        get { UserDefaults.standard.string(forKey: "realm_db_version") }
+        set { UserDefaults.standard.setValue(newValue, forKey: "realm_db_version") }
+    }
     
     /// **本地 Realm 存储路径**
     private var localRealmPath: URL {
@@ -16,40 +36,40 @@ class RealmManager {
     }
     
     private init() {
-        copyBundleRealmToDocuments()
-        setupRealm()
+//        copyBundleRealmToDocuments()
+        checkAndUpdateDatabase()
     }
     
     // 将Bundle中的Realm文件复制到沙盒中
-    private func copyBundleRealmToDocuments() {
-        let fileManager = FileManager.default
-        
-        // 检查目标文件是否已存在
-        if fileManager.fileExists(atPath: localRealmPath.path) {
-            print("Realm文件已存在于沙盒中，无需复制")
-            return
-        }
-        
-        // 获取Bundle中的Realm文件路径
-        guard let bundleRealmPath = Bundle.main.path(forResource: "word-core", ofType: "realm") else {
-            print("在Bundle中找不到Realm文件")
-            return
-        }
-        
-        do {
-            // 创建目录（如果不存在）
-            let directory = localRealmPath.deletingLastPathComponent()
-            if !fileManager.fileExists(atPath: directory.path) {
-                try fileManager.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-            }
-            
-            // 复制文件
-            try fileManager.copyItem(atPath: bundleRealmPath, toPath: localRealmPath.path)
-            print("成功将Realm文件从Bundle复制到沙盒: \(localRealmPath.path)")
-        } catch {
-            print("复制Realm文件失败: \(error.localizedDescription)")
-        }
-    }
+//    private func copyBundleRealmToDocuments() {
+//        let fileManager = FileManager.default
+//        
+//        // 检查目标文件是否已存在
+//        if fileManager.fileExists(atPath: localRealmPath.path) {
+//            print("Realm文件已存在于沙盒中，无需复制")
+//            return
+//        }
+//        
+//        // 获取Bundle中的Realm文件路径
+//        guard let bundleRealmPath = Bundle.main.path(forResource: "word-core", ofType: "realm") else {
+//            print("在Bundle中找不到Realm文件")
+//            return
+//        }
+//        
+//        do {
+//            // 创建目录（如果不存在）
+//            let directory = localRealmPath.deletingLastPathComponent()
+//            if !fileManager.fileExists(atPath: directory.path) {
+//                try fileManager.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+//            }
+//            
+//            // 复制文件
+//            try fileManager.copyItem(atPath: bundleRealmPath, toPath: localRealmPath.path)
+//            print("成功将Realm文件从Bundle复制到沙盒: \(localRealmPath.path)")
+//        } catch {
+//            print("复制Realm文件失败: \(error.localizedDescription)")
+//        }
+//    }
     
     // 获取默认Realm实例
     func realm() throws -> Realm {
@@ -173,5 +193,95 @@ class RealmManager {
                 promise(.failure(error))
             }
         }.eraseToAnyPublisher()
+    }
+}
+
+extension RealmManager {
+    /// **检查并更新 Realm 数据库**
+    func checkAndUpdateDatabase() {
+        getLatestVersion()
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    print("❌ 获取最新数据库版本失败: \(error)")
+                }
+            }, receiveValue: { [weak self] latestVersion in
+                guard let self = self else { return }
+                
+                // 1️⃣ **版本比较**：如果是相同版本，直接返回
+                if self.localVersion == latestVersion {
+                    print("✅ 当前数据库已是最新版本: \(latestVersion)，无需更新")
+                    setupRealm()
+                    return
+                }
+                
+                // 2️⃣ **版本更新**：下载 & 解压
+                print("⬇️ 发现新版本 \(latestVersion)，开始更新数据库...")
+                self.downloadAndUnzipRealmDatabase(version: latestVersion)
+            })
+            .store(in: &cancellables)
+    }
+    
+    /// **获取最新数据库版本 (GitHub Releases API)**
+    private func getLatestVersion() -> AnyPublisher<String, APIError> {
+        NetworkManager.shared.requestJSON(urlString: releasesAPI, token: githubMyRealmDBToken)
+            .compactMap { json -> String? in
+                return json["tag_name"] as? String  // GitHub Release 版本号
+            }
+            .mapError { error in APIError.unknown(error) }
+            .eraseToAnyPublisher()
+    }
+    
+    /// **下载并解压 Realm 数据库**
+    private func downloadAndUnzipRealmDatabase(version: String) {
+        let downloadURL = "\(realmDownloadBaseURL)/\(version)/word-core.realm.zip"
+        
+        NetworkManager.shared.requestData(urlString: downloadURL)
+            .sink(receiveCompletion: { completionStatus in
+                if case .failure(let error) = completionStatus {
+                    print("❌ 下载数据库失败: \(error)")
+                }
+            }, receiveValue: { [weak self] data in
+                guard let self = self else { return }
+                do {
+                    // 1️⃣ **写入 ZIP 文件**
+                    try data.write(to: self.localZipPath)
+                    
+                    // 2️⃣ **解压**
+                    try self.unzipRealmFile()
+                    
+                    // 3️⃣ **更新版本号**
+                    self.localVersion = version
+                    print("✅ 数据库更新成功! 版本: \(version)")
+                    setupRealm()
+                } catch {
+                    print("❌ 解压失败: \(error)")
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    /// **解压 ZIP 并获取 `.realm` 文件**
+    private func unzipRealmFile() throws {
+        let fileManager = FileManager.default
+        
+        // 确保 ZIP 文件存在
+        guard fileManager.fileExists(atPath: localZipPath.path) else {
+            throw APIError.fileNotFound
+        }
+        
+        // 目标解压目录
+        let destinationURL = localRealmPath.deletingLastPathComponent()
+        
+        if fileManager.fileExists(atPath: destinationURL.path) {
+            try fileManager.removeItem(atPath: destinationURL.path)
+        }
+        
+        // 解压 ZIP
+        try fileManager.unzipItem(at: localZipPath, to: destinationURL)
+        
+        // 删除 ZIP
+        try fileManager.removeItem(at: localZipPath)
+        
+        print("✅ 解压完成，Realm 数据库路径: \(localRealmPath.path)")
     }
 }

@@ -33,7 +33,8 @@
 		C52001D82DA90D76007BC24D /* DictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001D72DA90D76007BC24D /* DictionaryViewModel.swift */; };
 		C52001DA2DA92044007BC24D /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52001D92DA92044007BC24D /* SearchResultsViewModel.swift */; };
 		C55B56142DAA97D800418E4C /* word-core-model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55B56132DAA97D800418E4C /* word-core-model.swift */; };
-		C55B56172DAA994A00418E4C /* word-core.realm in Resources */ = {isa = PBXBuildFile; fileRef = C55B56162DAA994A00418E4C /* word-core.realm */; };
+		C55B56192DAC9E6F00418E4C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55B56182DAC9E6F00418E4C /* NetworkManager.swift */; };
+		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
@@ -83,7 +84,7 @@
 		C52001D72DA90D76007BC24D /* DictionaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewModel.swift; sourceTree = "<group>"; };
 		C52001D92DA92044007BC24D /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		C55B56132DAA97D800418E4C /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
-		C55B56162DAA994A00418E4C /* word-core.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "word-core.realm"; sourceTree = "<group>"; };
+		C55B56182DAC9E6F00418E4C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C592EF652DA5291100784427 /* RealmSwift in Frameworks */,
+				C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +137,7 @@
 		C52001A52DA7C30A007BC24D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C55B56182DAC9E6F00418E4C /* NetworkManager.swift */,
 				C52001A42DA7C30A007BC24D /* SyncConflictResolver.swift */,
 			);
 			path = Utils;
@@ -236,7 +239,6 @@
 		C55B56152DAA992500418E4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C55B56162DAA994A00418E4C /* word-core.realm */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -333,6 +335,7 @@
 			mainGroup = C5AEDA412DA261520031B210;
 			packageReferences = (
 				C592EF5A2DA525C200784427 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = C5AEDA4B2DA261520031B210 /* Products */;
 			projectDirPath = "";
@@ -350,7 +353,6 @@
 			files = (
 				C5AEDA552DA261560031B210 /* Preview Assets.xcassets in Resources */,
 				C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */,
-				C55B56172DAA994A00418E4C /* word-core.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +377,7 @@
 				C52001DA2DA92044007BC24D /* SearchResultsViewModel.swift in Sources */,
 				C52001BF2DA7C30A007BC24D /* SyncService.swift in Sources */,
 				C52001D12DA7D655007BC24D /* EntryDetailView.swift in Sources */,
+				C55B56192DAC9E6F00418E4C /* NetworkManager.swift in Sources */,
 				C52001D22DA7D655007BC24D /* SearchResultsView.swift in Sources */,
 				C52001C02DA7C30A007BC24D /* SearchViewModel.swift in Sources */,
 				C52001C12DA7C30A007BC24D /* DictionaryServiceFactory.swift in Sources */,
@@ -538,9 +541,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.modi.JapaneseLearnApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -568,9 +573,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.modi.JapaneseLearnApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -598,6 +605,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
 		C592EF5A2DA525C200784427 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -609,6 +624,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C55B561B2DAC9F5000418E4C /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
 		C592EF642DA5291100784427 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C592EF5A2DA525C200784427 /* XCRemoteSwiftPackageReference "realm-swift" */;

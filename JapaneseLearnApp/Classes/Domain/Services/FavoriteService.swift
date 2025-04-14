@@ -165,27 +165,26 @@ class FavoriteService: FavoriteServiceProtocol {
     }
     
     // 添加收藏
+    // 添加收藏
     func addFavorite(wordId: String, folderId: String, note: String?) -> AnyPublisher<FavoriteItemDetail, FavoriteError> {
         // 先获取词条信息
         return dictionaryRepository.getWordDetails(id: wordId)
-            .flatMap { dictEntry -> AnyPublisher<FavoriteItem, Error> in
+            .flatMap { dictEntry -> AnyPublisher<FavoriteItemDetail, Error> in
                 guard let entry = dictEntry else {
                     return Fail(error: NSError(domain: "FavoriteService", code: 404, userInfo: [NSLocalizedDescriptionKey: "词条不存在"])).eraseToAnyPublisher()
                 }
                 
-                return self.favoriteRepository.addFavoriteItem(folderId: folderId, word: entry, note: note)
-            }
-            .map { item in
-                return FavoriteItemDetail(
-                    id: item.id,
-                    wordId: item.wordId,
-                    word: item.word,
-                    reading: item.reading,
-                    meaning: item.meaning,
-                    note: item.note,
-                    addedAt: item.addedAt,
-                    syncStatus: self.mapSyncStatus(item.syncStatus)
+                // 从 Realm 对象中提取必要的数据，使用现有的 WordListItem 结构体
+                let wordItem = WordListItem(
+                    id: entry.id,
+                    word: entry.word,
+                    reading: entry.reading,
+                    partOfSpeech: entry.partOfSpeech,
+                    briefMeaning: entry.definitions.first?.meaning ?? ""
                 )
+                
+                // 直接返回转换后的非Realm对象
+                return self.favoriteRepository.addFavoriteItemAndConvert(folderId: folderId, wordItem: wordItem, note: note)
             }
             .mapError { error in
                 if let nsError = error as NSError? {

@@ -21,6 +21,9 @@ protocol FavoriteRepositoryProtocol {
     // 添加单词到收藏夹
     func addFavoriteItem(folderId: String, word: DictEntry, note: String?) -> AnyPublisher<FavoriteItem, Error>
     
+    // 使用 WordListItem 而不是创建新的 WordData
+    func addFavoriteItem(folderId: String, wordItem: WordListItem, note: String?) -> AnyPublisher<FavoriteItem, Error>
+
     // 更新收藏单词的笔记
     func updateFavoriteItemNote(itemId: String, note: String) -> AnyPublisher<FavoriteItem, Error>
     
@@ -32,6 +35,9 @@ protocol FavoriteRepositoryProtocol {
     
     // 获取单词所在的所有收藏夹
     func getFoldersContainingWord(wordId: String) -> AnyPublisher<[Folder], Error>
+    
+    func addFavoriteItemAndConvert(folderId: String, wordItem: WordListItem, note: String?) -> AnyPublisher<FavoriteItemDetail, Error>
+
 }
 
 class FavoriteRepository: FavoriteRepositoryProtocol {
@@ -41,6 +47,64 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
         self.realmManager = realmManager
         createDefaultFolderIfNeeded()
     }
+
+    func addFavoriteItemAndConvert(folderId: String, wordItem: WordListItem, note: String?) -> AnyPublisher<FavoriteItemDetail, Error> {
+        return realmManager.writeAsync { realm in
+            // 检查收藏夹是否存在
+            guard let folder = realm.object(ofType: Folder.self, forPrimaryKey: folderId) else {
+                throw NSError(domain: "FavoriteRepository", code: 404, userInfo: [NSLocalizedDescriptionKey: "收藏夹不存在"])
+            }
+            
+            // 检查是否已收藏
+            let existingItems = folder.items.filter("wordId == %@", wordItem.id)
+            if !existingItems.isEmpty {
+                // 如果已收藏，使用现有项
+                let item = existingItems.first!
+                
+                // 直接转换为非Realm对象
+                return FavoriteItemDetail(
+                    id: item.id,
+                    wordId: item.wordId,
+                    word: item.word,
+                    reading: item.reading,
+                    meaning: item.meaning,
+                    note: item.note ?? "",
+                    addedAt: item.addedAt,
+                    syncStatus: SyncStatusType(rawValue: item.syncStatus) ?? .error
+                )
+            }
+            
+            // 创建新收藏项
+            let favoriteItem = FavoriteItem()
+            favoriteItem.id = UUID().uuidString
+            favoriteItem.wordId = wordItem.id
+            favoriteItem.word = wordItem.word
+            favoriteItem.reading = wordItem.reading
+            favoriteItem.meaning = wordItem.briefMeaning
+            favoriteItem.note = note ?? ""
+            favoriteItem.addedAt = Date()
+            favoriteItem.lastModified = Date()
+            favoriteItem.syncStatus = SyncStatusType.pendingUpload.rawValue
+            
+            // 添加到收藏夹
+            folder.items.append(favoriteItem)
+            folder.lastModified = Date()
+            folder.syncStatus = SyncStatusType.pendingUpload.rawValue
+            
+            // 直接转换为非Realm对象
+            return FavoriteItemDetail(
+                id: favoriteItem.id,
+                wordId: favoriteItem.wordId,
+                word: favoriteItem.word,
+                reading: favoriteItem.reading,
+                meaning: favoriteItem.meaning,
+                note: favoriteItem.note ?? "",
+                addedAt: favoriteItem.addedAt,
+                syncStatus: SyncStatusType(rawValue: favoriteItem.syncStatus) ?? .error
+            )
+        }
+    }
+
     
     // 创建默认收藏夹（如果不存在）
     private func createDefaultFolderIfNeeded() {
@@ -188,6 +252,42 @@ class FavoriteRepository: FavoriteRepositoryProtocol {
         }
     }
     
+    // 实现新方法
+    func addFavoriteItem(folderId: String, wordItem: WordListItem, note: String?) -> AnyPublisher<FavoriteItem, Error> {
+        return realmManager.writeAsync { realm in
+            // 检查收藏夹是否存在
+            guard let folder = realm.object(ofType: Folder.self, forPrimaryKey: folderId) else {
+                throw NSError(domain: "FavoriteRepository", code: 404, userInfo: [NSLocalizedDescriptionKey: "收藏夹不存在"])
+            }
+            
+            // 检查是否已收藏 - 修改查询方式
+            let existingItems = folder.items.filter("wordId == %@", wordItem.id)
+            if !existingItems.isEmpty {
+                // 如果已收藏，返回现有项
+                return existingItems.first!
+            }
+            
+            // 创建新收藏项
+            let favoriteItem = FavoriteItem()
+            favoriteItem.id = UUID().uuidString
+            favoriteItem.wordId = wordItem.id
+            favoriteItem.word = wordItem.word
+            favoriteItem.reading = wordItem.reading
+            favoriteItem.meaning = wordItem.briefMeaning
+            favoriteItem.note = note ?? ""
+            favoriteItem.addedAt = Date()
+            favoriteItem.lastModified = Date()
+            favoriteItem.syncStatus = SyncStatusType.pendingUpload.rawValue
+            
+            // 添加到收藏夹
+            folder.items.append(favoriteItem)
+            folder.lastModified = Date()
+            folder.syncStatus = SyncStatusType.pendingUpload.rawValue
+            
+            return favoriteItem
+        }
+    }
+
     // 更新收藏单词的笔记
     func updateFavoriteItemNote(itemId: String, note: String) -> AnyPublisher<FavoriteItem, Error> {
         return realmManager.writeAsync { realm in
