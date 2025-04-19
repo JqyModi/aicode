@@ -87,7 +87,7 @@ class DictionaryRepository: DictionaryRepositoryProtocol {
                     
                     if let existingItem = existingItems.first {
                         // 更新搜索时间
-                        existingItem.searchDate = Date()
+                        existingItem.searchedAt = Date()
                     } else {
                         // 创建新的搜索历史
                         let historyItem = SearchHistoryItem()

@@ -26,6 +26,7 @@ class UserAuthRepository: UserAuthRepositoryProtocol {
     }
     
     // Apple ID登录
+    // 在 signInWithApple 方法中修改
     func signInWithApple(identityToken: Data, authorizationCode: String, fullName: PersonNameComponents?, email: String?, userIdentifier: String) -> AnyPublisher<User, Error> {
         return Future<User, Error> { promise in
             do {
@@ -33,7 +34,8 @@ class UserAuthRepository: UserAuthRepositoryProtocol {
                 let existingUsers = self.realm.objects(User.self)
                     .filter("appleUserId == %@", userIdentifier)
                 
-                let user: User
+                // 初始化 user 变量
+                var user = User()
                 
                 try self.realm.write {
                     if let existingUser = existingUsers.first {

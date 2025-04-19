@@ -15,7 +15,7 @@ class Folder: Object {
     @objc dynamic var createdAt: Date = Date()
     @objc dynamic var updatedAt: Date = Date()
     @objc dynamic var userId: String = ""
-    @objc dynamic var syncStatus: Int = SyncStatus.synced.rawValue
+    @objc dynamic var syncStatus: Int = SyncStatusType.synced.rawValue
     
     override static func primaryKey() -> String? {
         return "id"
@@ -33,7 +33,7 @@ class FavoriteItem: Object {
     @objc dynamic var note: String? = nil
     @objc dynamic var addedAt: Date = Date()
     @objc dynamic var updatedAt: Date = Date()
-    @objc dynamic var syncStatus: Int = SyncStatus.synced.rawValue
+    @objc dynamic var syncStatus: Int = SyncStatusType.synced.rawValue
     
     override static func primaryKey() -> String? {
         return "id"
@@ -41,7 +41,7 @@ class FavoriteItem: Object {
 }
 
 // MARK: - 同步状态枚举
-enum SyncStatus: Int {
+enum SyncStatusType: Int {
     case synced = 0        // 已同步
     case pendingUpload = 1 // 待上传
     case pendingDownload = 2 // 待下载

@@ -85,10 +85,11 @@ class Example: Object {
 // MARK: - 搜索历史
 class SearchHistoryItem: Object {
     @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var wordId: String = ""
     @objc dynamic var word: String = ""
     @objc dynamic var reading: String = ""
-    @objc dynamic var searchDate: Date = Date()
-    @objc dynamic var wordId: String = ""
+    @objc dynamic var meaning: String = ""  // 添加这个属性
+    @objc dynamic var searchedAt: Date = Date()
     
     override static func primaryKey() -> String? {
         return "id"

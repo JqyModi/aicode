@@ -274,12 +274,15 @@ class SyncRepository: SyncRepositoryProtocol {
                             folder.syncStatus = UISyncStatus.synced.rawValue
                         case .useRemote:
                             // 使用远程版本
-                            if let remoteData = try? JSONDecoder().decode(Folder.self, from: conflict.remoteData.data(using: .utf8) ?? Data()) {
-                                folder.name = remoteData.name
+                            // 修改这里的解码方式
+                            if let remoteData = conflict.remoteData.data(using: .utf8),
+                               let jsonDict = try? JSONSerialization.jsonObject(with: remoteData) as? [String: Any],
+                               let name = jsonDict["name"] as? String {
+                                folder.name = name
                                 folder.syncStatus = UISyncStatus.synced.rawValue
                             }
                         case .merge:
-                            // 合并版本（在这个简单例子中，我们只保留本地名称但标记为已同步）
+                            // 合并版本
                             folder.syncStatus = UISyncStatus.synced.rawValue
                         }
                     }
@@ -292,8 +295,11 @@ class SyncRepository: SyncRepositoryProtocol {
                             item.syncStatus = UISyncStatus.synced.rawValue
                         case .useRemote:
                             // 使用远程版本
-                            if let remoteData = try? JSONDecoder().decode(FavoriteItem.self, from: conflict.remoteData.data(using: .utf8) ?? Data()) {
-                                item.note = remoteData.note
+                            // 修改这里的解码方式，使用 JSONSerialization 替代 JSONDecoder
+                            if let remoteData = conflict.remoteData.data(using: .utf8),
+                               let jsonDict = try? JSONSerialization.jsonObject(with: remoteData) as? [String: Any],
+                               let note = jsonDict["note"] as? String {
+                                item.note = note
                                 item.syncStatus = UISyncStatus.synced.rawValue
                             }
                         case .merge:
@@ -313,10 +319,22 @@ class SyncRepository: SyncRepositoryProtocol {
                             user.syncStatus = UISyncStatus.synced.rawValue
                         case .useRemote:
                             // 使用远程版本
-                            if let remoteData = try? JSONDecoder().decode(UserSettings.self, from: conflict.remoteData.data(using: .utf8) ?? Data()) {
-                                settings.darkMode = remoteData.darkMode
-                                settings.fontSize = remoteData.fontSize
-                                settings.autoSync = remoteData.autoSync
+                            // 修改这里的解码方式，使用 JSONSerialization 替代 JSONDecoder
+                            if let remoteData = conflict.remoteData.data(using: .utf8),
+                               let jsonDict = try? JSONSerialization.jsonObject(with: remoteData) as? [String: Any] {
+                                
+                                if let darkMode = jsonDict["darkMode"] as? Bool {
+                                    settings.darkMode = darkMode
+                                }
+                                
+                                if let fontSize = jsonDict["fontSize"] as? Int {
+                                    settings.fontSize = fontSize
+                                }
+                                
+                                if let autoSync = jsonDict["autoSync"] as? Bool {
+                                    settings.autoSync = autoSync
+                                }
+                                
                                 user.syncStatus = UISyncStatus.synced.rawValue
                             }
                         case .merge:

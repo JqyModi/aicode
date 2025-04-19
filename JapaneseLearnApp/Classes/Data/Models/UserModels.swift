@@ -14,10 +14,11 @@ class User: Object {
     @objc dynamic var appleUserId: String = ""
     @objc dynamic var nickname: String? = nil
     @objc dynamic var email: String? = nil
-    @objc dynamic var lastLoginDate: Date = Date()
-    @objc dynamic var createdAt: Date = Date()
     @objc dynamic var settings: UserSettings? = nil
+    @objc dynamic var createdAt: Date = Date()
+    @objc dynamic var lastLoginAt: Date = Date()
     @objc dynamic var lastSyncTime: Date? = nil
+    @objc dynamic var syncStatus: Int = UISyncStatus.synced.rawValue  // 添加这个属性
     
     override static func primaryKey() -> String? {
         return "id"

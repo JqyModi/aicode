@@ -41,13 +41,13 @@ class SyncProgress: Object {
 // MARK: - 同步冲突
 class SyncConflict: Object {
     @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var entityType: String = "" // folder, favorite_item, user_settings
+    @objc dynamic var entityType: String = ""
     @objc dynamic var entityId: String = ""
-    @objc dynamic var localData: String = "" // JSON格式的本地数据
-    @objc dynamic var remoteData: String = "" // JSON格式的远程数据
+    @objc dynamic var localData: String = ""
+    @objc dynamic var remoteData: String = ""
     @objc dynamic var detectedAt: Date = Date()
     @objc dynamic var resolved: Bool = false
-    @objc dynamic var resolution: Int = 0 // 0: 未解决, 1: 使用本地, 2: 使用远程, 3: 合并
+    @objc dynamic var resolution: Int = 0  // 添加这个属性：0: 未解决, 1: 使用本地, 2: 使用远程, 3: 合并
     
     override static func primaryKey() -> String? {
         return "id"
@@ -59,4 +59,18 @@ enum SyncType: Int {
     case full = 0       // 全量同步
     case favorites = 1  // 仅同步收藏
     case settings = 2   // 仅同步设置
+}
+
+
+// MARK: - 同步状态
+class SyncStatus: Object {
+    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var pendingChanges: Int = 0
+    @objc dynamic var lastSyncTime: Date? = nil
+    @objc dynamic var availableOffline: Bool = true
+    @objc dynamic var status: String = "synced"
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
