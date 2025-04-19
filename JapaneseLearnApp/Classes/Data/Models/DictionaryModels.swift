@@ -13,7 +13,7 @@ class DictionaryVersion: Object {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var version: String = ""
     @objc dynamic var updateDate: Date = Date()
-//    @objc dynamic var description: String = ""
+    @objc dynamic var description1: String = ""
     
     override static func primaryKey() -> String? {
         return "id"

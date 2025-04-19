@@ -24,6 +24,10 @@
 		C596043A2DB2BD4B00123ED1 /* word-core-model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604392DB2BD4B00123ED1 /* word-core-model.swift */; };
 		C596043D2DB2BD7D00123ED1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043C2DB2BD7D00123ED1 /* RealmManager.swift */; };
 		C596043E2DB2BD7D00123ED1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043B2DB2BD7D00123ED1 /* NetworkManager.swift */; };
+		C59604442DB2C40000123ED1 /* UserAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604422DB2C40000123ED1 /* UserAuthRepository.swift */; };
+		C59604452DB2C40000123ED1 /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */; };
+		C59604462DB2C40000123ED1 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604402DB2C40000123ED1 /* FavoriteRepository.swift */; };
+		C59604472DB2C40000123ED1 /* SyncRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604412DB2C40000123ED1 /* SyncRepository.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		C59604392DB2BD4B00123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596043B2DB2BD7D00123ED1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C596043C2DB2BD7D00123ED1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
+		C59604402DB2C40000123ED1 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
+		C59604412DB2C40000123ED1 /* SyncRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncRepository.swift; sourceTree = "<group>"; };
+		C59604422DB2C40000123ED1 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +126,7 @@
 		C596041D2DB25B5800123ED1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				C59604432DB2C40000123ED1 /* Repositories */,
 				C59604182DB25B5800123ED1 /* Models */,
 				C596041A2DB25B5800123ED1 /* Protocols */,
 				C596041C2DB25B5800123ED1 /* Utils */,
@@ -193,6 +202,17 @@
 				C596042A2DB25B5800123ED1 /* Presentation */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		C59604432DB2C40000123ED1 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */,
+				C59604402DB2C40000123ED1 /* FavoriteRepository.swift */,
+				C59604412DB2C40000123ED1 /* SyncRepository.swift */,
+				C59604422DB2C40000123ED1 /* UserAuthRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		C5AEDA412DA261520031B210 = {
@@ -312,6 +332,10 @@
 				C596042E2DB25B5800123ED1 /* SyncModels.swift in Sources */,
 				C596042F2DB25B5800123ED1 /* UserModels.swift in Sources */,
 				C596043D2DB2BD7D00123ED1 /* RealmManager.swift in Sources */,
+				C59604442DB2C40000123ED1 /* UserAuthRepository.swift in Sources */,
+				C59604452DB2C40000123ED1 /* DictionaryRepository.swift in Sources */,
+				C59604462DB2C40000123ED1 /* FavoriteRepository.swift in Sources */,
+				C59604472DB2C40000123ED1 /* SyncRepository.swift in Sources */,
 				C596043E2DB2BD7D00123ED1 /* NetworkManager.swift in Sources */,
 				C59604302DB25B5800123ED1 /* DictionaryModels.swift in Sources */,
 				C59604312DB25B5800123ED1 /* FavoriteModels.swift in Sources */,
