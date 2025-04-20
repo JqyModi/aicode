@@ -10,24 +10,13 @@
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		C596042D2DB25B5800123ED1 /* ErrorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596041F2DB25B5800123ED1 /* ErrorModels.swift */; };
-		C596042E2DB25B5800123ED1 /* SyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604162DB25B5800123ED1 /* SyncModels.swift */; };
-		C596042F2DB25B5800123ED1 /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604172DB25B5800123ED1 /* UserModels.swift */; };
-		C59604302DB25B5800123ED1 /* DictionaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604132DB25B5800123ED1 /* DictionaryModels.swift */; };
-		C59604312DB25B5800123ED1 /* FavoriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604152DB25B5800123ED1 /* FavoriteModels.swift */; };
-		C59604322DB25B5800123ED1 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596041E2DB25B5800123ED1 /* DomainModels.swift */; };
-		C59604332DB25B5800123ED1 /* ViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604282DB25B5800123ED1 /* ViewModelProtocols.swift */; };
-		C59604342DB25B5800123ED1 /* PresentationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604262DB25B5800123ED1 /* PresentationModels.swift */; };
-		C59604362DB25B5800123ED1 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604192DB25B5800123ED1 /* RepositoryProtocols.swift */; };
-		C59604372DB25B5800123ED1 /* ServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604212DB25B5800123ED1 /* ServiceProtocols.swift */; };
-		C59604382DB25B5800123ED1 /* ModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604232DB25B5800123ED1 /* ModelConverter.swift */; };
-		C596043A2DB2BD4B00123ED1 /* word-core-model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604392DB2BD4B00123ED1 /* word-core-model.swift */; };
-		C596043D2DB2BD7D00123ED1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043C2DB2BD7D00123ED1 /* RealmManager.swift */; };
-		C596043E2DB2BD7D00123ED1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043B2DB2BD7D00123ED1 /* NetworkManager.swift */; };
-		C59604442DB2C40000123ED1 /* UserAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604422DB2C40000123ED1 /* UserAuthRepository.swift */; };
-		C59604452DB2C40000123ED1 /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */; };
-		C59604462DB2C40000123ED1 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604402DB2C40000123ED1 /* FavoriteRepository.swift */; };
-		C59604472DB2C40000123ED1 /* SyncRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604412DB2C40000123ED1 /* SyncRepository.swift */; };
+		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
+		C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604662DB4876200123ED1 /* ServiceProtocols.swift */; };
+		C59604722DB4876200123ED1 /* DataRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */; };
+		C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604612DB4876200123ED1 /* NetworkManager.swift */; };
+		C59604742DB4876200123ED1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604622DB4876200123ED1 /* RealmManager.swift */; };
+		C59604752DB4876200123ED1 /* word-core-model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045B2DB4876200123ED1 /* word-core-model.swift */; };
+		C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596046C2DB4876200123ED1 /* ViewModelProtocols.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -49,24 +38,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C59604132DB25B5800123ED1 /* DictionaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryModels.swift; sourceTree = "<group>"; };
-		C59604152DB25B5800123ED1 /* FavoriteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModels.swift; sourceTree = "<group>"; };
-		C59604162DB25B5800123ED1 /* SyncModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncModels.swift; sourceTree = "<group>"; };
-		C59604172DB25B5800123ED1 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
-		C59604192DB25B5800123ED1 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
-		C596041E2DB25B5800123ED1 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
-		C596041F2DB25B5800123ED1 /* ErrorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModels.swift; sourceTree = "<group>"; };
-		C59604212DB25B5800123ED1 /* ServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocols.swift; sourceTree = "<group>"; };
-		C59604232DB25B5800123ED1 /* ModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConverter.swift; sourceTree = "<group>"; };
-		C59604262DB25B5800123ED1 /* PresentationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationModels.swift; sourceTree = "<group>"; };
-		C59604282DB25B5800123ED1 /* ViewModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocols.swift; sourceTree = "<group>"; };
-		C59604392DB2BD4B00123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
-		C596043B2DB2BD7D00123ED1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		C596043C2DB2BD7D00123ED1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
-		C59604402DB2C40000123ED1 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
-		C59604412DB2C40000123ED1 /* SyncRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncRepository.swift; sourceTree = "<group>"; };
-		C59604422DB2C40000123ED1 /* UserAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRepository.swift; sourceTree = "<group>"; };
+		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
+		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
+		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
+		C59604612DB4876200123ED1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C59604622DB4876200123ED1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		C59604662DB4876200123ED1 /* ServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocols.swift; sourceTree = "<group>"; };
+		C596046C2DB4876200123ED1 /* ViewModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocols.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,125 +72,122 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C59604182DB25B5800123ED1 /* Models */ = {
+		C596045C2DB4876200123ED1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C59604392DB2BD4B00123ED1 /* word-core-model.swift */,
-				C59604132DB25B5800123ED1 /* DictionaryModels.swift */,
-				C59604152DB25B5800123ED1 /* FavoriteModels.swift */,
-				C59604162DB25B5800123ED1 /* SyncModels.swift */,
-				C59604172DB25B5800123ED1 /* UserModels.swift */,
+				C596045B2DB4876200123ED1 /* word-core-model.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C596041A2DB25B5800123ED1 /* Protocols */ = {
+		C596045F2DB4876200123ED1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C59604192DB25B5800123ED1 /* RepositoryProtocols.swift */,
+				C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */,
+				C596045E2DB4876200123ED1 /* EntityModels.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		C596041C2DB25B5800123ED1 /* Utils */ = {
+		C59604602DB4876200123ED1 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C596043B2DB2BD7D00123ED1 /* NetworkManager.swift */,
-				C596043C2DB2BD7D00123ED1 /* RealmManager.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C59604632DB4876200123ED1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C59604612DB4876200123ED1 /* NetworkManager.swift */,
+				C59604622DB4876200123ED1 /* RealmManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		C596041D2DB25B5800123ED1 /* Data */ = {
+		C59604642DB4876200123ED1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				C59604432DB2C40000123ED1 /* Repositories */,
-				C59604182DB25B5800123ED1 /* Models */,
-				C596041A2DB25B5800123ED1 /* Protocols */,
-				C596041C2DB25B5800123ED1 /* Utils */,
+				C596045C2DB4876200123ED1 /* Models */,
+				C596045F2DB4876200123ED1 /* Protocols */,
+				C59604602DB4876200123ED1 /* Repositories */,
+				C59604632DB4876200123ED1 /* Utils */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		C59604202DB25B5800123ED1 /* Models */ = {
+		C59604652DB4876200123ED1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C596041E2DB25B5800123ED1 /* DomainModels.swift */,
-				C596041F2DB25B5800123ED1 /* ErrorModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C59604222DB25B5800123ED1 /* Protocols */ = {
+		C59604672DB4876200123ED1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C59604212DB25B5800123ED1 /* ServiceProtocols.swift */,
+				C59604662DB4876200123ED1 /* ServiceProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		C59604242DB25B5800123ED1 /* Utils */ = {
+		C59604682DB4876200123ED1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C59604232DB25B5800123ED1 /* ModelConverter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C59604692DB4876200123ED1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		C59604252DB25B5800123ED1 /* Domain */ = {
+		C596046A2DB4876200123ED1 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				C59604202DB25B5800123ED1 /* Models */,
-				C59604222DB25B5800123ED1 /* Protocols */,
-				C59604242DB25B5800123ED1 /* Utils */,
+				C59604652DB4876200123ED1 /* Models */,
+				C59604672DB4876200123ED1 /* Protocols */,
+				C59604682DB4876200123ED1 /* Services */,
+				C59604692DB4876200123ED1 /* Utils */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		C59604272DB25B5800123ED1 /* Models */ = {
+		C596046B2DB4876200123ED1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C59604262DB25B5800123ED1 /* PresentationModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C59604292DB25B5800123ED1 /* Protocols */ = {
+		C596046D2DB4876200123ED1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C59604282DB25B5800123ED1 /* ViewModelProtocols.swift */,
+				C596046C2DB4876200123ED1 /* ViewModelProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		C596042A2DB25B5800123ED1 /* Presentation */ = {
+		C596046E2DB4876200123ED1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				C59604272DB25B5800123ED1 /* Models */,
-				C59604292DB25B5800123ED1 /* Protocols */,
+				C596046B2DB4876200123ED1 /* Models */,
+				C596046D2DB4876200123ED1 /* Protocols */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		C596042B2DB25B5800123ED1 /* Classes */ = {
+		C596046F2DB4876200123ED1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C596041D2DB25B5800123ED1 /* Data */,
-				C59604252DB25B5800123ED1 /* Domain */,
-				C596042A2DB25B5800123ED1 /* Presentation */,
+				C59604642DB4876200123ED1 /* Data */,
+				C596046A2DB4876200123ED1 /* Domain */,
+				C596046E2DB4876200123ED1 /* Presentation */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		C59604432DB2C40000123ED1 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				C596043F2DB2C40000123ED1 /* DictionaryRepository.swift */,
-				C59604402DB2C40000123ED1 /* FavoriteRepository.swift */,
-				C59604412DB2C40000123ED1 /* SyncRepository.swift */,
-				C59604422DB2C40000123ED1 /* UserAuthRepository.swift */,
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		C5AEDA412DA261520031B210 = {
@@ -235,7 +210,7 @@
 		C5AEDA4C2DA261520031B210 /* JapaneseLearnApp */ = {
 			isa = PBXGroup;
 			children = (
-				C596042B2DB25B5800123ED1 /* Classes */,
+				C596046F2DB4876200123ED1 /* Classes */,
 				C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */,
 				C5AEDA4F2DA261520031B210 /* ContentView.swift */,
 				C5AEDA512DA261560031B210 /* Assets.xcassets */,
@@ -328,24 +303,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
-				C596042D2DB25B5800123ED1 /* ErrorModels.swift in Sources */,
-				C596042E2DB25B5800123ED1 /* SyncModels.swift in Sources */,
-				C596042F2DB25B5800123ED1 /* UserModels.swift in Sources */,
-				C596043D2DB2BD7D00123ED1 /* RealmManager.swift in Sources */,
-				C59604442DB2C40000123ED1 /* UserAuthRepository.swift in Sources */,
-				C59604452DB2C40000123ED1 /* DictionaryRepository.swift in Sources */,
-				C59604462DB2C40000123ED1 /* FavoriteRepository.swift in Sources */,
-				C59604472DB2C40000123ED1 /* SyncRepository.swift in Sources */,
-				C596043E2DB2BD7D00123ED1 /* NetworkManager.swift in Sources */,
-				C59604302DB25B5800123ED1 /* DictionaryModels.swift in Sources */,
-				C59604312DB25B5800123ED1 /* FavoriteModels.swift in Sources */,
-				C59604322DB25B5800123ED1 /* DomainModels.swift in Sources */,
-				C59604332DB25B5800123ED1 /* ViewModelProtocols.swift in Sources */,
-				C59604342DB25B5800123ED1 /* PresentationModels.swift in Sources */,
-				C59604362DB25B5800123ED1 /* RepositoryProtocols.swift in Sources */,
-				C596043A2DB2BD4B00123ED1 /* word-core-model.swift in Sources */,
-				C59604372DB25B5800123ED1 /* ServiceProtocols.swift in Sources */,
-				C59604382DB25B5800123ED1 /* ModelConverter.swift in Sources */,
+				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
+				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
+				C59604722DB4876200123ED1 /* DataRepositoryProtocols.swift in Sources */,
+				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
+				C59604742DB4876200123ED1 /* RealmManager.swift in Sources */,
+				C59604752DB4876200123ED1 /* word-core-model.swift in Sources */,
+				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

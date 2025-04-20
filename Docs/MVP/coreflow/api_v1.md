@@ -12,18 +12,18 @@
 ## 2. 数据层接口设计
 ### 2.1 RealmManager接口
 ```swift
-protocol DictionaryRepositoryProtocol {
+protocol DictionaryDataRepositoryProtocol {
     // 查询单词
-    func searchWords(query: String, type: SearchType, limit: Int, offset: Int) -> AnyPublisher<[DictEntry], Error>
+    func searchWords(query: String, type: SearchTypeEntity, limit: Int, offset: Int) -> AnyPublisher<[DictEntryEntity], Error>
     
     // 获取单词详情
-    func getWordDetails(id: String) -> AnyPublisher<DictEntry?, Error>
+    func getWordDetails(id: String) -> AnyPublisher<DictEntryEntity?, Error>
     
     // 获取搜索历史
-    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItem], Error>
+    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItemEntity], Error>
     
     // 添加搜索历史
-    func addSearchHistory(word: DictEntry) -> AnyPublisher<Void, Error>
+    func addSearchHistory(word: DictEntryEntity) -> AnyPublisher<Void, Error>
     
     // 清除搜索历史
     func clearSearchHistory() -> AnyPublisher<Void, Error>
@@ -32,10 +32,10 @@ protocol DictionaryRepositoryProtocol {
     func initializeDictionary() -> AnyPublisher<Void, Error>
     
     // 检查词库版本
-    func checkDictionaryVersion() -> AnyPublisher<DictionaryVersion, Error>
+    func checkDictionaryVersion() -> AnyPublisher<DictionaryVersionEntity, Error>
 }
 
-enum SearchType {
+enum SearchTypeEntity {
     case auto      // 自动识别
     case word      // 按单词
     case reading   // 按读音
@@ -45,27 +45,27 @@ enum SearchType {
 
 ### 2.2 收藏管理接口
 ```swift
-protocol FavoriteRepositoryProtocol {
+protocol FavoriteDataRepositoryProtocol {
     // 获取所有收藏夹
-    func getAllFolders() -> AnyPublisher<[Folder], Error>
+    func getAllFolders() -> AnyPublisher<[FolderEntity], Error>
     
     // 创建收藏夹
-    func createFolder(name: String) -> AnyPublisher<Folder, Error>
+    func createFolder(name: String) -> AnyPublisher<FolderEntity, Error>
     
     // 更新收藏夹
-    func updateFolder(id: String, name: String) -> AnyPublisher<Folder, Error>
+    func updateFolder(id: String, name: String) -> AnyPublisher<FolderEntity, Error>
     
     // 删除收藏夹
     func deleteFolder(id: String) -> AnyPublisher<Bool, Error>
     
     // 获取收藏夹内容
-    func getFolderItems(folderId: String, limit: Int, offset: Int) -> AnyPublisher<[FavoriteItem], Error>
+    func getFolderItems(folderId: String, limit: Int, offset: Int) -> AnyPublisher<[FavoriteItemEntity], Error>
     
     // 添加收藏
-    func addFavorite(wordId: String, folderId: String, note: String?) -> AnyPublisher<FavoriteItem, Error>
+    func addFavorite(wordId: String, folderId: String, note: String?) -> AnyPublisher<FavoriteItemEntity, Error>
     
     // 更新收藏笔记
-    func updateFavoriteNote(id: String, note: String) -> AnyPublisher<FavoriteItem, Error>
+    func updateFavoriteNote(id: String, note: String) -> AnyPublisher<FavoriteItemEntity, Error>
     
     // 删除收藏
     func deleteFavorite(id: String) -> AnyPublisher<Bool, Error>
@@ -77,15 +77,15 @@ protocol FavoriteRepositoryProtocol {
 
 ### 2.3 用户认证接口
 ```swift
-protocol UserAuthRepositoryProtocol {
+protocol UserAuthDataRepositoryProtocol {
     // Apple ID登录
-    func signInWithApple(identityToken: Data, authorizationCode: String, fullName: PersonNameComponents?, email: String?, userIdentifier: String) -> AnyPublisher<User, Error>
+    func signInWithApple(identityToken: Data, authorizationCode: String, fullName: PersonNameComponents?, email: String?, userIdentifier: String) -> AnyPublisher<UserEntity, Error>
     
     // 获取当前用户
-    func getCurrentUser() -> AnyPublisher<User?, Error>
+    func getCurrentUser() -> AnyPublisher<UserEntity?, Error>
     
     // 更新用户设置
-    func updateUserSettings(settings: UserSettings) -> AnyPublisher<UserSettings, Error>
+    func updateUserSettings(settings: UserSettingsEntity) -> AnyPublisher<UserSettingsEntity, Error>
     
     // 登出
     func signOut() -> AnyPublisher<Bool, Error>
@@ -98,30 +98,30 @@ protocol UserAuthRepositoryProtocol {
 
 ### 2.4 云同步接口
 ```swift
-protocol SyncRepositoryProtocol {
+protocol SyncDataRepositoryProtocol {
     // 获取同步状态
-    func getSyncStatus() -> AnyPublisher<SyncStatus, Error>
+    func getSyncStatus() -> AnyPublisher<SyncStatusEntity, Error>
     
     // 触发同步
-    func startSync(type: SyncType) -> AnyPublisher<SyncOperation, Error>
+    func startSync(type: SyncTypeEntity) -> AnyPublisher<SyncOperationEntity, Error>
     
     // 获取同步进度
-    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgress, Error>
+    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgressEntity, Error>
     
     // 解决同步冲突
-    func resolveSyncConflict(conflictId: String, resolution: ConflictResolution) -> AnyPublisher<Bool, Error>
+    func resolveSyncConflict(conflictId: String, resolution: ConflictResolutionEntity) -> AnyPublisher<Bool, Error>
     
     // 启用/禁用自动同步
     func setAutoSync(enabled: Bool) -> AnyPublisher<Bool, Error>
 }
 
-enum SyncType {
+enum SyncTypeDomain {
     case full       // 全量同步
     case favorites  // 仅同步收藏
     case settings   // 仅同步设置
 }
 
-enum ConflictResolution {
+enum ConflictResolutionDomain {
     case useLocal   // 使用本地版本
     case useRemote  // 使用远程版本
     case merge      // 合并两个版本
@@ -134,27 +134,27 @@ enum ConflictResolution {
 ```swift
 protocol DictionaryServiceProtocol {
     // 搜索单词
-    func searchWords(query: String, type: SearchType?, limit: Int, offset: Int) -> AnyPublisher<SearchResult, DictionaryError>
+    func searchWords(query: String, type: SearchTypeDomain?, limit: Int, offset: Int) -> AnyPublisher<SearchResultDomain, DictionaryErrorDomain>
     
     // 获取单词详情
-    func getWordDetails(id: String) -> AnyPublisher<WordDetails, DictionaryError>
+    func getWordDetails(id: String) -> AnyPublisher<WordDetailsDomain, DictionaryError>
     
     // 获取单词发音
-    func getWordPronunciation(id: String, speed: Float) -> AnyPublisher<URL, DictionaryError>
+    func getWordPronunciation(id: String, speed: Float) -> AnyPublisher<URL, DictionaryErrorDomain>
     
     // 获取搜索历史
-    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItem], DictionaryError>
+    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItemDomain], DictionaryError>
     
     // 清除搜索历史
-    func clearSearchHistory() -> AnyPublisher<Bool, DictionaryError>
+    func clearSearchHistory() -> AnyPublisher<Bool, DictionaryErrorDomain>
 }
 
-struct SearchResult {
+struct SearchResultDomain {
     let total: Int
-    let items: [WordSummary]
+    let items: [WordSummaryDomain]
 }
 
-struct WordSummary {
+struct WordSummaryDomain {
     let id: String
     let word: String
     let reading: String
@@ -162,18 +162,18 @@ struct WordSummary {
     let briefMeaning: String
 }
 
-struct WordDetails {
+struct WordDetailsDomain {
     let id: String
     let word: String
     let reading: String
     let partOfSpeech: String
-    let definitions: [Definition]
-    let examples: [Example]
-    let relatedWords: [WordSummary]
+    let definitions: [DefinitionDomain]
+    let examples: [ExampleDomain]
+    let relatedWords: [WordSummaryDomain]
     let isFavorited: Bool
 }
 
-enum DictionaryError: Error {
+enum DictionaryErrorDomain: Error {
     case notFound
     case searchFailed
     case databaseError
@@ -187,44 +187,44 @@ enum DictionaryError: Error {
 ```swift
 protocol FavoriteServiceProtocol {
     // 获取所有收藏夹
-    func getAllFolders() -> AnyPublisher<[FolderSummary], FavoriteError>
+    func getAllFolders() -> AnyPublisher<[FolderSummaryDomain], FavoriteErrorDomain>
     
     // 创建收藏夹
-    func createFolder(name: String) -> AnyPublisher<FolderSummary, FavoriteError>
+    func createFolder(name: String) -> AnyPublisher<FolderSummaryDomain, FavoriteErrorDomain>
     
     // 更新收藏夹
-    func updateFolder(id: String, name: String) -> AnyPublisher<FolderSummary, FavoriteError>
+    func updateFolder(id: String, name: String) -> AnyPublisher<FolderSummaryDomain, FavoriteErrorDomain>
     
     // 删除收藏夹
-    func deleteFolder(id: String) -> AnyPublisher<Bool, FavoriteError>
+    func deleteFolder(id: String) -> AnyPublisher<Bool, FavoriteErrorDomain>
     
     // 获取收藏夹内容
-    func getFolderItems(folderId: String, limit: Int, offset: Int) -> AnyPublisher<FolderContent, FavoriteError>
+    func getFolderItems(folderId: String, limit: Int, offset: Int) -> AnyPublisher<FolderContentDomain, FavoriteErrorDomain>
     
     // 添加收藏
-    func addFavorite(wordId: String, folderId: String, note: String?) -> AnyPublisher<FavoriteItemDetail, FavoriteError>
+    func addFavorite(wordId: String, folderId: String, note: String?) -> AnyPublisher<FavoriteItemDetailDomain, FavoriteErrorDomain>
     
     // 更新收藏笔记
-    func updateFavoriteNote(id: String, note: String) -> AnyPublisher<FavoriteItemDetail, FavoriteError>
+    func updateFavoriteNote(id: String, note: String) -> AnyPublisher<FavoriteItemDetailDomain, FavoriteErrorDomain>
     
     // 删除收藏
     func deleteFavorite(id: String) -> AnyPublisher<Bool, FavoriteError>
 }
 
-struct FolderSummary {
+struct FolderSummaryDomain {
     let id: String
     let name: String
     let createdAt: Date
     let itemCount: Int
-    let syncStatus: SyncStatus
+    let syncStatus: SyncStatusDomain
 }
 
-struct FolderContent {
+struct FolderContentDomain {
     let total: Int
-    let items: [FavoriteItemDetail]
+    let items: [FavoriteItemDetailDomain]
 }
 
-struct FavoriteItemDetail {
+struct FavoriteItemDetailDomain {
     let id: String
     let wordId: String
     let word: String
@@ -232,10 +232,10 @@ struct FavoriteItemDetail {
     let meaning: String
     let note: String?
     let addedAt: Date
-    let syncStatus: SyncStatus
+    let syncStatus: SyncStatusDomain
 }
 
-enum FavoriteError: Error {
+enum FavoriteErrorDomain: Error {
     case folderNotFound
     case itemNotFound
     case duplicateName
@@ -243,7 +243,7 @@ enum FavoriteError: Error {
     case syncError
 }
 
-enum SyncStatus {
+enum SyncStatusDomain {
     case synced        // 已同步
     case pendingUpload // 待上传
     case pendingDownload // 待下载
@@ -257,37 +257,37 @@ enum SyncStatus {
 ```swift
 protocol UserServiceProtocol {
     // Apple ID登录
-    func signInWithApple() -> AnyPublisher<UserProfile, UserError>
+    func signInWithApple() -> AnyPublisher<UserProfileDomain, UserErrorDomain>
     
     // 获取用户信息
-    func getUserProfile() -> AnyPublisher<UserProfile, UserError>
+    func getUserProfile() -> AnyPublisher<UserProfileDomain, UserErrorDomain>
     
     // 更新用户设置
-    func updateUserSettings(settings: UserPreferences) -> AnyPublisher<UserPreferences, UserError>
+    func updateUserSettings(settings: UserPreferencesDomain) -> AnyPublisher<UserPreferencesDomain, UserErrorDomain>
     
     // 登出
-    func signOut() -> AnyPublisher<Bool, UserError>
+    func signOut() -> AnyPublisher<Bool, UserErrorDomain>
     
     // 检查登录状态
     func isUserLoggedIn() -> Bool
 }
 
-struct UserProfile {
+struct UserProfileDomain {
     let userId: String
     let nickname: String?
-    let settings: UserPreferences
+    let settings: UserPreferencesDomain
     let lastSyncTime: Date?
     let favoriteCount: Int
     let folderCount: Int
 }
 
-struct UserPreferences {
+struct UserPreferencesDomain {
     let darkMode: Bool
     let fontSize: Int
     let autoSync: Bool
 }
 
-enum UserError: Error {
+enum UserErrorDomain: Error {
     case authenticationFailed
     case userNotFound
     case settingsUpdateFailed
@@ -300,33 +300,33 @@ enum UserError: Error {
 ```swift
 protocol SyncServiceProtocol {
     // 获取同步状态
-    func getSyncStatus() -> AnyPublisher<SyncStatusInfo, SyncError>
+    func getSyncStatus() -> AnyPublisher<SyncStatusInfoDomain, SyncErrorDomain>
     
     // 触发同步
-    func startSync(type: SyncType) -> AnyPublisher<SyncOperationInfo, SyncError>
+    func startSync(type: SyncTypeDomain) -> AnyPublisher<SyncOperationInfoDomain, SyncErrorDomain>
     
     // 获取同步进度
-    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgressInfo, SyncError>
+    func getSyncProgress(operationId: String) -> AnyPublisher<SyncProgressInfoDomain, SyncErrorDomain>
     
     // 解决同步冲突
-    func resolveSyncConflict(conflictId: String, resolution: ConflictResolution) -> AnyPublisher<Bool, SyncError>
+    func resolveSyncConflict(conflictId: String, resolution: ConflictResolutionDomain) -> AnyPublisher<Bool, SyncErrorDomain>
 }
 
-struct SyncStatusInfo {
+struct SyncStatusInfoDomain {
     let lastSyncTime: Date?
     let pendingChanges: Int
     let syncStatus: String
     let availableOffline: Bool
 }
 
-struct SyncOperationInfo {
+struct SyncOperationInfoDomain {
     let syncId: String
     let startedAt: Date
     let status: String
     let estimatedTimeRemaining: Int?
 }
 
-struct SyncProgressInfo {
+struct SyncProgressInfoDomain {
     let syncId: String
     let progress: Double
     let status: String
@@ -335,7 +335,7 @@ struct SyncProgressInfo {
     let estimatedTimeRemaining: Int?
 }
 
-enum SyncError: Error {
+enum SyncErrorDomain: Error {
     case networkUnavailable
     case cloudKitError
     case authenticationRequired
@@ -351,11 +351,11 @@ enum SyncError: Error {
 protocol SearchViewModelProtocol: ObservableObject {
     // 输入属性
     var searchQuery: String { get set }
-    var searchType: SearchType { get set }
+    var searchType: SearchTypeViewModel { get set }
     
     // 输出属性
-    var searchResults: [WordSummary] { get }
-    var searchHistory: [SearchHistoryItem] { get }
+    var searchResults: [WordSummaryViewModel] { get }
+    var searchHistory: [SearchHistoryItemViewModel] { get }
     var suggestions: [String] { get }
     var isSearching: Bool { get }
     var errorMessage: String? { get }
@@ -367,13 +367,14 @@ protocol SearchViewModelProtocol: ObservableObject {
     func clearHistory()
     func loadMoreResults()
 }
+```
 
 
 ### 4.2 DetailViewModel接口
 ```swift
 protocol DetailViewModelProtocol: ObservableObject {
     // 输出属性
-    var wordDetails: WordDetails? { get }
+    var wordDetails: WordDetailsViewModel? { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     var isFavorited: Bool { get }
@@ -390,9 +391,9 @@ protocol DetailViewModelProtocol: ObservableObject {
 ```swift
 protocol FavoriteViewModelProtocol: ObservableObject {
     // 输出属性
-    var folders: [FolderSummary] { get }
-    var selectedFolder: FolderSummary? { get }
-    var folderItems: [FavoriteItemDetail] { get }
+    var folders: [FolderSummaryViewModel] { get }
+    var selectedFolder: FolderSummaryViewModel? { get }
+    var folderItems: [FavoriteItemDetailViewModel] { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     
@@ -413,11 +414,11 @@ protocol FavoriteViewModelProtocol: ObservableObject {
 ```swift
 protocol UserViewModelProtocol: ObservableObject {
     // 输出属性
-    var userProfile: UserProfile? { get }
+    var userProfile: UserProfileViewModel? { get }
     var isLoggedIn: Bool { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
-    var userSettings: UserPreferences { get }
+    var userSettings: UserPreferencesViewModel { get }
     
     // 方法
     func signInWithApple()
@@ -432,7 +433,7 @@ protocol UserViewModelProtocol: ObservableObject {
 这些模型是业务层使用的，与数据层的Realm模型相分离：
 
 ```swift
-// 词典领域模型
+// 词典领域模型 - 业务层模型
 struct DictEntryDomain {
     let id: String
     let word: String
@@ -452,7 +453,13 @@ struct ExampleDomain {
     let translation: String
 }
 
-// 用户领域模型
+struct SearchHistoryItemDomain {
+    let id: String
+    let word: String
+    let timestamp: Date
+}
+
+// 用户领域模型 - 业务层模型
 struct UserDomain {
     let id: String
     let nickname: String?
@@ -466,7 +473,7 @@ struct UserSettingsDomain {
     let autoSync: Bool
 }
 
-// 收藏领域模型
+// 收藏领域模型 - 业务层模型
 struct FolderDomain {
     let id: String
     let name: String
@@ -502,7 +509,7 @@ enum AppError: Error {
 
 // 特定功能错误
 extension AppError {
-    static func dictionary(_ error: DictionaryError) -> AppError {
+    static func dictionary(_ error: DictionaryErrorDomain) -> AppError {
         switch error {
         case .notFound:
             return .validationError("单词未找到")
@@ -517,7 +524,7 @@ extension AppError {
         }
     }
     
-    static func favorite(_ error: FavoriteError) -> AppError {
+    static func favorite(_ error: FavoriteErrorDomain) -> AppError {
         switch error {
         case .folderNotFound:
             return .validationError("收藏夹未找到")
@@ -576,7 +583,7 @@ class AppErrorHandler: ErrorHandling {
 ### 7.1 数据层到业务层的转换
 ```swift
 // Realm模型到领域模型的转换
-extension DictEntry {
+extension DictEntryEntity {
     func toDomain() -> DictEntryDomain {
         return DictEntryDomain(
             id: id,
@@ -589,7 +596,7 @@ extension DictEntry {
     }
 }
 
-extension Definition {
+extension DefinitionEntity {
     func toDomain() -> DefinitionDomain {
         return DefinitionDomain(
             meaning: meaning,
@@ -598,7 +605,7 @@ extension Definition {
     }
 }
 
-extension Example {
+extension ExampleEntity {
     func toDomain() -> ExampleDomain {
         return ExampleDomain(
             sentence: sentence,
@@ -612,25 +619,25 @@ extension Example {
 ```swift
 // 领域模型到视图模型的转换
 extension DictEntryDomain {
-    func toWordDetails(isFavorited: Bool) -> WordDetails {
-        return WordDetails(
+    func toViewModel(isFavorited: Bool) -> WordDetailsViewModel {
+        return WordDetailsViewModel(
             id: id,
             word: word,
             reading: reading,
             partOfSpeech: partOfSpeech,
             definitions: definitions.map { 
-                Definition(meaning: $0.meaning, notes: $0.notes) 
+                DefinitionViewModel(meaning: $0.meaning, notes: $0.notes) 
             },
             examples: examples.map { 
-                Example(sentence: $0.sentence, translation: $0.translation) 
+                ExampleViewModel(sentence: $0.sentence, translation: $0.translation) 
             },
             relatedWords: [], // 需要另外填充
             isFavorited: isFavorited
         )
     }
     
-    func toWordSummary() -> WordSummary {
-        return WordSummary(
+    func toSummaryViewModel() -> WordSummaryViewModel {
+        return WordSummaryViewModel(
             id: id,
             word: word,
             reading: reading,
@@ -667,8 +674,8 @@ class SearchViewModel: SearchViewModelProtocol {
     // 实现协议属性
     @Published var searchQuery: String = ""
     @Published var searchType: SearchType = .auto
-    @Published private(set) var searchResults: [WordSummary] = []
-    @Published private(set) var searchHistory: [SearchHistoryItem] = []
+    @Published private(set) var searchResults: [WordSummaryViewModel] = []
+    @Published private(set) var searchHistory: [SearchHistoryItemViewModel] = []
     @Published private(set) var suggestions: [String] = []
     @Published private(set) var isSearching: Bool = false
     @Published private(set) var errorMessage: String? = nil
@@ -713,7 +720,7 @@ class DetailViewModel: DetailViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
     
     // 实现协议属性
-    @Published private(set) var wordDetails: WordDetails? = nil
+    @Published private(set) var wordDetails: WordDetailsViewModel? = nil
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var isFavorited: Bool = false

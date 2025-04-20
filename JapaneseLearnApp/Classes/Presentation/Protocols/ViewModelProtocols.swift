@@ -2,7 +2,7 @@
 //  ViewModelProtocols.swift
 //  JapaneseLearnApp
 //
-//  Created by J.qy on 2025/4/20.
+//  Created by AI on 2023/10/01.
 //
 
 import Foundation
@@ -13,11 +13,11 @@ import Combine
 protocol SearchViewModelProtocol: ObservableObject {
     // 输入属性
     var searchQuery: String { get set }
-    var searchType: SearchType { get set }
+    var searchType: SearchTypeViewModel { get set }
     
     // 输出属性
-    var searchResults: [WordSummary] { get }
-    var searchHistory: [SearchHistoryItem] { get }
+    var searchResults: [WordSummaryViewModel] { get }
+    var searchHistory: [SearchHistoryItemViewModel] { get }
     var suggestions: [String] { get }
     var isSearching: Bool { get }
     var errorMessage: String? { get }
@@ -33,7 +33,7 @@ protocol SearchViewModelProtocol: ObservableObject {
 // MARK: - 详情视图模型协议
 protocol DetailViewModelProtocol: ObservableObject {
     // 输出属性
-    var wordDetails: WordDetails? { get }
+    var wordDetails: WordDetailsViewModel? { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     var isFavorited: Bool { get }
@@ -48,9 +48,9 @@ protocol DetailViewModelProtocol: ObservableObject {
 // MARK: - 收藏视图模型协议
 protocol FavoriteViewModelProtocol: ObservableObject {
     // 输出属性
-    var folders: [FolderSummary] { get }
-    var selectedFolder: FolderSummary? { get }
-    var folderItems: [FavoriteItemDetail] { get }
+    var folders: [FolderSummaryViewModel] { get }
+    var selectedFolder: FolderSummaryViewModel? { get }
+    var folderItems: [FavoriteItemDetailViewModel] { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     
@@ -69,15 +69,92 @@ protocol FavoriteViewModelProtocol: ObservableObject {
 // MARK: - 用户视图模型协议
 protocol UserViewModelProtocol: ObservableObject {
     // 输出属性
-    var userProfile: UserProfile? { get }
+    var userProfile: UserProfileViewModel? { get }
     var isLoggedIn: Bool { get }
     var isLoading: Bool { get }
     var errorMessage: String? { get }
-    var userSettings: UserPreferences { get }
+    var userSettings: UserPreferencesViewModel { get }
     
     // 方法
     func signInWithApple()
     func signOut()
     func loadUserProfile()
     func updateSettings(darkMode: Bool, fontSize: Int, autoSync: Bool)
+}
+
+// MARK: - 表现层枚举类型
+enum SearchTypeViewModel {
+    case auto      // 自动识别
+    case word      // 按单词
+    case reading   // 按读音
+    case meaning   // 按释义
+}
+
+// MARK: - 表现层数据模型
+struct WordSummaryViewModel: Identifiable {
+    let id: String
+    let word: String
+    let reading: String
+    let partOfSpeech: String
+    let briefMeaning: String
+}
+
+struct WordDetailsViewModel: Identifiable {
+    let id: String
+    let word: String
+    let reading: String
+    let partOfSpeech: String
+    let definitions: [DefinitionViewModel]
+    let examples: [ExampleViewModel]
+    let relatedWords: [WordSummaryViewModel]
+    let isFavorited: Bool
+}
+
+struct DefinitionViewModel {
+    let meaning: String
+    let notes: String?
+}
+
+struct ExampleViewModel {
+    let sentence: String
+    let translation: String
+}
+
+struct SearchHistoryItemViewModel: Identifiable {
+    let id: String
+    let word: String
+    let timestamp: Date
+}
+
+struct FolderSummaryViewModel: Identifiable {
+    let id: String
+    let name: String
+    let createdAt: Date
+    let itemCount: Int
+    let syncStatus: String
+}
+
+struct FavoriteItemDetailViewModel: Identifiable {
+    let id: String
+    let wordId: String
+    let word: String
+    let reading: String
+    let meaning: String
+    let note: String?
+    let addedAt: Date
+    let syncStatus: String
+}
+
+struct UserProfileViewModel {
+    let userId: String
+    let nickname: String?
+    let lastSyncTime: Date?
+    let favoriteCount: Int
+    let folderCount: Int
+}
+
+struct UserPreferencesViewModel {
+    let darkMode: Bool
+    let fontSize: Int
+    let autoSync: Bool
 }

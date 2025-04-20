@@ -231,24 +231,24 @@ Clean Architecture 分层
 ## 6. 数据模型设计
 ### 6.1 词典数据模型
 ```swift
-// 词条模型
-class DictEntry: Object {
+// 词条模型 - 数据层实体
+class DictEntryEntity: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var word: String              // 单词
     @Persisted var reading: String           // 读音
     @Persisted var partOfSpeech: String      // 词性
-    @Persisted var definitions: List<Definition> // 释义列表
-    @Persisted var examples: List<Example>   // 例句列表
+    @Persisted var definitions: List<DefinitionEntity> // 释义列表
+    @Persisted var examples: List<ExampleEntity>   // 例句列表
 }
 
-// 释义模型
-class Definition: EmbeddedObject {
+// 释义模型 - 数据层实体
+class DefinitionEntity: EmbeddedObject {
     @Persisted var meaning: String           // 中文释义
     @Persisted var notes: String?            // 注释
 }
 
-// 例句模型
-class Example: EmbeddedObject {
+// 例句模型 - 数据层实体
+class ExampleEntity: EmbeddedObject {
     @Persisted var sentence: String          // 日语例句
     @Persisted var translation: String       // 中文翻译
 }
@@ -257,16 +257,16 @@ class Example: EmbeddedObject {
 
 ### 6.2 用户数据模型
 ```swift
-// 用户模型
-class User: Object {
+// 用户模型 - 数据层实体
+class UserEntity: Object {
     @Persisted(primaryKey: true) var id: String  // Apple ID标识符
     @Persisted var nickname: String?             // 昵称
-    @Persisted var settings: UserSettings?       // 用户设置
+    @Persisted var settings: UserSettingsEntity?       // 用户设置
     @Persisted var lastSyncTime: Date?           // 最后同步时间
 }
 
-// 用户设置
-class UserSettings: EmbeddedObject {
+// 用户设置 - 数据层实体
+class UserSettingsEntity: EmbeddedObject {
     @Persisted var darkMode: Bool = false        // 深色模式
     @Persisted var fontSize: Int = 2             // 字体大小
     @Persisted var autoSync: Bool = true         // 自动同步
@@ -276,17 +276,17 @@ class UserSettings: EmbeddedObject {
 
 ### 6.3 收藏数据模型
 ```swift
-// 收藏夹模型
-class Folder: Object {
+// 收藏夹模型 - 数据层实体
+class FolderEntity: Object {
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
     @Persisted var name: String                  // 收藏夹名称
     @Persisted var createdAt: Date = Date()      // 创建时间
-    @Persisted var items: List<FavoriteItem>     // 收藏项目
+    @Persisted var items: List<FavoriteItemEntity>     // 收藏项目
     @Persisted var syncStatus: Int = 0           // 同步状态
 }
 
-// 收藏项目
-class FavoriteItem: Object {
+// 收藏项目 - 数据层实体
+class FavoriteItemEntity: Object {
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
     @Persisted var wordId: String                // 词条ID
     @Persisted var word: String                  // 单词
