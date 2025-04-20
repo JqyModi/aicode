@@ -94,12 +94,13 @@ enum SearchTypeDomain {
     case meaning   // 按释义
 }
 
-enum SyncStatusDomain {
-    case synced        // 已同步
-    case pendingUpload // 待上传
-    case pendingDownload // 待下载
-    case conflict      // 冲突
-    case error         // 错误
+enum SyncStatusDomain: String {
+    case synced = "synced"        // 已同步
+    case pendingUpload = "pendingUpload" // 待上传
+    case pendingDownload = "pendingDownload" // 待下载
+    case conflict = "conflict"      // 冲突
+    case error = "error"         // 错误
+    case none = "none"          // 无状态
 }
 
 enum SyncTypeDomain {

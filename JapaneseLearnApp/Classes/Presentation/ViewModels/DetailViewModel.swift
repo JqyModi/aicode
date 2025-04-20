@@ -1,0 +1,211 @@
+//
+//  DetailViewModel.swift
+//  JapaneseLearnApp
+//
+//  Created by AI on 2023/10/01.
+//
+
+import Foundation
+import Combine
+import AVFoundation
+
+class DetailViewModel: DetailViewModelProtocol {
+    // MARK: - 依赖注入
+    private let dictionaryService: DictionaryServiceProtocol
+    private let favoriteService: FavoriteServiceProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - 音频播放器
+    private var audioPlayer: AVAudioPlayer?
+    
+    // MARK: - 输出属性
+    @Published private(set) var wordDetails: WordDetailsViewModel? = nil
+    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var errorMessage: String? = nil
+    @Published private(set) var isFavorited: Bool = false
+    
+    // MARK: - 当前单词ID
+    private var currentWordId: String? = nil
+    
+    // MARK: - 初始化
+    init(dictionaryService: DictionaryServiceProtocol, favoriteService: FavoriteServiceProtocol) {
+        self.dictionaryService = dictionaryService
+        self.favoriteService = favoriteService
+    }
+    
+    // MARK: - 公开方法
+    func loadWordDetails(id: String) {
+        isLoading = true
+        errorMessage = nil
+        currentWordId = id
+        
+        dictionaryService.getWordDetails(id: id)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.isLoading = false
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "获取单词详情失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] details in
+                    guard let self = self else { return }
+                    self.wordDetails = self.mapToWordDetailsViewModel(details)
+                    self.isFavorited = details.isFavorited
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func playPronunciation(speed: Float) {
+        guard let wordId = currentWordId else {
+            errorMessage = "无法播放发音：单词ID不存在"
+            return
+        }
+        
+        isLoading = true
+        
+        dictionaryService.getWordPronunciation(id: wordId, speed: speed)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.isLoading = false
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "获取发音失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] audioURL in
+                    self?.playAudio(from: audioURL)
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func toggleFavorite() {
+        guard let wordId = currentWordId, let wordDetails = wordDetails else {
+            errorMessage = "无法收藏：单词详情不存在"
+            return
+        }
+        
+        isLoading = true
+        
+        if isFavorited {
+            // 从收藏中删除
+            // 注意：这里简化处理，实际应用中需要先获取收藏项ID
+            // 这里假设favoriteService有一个方法可以通过wordId删除收藏
+            favoriteService.deleteFavorite(id: wordId)
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { [weak self] completion in
+                        self?.isLoading = false
+                        if case .failure(let error) = completion {
+                            self?.errorMessage = "取消收藏失败: \(error.localizedDescription)"
+                        }
+                    },
+                    receiveValue: { [weak self] success in
+                        if success {
+                            self?.isFavorited = false
+                        }
+                    }
+                )
+                .store(in: &cancellables)
+        } else {
+            // 添加到收藏
+            // 注意：这里简化处理，使用默认收藏夹
+            // 实际应用中可能需要让用户选择收藏夹
+            favoriteService.getAllFolders()
+                .receive(on: DispatchQueue.main)
+                .flatMap { [weak self] folders -> AnyPublisher<FavoriteItemDetailDomain, FavoriteErrorDomain> in
+                    guard let self = self, let defaultFolder = folders.first else {
+                        return Fail(error: FavoriteErrorDomain.folderNotFound).eraseToAnyPublisher()
+                    }
+                    return self.favoriteService.addFavorite(wordId: wordId, folderId: defaultFolder.id, note: nil)
+                }
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { [weak self] completion in
+                        self?.isLoading = false
+                        if case .failure(let error) = completion {
+                            self?.errorMessage = "添加收藏失败: \(error.localizedDescription)"
+                        }
+                    },
+                    receiveValue: { [weak self] _ in
+                        self?.isFavorited = true
+                    }
+                )
+                .store(in: &cancellables)
+        }
+    }
+    
+    func addNote(note: String) {
+        guard let wordId = currentWordId, isFavorited else {
+            errorMessage = "无法添加笔记：单词未收藏"
+            return
+        }
+        
+        isLoading = true
+        
+        // 注意：这里简化处理，实际应用中需要先获取收藏项ID
+        // 这里假设favoriteService有一个方法可以通过wordId更新笔记
+        favoriteService.updateFavoriteNote(id: wordId, note: note)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.isLoading = false
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "添加笔记失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { _ in }
+            )
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - 私有方法
+    private func playAudio(from url: URL) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            errorMessage = "播放发音失败: \(error.localizedDescription)"
+        }
+    }
+    
+    private func mapToWordDetailsViewModel(_ domain: WordDetailsDomain) -> WordDetailsViewModel {
+        return WordDetailsViewModel(
+            id: domain.id,
+            word: domain.word,
+            reading: domain.reading,
+            partOfSpeech: domain.partOfSpeech,
+            definitions: domain.definitions.map { mapToDefinitionViewModel($0) },
+            examples: domain.examples.map { mapToExampleViewModel($0) },
+            relatedWords: domain.relatedWords.map { mapToWordSummaryViewModel($0) },
+            isFavorited: domain.isFavorited
+        )
+    }
+    
+    private func mapToDefinitionViewModel(_ domain: DefinitionDomain) -> DefinitionViewModel {
+        return DefinitionViewModel(
+            meaning: domain.meaning,
+            notes: domain.notes
+        )
+    }
+    
+    private func mapToExampleViewModel(_ domain: ExampleDomain) -> ExampleViewModel {
+        return ExampleViewModel(
+            sentence: domain.sentence,
+            translation: domain.translation
+        )
+    }
+    
+    private func mapToWordSummaryViewModel(_ domain: WordSummaryDomain) -> WordSummaryViewModel {
+        return WordSummaryViewModel(
+            id: domain.id,
+            word: domain.word,
+            reading: domain.reading,
+            partOfSpeech: domain.partOfSpeech,
+            briefMeaning: domain.briefMeaning
+        )
+    }
+}
