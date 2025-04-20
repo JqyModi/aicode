@@ -22,6 +22,10 @@
 		C596047D2DB49CC200123ED1 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596047C2DB49CC200123ED1 /* FavoriteViewModel.swift */; };
 		C596047F2DB4D7DB00123ED1 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596047E2DB4D7DB00123ED1 /* UserViewModel.swift */; };
 		C59604812DB50F8800123ED1 /* SyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604802DB50F8800123ED1 /* SyncViewModel.swift */; };
+		C59604872DB5400000123ED1 /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604822DB5400000123ED1 /* DictionaryService.swift */; };
+		C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604832DB5400000123ED1 /* FavoriteService.swift */; };
+		C59604892DB5400000123ED1 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604842DB5400000123ED1 /* SyncService.swift */; };
+		C596048A2DB5400000123ED1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604852DB5400000123ED1 /* UserService.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -55,6 +59,10 @@
 		C596047C2DB49CC200123ED1 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		C596047E2DB4D7DB00123ED1 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		C59604802DB50F8800123ED1 /* SyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewModel.swift; sourceTree = "<group>"; };
+		C59604822DB5400000123ED1 /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
+		C59604832DB5400000123ED1 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
+		C59604842DB5400000123ED1 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		C59604852DB5400000123ED1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,6 +166,7 @@
 		C596046A2DB4876200123ED1 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				C59604862DB5400000123ED1 /* Services */,
 				C59604652DB4876200123ED1 /* Models */,
 				C59604672DB4876200123ED1 /* Protocols */,
 				C59604682DB4876200123ED1 /* Services */,
@@ -211,6 +220,17 @@
 				C59604772DB4912300123ED1 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C59604862DB5400000123ED1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C59604822DB5400000123ED1 /* DictionaryService.swift */,
+				C59604832DB5400000123ED1 /* FavoriteService.swift */,
+				C59604842DB5400000123ED1 /* SyncService.swift */,
+				C59604852DB5400000123ED1 /* UserService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		C5AEDA412DA261520031B210 = {
@@ -325,6 +345,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59604872DB5400000123ED1 /* DictionaryService.swift in Sources */,
+				C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */,
+				C59604892DB5400000123ED1 /* SyncService.swift in Sources */,
+				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
