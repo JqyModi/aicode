@@ -30,6 +30,9 @@
 		C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */; };
 		C59604902DB55C7200123ED1 /* UserAuthDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */; };
 		C59604942DB5BD9E00123ED1 /* SyncDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604932DB5BD9E00123ED1 /* SyncDataRepository.swift */; };
+		C59604992DB5F06300123ED1 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604952DB5F06300123ED1 /* Components.swift */; };
+		C596049A2DB5F06300123ED1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604972DB5F06300123ED1 /* HomeView.swift */; };
+		C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604962DB5F06300123ED1 /* DesignSystem.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -71,6 +74,9 @@
 		C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataRepository.swift; sourceTree = "<group>"; };
 		C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthDataRepository.swift; sourceTree = "<group>"; };
 		C59604932DB5BD9E00123ED1 /* SyncDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataRepository.swift; sourceTree = "<group>"; };
+		C59604952DB5F06300123ED1 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		C59604962DB5F06300123ED1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		C59604972DB5F06300123ED1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 		C596046E2DB4876200123ED1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C59604982DB5F06300123ED1 /* UI */,
 				C59604782DB4912300123ED1 /* ViewModels */,
 				C596046B2DB4876200123ED1 /* Models */,
 				C596046D2DB4876200123ED1 /* Protocols */,
@@ -243,6 +250,16 @@
 				C59604852DB5400000123ED1 /* UserService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		C59604982DB5F06300123ED1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C59604952DB5F06300123ED1 /* Components.swift */,
+				C59604962DB5F06300123ED1 /* DesignSystem.swift */,
+				C59604972DB5F06300123ED1 /* HomeView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		C5AEDA412DA261520031B210 = {
@@ -367,6 +384,9 @@
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
 				C59604812DB50F8800123ED1 /* SyncViewModel.swift in Sources */,
+				C59604992DB5F06300123ED1 /* Components.swift in Sources */,
+				C596049A2DB5F06300123ED1 /* HomeView.swift in Sources */,
+				C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */,
 				C59604722DB4876200123ED1 /* DataRepositoryProtocols.swift in Sources */,
 				C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */,
 				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
