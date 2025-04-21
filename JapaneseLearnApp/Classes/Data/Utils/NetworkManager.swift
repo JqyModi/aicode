@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Network
 
 private var cancellables = Set<AnyCancellable>()
 
@@ -38,7 +39,26 @@ enum APIError: Error, LocalizedError {
 /// **通用网络管理器**
 class NetworkManager {
     static let shared = NetworkManager()
-    private init() {}
+    private let networkMonitor = NWPathMonitor()
+    private var isConnected = false
+    
+    private init() {
+        setupNetworkMonitoring()
+    }
+    
+    /// 设置网络监控
+    private func setupNetworkMonitoring() {
+        networkMonitor.pathUpdateHandler = { [weak self] path in
+            self?.isConnected = path.status == .satisfied
+        }
+        let queue = DispatchQueue(label: "NetworkMonitor")
+        networkMonitor.start(queue: queue)
+    }
+    
+    /// 检查网络是否可用
+    func isNetworkAvailable() -> Bool {
+        return isConnected
+    }
 
     /// 进行泛型网络请求
     func request<T: Decodable>(

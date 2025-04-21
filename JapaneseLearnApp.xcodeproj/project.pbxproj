@@ -26,6 +26,10 @@
 		C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604832DB5400000123ED1 /* FavoriteService.swift */; };
 		C59604892DB5400000123ED1 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604842DB5400000123ED1 /* SyncService.swift */; };
 		C596048A2DB5400000123ED1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604852DB5400000123ED1 /* UserService.swift */; };
+		C596048C2DB55C1800123ED1 /* DictionaryDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596048B2DB55C1800123ED1 /* DictionaryDataRepository.swift */; };
+		C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */; };
+		C59604902DB55C7200123ED1 /* UserAuthDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */; };
+		C59604942DB5BD9E00123ED1 /* SyncDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604932DB5BD9E00123ED1 /* SyncDataRepository.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -63,6 +67,10 @@
 		C59604832DB5400000123ED1 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		C59604842DB5400000123ED1 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
 		C59604852DB5400000123ED1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		C596048B2DB55C1800123ED1 /* DictionaryDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDataRepository.swift; sourceTree = "<group>"; };
+		C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataRepository.swift; sourceTree = "<group>"; };
+		C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthDataRepository.swift; sourceTree = "<group>"; };
+		C59604932DB5BD9E00123ED1 /* SyncDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDataRepository.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +118,10 @@
 		C59604602DB4876200123ED1 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				C59604932DB5BD9E00123ED1 /* SyncDataRepository.swift */,
+				C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */,
+				C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */,
+				C596048B2DB55C1800123ED1 /* DictionaryDataRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -345,8 +357,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59604942DB5BD9E00123ED1 /* SyncDataRepository.swift in Sources */,
 				C59604872DB5400000123ED1 /* DictionaryService.swift in Sources */,
 				C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */,
+				C59604902DB55C7200123ED1 /* UserAuthDataRepository.swift in Sources */,
 				C59604892DB5400000123ED1 /* SyncService.swift in Sources */,
 				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
@@ -354,6 +368,7 @@
 				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
 				C59604812DB50F8800123ED1 /* SyncViewModel.swift in Sources */,
 				C59604722DB4876200123ED1 /* DataRepositoryProtocols.swift in Sources */,
+				C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */,
 				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
 				C59604742DB4876200123ED1 /* RealmManager.swift in Sources */,
 				C596047D2DB49CC200123ED1 /* FavoriteViewModel.swift in Sources */,
@@ -363,6 +378,7 @@
 				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
 				C596047B2DB4961D00123ED1 /* DetailViewModel.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
+				C596048C2DB55C1800123ED1 /* DictionaryDataRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
