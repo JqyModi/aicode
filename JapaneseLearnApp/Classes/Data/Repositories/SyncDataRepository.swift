@@ -450,6 +450,8 @@ class DBSyncConflict: Object {
     override static func primaryKey() -> String? {
         return "conflictId"
     }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["remoteData"]
+    }
 }
-
-// updatedAt属性已移至DBFolder和DBFavoriteItem类的原始定义中
