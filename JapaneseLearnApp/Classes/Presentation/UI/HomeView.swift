@@ -15,6 +15,7 @@ struct HomeView: View {
     @ObservedObject var userViewModel: UserViewModel
     
     @State private var isLearningCenterExpanded = false
+    @State private var isLearningCenterExpanded1 = false
     @State private var showSettings = false
     @State private var animateBackground = false
     @State private var selectedTab = 0
@@ -114,7 +115,10 @@ struct HomeView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    learningCenterButton
+//                    learningCenterButton
+                    Button("调通", action: {
+                        isLearningCenterExpanded1.toggle()
+                    })
                         .padding(.trailing, DesignSystem.Spacing.screenEdge)
                         .padding(.bottom, DesignSystem.Spacing.screenEdge)
                 }
@@ -123,6 +127,17 @@ struct HomeView: View {
             // 学习中心展开菜单
             if isLearningCenterExpanded {
                 learningCenterMenu
+            }
+            
+            if isLearningCenterExpanded1 {
+                let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
+                let favoriteService = FavoriteService(favoriteRepository: FavoriteDataRepository())
+                let viewModel = DetailViewModel(dictionaryService: dictionaryService, favoriteService: favoriteService)
+                
+                // 198922179
+                // 198960041
+                DetailView(viewModel: viewModel, wordId: "198922179")
+                    .background(.green)
             }
         }
         .sheet(isPresented: $showSettings) {
@@ -434,7 +449,8 @@ struct HomeView: View {
                 // 继续学习按钮
                 Components.Buttons.PrimaryButton(title: "继续学习", action: {
                     // 继续学习操作
-                    print("继续学习")
+//                    print("继续学习")
+                    isLearningCenterExpanded1.toggle()
                 })
                 .padding(.top, DesignSystem.Spacing.compact)
             }
