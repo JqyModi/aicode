@@ -49,7 +49,7 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 // 顶部区域
                 topSection
-                    .ignoresSafeArea()
+//                    .ignoresSafeArea()
                 
                 // 主内容区域
                 ScrollView(showsIndicators: false) {
@@ -116,21 +116,21 @@ struct HomeView: View {
             }
         }
         .padding()
-        .background(
-            Rectangle()
-                .fill(Color(UIColor.secondarySystemBackground))
-                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
-        )
+//        .background(
+//            Rectangle()
+//                .fill(Color(UIColor.secondarySystemBackground))
+//                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+//        )
     }
     
     // 搜索区域
     private var searchSection: some View {
         VStack(spacing: 15) {
-            Text("学习日语")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(Color("Primary"))
-                .frame(maxWidth: .infinity, alignment: .leading)
+//            Text("学习日语")
+//                .font(.title)
+//                .fontWeight(.bold)
+//                .foregroundColor(Color("Primary"))
+//                .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
                 Image(systemName: "magnifyingglass")
