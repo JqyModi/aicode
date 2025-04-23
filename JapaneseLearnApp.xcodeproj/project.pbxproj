@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C551C4052DB8B467003A0242 /* WordDetailView.swift */; };
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C551C4052DB8B467003A0242 /* WordDetailView.swift */,
 				C59604E02DB698DB00123ED1 /* DetailView.swift */,
 				C59604B72DB633AA00123ED1 /* SearchView.swift */,
 				C59604952DB5F06300123ED1 /* Components.swift */,
@@ -385,6 +388,7 @@
 				C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */,
 				C59604902DB55C7200123ED1 /* UserAuthDataRepository.swift in Sources */,
 				C59604892DB5400000123ED1 /* SyncService.swift in Sources */,
+				C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */,
 				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
