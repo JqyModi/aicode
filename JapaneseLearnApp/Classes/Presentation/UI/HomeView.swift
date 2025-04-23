@@ -20,9 +20,9 @@ struct HomeView: View {
     private var greetingText: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 6..<12: return "おはようございます"
-        case 12..<18: return "こんにちは"
-        default: return "こんばんは"
+        case 6..<12: return "早上好"
+        case 12..<18: return "下午好"
+        default: return "晚上好"
         }
     }
     
@@ -49,6 +49,7 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 // 顶部区域
                 topSection
+                    .ignoresSafeArea()
                 
                 // 主内容区域
                 ScrollView {
@@ -125,7 +126,7 @@ struct HomeView: View {
     // 搜索区域
     private var searchSection: some View {
         VStack(spacing: 15) {
-            Text("日本語を学ぼう")
+            Text("学习日语")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color("Primary"))
@@ -135,7 +136,7 @@ struct HomeView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color("Primary"))
                 
-                TextField("単語、文法、例文を検索", text: $searchText)
+                TextField("搜索单词、语法、例句", text: $searchText)
                     .font(.system(size: 16))
                 
                 if !searchText.isEmpty {
@@ -182,7 +183,7 @@ struct HomeView: View {
                         .font(.title2)
                         .foregroundColor(.white)
                     
-                    Text("今日のおすすめ")
+                    Text("今日推荐")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -198,15 +199,15 @@ struct HomeView: View {
                     .background(Color.white.opacity(0.5))
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("N3文法: 〜ようになる")
+                    Text("N3语法: 〜ようになる")
                         .font(.headline)
                         .foregroundColor(.white)
                     
-                    Text("状態変化や能力の獲得を表す表現")
+                    Text("表示状态变化或能力获得的表达")
                         .font(.subheadline)
                         .foregroundColor(.white.opacity(0.9))
                     
-                    Text("例: 日本語が話せるようになりました。")
+                    Text("例: 我能说日语了。")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.8))
                 }
@@ -229,7 +230,7 @@ struct HomeView: View {
                         .font(.title2)
                         .foregroundColor(Color("Primary"))
                     
-                    Text("学習の進捗")
+                    Text("学习进度")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("Primary"))
@@ -256,7 +257,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("単語")
+                        Text("单词")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -279,7 +280,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("文法")
+                        Text("语法")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -302,7 +303,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("読解")
+                        Text("阅读")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -327,7 +328,7 @@ struct HomeView: View {
                         .font(.title2)
                         .foregroundColor(Color("Primary"))
                     
-                    Text("最近の検索")
+                    Text("最近搜索")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("Primary"))
@@ -335,7 +336,7 @@ struct HomeView: View {
                     Spacer()
                     
                     Button(action: { /* 查看全部 */ }) {
-                        Text("すべて")
+                        Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
                     }
@@ -384,7 +385,7 @@ struct HomeView: View {
                         .font(.title2)
                         .foregroundColor(Color("Primary"))
                     
-                    Text("お気に入り")
+                    Text("收藏夹")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("Primary"))
@@ -392,7 +393,7 @@ struct HomeView: View {
                     Spacer()
                     
                     Button(action: { /* 查看全部 */ }) {
-                        Text("すべて")
+                        Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
                     }
@@ -400,7 +401,7 @@ struct HomeView: View {
                 
                 if userViewModel.isLoggedIn {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
-                        ForEach(["日常会話", "JLPT N3", "擬態語", "旅行"], id: \.self) { category in
+                        ForEach(["日常对话", "JLPT N3", "拟态语", "旅行"], id: \.self) { category in
                             Button(action: { /* 查看分类 */ }) {
                                 HStack {
                                     Text(category)
@@ -428,7 +429,7 @@ struct HomeView: View {
                     }
                 } else {
                     Button(action: { /* 登录操作 */ }) {
-                        Text("ログインしてお気に入りを表示")
+                        Text("登录以显示收藏内容")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
                             .padding()
@@ -485,7 +486,7 @@ private var learningTipsCard: some View {
                     .font(.title2)
                     .foregroundColor(Color("Primary"))
                 
-                Text("学習のヒント")
+                Text("学习提示")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color("Primary"))
@@ -494,11 +495,11 @@ private var learningTipsCard: some View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("毎日15分の学習で上達します")
+                Text("每天15分钟的学习让你进步")
                     .font(.headline)
                     .foregroundColor(Color("Primary"))
                 
-                Text("継続は力なり！定期的な復習が大切です。")
+                Text("坚持就是力量！定期复习很重要。")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
