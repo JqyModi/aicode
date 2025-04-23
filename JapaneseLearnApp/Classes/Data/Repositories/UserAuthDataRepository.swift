@@ -196,6 +196,9 @@ class UserAuthDataRepository: UserAuthDataRepositoryProtocol {
     }
     
     func isUserLoggedIn() -> Bool {
+#if DEBUG
+        return true
+#endif
         return UserDefaults.standard.string(forKey: "currentUserId") != nil
     }
 }

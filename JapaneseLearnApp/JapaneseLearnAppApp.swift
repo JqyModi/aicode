@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct JapaneseLearnAppApp: App {
     // 创建视图模型实例
-    let dictionaryService = DictionaryService1()
-    let userService = UserService1()
+    let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
+    let userService = UserService(userRepository: UserAuthDataRepository())
     
     var body: some Scene {
         WindowGroup {

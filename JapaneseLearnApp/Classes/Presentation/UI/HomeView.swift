@@ -2,763 +2,523 @@
 //  HomeView.swift
 //  JapaneseLearnApp
 //
-//  Created by AI on 2023/10/01.
+//  Created by Modi on 2025/4/6.
 //
 
 import SwiftUI
 import Combine
 
-/// 首页视图，实现现代化日式风格的UI设计
 struct HomeView: View {
-    // MARK: - 属性
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var userViewModel: UserViewModel
-    
-    @State private var isLearningCenterExpanded = false
-    @State private var isLearningCenterExpanded1 = false
-    @State private var showSettings = false
-    @State private var animateBackground = false
+    @State private var searchText = ""
+    @State private var showingSettings = false
     @State private var selectedTab = 0
-    @State private var cardOffsets: [CGFloat] = [0, 0, 0, 0]
+    @State private var animateGradient = false
     
-    // MARK: - 视图
-    var body: some View {
-        ZStack {
-            // 背景图案
-            ZStack {
-                // 日式波浪图案背景
-                VStack(spacing: 0) {
-                    ForEach(0..<5) { i in
-                        HStack(spacing: 0) {
-                            ForEach(0..<3) { j in
-                                Circle()
-                                    .fill(DesignSystem.Colors.primaryLightHex.opacity(0.1))
-                                    .frame(width: 100, height: 100)
-                                    .offset(x: animateBackground ? 5 : -5, y: animateBackground ? 5 : -5)
-                                    .blur(radius: 15)
-                            }
-                        }
-                    }
-                }
-                .rotationEffect(.degrees(45))
-                .offset(x: -100, y: -200)
-                .opacity(0.6)
-                
-                // 樱花图案
-                ForEach(0..<8) { i in
-                    Image(systemName: "sakura")
-                        .foregroundColor(DesignSystem.Colors.accentHex.opacity(0.2))
-                        .font(.system(size: 20 + CGFloat(i * 5)))
-                        .position(x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
-                                  y: CGFloat.random(in: 0...UIScreen.main.bounds.height))
-                        .rotationEffect(.degrees(Double.random(in: 0...360)))
-                        .opacity(animateBackground ? 0.7 : 0.3)
-                        .animation(Animation.easeInOut(duration: 3).repeatForever().delay(Double(i) * 0.2), value: animateBackground)
-                }
-            }
-            .ignoresSafeArea()
-            
-            // 主内容
-            VStack(spacing: DesignSystem.Spacing.standard) {
-                // 顶部区域
-                topSection
-                
-                // 搜索区域
-                searchSection
-                
-                // 学习流区域
-                ScrollView {
-                    VStack(spacing: DesignSystem.Spacing.relaxed) {
-                        // 每日学习建议
-                        dailyLearningCard
-                            .offset(x: cardOffsets[0])
-                            .onAppear {
-                                withAnimation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.1)) {
-                                    cardOffsets[0] = 0
-                                }
-                            }
-                        
-                        // 最近查询词汇
-                        recentSearchesCard
-                            .offset(x: cardOffsets[1])
-                            .onAppear {
-                                withAnimation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2)) {
-                                    cardOffsets[1] = 0
-                                }
-                            }
-                        
-                        // 学习进度卡片
-                        learningProgressCard
-                            .offset(x: cardOffsets[2])
-                            .onAppear {
-                                withAnimation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.3)) {
-                                    cardOffsets[2] = 0
-                                }
-                            }
-                        
-                        // 收藏夹快速访问
-                        favoritesCard
-                            .offset(x: cardOffsets[3])
-                            .onAppear {
-                                withAnimation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.4)) {
-                                    cardOffsets[3] = 0
-                                }
-                            }
-                    }
-                    .padding(.horizontal, DesignSystem.Spacing.screenEdge)
-                    .padding(.bottom, 100) // 为底部导航栏留出空间
-                }
-            }
-            
-            // 浮动学习中心
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-//                    learningCenterButton
-                    Button("调通", action: {
-                        isLearningCenterExpanded1.toggle()
-                    })
-                        .padding(.trailing, DesignSystem.Spacing.screenEdge)
-                        .padding(.bottom, DesignSystem.Spacing.screenEdge)
-                }
-            }
-            
-            // 学习中心展开菜单
-            if isLearningCenterExpanded {
-                learningCenterMenu
-            }
-            
-            if isLearningCenterExpanded1 {
-                let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
-                let favoriteService = FavoriteService(favoriteRepository: FavoriteDataRepository())
-                let viewModel = DetailViewModel(dictionaryService: dictionaryService, favoriteService: favoriteService)
-                
-                // 198922179
-                // 198960041
-                DetailView(viewModel: viewModel, wordId: "198922179")
-                    .background(.green)
-            }
-        }
-        .sheet(isPresented: $showSettings) {
-            Text("设置页面")
-                .font(DesignSystem.Typography.title)
-        }
-        .overlay(alignment: .bottom) {
-            bottomTabBar
-        }
-        .onAppear {
-            // 初始化卡片偏移量，用于入场动画
-            cardOffsets = [UIScreen.main.bounds.width, UIScreen.main.bounds.width, UIScreen.main.bounds.width, UIScreen.main.bounds.width]
-            
-            // 启动背景动画
-            withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                animateBackground = true
-            }
+    // 获取当前时间段的问候语
+    private var greetingText: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 6..<12: return "おはようございます"
+        case 12..<18: return "こんにちは"
+        default: return "こんばんは"
         }
     }
     
-    // MARK: - 顶部区域
-    private var topSection: some View {
-        HStack {
-            // 用户头像 - 现代化设计
-            Button(action: { showSettings = true }) {
-                ZStack {
-                    if let _ = userViewModel.userProfile {
-                        Circle()
-                            .fill(DesignSystem.Colors.primaryHex)
-                            .frame(width: 40, height: 40)
-                            .shadowStyle(DesignSystem.Shadow.medium)
-                        
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(.white)
-                    } else {
-                        Circle()
-                            .stroke(DesignSystem.Colors.primaryHex, lineWidth: 2)
-                            .frame(width: 40, height: 40)
-                        
-                        Image(systemName: "person")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(DesignSystem.Colors.primaryHex)
-                    }
-                }
-            }
-            
-            // 问候语 - 带有日式风格
-            VStack(alignment: .leading, spacing: 2) {
-                Text("こんにちは")
-                    .font(DesignSystem.Typography.footnote)
-                    .foregroundColor(DesignSystem.Colors.accentHex)
-                
-                Text(greetingMessage)
-                    .font(DesignSystem.Typography.subtitle.weight(.bold))
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-            }
-            
-            Spacer()
-            
-            // 设置入口 - 更现代的设计
-            Button(action: { showSettings = true }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.small)
-                        .fill(DesignSystem.Colors.neutralLightHex)
-                        .frame(width: 36, height: 36)
-                    
-                    Image(systemName: "gearshape")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(DesignSystem.Colors.primaryHex)
-                }
-            }
-        }
-        .padding(.horizontal, DesignSystem.Spacing.screenEdge)
-        .padding(.top, DesignSystem.Spacing.standard)
+    // 获取最近搜索词汇
+    private var recentSearches: [String] {
+        return searchViewModel.searchHistory.prefix(5).map { $0.word }
     }
     
-    // MARK: - 搜索区域
-    private var searchSection: some View {
-        HStack {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(DesignSystem.Colors.primaryHex)
-                    .font(.system(size: 16, weight: .medium))
-                
-                TextField("搜索日语单词、假名或中文", text: $searchViewModel.searchQuery)
-                    .font(DesignSystem.Typography.body)
-                    .onSubmit(searchViewModel.search)
-                
-                if !searchViewModel.searchQuery.isEmpty {
-                    Button(action: { searchViewModel.searchQuery = "" }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(DesignSystem.Colors.textHintHex)
-                            .font(.system(size: 16))
-                    }
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
-                    .fill(Color.white)
-                    .shadowStyle(DesignSystem.Shadow.small)
-            )
-        }
-        .padding(.horizontal, DesignSystem.Spacing.screenEdge)
-    }
-    
-    // MARK: - 每日学习建议卡片
-    private var dailyLearningCard: some View {
-        VStack(alignment: .leading, spacing: DesignSystem.Spacing.compact) {
-            HStack {
-                // 日式风格标题
-                HStack(spacing: 6) {
-                    Rectangle()
-                        .fill(DesignSystem.Colors.accentHex)
-                        .frame(width: 4, height: 20)
-                    
-                    Text("每日学习建议")
-                        .font(DesignSystem.Typography.subtitle.weight(.bold))
-                        .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                }
-                
-                Spacer()
-                
-                // 刷新按钮
-                Button(action: {
-                    // 刷新每日建议
-                    print("刷新每日建议")
-                }) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(DesignSystem.Colors.primaryHex)
-                        .padding(8)
-                        .background(DesignSystem.Colors.neutralLightHex)
-                        .clipShape(Circle())
-                }
-            }
-            
-            Text("今天建议学习这些单词")
-                .font(DesignSystem.Typography.callout)
-                .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-            
-            // 示例单词列表 - 现代卡片式设计
-            VStack(spacing: DesignSystem.Spacing.standard) {
-                dailyWordRow(word: "食べる", reading: "たべる", meaning: "吃")
-                dailyWordRow(word: "飲む", reading: "のむ", meaning: "喝")
-                dailyWordRow(word: "見る", reading: "みる", meaning: "看")
-            }
-            .padding(.top, DesignSystem.Spacing.compact)
-        }
-        .padding(DesignSystem.Spacing.standard)
-        .background(
-            RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.large)
-                .fill(Color.white)
-                .shadowStyle(DesignSystem.Shadow.medium)
+    // 主题色渐变
+    private var themeGradient: LinearGradient {
+        LinearGradient(
+            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            startPoint: animateGradient ? .topLeading : .bottomLeading,
+            endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
     }
     
-    // 每日单词行 - 现代卡片式设计
-    private func dailyWordRow(word: String, reading: String, meaning: String) -> some View {
-        HStack(spacing: DesignSystem.Spacing.standard) {
-            // 单词指示器
-            ZStack {
-                Circle()
-                    .fill(DesignSystem.Colors.primaryLightHex)
-                    .frame(width: 40, height: 40)
+    var body: some View {
+        ZStack {
+            // 背景层
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                // 顶部区域
+                topSection
                 
-                Text(word.prefix(1))
-                    .font(DesignSystem.Typography.subtitle.weight(.bold))
-                    .foregroundColor(DesignSystem.Colors.primaryHex)
+                // 主内容区域
+                ScrollView {
+                    VStack(spacing: 25) {
+                        // 搜索区域
+                        searchSection
+                        
+                        // 学习建议卡片
+                        learningRecommendationCard
+                        
+                        // 学习进度卡片
+                        learningProgressCard
+                        
+                        // 最近查询词汇
+                        recentSearchesCard
+                        
+                        // 收藏夹快速访问
+                        favoritesCard
+                        
+                        // 学习建议
+                        learningTipsCard
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 80) // 为浮动按钮留出空间
+                }
             }
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(word)
-                    .font(DesignSystem.Typography.body.weight(.semibold))
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                
-                Text(reading)
-                    .font(DesignSystem.Typography.callout)
-                    .foregroundColor(DesignSystem.Colors.textSecondaryHex)
+            // 浮动学习中心按钮
+            floatingActionButton
+        }
+        .onAppear {
+            // 启动渐变动画
+            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+                animateGradient.toggle()
+            }
+        }
+    }
+    
+    // 顶部区域
+    private var topSection: some View {
+        HStack {
+            // 用户头像
+            Button(action: { /* 用户资料操作 */ }) {
+                Image(systemName: userViewModel.isLoggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                    .font(.system(size: 28))
+                    .foregroundColor(Color("Primary"))
             }
             
             Spacer()
             
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(meaning)
-                    .font(DesignSystem.Typography.body)
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .background(DesignSystem.Colors.neutralLightHex)
-                    .cornerRadius(DesignSystem.CornerRadius.small)
-                
-                Button(action: {
-                    // 播放发音
-                    print("播放发音: \(word)")
-                }) {
-                    HStack(spacing: 4) {
-                        Text("发音")
-                            .font(DesignSystem.Typography.footnote)
-                        Image(systemName: "speaker.wave.2")
-                            .font(.system(size: 10))
-                    }
-                    .foregroundColor(DesignSystem.Colors.primaryHex)
-                }
+            // 动态问候语
+            Text(greetingText)
+                .font(.title2)
+                .fontWeight(.medium)
+                .foregroundColor(Color("Primary"))
+            
+            Spacer()
+            
+            // 设置入口
+            Button(action: { showingSettings = true }) {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 22))
+                    .foregroundColor(Color("Primary"))
             }
         }
-        .padding(DesignSystem.Spacing.standard)
+        .padding()
         .background(
-            RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
-                .fill(Color.white)
+            Rectangle()
+                .fill(Color(UIColor.secondarySystemBackground))
                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
         )
     }
     
-    // MARK: - 最近搜索卡片
-    private var recentSearchesCard: some View {
-        Components.Cards.StandardCard {
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.compact) {
-                Text("最近搜索")
-                    .font(DesignSystem.Typography.subtitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
+    // 搜索区域
+    private var searchSection: some View {
+        VStack(spacing: 15) {
+            Text("日本語を学ぼう")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(Color("Primary"))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color("Primary"))
                 
-                if searchViewModel.searchHistory.isEmpty {
-                    Text("暂无搜索历史")
-                        .font(DesignSystem.Typography.callout)
-                        .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                        .padding(.vertical, DesignSystem.Spacing.compact)
+                TextField("単語、文法、例文を検索", text: $searchText)
+                    .font(.system(size: 16))
+                
+                if !searchText.isEmpty {
+                    Button(action: { searchText = "" }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                    }
                 } else {
-                    // 最近搜索列表
-                    VStack(spacing: DesignSystem.Spacing.compact) {
-                        ForEach(searchViewModel.searchHistory.prefix(3)) { item in
+                    // 语音输入按钮
+                    Button(action: { /* 语音输入功能 */ }) {
+                        Image(systemName: "mic.fill")
+                            .foregroundColor(Color("Primary"))
+                    }
+                    
+                    // 手写识别按钮
+                    Button(action: { /* 手写识别功能 */ }) {
+                        Image(systemName: "pencil")
+                            .foregroundColor(Color("Primary"))
+                    }
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color(UIColor.secondarySystemBackground))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+            )
+        }
+        .padding(.top, 10)
+    }
+    
+    // 学习建议卡片
+    private var learningRecommendationCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(themeGradient)
+            
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image(systemName: "lightbulb.fill")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                    
+                    Text("今日のおすすめ")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "arrow.right.circle.fill")
+                        .font(.title3)
+                        .foregroundColor(.white.opacity(0.8))
+                }
+                
+                Divider()
+                    .background(Color.white.opacity(0.5))
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("N3文法: 〜ようになる")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    Text("状態変化や能力の獲得を表す表現")
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.9))
+                    
+                    Text("例: 日本語が話せるようになりました。")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.8))
+                }
+            }
+            .padding()
+        }
+        .frame(height: 180)
+        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+    }
+    
+    // 学习进度卡片
+    private var learningProgressCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(UIColor.secondarySystemBackground))
+            
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image(systemName: "chart.bar.fill")
+                        .font(.title2)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Text("学習の進捗")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Spacer()
+                }
+                
+                HStack(spacing: 20) {
+                    // 单词学习进度
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                            
+                            Circle()
+                                .trim(from: 0, to: 0.65)
+                                .stroke(Color("Primary"), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                                .rotationEffect(.degrees(-90))
+                            
+                            Text("65%")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Color("Primary"))
+                        }
+                        
+                        Text("単語")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    // 语法学习进度
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                            
+                            Circle()
+                                .trim(from: 0, to: 0.4)
+                                .stroke(Color("Primary"), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                                .rotationEffect(.degrees(-90))
+                            
+                            Text("40%")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Color("Primary"))
+                        }
+                        
+                        Text("文法")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    // 阅读学习进度
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                            
+                            Circle()
+                                .trim(from: 0, to: 0.25)
+                                .stroke(Color("Primary"), lineWidth: 8)
+                                .frame(width: 70, height: 70)
+                                .rotationEffect(.degrees(-90))
+                            
+                            Text("25%")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Color("Primary"))
+                        }
+                        
+                        Text("読解")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .padding()
+        }
+        .frame(height: 200)
+        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
+    }
+    
+    // 最近查询词汇
+    private var recentSearchesCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(UIColor.secondarySystemBackground))
+            
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image(systemName: "clock.fill")
+                        .font(.title2)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Text("最近の検索")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Spacer()
+                    
+                    Button(action: { /* 查看全部 */ }) {
+                        Text("すべて")
+                            .font(.caption)
+                            .foregroundColor(Color("Primary"))
+                    }
+                }
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(recentSearches, id: \.self) { word in
                             Button(action: {
-                                searchViewModel.searchQuery = item.word
-                                searchViewModel.search()
+                                searchText = word
+                                searchViewModel.searchQuery = word
                             }) {
+                                Text(word)
+                                    .font(.system(size: 16))
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        Capsule()
+                                            .fill(Color(UIColor.systemBackground))
+                                    )
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                    )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+        .frame(height: 130)
+        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
+    }
+    
+    // 收藏夹快速访问
+    private var favoritesCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(UIColor.secondarySystemBackground))
+            
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image(systemName: "star.fill")
+                        .font(.title2)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Text("お気に入り")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("Primary"))
+                    
+                    Spacer()
+                    
+                    Button(action: { /* 查看全部 */ }) {
+                        Text("すべて")
+                            .font(.caption)
+                            .foregroundColor(Color("Primary"))
+                    }
+                }
+                
+                if userViewModel.isLoggedIn {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
+                        ForEach(["日常会話", "JLPT N3", "擬態語", "旅行"], id: \.self) { category in
+                            Button(action: { /* 查看分类 */ }) {
                                 HStack {
-                                    Text(item.word)
-                                        .font(DesignSystem.Typography.body)
-                                        .foregroundColor(DesignSystem.Colors.textPrimaryHex)
+                                    Text(category)
+                                        .font(.system(size: 16))
+                                        .foregroundColor(Color("Primary"))
                                     
                                     Spacer()
                                     
-                                    Text(formatDate(item.timestamp))
-                                        .font(DesignSystem.Typography.footnote)
-                                        .foregroundColor(DesignSystem.Colors.textHintHex)
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundColor(Color("Primary").opacity(0.7))
                                 }
-                                .padding(.vertical, 4)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(UIColor.systemBackground))
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                )
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
-                }
-                
-                if !searchViewModel.searchHistory.isEmpty {
-                    Button("清除历史") {
-                        searchViewModel.clearHistory()
+                } else {
+                    Button(action: { /* 登录操作 */ }) {
+                        Text("ログインしてお気に入りを表示")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color("Primary"))
+                            )
                     }
-                    .font(DesignSystem.Typography.callout)
-                    .foregroundColor(DesignSystem.Colors.primaryHex)
-                    .padding(.top, DesignSystem.Spacing.compact)
                 }
             }
+            .padding()
         }
+        .frame(height: userViewModel.isLoggedIn ? 220 : 150)
+        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
     
-    // MARK: - 学习进度卡片
-    private var learningProgressCard: some View {
-        Components.Cards.StandardCard {
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.compact) {
-                Text("学习进度")
-                    .font(DesignSystem.Typography.subtitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                
-                // 进度条
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("今日学习")
-                            .font(DesignSystem.Typography.callout)
-                            .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                        
-                        Spacer()
-                        
-                        Text("10/20词")
-                            .font(DesignSystem.Typography.callout)
-                            .foregroundColor(DesignSystem.Colors.primaryHex)
-                    }
-                    
-                    // 进度条
-                    GeometryReader { geometry in
-                        ZStack(alignment: .leading) {
-                            Rectangle()
-                                .frame(width: geometry.size.width, height: 8)
-                                .foregroundColor(DesignSystem.Colors.neutralLightHex)
-                                .cornerRadius(4)
-                            
-                            Rectangle()
-                                .frame(width: geometry.size.width * 0.5, height: 8)
-                                .foregroundColor(DesignSystem.Colors.primaryHex)
-                                .cornerRadius(4)
-                        }
-                    }
-                    .frame(height: 8)
-                }
-                .padding(.top, DesignSystem.Spacing.compact)
-                
-                // 继续学习按钮
-                Components.Buttons.PrimaryButton(title: "继续学习", action: {
-                    // 继续学习操作
-//                    print("继续学习")
-                    isLearningCenterExpanded1.toggle()
-                })
-                .padding(.top, DesignSystem.Spacing.compact)
-            }
-        }
-    }
-    
-    // MARK: - 收藏夹卡片
-    private var favoritesCard: some View {
-        Components.Cards.StandardCard {
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.compact) {
-                Text("收藏夹")
-                    .font(DesignSystem.Typography.subtitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                
-                Text("快速访问您收藏的单词")
-                    .font(DesignSystem.Typography.callout)
-                    .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                
-                // 示例收藏夹
-                HStack(spacing: DesignSystem.Spacing.standard) {
-                    folderButton(name: "常用词汇", count: 42)
-                    folderButton(name: "N5单词", count: 28)
-                    folderButton(name: "旅行用语", count: 15)
-                }
-                .padding(.top, DesignSystem.Spacing.compact)
-            }
-        }
-    }
-    
-    // 收藏夹按钮
-    private func folderButton(name: String, count: Int) -> some View {
-        Button(action: {
-            // 打开收藏夹
-            print("打开收藏夹: \(name)")
-        }) {
-            VStack(spacing: 4) {
-                Text(name)
-                    .font(DesignSystem.Typography.callout)
-                    .fontWeight(.semibold)
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                    .lineLimit(1)
-                
-                Text("\(count)个词")
-                    .font(DesignSystem.Typography.footnote)
-                    .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, DesignSystem.Spacing.compact)
-            .background(DesignSystem.Colors.neutralLightHex)
-            .cornerRadius(DesignSystem.CornerRadius.small)
-        }
-    }
-    
-    // MARK: - 底部导航栏
-    private var bottomTabBar: some View {
-        HStack(spacing: 0) {
-            tabBarItem(icon: "house.fill", title: "首页", index: 0)
-            tabBarItem(icon: "book.fill", title: "词典", index: 1)
+    // 浮动学习中心按钮
+    private var floatingActionButton: some View {
+        VStack {
+            Spacer()
             
-            // 中间的学习中心按钮
-            Button(action: {
-                withAnimation(.spring()) {
-                    isLearningCenterExpanded.toggle()
-                }
-            }) {
-                ZStack {
-                    Circle()
-                        .fill(DesignSystem.Colors.primaryHex)
-                        .frame(width: 56, height: 56)
-                        .shadow(color: DesignSystem.Colors.primaryHex.opacity(0.3), radius: 10, x: 0, y: 4)
-                    
-                    Image(systemName: "lightbulb.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                }
-            }
-            .offset(y: -20)
-            
-            tabBarItem(icon: "star.fill", title: "收藏", index: 2)
-            tabBarItem(icon: "person.fill", title: "我的", index: 3)
-        }
-        .padding(.horizontal, DesignSystem.Spacing.standard)
-        .padding(.top, 12)
-        .padding(.bottom, 8 + (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0))
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color.white)
-                .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: -5)
-                .edgesIgnoringSafeArea(.bottom)
-        )
-    }
-    
-    // 底部导航栏项
-    private func tabBarItem(icon: String, title: String, index: Int) -> some View {
-        Button(action: {
-            withAnimation(.spring()) {
-                selectedTab = index
-            }
-        }) {
-            VStack(spacing: 4) {
-                Image(systemName: icon)
-                    .font(.system(size: selectedTab == index ? 20 : 18))
-                    .foregroundColor(selectedTab == index ? DesignSystem.Colors.primaryHex : DesignSystem.Colors.textSecondaryHex)
-                
-                Text(title)
-                    .font(DesignSystem.Typography.footnote)
-                    .foregroundColor(selectedTab == index ? DesignSystem.Colors.primaryHex : DesignSystem.Colors.textSecondaryHex)
-            }
-            .frame(maxWidth: .infinity)
-        }
-    }
-    
-    // MARK: - 学习中心菜单
-    private var learningCenterMenu: some View {
-        ZStack {
-            // 背景遮罩
-            Color.black.opacity(0.3)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        isLearningCenterExpanded = false
-                    }
-                }
-            
-            // 菜单内容 - 现代化设计
-            VStack {
+            HStack {
                 Spacer()
                 
-                VStack(spacing: DesignSystem.Spacing.standard) {
-                    Text("学习中心")
-                        .font(DesignSystem.Typography.title.weight(.bold))
-                        .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, DesignSystem.Spacing.standard)
-                    
-                    // 菜单选项网格
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: DesignSystem.Spacing.standard) {
-                        learningCenterGridItem(icon: "book.fill", title: "词典", color: DesignSystem.Colors.primaryHex, action: {
-                            print("打开词典")
-                            isLearningCenterExpanded = false
-                        })
+                Button(action: { /* 打开学习中心 */ }) {
+                    ZStack {
+                        Circle()
+                            .fill(themeGradient)
+                            .frame(width: 60, height: 60)
+                            .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
                         
-                        learningCenterGridItem(icon: "star.fill", title: "收藏", color: DesignSystem.Colors.accentHex, action: {
-                            print("打开收藏")
-                            isLearningCenterExpanded = false
-                        })
-                        
-                        learningCenterGridItem(icon: "graduationcap.fill", title: "学习", color: DesignSystem.Colors.infoHex, action: {
-                            print("打开学习")
-                            isLearningCenterExpanded = false
-                        })
-                        
-                        learningCenterGridItem(icon: "chart.bar.fill", title: "统计", color: DesignSystem.Colors.successHex, action: {
-                            print("打开统计")
-                            isLearningCenterExpanded = false
-                        })
-                    }
-                    .padding(.horizontal, DesignSystem.Spacing.standard)
-                    
-                    // 关闭按钮
-                    Button(action: {
-                        withAnimation(.spring()) {
-                            isLearningCenterExpanded = false
-                        }
-                    }) {
-                        Text("关闭")
-                            .font(DesignSystem.Typography.body.weight(.medium))
-                            .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                            .padding(.vertical, DesignSystem.Spacing.compact)
+                        Image(systemName: "book.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
                     }
                 }
-                .padding(.vertical, DesignSystem.Spacing.standard)
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(Color.white)
-                )
-                .padding(.horizontal, DesignSystem.Spacing.standard)
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
             }
         }
-    }
-    
-    // 学习中心网格项
-    private func learningCenterGridItem(icon: String, title: String, color: Color, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            VStack(spacing: DesignSystem.Spacing.compact) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
-                        .fill(color.opacity(0.1))
-                        .frame(width: 60, height: 60)
-                    
-                    Image(systemName: icon)
-                        .font(.system(size: 24))
-                        .foregroundColor(color)
-                }
-                
-                Text(title)
-                    .font(DesignSystem.Typography.body.weight(.medium))
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, DesignSystem.Spacing.standard)
-            .background(
-                RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
-                    .fill(Color.white)
-                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
-            )
-        }
-    }
-    
-    // 学习中心菜单项
-    private func learningCenterMenuItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack(spacing: DesignSystem.Spacing.compact) {
-                Text(title)
-                    .font(DesignSystem.Typography.body)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                
-                Image(systemName: icon)
-                    .font(.system(size: 16))
-                    .foregroundColor(.white)
-            }
-            .padding(.horizontal, DesignSystem.Spacing.standard)
-            .padding(.vertical, DesignSystem.Spacing.compact)
-            .background(DesignSystem.Colors.primaryHex)
-            .cornerRadius(DesignSystem.CornerRadius.large)
-            .shadowStyle(DesignSystem.Shadow.medium)
-        }
-    }
-    
-    // MARK: - 辅助方法
-    // 获取问候语
-    private var greetingMessage: String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        switch hour {
-        case 0..<6: return "夜深了"
-        case 6..<12: return "早上好"
-        case 12..<18: return "下午好"
-        default: return "晚上好"
-        }
-    }
-    
-    // 格式化日期
-    private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        return formatter.string(from: date)
     }
 }
 
-// MARK: - 预览
+// 学习建议卡片
+private var learningTipsCard: some View {
+    ZStack {
+        RoundedRectangle(cornerRadius: 20)
+            .fill(Color(UIColor.secondarySystemBackground))
+        
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Image(systemName: "lightbulb.fill")
+                    .font(.title2)
+                    .foregroundColor(Color("Primary"))
+                
+                Text("学習のヒント")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("Primary"))
+                
+                Spacer()
+            }
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text("毎日15分の学習で上達します")
+                    .font(.headline)
+                    .foregroundColor(Color("Primary"))
+                
+                Text("継続は力なり！定期的な復習が大切です。")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            .padding(.vertical, 5)
+        }
+        .padding()
+    }
+    .frame(height: 130)
+    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
+}
+
+// 预览
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let dictionaryService = DictionaryService1()
-        let userService = UserService1()
+        let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
+        let userService = UserService(userRepository: UserAuthDataRepository())
         
         HomeView(
             searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
             userViewModel: UserViewModel(userService: userService)
         )
-    }
-}
-
-// 临时服务实现，仅用于预览
-class DictionaryService1: DictionaryServiceProtocol {
-    func searchWords(query: String, type: SearchTypeDomain?, limit: Int, offset: Int) -> AnyPublisher<SearchResultDomain, DictionaryErrorDomain> {
-        return Just(SearchResultDomain(total: 0, items: []))
-            .setFailureType(to: DictionaryErrorDomain.self)
-            .eraseToAnyPublisher()
-    }
-    
-    func getWordDetails(id: String) -> AnyPublisher<WordDetailsDomain, DictionaryErrorDomain> {
-        return Fail(error: DictionaryErrorDomain.notFound).eraseToAnyPublisher()
-    }
-    
-    func getWordPronunciation(id: String, speed: Float) -> AnyPublisher<URL, DictionaryErrorDomain> {
-        return Fail(error: DictionaryErrorDomain.pronunciationFailed).eraseToAnyPublisher()
-    }
-    
-    func getSearchHistory(limit: Int) -> AnyPublisher<[SearchHistoryItemDomain], DictionaryErrorDomain> {
-        return Just([]).setFailureType(to: DictionaryErrorDomain.self).eraseToAnyPublisher()
-    }
-    
-    func clearSearchHistory() -> AnyPublisher<Bool, DictionaryErrorDomain> {
-        return Just(true).setFailureType(to: DictionaryErrorDomain.self).eraseToAnyPublisher()
-    }
-}
-
-class UserService1: UserServiceProtocol {
-    func signInWithApple() -> AnyPublisher<UserProfileDomain, UserErrorDomain> {
-        return Fail(error: UserErrorDomain.authenticationFailed).eraseToAnyPublisher()
-    }
-    
-    func getUserProfile() -> AnyPublisher<UserProfileDomain, UserErrorDomain> {
-        return Fail(error: UserErrorDomain.userNotFound).eraseToAnyPublisher()
-    }
-    
-    func updateUserSettings(settings: UserPreferencesDomain) -> AnyPublisher<UserPreferencesDomain, UserErrorDomain> {
-        return Fail(error: UserErrorDomain.settingsUpdateFailed).eraseToAnyPublisher()
-    }
-    
-    func signOut() -> AnyPublisher<Bool, UserErrorDomain> {
-        return Just(true).setFailureType(to: UserErrorDomain.self).eraseToAnyPublisher()
-    }
-    
-    func isUserLoggedIn() -> Bool {
-        return false
     }
 }

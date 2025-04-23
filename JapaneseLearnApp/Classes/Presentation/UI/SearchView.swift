@@ -267,7 +267,7 @@ struct SearchView: View {
 // MARK: - 预览
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let dictionaryService = DictionaryService1()
+        let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
         let viewModel = SearchViewModel(dictionaryService: dictionaryService)
         
         // 模拟数据
