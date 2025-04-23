@@ -52,7 +52,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
                 
                 // 主内容区域
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 25) {
                         // 搜索区域
                         searchSection
