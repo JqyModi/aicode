@@ -24,6 +24,9 @@ struct WordDetailView: View {
     // 单词ID参数，用于初始加载
     let wordId: String
     
+    // 用于动画过渡的命名空间
+    @Namespace private var namespace
+    
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
@@ -69,14 +72,14 @@ struct WordDetailView: View {
                     GeometryReader { geometry in
                         ScrollView(showsIndicators: false) {
                             VStack(spacing: 0) {
-                                // 单词卡片 - 视差效果
+                                // 单词卡片 - 修改视差效果，确保初始状态可见
                                 wordCard(details)
-                                    .offset(y: min(0, -scrollOffset * 0.5))
+                                    .offset(y: min(0, -scrollOffset * 0.1))
                                     .scaleEffect(
-                                        scrollOffset > 0 ? 1 : max(0.8, 1 - scrollOffset.magnitude / 500),
+                                        scrollOffset > 0 ? 1 : max(0.95, 1 - scrollOffset.magnitude / 500),  // 调整最小缩放比例
                                         anchor: .center
                                     )
-                                    .opacity(scrollOffset > 100 ? 0.3 : 1)
+                                    .opacity(scrollOffset > 120 ? 0.3 : 1)
                                     .animation(.easeOut(duration: 0.2), value: scrollOffset)
                                 
                                 // 内容选项卡
@@ -210,71 +213,69 @@ struct WordDetailView: View {
                 }
                 .padding(.top, 20)
                 
-                // 发音控制 - 创意布局
-                HStack(spacing: 25) {
-                    // 慢速发音
+                // 发音控制 - 简化为单行小按钮
+                HStack(spacing: 20) {
+                    Spacer()
+                    
+                    // 慢速发音 - 更小的按钮
                     Button(action: { detailViewModel.playPronunciation(speed: 0.75) }) {
-                        VStack(spacing: 8) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.white.opacity(0.2))
-                                    .frame(width: 50, height: 50)
-                                
-                                Image(systemName: "tortoise.fill")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.white)
-                            }
-                            
+                        HStack(spacing: 5) {
+                            Image(systemName: "tortoise.fill")
+                                .font(.system(size: 14))
                             Text("慢速")
                                 .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.9))
                         }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.2))
+                        )
                     }
                     
-                    // 正常发音 - 突出显示
+                    // 正常发音
                     Button(action: { detailViewModel.playPronunciation(speed: 1.0) }) {
-                        VStack(spacing: 8) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.white.opacity(0.3))
-                                    .frame(width: 65, height: 65)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3)
-                                
-                                Image(systemName: "speaker.wave.2.fill")
-                                    .font(.system(size: 28))
-                                    .foregroundColor(.white)
-                            }
-                            
+                        HStack(spacing: 5) {
+                            Image(systemName: "speaker.wave.2.fill")
+                                .font(.system(size: 14))
                             Text("播放")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.white)
+                                .font(.system(size: 12))
                         }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.3))
+                        )
                     }
                     
                     // 快速发音
                     Button(action: { detailViewModel.playPronunciation(speed: 1.25) }) {
-                        VStack(spacing: 8) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.white.opacity(0.2))
-                                    .frame(width: 50, height: 50)
-                                
-                                Image(systemName: "hare.fill")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.white)
-                            }
-                            
+                        HStack(spacing: 5) {
+                            Image(systemName: "hare.fill")
+                                .font(.system(size: 14))
                             Text("快速")
                                 .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.9))
                         }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.2))
+                        )
                     }
+                    
+                    Spacer()
                 }
-                .padding(.bottom, 30)
+                .padding(.top, 5)
+                .padding(.bottom, 15)
             }
             .padding()
         }
-        .frame(height: 280)
+        .frame(height: 250)
     }
     
     // MARK: - 选项卡视图
@@ -313,27 +314,24 @@ struct WordDetailView: View {
         .padding(.bottom, 5)
     }
     
-    // 用于动画过渡的命名空间
-    @Namespace private var namespace
-    
     // MARK: - 选项卡内容
     private func tabContent(_ details: WordDetailsViewModel) -> some View {
         VStack {
             switch selectedTab {
-            case 0:
-                // 释义内容
-                definitionsContent(details)
-                    .transition(.opacity)
-            case 1:
-                // 例句内容
-                examplesContent(details)
-                    .transition(.opacity)
-            case 2:
-                // 相关词汇内容
-                relatedWordsContent(details)
-                    .transition(.opacity)
-            default:
-                EmptyView()
+                case 0:
+                    // 释义内容
+                    definitionsContent(details)
+                        .transition(.opacity)
+                case 1:
+                    // 例句内容
+                    examplesContent(details)
+                        .transition(.opacity)
+                case 2:
+                    // 相关词汇内容
+                    relatedWordsContent(details)
+                        .transition(.opacity)
+                default:
+                    EmptyView()
             }
             
             // 学习提示卡片 - 所有选项卡都显示
@@ -488,31 +486,27 @@ struct WordDetailView: View {
                             // 相关词汇卡片 - 更现代的设计
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(relatedWord.word)
-                                    .font(.system(size: 18, weight: .medium))
+                                    .font(.system(size: 16, weight: .medium))
                                     .foregroundColor(.primary)
                                 
                                 Text(relatedWord.reading)
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
                                 
-                                Divider()
-                                    .padding(.vertical, 4)
-                                
                                 Text(relatedWord.briefMeaning)
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
                                     .lineLimit(2)
-                                    .frame(height: 40, alignment: .top)
                             }
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color(UIColor.secondarySystemBackground))
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color("Primary").opacity(0.2), lineWidth: 1)
+                                    )
                             )
                         }
                     }
@@ -525,50 +519,29 @@ struct WordDetailView: View {
     // MARK: - 学习提示卡片
     private var learningTipsCard: some View {
         VStack(alignment: .leading, spacing: 15) {
-            // 标题区域 - 更有创意的设计
             HStack {
-                // 灯泡图标带背景
-                ZStack {
-                    Circle()
-                        .fill(Color("Primary").opacity(0.2))
-                        .frame(width: 36, height: 36)
-                    
-                    Image(systemName: "lightbulb.fill")
-                        .font(.system(size: 18))
-                        .foregroundColor(Color("Primary"))
-                }
+                Image(systemName: "lightbulb.fill")
+                    .font(.system(size: 18))
+                    .foregroundColor(Color("Primary"))
                 
                 Text("学习提示")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.headline)
                     .foregroundColor(Color("Primary"))
                 
                 Spacer()
-                
-                // 添加一个小装饰
-                Image(systemName: "sparkles")
-                    .font(.system(size: 16))
-                    .foregroundColor(Color("Primary").opacity(0.7))
             }
             
-            // 提示内容
-            VStack(alignment: .leading, spacing: 12) {
-                Text("记忆技巧")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(Color("Primary"))
-                
-                Text("尝试将这个单词与相似的词汇联系起来，或者创建一个包含这个单词的短句来加深记忆。")
-                    .font(.system(size: 15))
-                    .foregroundColor(.gray)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .padding(.leading, 8)
+            Text("尝试将这个单词与相似的词汇联系起来，或者创建一个包含这个单词的短句来加深记忆。")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(UIColor.secondarySystemBackground))
-                .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 3)
         )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
     }
     
     // MARK: - 浮动收藏按钮
@@ -579,120 +552,82 @@ struct WordDetailView: View {
             HStack {
                 Spacer()
                 
-                // 收藏按钮 - 更有创意的设计
-                Button(action: { detailViewModel.toggleFavorite() }) {
-                    ZStack {
-                        // 主按钮背景
-                        Circle()
-                            .fill(themeGradient)
-                            .frame(width: 60, height: 60)
-                            .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
-                        
-                        // 星星图标
-                        Image(systemName: detailViewModel.isFavorited ? "star.fill" : "star")
-                            .font(.system(size: 24))
-                            .foregroundColor(.white)
-                        
-                        // 动画效果 - 收藏时显示
-                        if detailViewModel.isFavorited {
-                            Circle()
-                                .stroke(Color.white.opacity(0.3), lineWidth: 3)
-                                .frame(width: 70, height: 70)
-                                .scaleEffect(animateGradient ? 1.1 : 1.0)
-                        }
-                    }
-                }
-                .padding(.trailing, 20)
-                .padding(.bottom, 20)
-                
-                // 添加笔记按钮 - 小一些的辅助按钮
+                // 编辑按钮 - 位置调整
                 Button(action: { showNoteEditor = true }) {
                     ZStack {
                         Circle()
                             .fill(Color(UIColor.secondarySystemBackground))
-                            .frame(width: 45, height: 45)
-                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 3)
+                            .frame(width: 50, height: 50)
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                         
-                        Image(systemName: "square.and.pencil")
-                            .font(.system(size: 18))
+                        Image(systemName: "pencil")
+                            .font(.system(size: 20))
                             .foregroundColor(Color("Primary"))
                     }
                 }
-                .offset(x: -70, y: -15)
-                .opacity(scrollOffset < 100 ? 1 : 0)
-                .animation(.easeInOut, value: scrollOffset < 100)
+                .padding(.trailing, 15)
+                
+                // 收藏按钮
+                Button(action: { detailViewModel.toggleFavorite() }) {
+                    ZStack {
+                        Circle()
+                            .fill(themeGradient)
+                            .frame(width: 56, height: 56)
+                            .shadow(color: Color("Primary").opacity(0.3), radius: 8, x: 0, y: 3)
+                        
+                        Image(systemName: detailViewModel.isFavorited ? "star.fill" : "star")
+                            .font(.system(size: 22))
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding(.trailing, 20)
             }
+            .padding(.bottom, 20)
+            .offset(y: scrollOffset > 0 ? min(0, -scrollOffset * 0.5) : 0) // 滚动时调整位置
         }
     }
     
     // MARK: - 加载中视图
     private var loadingView: some View {
-        VStack(spacing: 20) {
+        VStack {
             Spacer()
-            
-            // 自定义加载动画
-            ZStack {
-                Circle()
-                    .stroke(Color("Primary").opacity(0.2), lineWidth: 8)
-                    .frame(width: 80, height: 80)
-                
-                Circle()
-                    .trim(from: 0, to: 0.7)
-                    .stroke(Color("Primary"), lineWidth: 8)
-                    .frame(width: 80, height: 80)
-                    .rotationEffect(Angle(degrees: animateGradient ? 360 : 0))
-                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: animateGradient)
-            }
-            
+            ProgressView()
+                .scaleEffect(1.5)
+                .progressViewStyle(CircularProgressViewStyle(tint: Color("Primary")))
             Text("加载中...")
                 .font(.system(size: 16))
-                .foregroundColor(Color("Primary"))
-            
+                .foregroundColor(.gray)
+                .padding(.top, 10)
             Spacer()
-        }
-        .onAppear {
-            animateGradient = true
         }
     }
     
     // MARK: - 错误视图
     private func errorView(message: String) -> some View {
-        VStack(spacing: 25) {
+        VStack(spacing: 20) {
             Spacer()
             
-            // 错误图标
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 50))
                 .foregroundColor(.orange)
-                .padding()
-                .background(
-                    Circle()
-                        .fill(Color.orange.opacity(0.2))
-                        .frame(width: 120, height: 120)
-                )
             
             Text("加载失败")
-                .font(.title2)
+                .font(.title)
                 .fontWeight(.bold)
             
             Text(message)
                 .font(.body)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-                .foregroundColor(.gray)
+                .padding(.horizontal)
             
-            // 重试按钮
             Button(action: { detailViewModel.loadWordDetails(id: wordId) }) {
                 Text("重试")
                     .font(.headline)
                     .foregroundColor(.white)
-                    .padding(.horizontal, 40)
+                    .padding(.horizontal, 30)
                     .padding(.vertical, 12)
-                    .background(
-                        Capsule()
-                            .fill(Color("Primary"))
-                    )
-                    .shadow(color: Color("Primary").opacity(0.3), radius: 5, x: 0, y: 3)
+                    .background(Color("Primary"))
+                    .cornerRadius(10)
             }
             .padding(.top, 10)
             
@@ -703,7 +638,6 @@ struct WordDetailView: View {
     // MARK: - 笔记编辑器视图
     private var noteEditorView: some View {
         VStack(spacing: 20) {
-            // 顶部栏
             HStack {
                 Button(action: { showNoteEditor = false }) {
                     Text("取消")
@@ -728,31 +662,15 @@ struct WordDetailView: View {
             }
             .padding()
             
-            // 编辑区域
-            ZStack(alignment: .topLeading) {
-                if noteText.isEmpty {
-                    Text("在这里添加你的学习笔记...")
-                        .font(.system(size: 16))
-                        .foregroundColor(.gray.opacity(0.7))
-                        .padding(.top, 8)
-                        .padding(.leading, 5)
-                }
-                
-                TextEditor(text: $noteText)
-                    .padding(5)
-                    .background(Color.clear)
-            }
-            .padding()
-            .frame(minHeight: 200)
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color(UIColor.secondarySystemBackground))
-            )
-            .padding(.horizontal)
+            TextEditor(text: $noteText)
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .frame(minHeight: 200)
             
             Spacer()
         }
-        .padding(.top)
+        .padding()
     }
 }
 
@@ -788,7 +706,7 @@ struct WordDetailView_Previews: PreviewProvider {
                 dictionaryService: dictionaryService,
                 favoriteService: favoriteService
             ),
-            wordId: "198922179"
+            wordId: "1989106919s"
         )
     }
 }
