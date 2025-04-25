@@ -127,8 +127,16 @@ class DictionaryService: DictionaryServiceProtocol {
         let definitions = entity.definitions.map { mapToDefinitionDomain(from: $0) }
         let examples = entity.examples.map { mapToExampleDomain(from: $0) }
         
-        // 相关词汇可能需要额外查询，这里简化处理
-        let relatedWords: [WordSummaryDomain] = []
+        // 映射关联词
+        let relatedWords = entity.relatedWords.map { relatedWordEntity -> WordSummaryDomain in
+            return WordSummaryDomain(
+                id: relatedWordEntity.id,
+                word: relatedWordEntity.word,
+                reading: relatedWordEntity.reading ?? "",
+                partOfSpeech: "", // 关联词可能没有词性信息，这里简化处理
+                briefMeaning: "" // 关联词可能没有简要释义，这里简化处理
+            )
+        }
         
         return WordDetailsDomain(
             id: entity.id,

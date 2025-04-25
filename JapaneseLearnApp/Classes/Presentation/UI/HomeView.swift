@@ -17,6 +17,7 @@ struct HomeView: View {
     @State private var showingSettings = false
     @State private var selectedTab = 0
     @State private var animateGradient = false
+    @State private var isShowWordDetailView = false
     
     // 获取当前时间段的问候语
     private var greetingText: String {
@@ -87,6 +88,9 @@ struct HomeView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
+        }
+        .sheet(isPresented: $isShowWordDetailView) {
+            WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
         }
     }
     
@@ -457,7 +461,10 @@ struct HomeView: View {
             HStack {
                 Spacer()
                 
-                Button(action: { /* 打开学习中心 */ }) {
+                Button(action: {
+                    /* 打开学习中心 */
+                    isShowWordDetailView.toggle()
+                }) {
                     ZStack {
                         Circle()
                             .fill(themeGradient)

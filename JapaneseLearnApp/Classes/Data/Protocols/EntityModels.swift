@@ -18,6 +18,20 @@ struct DictEntryEntity {
     let partOfSpeech: String
     let definitions: [DefinitionEntity]
     let examples: [ExampleEntity]
+    let relatedWords: [RelatedWordEntity]
+}
+
+struct RelatedWordEntity {
+    let id: String
+    let word: String
+    let reading: String?
+    let type: RelatedWordType
+}
+
+enum RelatedWordType {
+    case synonym    // 同义词
+    case paronym    // 近义词
+    case polyphonic // 多音词
 }
 
 struct DefinitionEntity {

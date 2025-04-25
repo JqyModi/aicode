@@ -233,13 +233,52 @@ class DictionaryDataRepository: DictionaryDataRepositoryProtocol {
             )
         }
         
+        // 转换关联词
+        var relatedWords: [RelatedWordEntity] = []
+        if let relatedWord = dbWord.relatedWord {
+            // 添加同义词
+            let synonyms = relatedWord.synonyms.map { synonym -> RelatedWordEntity in
+                return RelatedWordEntity(
+                    id: synonym.objectId,
+                    word: synonym.spell,
+                    reading: synonym.pron,
+                    type: .synonym
+                )
+            }
+            
+            // 添加近义词
+            let paronyms = relatedWord.paronyms.map { paronym -> RelatedWordEntity in
+                return RelatedWordEntity(
+                    id: paronym.objectId,
+                    word: paronym.spell,
+                    reading: paronym.pron,
+                    type: .paronym
+                )
+            }
+            
+            // 添加多音词
+            let polyphonics = relatedWord.polyphonics.map { polyphonic -> RelatedWordEntity in
+                return RelatedWordEntity(
+                    id: polyphonic.objectId,
+                    word: polyphonic.spell,
+                    reading: polyphonic.pron,
+                    type: .polyphonic
+                )
+            }
+            
+            relatedWords.append(contentsOf: synonyms)
+            relatedWords.append(contentsOf: paronyms)
+            relatedWords.append(contentsOf: polyphonics)
+        }
+        
         return DictEntryEntity(
             id: dbWord.objectId,
             word: dbWord.spell ?? "",
             reading: dbWord.pron ?? "",
             partOfSpeech: "名词", // 简化处理，实际应根据数据库中的词性信息转换
             definitions: Array(definitions),
-            examples: Array(examples)
+            examples: Array(examples),
+            relatedWords: relatedWords
         )
     }
 }

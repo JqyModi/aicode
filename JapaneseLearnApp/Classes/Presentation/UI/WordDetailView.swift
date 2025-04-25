@@ -706,7 +706,7 @@ struct WordDetailView_Previews: PreviewProvider {
                 dictionaryService: dictionaryService,
                 favoriteService: favoriteService
             ),
-            wordId: "1989106919s"
+            wordId: "1989103009"
         )
     }
 }
