@@ -36,6 +36,10 @@
 		C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604962DB5F06300123ED1 /* DesignSystem.swift */; };
 		C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604B72DB633AA00123ED1 /* SearchView.swift */; };
 		C59604E12DB698DB00123ED1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604E02DB698DB00123ED1 /* DetailView.swift */; };
+		C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */; };
+		C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */; };
+		C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */; };
+		C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -83,6 +87,10 @@
 		C59604972DB5F06300123ED1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C59604B72DB633AA00123ED1 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		C59604E02DB698DB00123ED1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
+		C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
+		C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserDemo.swift; sourceTree = "<group>"; };
+		C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserViewController.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -261,6 +269,10 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */,
+				C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */,
+				C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */,
+				C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */,
 				C551C4052DB8B467003A0242 /* WordDetailView.swift */,
 				C59604E02DB698DB00123ED1 /* DetailView.swift */,
 				C59604B72DB633AA00123ED1 /* SearchView.swift */,
@@ -390,6 +402,10 @@
 				C59604892DB5400000123ED1 /* SyncService.swift in Sources */,
 				C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */,
 				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
+				C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */,
+				C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */,
+				C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */,
+				C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */,
