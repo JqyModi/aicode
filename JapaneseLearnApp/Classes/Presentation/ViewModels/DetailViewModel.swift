@@ -161,6 +161,30 @@ class DetailViewModel: DetailViewModelProtocol {
             .store(in: &cancellables)
     }
     
+    // MARK: - 单词交互
+    func handleWordTapped(word: String, lemma: String, furigana: String) {
+        // 处理用户点击单词的交互
+        print("DetailViewModel - 处理单词点击: 单词=\(word), 词元=\(lemma), 假名=\(furigana)")
+        
+        // 这里可以实现更多功能，例如：
+        // 1. 查询点击的单词详情
+        // if !lemma.isEmpty {
+        //    dictionaryService.searchWord(lemma)
+        //        .receive(on: DispatchQueue.main)
+        //        .sink(...)
+        //        .store(in: &cancellables)
+        // }
+        
+        // 2. 添加到生词本
+        // favoriteService.addToVocabulary(word: word, reading: furigana)
+        
+        // 3. 显示单词释义弹窗
+        // 可以通过NotificationCenter或回调函数通知UI层显示弹窗
+        
+        // 4. 播放单词发音
+        // 可以调用现有的playPronunciation方法
+    }
+    
     // MARK: - 私有方法
     private func playAudio(from url: URL) {
         do {

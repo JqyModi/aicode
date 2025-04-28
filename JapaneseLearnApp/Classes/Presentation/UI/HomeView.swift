@@ -90,8 +90,8 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $isShowWordDetailView) {
-//            WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
-            CompleteJapaneseTextParserDemo()
+            WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
+//            CompleteJapaneseTextParserDemo()
 //            JapaneseTextParserDemo()
 //            AdvancedJapaneseTextParserDemo()
 //            UIViewControllerPreview {

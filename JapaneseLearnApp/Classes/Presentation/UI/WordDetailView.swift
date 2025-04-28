@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Combine
+import UIKit
+import CoreText
 
 struct WordDetailView: View {
     // MARK: - 属性
@@ -414,18 +416,25 @@ struct WordDetailView: View {
                         }
                         .padding(.top, 5)
                         
-                        // 例句文本
+                        // 例句文本 - 使用CompleteRichTextView替换普通Text
                         VStack(alignment: .leading, spacing: 12) {
-                            Text(example.sentence)
-                                .font(.system(size: 17))
-                                .foregroundColor(.primary)
-                                .fixedSize(horizontal: false, vertical: true)
+                            // 富文本例句展示
+                            CompleteRichTextView(htmlString: example.translation) { word, lemma, furigana in
+                                // 处理单词点击事件
+                                print("点击了单词: \(word), 词元: \(lemma), 假名: \(furigana)")
+                                // 将点击事件传递给ViewModel处理
+                                detailViewModel.handleWordTapped(word: word, lemma: lemma, furigana: furigana)
+                            }
+                            .frame(minHeight: 60) // 设置最小高度，允许根据内容自动扩展
+                            .background(Color(UIColor.systemBackground))
+                            .cornerRadius(8)
                             
                             // 中文翻译
-                            Text(example.translation)
+                            Text(example.sentence)
                                 .font(.system(size: 15))
                                 .foregroundColor(.gray)
                                 .fixedSize(horizontal: false, vertical: true)
+                                .padding(.top, 4)
                             
                             // 播放按钮 - 更现代的设计
                             Button(action: { detailViewModel.playPronunciation(speed: 1.0) }) {
