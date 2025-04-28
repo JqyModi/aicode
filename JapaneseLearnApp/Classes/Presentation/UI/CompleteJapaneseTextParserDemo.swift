@@ -138,6 +138,10 @@ struct CompleteRichTextView: UIViewRepresentable {
     // 协调器处理点击事件
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: CompleteRichTextView
+        // 当前高亮的文本范围
+        private var currentHighlightRange: NSRange?
+        // 当前高亮的背景视图
+        private var highlightView: UIView?
         
         init(_ parent: CompleteRichTextView) {
             self.parent = parent
@@ -146,6 +150,12 @@ struct CompleteRichTextView: UIViewRepresentable {
         func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
             // 处理点击事件，获取被点击的单词信息
             if URL.scheme == "word" {
+                // 移除之前的高亮效果
+                removeHighlight()
+                
+                // 添加新的高亮效果
+                addHighlight(textView: textView, range: characterRange)
+                
                 let components = URL.absoluteString.components(separatedBy: "?")
                 if components.count > 1 {
                     let queryItems = components[1].components(separatedBy: "&")
@@ -180,6 +190,93 @@ struct CompleteRichTextView: UIViewRepresentable {
                 }
             }
             return false
+        }
+        
+        // // 添加高亮效果
+        // private func addHighlight(textView: UITextView, range: NSRange) {
+        //     // 保存当前高亮范围
+        //     currentHighlightRange = range
+            
+        //     // 获取文本范围的位置信息
+        //     guard let textRange = textView.layoutManager.textRange(for: range) else { return }
+            
+        //     // 创建高亮背景视图
+        //     let highlightView = UIView()
+        //     highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+        //     highlightView.layer.cornerRadius = 3
+        //     highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
+        //     textView.addSubview(highlightView)
+            
+        //     // 设置高亮视图的位置和大小
+        //     highlightView.frame = textRange
+            
+        //     // 保存高亮视图的引用
+        //     self.highlightView = highlightView
+            
+        //     // 添加淡入动画
+        //     UIView.animate(withDuration: 0.3, animations: {
+        //         highlightView.alpha = 1
+        //     }) { _ in
+        //         // 淡入完成后，延迟一段时间后淡出
+        //         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        //             self.fadeOutHighlight()
+        //         }
+        //     }
+        // }
+
+        // ... existing code ...
+
+// 添加高亮效果
+private func addHighlight(textView: UITextView, range: NSRange) {
+    // 保存当前高亮范围
+    currentHighlightRange = range
+    
+    // 获取文本范围的位置信息
+    guard let textRange = textView.layoutManager.textRange(for: range, in: textView) else { return }
+    
+    // 创建高亮背景视图
+    let highlightView = UIView()
+    highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+    highlightView.layer.cornerRadius = 3
+    highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
+    textView.addSubview(highlightView)
+    
+    // 设置高亮视图的位置和大小
+    highlightView.frame = textRange
+    
+    // 保存高亮视图的引用
+    self.highlightView = highlightView
+    
+    // 添加淡入动画
+    UIView.animate(withDuration: 0.3, animations: {
+        highlightView.alpha = 1
+    }) { _ in
+        // 淡入完成后，延迟一段时间后淡出
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.fadeOutHighlight()
+        }
+    }
+}
+
+// ... existing code ...
+        
+        // 淡出高亮效果
+        private func fadeOutHighlight() {
+            guard let highlightView = self.highlightView else { return }
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                highlightView.alpha = 0
+            }) { _ in
+                self.removeHighlight()
+            }
+        }
+        
+        // 移除高亮效果
+        private func removeHighlight() {
+            // 移除高亮视图
+            highlightView?.removeFromSuperview()
+            highlightView = nil
+            currentHighlightRange = nil
         }
     }
     
@@ -316,6 +413,57 @@ struct CompleteRichTextView: UIViewRepresentable {
         return NSAttributedString(string: text, attributes: attributes)
     }
 }
+
+// MARK: - UITextView布局管理器扩展
+// extension NSLayoutManager {
+//     // 获取文本范围的位置信息
+//     func textRange(for range: NSRange) -> CGRect? {
+//         guard let textContainer = textContainers.first else { return nil }
+        
+//         // 获取字形范围
+//         let glyphRange = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+        
+//         // 计算字形范围的边界矩形
+//         var boundingRect = CGRect.zero
+//         boundingRect = self.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        
+//         return boundingRect
+//     }
+// }
+
+// ... existing code ...
+
+// MARK: - UITextView布局管理器扩展
+extension NSLayoutManager {
+    // 获取文本范围的位置信息
+    func textRange(for range: NSRange, in textView: UITextView) -> CGRect? {
+        guard let textContainer = textContainers.first else { return nil }
+        
+        // 获取字形范围
+        let glyphRange = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+        
+        // 计算字形范围的边界矩形（相对于textContainer）
+        var boundingRect = self.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        
+        // 考虑textContainer的原点偏移
+        boundingRect.origin.x += textView.textContainerInset.left
+        boundingRect.origin.y += textView.textContainerInset.top
+        
+        // 考虑文本视图的滚动位置
+        boundingRect.origin.x -= textView.contentOffset.x
+        boundingRect.origin.y -= textView.contentOffset.y
+        
+        // 为了更好的视觉效果，稍微扩大高亮区域
+        boundingRect.size.width += 4
+        boundingRect.size.height += 4
+        boundingRect.origin.x -= 2
+        boundingRect.origin.y -= 2
+        
+        return boundingRect
+    }
+}
+
+// ... existing code ...
 
 // MARK: - 预览
 struct CompleteJapaneseTextParserDemo_Previews: PreviewProvider {
