@@ -225,12 +225,25 @@ class DictionaryDataRepository: DictionaryDataRepositoryProtocol {
             )]
         }
         
-        // 转换例句
-        let examples = dbWord.examples.map { example -> ExampleEntity in
-            return ExampleEntity(
-                sentence: example.title,
-                translation: example.notationTitle ?? ""
-            )
+        // 转换例句 - 按relaId分组并配对日语例句和中文翻译
+        // 首先按relaId分组所有例句
+        let examplesByRelaId = Dictionary(grouping: dbWord.examples) { $0.relaId }
+        
+        // 然后为每组创建ExampleEntity，正确配对日语例句和中文翻译
+        let examples = examplesByRelaId.compactMap { (relaId, exampleGroup) -> ExampleEntity? in
+            // 查找日语例句
+            let jaExample = exampleGroup.first { $0.lang == "ja" }
+            // 查找中文翻译
+            let zhExample = exampleGroup.first { $0.lang == "zh-CN" }
+            
+            // 只有当同时找到日语例句和中文翻译时才创建ExampleEntity
+            if let jaExample = jaExample {
+                return ExampleEntity(
+                    sentence: jaExample.notationTitle ?? jaExample.title,
+                    translation: zhExample?.title ?? ""
+                )
+            }
+            return nil
         }
         
         // 转换关联词
