@@ -2,46 +2,110 @@
 //  SearchView.swift
 //  JapaneseLearnApp
 //
-//  Created by AI on 2023/10/01.
+//  Created by Modi on 2025/4/6.
 //
 
 import SwiftUI
 import Combine
 
-/// 搜索结果页面，实现与HTML原型1:1还原的UI设计
 struct SearchView: View {
     // MARK: - 属性
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var searchText = ""
+    @State private var showVoiceInput = false
+    @State private var showHandwritingInput = false
     @State private var selectedSearchType: SearchTypeViewModel = .auto
+    @State private var isSearching = false
     @State private var showFilterOptions = false
+    @State private var animateGradient = false
+    @State private var selectedWordId: String? = nil
+    @State private var showWordDetail = false
+    
+    // 搜索类型选项
+    private let searchTypes: [(type: SearchTypeViewModel, name: String, icon: String)] = [
+        (.auto, "自动", "sparkles"),
+        (.word, "单词", "character"),
+        (.reading, "读音", "textformat.alt"),
+        (.meaning, "释义", "text.book.closed")
+    ]
+    
+    // 主题色渐变
+    private var themeGradient: LinearGradient {
+        LinearGradient(
+            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            startPoint: animateGradient ? .topLeading : .bottomLeading,
+            endPoint: animateGradient ? .bottomTrailing : .topTrailing
+        )
+    }
     
     // MARK: - 视图
     var body: some View {
         ZStack {
-            // 背景色
-            DesignSystem.Colors.neutralLightHex.edgesIgnoringSafeArea(.all)
+            // 背景层
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 // 顶部导航栏
                 topNavigationBar
                 
-                // 搜索类型选择器
-                searchTypeSelector
+                // 搜索区域
+                searchArea
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+                    .padding(.bottom, 15)
                 
-                // 搜索结果列表
-                if viewModel.isSearching {
+                // 搜索结果或历史记录
+                if searchText.isEmpty {
+                    // 历史记录和建议
+                    historyAndSuggestionsView
+                } else if isSearching {
+                    // 加载中
                     loadingView
-                } else if let error = viewModel.errorMessage {
+                } else if let error = searchViewModel.errorMessage {
+                    // 错误信息
                     errorView(message: error)
-                } else if viewModel.searchResults.isEmpty {
+                } else if searchViewModel.searchResults.isEmpty {
+                    // 无结果
                     emptyResultsView
                 } else {
-                    searchResultsList
+                    // 搜索结果
+                    searchResultsView
                 }
             }
         }
         .navigationBarHidden(true)
+        .onAppear {
+            // 启动渐变动画
+            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+                animateGradient.toggle()
+            }
+        }
+        .sheet(isPresented: $showVoiceInput) {
+            // 语音输入视图（占位）
+            Text("语音输入功能")
+                .font(.title)
+                .padding()
+        }
+        .sheet(isPresented: $showHandwritingInput) {
+            // 手写输入视图（占位）
+            Text("手写输入功能")
+                .font(.title)
+                .padding()
+        }
+        .sheet(isPresented: $showWordDetail) {
+            // 单词详情页面
+            if let wordId = selectedWordId {
+                WordDetailView(
+                    detailViewModel: DetailViewModel(
+                        dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                    ),
+                    wordId: wordId
+                )
+            }
+        }
     }
     
     // MARK: - 顶部导航栏
@@ -51,228 +115,591 @@ struct SearchView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                    .frame(width: 40, height: 40)
-                    .background(DesignSystem.Colors.neutralLightHex)
-                    .cornerRadius(20)
+                    .foregroundColor(Color("Primary"))
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(Color(UIColor.secondarySystemBackground))
+                    )
             }
             
+            Spacer()
+            
+            // 页面标题
+            Text("搜索查词")
+                .font(.headline)
+                .fontWeight(.medium)
+                .foregroundColor(Color("Primary"))
+            
+            Spacer()
+            
+            // 清除历史按钮
+            Button(action: { searchViewModel.clearHistory() }) {
+                Image(systemName: "trash")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(Color("Primary"))
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(Color(UIColor.secondarySystemBackground))
+                    )
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+    }
+    
+    // MARK: - 搜索区域
+    private var searchArea: some View {
+        VStack(spacing: 12) {
             // 搜索框
-            Components.InputFields.SearchField(
-                text: $viewModel.searchQuery,
-                placeholder: "搜索日语单词或句子...",
-                onSubmit: { viewModel.search() }//,
-//                onClear: { viewModel.clearSearch() }
+            HStack(spacing: 12) {
+                // 搜索图标
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color("Primary"))
+                
+                // 搜索输入框
+                TextField("搜索日语单词、短语或例句", text: $searchText)
+                    .font(.system(size: 16))
+                    .onSubmit {
+                        if !searchText.isEmpty {
+                            isSearching = true
+                            searchViewModel.searchQuery = searchText
+                            searchViewModel.searchType = selectedSearchType
+                            searchViewModel.search()
+                            isSearching = searchViewModel.isSearching
+                        }
+                    }
+                
+                // 清除按钮
+                if !searchText.isEmpty {
+                    Button(action: { 
+                        searchText = ""
+                        searchViewModel.clearSearch()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    // 语音输入按钮
+                    Button(action: { showVoiceInput = true }) {
+                        Image(systemName: "mic.fill")
+                            .foregroundColor(Color("Primary"))
+                    }
+                    
+                    // 手写识别按钮
+                    Button(action: { showHandwritingInput = true }) {
+                        Image(systemName: "scribble")
+                            .foregroundColor(Color("Primary"))
+                    }
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color(UIColor.secondarySystemBackground))
+                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
             )
             
-            // 筛选按钮
-            Button(action: { showFilterOptions.toggle() }) {
-                Image(systemName: "slider.horizontal.3")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                    .frame(width: 40, height: 40)
-                    .background(DesignSystem.Colors.neutralLightHex)
-                    .cornerRadius(20)
+            // 搜索类型选择器
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(searchTypes, id: \.type) { searchType in
+                        Button(action: {
+                            selectedSearchType = searchType.type
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: searchType.icon)
+                                    .font(.system(size: 12))
+                                Text(searchType.name)
+                                    .font(.system(size: 14))
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .foregroundColor(selectedSearchType == searchType.type ? .white : Color("Primary"))
+                            .background(
+                                Capsule()
+                                    .fill(selectedSearchType == searchType.type ? Color("Primary") : Color("Primary").opacity(0.1))
+                            )
+                        }
+                    }
+                }
+                .padding(.horizontal, 4)
             }
         }
-        .padding(.horizontal, DesignSystem.Spacing.standard)
-        .padding(.vertical, DesignSystem.Spacing.compact)
-        .background(Color.white)
     }
     
-    // MARK: - 搜索类型选择器
-    private var searchTypeSelector: some View {
-        HStack(spacing: DesignSystem.Spacing.compact) {
-            searchTypeButton(.auto, title: "自动")
-            searchTypeButton(.word, title: "单词")
-            searchTypeButton(.reading, title: "读音")
-            searchTypeButton(.meaning, title: "释义")
-        }
-        .padding(.horizontal, DesignSystem.Spacing.standard)
-        .padding(.vertical, DesignSystem.Spacing.compact)
-        .background(Color.white)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 2)
-    }
-    
-    private func searchTypeButton(_ type: SearchTypeViewModel, title: String) -> some View {
-        Button(action: {
-            selectedSearchType = type
-            viewModel.searchType = type
-            if !viewModel.searchQuery.isEmpty {
-                viewModel.search()
-            }
-        }) {
-            Text(title)
-                .font(DesignSystem.Typography.body)
-                .foregroundColor(selectedSearchType == type ? .white : DesignSystem.Colors.textPrimaryHex)
-                .padding(.horizontal, DesignSystem.Spacing.standard)
-                .padding(.vertical, DesignSystem.Spacing.compact)
-                .background(
-                    selectedSearchType == type ?
-                    DesignSystem.Colors.primaryHex :
-                    DesignSystem.Colors.neutralMediumHex
-                )
-                .cornerRadius(DesignSystem.CornerRadius.small)
-        }
-    }
-    
-    // MARK: - 搜索结果列表
-    private var searchResultsList: some View {
+    // MARK: - 历史记录和建议视图
+    private var historyAndSuggestionsView: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
-                ForEach(viewModel.searchResults) { result in
-                    searchResultRow(result)
+            VStack(spacing: 20) {
+                // 搜索建议卡片
+                if !searchViewModel.suggestions.isEmpty {
+                    suggestionsCard
+                }
+                
+                // 历史记录卡片
+                if !searchViewModel.searchHistory.isEmpty {
+                    historyCard
+                }
+                
+                // 热门搜索卡片（模拟数据）
+                trendingSearchesCard
+                
+                // 学习提示卡片
+                learningTipsCard
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 30)
+        }
+    }
+    
+    // MARK: - 搜索建议卡片
+    private var suggestionsCard: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            Text("搜索建议")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            ForEach(searchViewModel.suggestions, id: \.self) { suggestion in
+                Button(action: {
+                    searchText = suggestion
+                    isSearching = true
+                    searchViewModel.searchQuery = searchText
+                    searchViewModel.search()
+                    isSearching = searchViewModel.isSearching
+                }) {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                        
+                        Text(suggestion)
+                            .font(.system(size: 16))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "arrow.up.left")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color("Primary"))
+                    }
+                    .padding(.vertical, 8)
+                }
+                
+                if suggestion != searchViewModel.suggestions.last {
+                    Divider()
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
+    }
+    
+    // MARK: - 历史记录卡片
+    private var historyCard: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            HStack {
+                Text("最近搜索")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                Button(action: { searchViewModel.clearHistory() }) {
+                    Text("清除")
+                        .font(.subheadline)
+                        .foregroundColor(Color("Primary"))
+                }
+            }
+            
+            ForEach(searchViewModel.searchHistory.prefix(5), id: \.id) { historyItem in
+                Button(action: {
+                    searchText = historyItem.word
+                    isSearching = true
+                    searchViewModel.searchQuery = searchText
+                    searchViewModel.search()
+                    isSearching = searchViewModel.isSearching
+                }) {
+                    HStack {
+                        Image(systemName: "clock")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                        
+                        Text(historyItem.word)
+                            .font(.system(size: 16))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                        
+                        Text(formatDate(historyItem.timestamp))
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.vertical, 8)
+                }
+                
+                if historyItem.id != searchViewModel.searchHistory.prefix(5).last?.id {
+                    Divider()
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
+    }
+    
+    // MARK: - 热门搜索卡片
+    private var trendingSearchesCard: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            Text("热门搜索")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            // 热门搜索标签云
+            FlowLayout(spacing: 10) {
+                // 模拟数据
+                ForEach(["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"], id: \.self) { word in
+                    Button(action: {
+                        searchText = word
+                        isSearching = true
+                        searchViewModel.searchQuery = searchText
+                        searchViewModel.search()
+                        isSearching = searchViewModel.isSearching
+                    }) {
+                        Text(word)
+                            .font(.system(size: 14))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(Color("Primary").opacity(0.1))
+                            )
+                            .foregroundColor(Color("Primary"))
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
+    }
+    
+    // MARK: - 学习提示卡片
+    private var learningTipsCard: some View {
+        ZStack {
+            // 背景渐变
+            RoundedRectangle(cornerRadius: 16)
+                .fill(themeGradient)
+            
+            // 背景装饰元素
+            Circle()
+                .fill(Color.white.opacity(0.1))
+                .frame(width: 150, height: 150)
+                .offset(x: 100, y: -50)
+                .blur(radius: 15)
+            
+            Circle()
+                .fill(Color.white.opacity(0.1))
+                .frame(width: 100, height: 100)
+                .offset(x: -100, y: 50)
+                .blur(radius: 10)
+            
+            // 内容
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image(systemName: "lightbulb.fill")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                    
+                    Text("学习小贴士")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                
+                Text("搜索时可以使用日语假名、汉字或中文进行查询。尝试使用不同的搜索类型以获得更精确的结果。")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Button(action: { /* 学习更多 */ }) {
+                    Text("了解更多搜索技巧")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.2))
+                        )
+                }
+                .padding(.top, 5)
+            }
+            .padding(20)
+        }
+        .frame(height: 200)
+        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+    }
+    
+    // MARK: - 搜索结果视图
+    private var searchResultsView: some View {
+        ScrollView {
+            LazyVStack(spacing: 15) {
+                ForEach(searchViewModel.searchResults, id: \.id) { result in
+                    wordResultCard(result)
+                        .onTapGesture {
+                            selectedWordId = result.id
+                            showWordDetail = true
+                            searchViewModel.selectWord(id: result.id)
+                        }
                 }
                 
                 // 加载更多按钮
-                if !viewModel.searchResults.isEmpty {
-                    Button(action: { viewModel.loadMoreResults() }) {
-                        HStack {
+                if !searchViewModel.searchResults.isEmpty {
+                    Button(action: { searchViewModel.loadMoreResults() }) {
+                        if searchViewModel.isSearching {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .scaleEffect(0.8)
+                                .frame(height: 30)
+                        } else {
                             Text("加载更多结果")
-                                .font(DesignSystem.Typography.body)
-                                .foregroundColor(DesignSystem.Colors.primaryHex)
-                            
-                            Image(systemName: "arrow.down.circle")
-                                .font(.system(size: 16))
-                                .foregroundColor(DesignSystem.Colors.primaryHex)
+                                .font(.subheadline)
+                                .foregroundColor(Color("Primary"))
+                                .padding(.vertical, 10)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(DesignSystem.Spacing.standard)
-                        .background(Color.white)
                     }
+                    .padding(.vertical, 5)
                 }
             }
-            .background(DesignSystem.Colors.neutralLightHex)
+            .padding(.horizontal)
+            .padding(.vertical, 10)
         }
     }
     
-    private func searchResultRow(_ result: WordSummaryViewModel) -> some View {
-        Button(action: { viewModel.selectWord(id: result.id) }) {
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.compact) {
-                HStack(alignment: .top) {
-                    // 单词和读音
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(result.word)
-                            .font(DesignSystem.Typography.subtitle)
-                            .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                        
-                        Text(result.reading)
-                            .font(DesignSystem.Typography.callout)
-                            .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                    }
+    // MARK: - 单词结果卡片
+    private func wordResultCard(_ result: WordSummaryViewModel) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                // 单词和读音
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(result.word)
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.primary)
                     
-                    Spacer()
-                    
-                    // 词性标签
-                    Text(result.partOfSpeech)
-                        .font(DesignSystem.Typography.footnote)
-                        .foregroundColor(DesignSystem.Colors.textHintHex)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(DesignSystem.Colors.neutralMediumHex)
-                        .cornerRadius(DesignSystem.CornerRadius.small)
+                    Text(result.reading)
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
                 }
                 
-                // 简短释义
-                Text(result.briefMeaning)
-                    .font(DesignSystem.Typography.body)
-                    .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
+                Spacer()
+                
+                // 词性标签
+                Text(result.partOfSpeech)
+                    .font(.system(size: 12))
+                    .foregroundColor(Color("Primary"))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(
+                        Capsule()
+                            .fill(Color("Primary").opacity(0.1))
+                    )
             }
-            .padding(DesignSystem.Spacing.standard)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white)
-            .cornerRadius(DesignSystem.CornerRadius.medium)
-            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 2)
-            .padding(.horizontal, DesignSystem.Spacing.standard)
-            .padding(.vertical, DesignSystem.Spacing.compact)
+            
+            // 分隔线
+            Divider()
+            
+            // 简要释义
+            Text(result.briefMeaning)
+                .font(.system(size: 15))
+                .foregroundColor(.primary)
+                .lineLimit(2)
+            
+            // 查看详情按钮
+            HStack {
+                Spacer()
+                
+                Button(action: {
+                    selectedWordId = result.id
+                    showWordDetail = true
+                    searchViewModel.selectWord(id: result.id)
+                }) {
+                    HStack(spacing: 5) {
+                        Text("查看详情")
+                            .font(.system(size: 14, weight: .medium))
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12))
+                    }
+                    .foregroundColor(Color("Primary"))
+                }
+            }
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
     }
     
     // MARK: - 加载中视图
     private var loadingView: some View {
-        VStack {
-            Spacer()
+        VStack(spacing: 20) {
             ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(1.5)
-                .progressViewStyle(CircularProgressViewStyle(tint: DesignSystem.Colors.primaryHex))
+            
             Text("正在搜索...")
-                .font(DesignSystem.Typography.body)
-                .foregroundColor(DesignSystem.Colors.textSecondaryHex)
-                .padding(.top, DesignSystem.Spacing.standard)
-            Spacer()
+                .font(.headline)
+                .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DesignSystem.Colors.neutralLightHex)
     }
     
     // MARK: - 错误视图
     private func errorView(message: String) -> some View {
-        VStack {
-            Spacer()
+        VStack(spacing: 15) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 50))
-                .foregroundColor(DesignSystem.Colors.warningHex)
-                .padding(.bottom, DesignSystem.Spacing.standard)
+                .foregroundColor(.orange)
+            
             Text("搜索出错")
-                .font(DesignSystem.Typography.title)
-                .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                .padding(.bottom, DesignSystem.Spacing.compact)
+                .font(.title2)
+                .fontWeight(.bold)
+            
             Text(message)
-                .font(DesignSystem.Typography.body)
-                .foregroundColor(DesignSystem.Colors.textSecondaryHex)
+                .font(.body)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, DesignSystem.Spacing.standard)
-            Button(action: { viewModel.search() }) {
+            
+            Button(action: {
+                isSearching = true
+                searchViewModel.search()
+                isSearching = searchViewModel.isSearching
+            }) {
                 Text("重试")
-                    .font(DesignSystem.Typography.body)
+                    .font(.headline)
                     .foregroundColor(.white)
-                    .padding(.horizontal, DesignSystem.Spacing.relaxed)
-                    .padding(.vertical, DesignSystem.Spacing.compact)
-                    .background(DesignSystem.Colors.primaryHex)
-                    .cornerRadius(DesignSystem.CornerRadius.small)
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 12)
+                    .background(
+                        Capsule()
+                            .fill(Color("Primary"))
+                    )
             }
-            .padding(.top, DesignSystem.Spacing.standard)
-            Spacer()
+            .padding(.top, 10)
         }
+        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DesignSystem.Colors.neutralLightHex)
     }
     
-    // MARK: - 空结果视图
+    // MARK: - 无结果视图
     private var emptyResultsView: some View {
-        VStack {
-            Spacer()
+        VStack(spacing: 15) {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 50))
-                .foregroundColor(DesignSystem.Colors.neutralDarkHex)
-                .padding(.bottom, DesignSystem.Spacing.standard)
+                .foregroundColor(Color("Primary").opacity(0.7))
+            
             Text("未找到结果")
-                .font(DesignSystem.Typography.title)
-                .foregroundColor(DesignSystem.Colors.textPrimaryHex)
-                .padding(.bottom, DesignSystem.Spacing.compact)
+                .font(.title2)
+                .fontWeight(.bold)
+            
             Text("尝试使用不同的关键词或搜索类型")
-                .font(DesignSystem.Typography.body)
-                .foregroundColor(DesignSystem.Colors.textSecondaryHex)
+                .font(.body)
+                .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, DesignSystem.Spacing.standard)
-            Spacer()
+            
+            Button(action: { searchText = "" }) {
+                Text("返回")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 12)
+                    .background(
+                        Capsule()
+                            .fill(Color("Primary"))
+                    )
+            }
+            .padding(.top, 10)
         }
+        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DesignSystem.Colors.neutralLightHex)
+    }
+    
+    // MARK: - 辅助函数
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
+}
+
+// MARK: - FlowLayout 组件
+struct FlowLayout<Content: View>: View {
+    let spacing: CGFloat
+    let content: () -> Content
+    
+    init(spacing: CGFloat = 8, @ViewBuilder content: @escaping () -> Content) {
+        self.spacing = spacing
+        self.content = content
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: spacing) {
+            GeometryReader { geometry in
+                self.generateContent(in: geometry)
+            }
+        }
+    }
+    
+    private func generateContent(in geometry: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+        
+        return ZStack(alignment: .topLeading) {
+            content()
+                .padding(.all, spacing)
+                .alignmentGuide(.leading) { dimension in
+                    if width + dimension.width > geometry.size.width {
+                        width = 0
+                        height -= dimension.height
+                    }
+                    let result = width
+                    if width != 0 {
+                        width -= spacing
+                    }
+                    width += dimension.width + spacing
+                    return result
+                }
+                .alignmentGuide(.top) { _ in
+                    let result = height
+                    if width == 0 {
+                        height -= spacing
+                    }
+                    return result
+                }
+        }
+        .frame(width: geometry.size.width)
     }
 }
 
 // MARK: - 预览
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
-        let viewModel = SearchViewModel(dictionaryService: dictionaryService)
-        
-        // 模拟数据
-        viewModel.searchQuery = "食べる"
-        
-        return SearchView(viewModel: viewModel)
+        SearchView(searchViewModel: SearchViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository())))
     }
 }
