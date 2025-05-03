@@ -16,11 +16,15 @@ struct SearchView: View {
     @State private var showVoiceInput = false
     @State private var showHandwritingInput = false
     @State private var selectedSearchType: SearchTypeViewModel = .auto
-    @State private var isSearching = false
     @State private var showFilterOptions = false
     @State private var animateGradient = false
     @State private var selectedWordId: String? = nil
     @State private var showWordDetail = false
+    
+    // 使用计算属性获取ViewModel的搜索状态
+    private var isSearching: Bool {
+        return searchViewModel.isSearching
+    }
     
     // 初始搜索文本，用于从HomeView传递
     var initialSearchText: String = ""
@@ -88,11 +92,9 @@ struct SearchView: View {
             // 如果有初始搜索文本，则自动执行搜索
             if !initialSearchText.isEmpty {
                 searchText = initialSearchText
-                isSearching = true
                 searchViewModel.searchQuery = searchText
                 searchViewModel.searchType = selectedSearchType
                 searchViewModel.search()
-                isSearching = searchViewModel.isSearching
             }
         }
         .sheet(isPresented: $showVoiceInput) {
@@ -176,11 +178,9 @@ struct SearchView: View {
                     .font(.system(size: 16))
                     .onSubmit {
                         if !searchText.isEmpty {
-                            isSearching = true
                             searchViewModel.searchQuery = searchText
                             searchViewModel.searchType = selectedSearchType
                             searchViewModel.search()
-                            isSearching = searchViewModel.isSearching
                         }
                     }
                 
@@ -277,10 +277,8 @@ struct SearchView: View {
             ForEach(searchViewModel.suggestions, id: \.self) { suggestion in
                 Button(action: {
                     searchText = suggestion
-                    isSearching = true
                     searchViewModel.searchQuery = searchText
                     searchViewModel.search()
-                    isSearching = searchViewModel.isSearching
                 }) {
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -333,10 +331,8 @@ struct SearchView: View {
             ForEach(searchViewModel.searchHistory.prefix(5), id: \.id) { historyItem in
                 Button(action: {
                     searchText = historyItem.word
-                    isSearching = true
                     searchViewModel.searchQuery = searchText
                     searchViewModel.search()
-                    isSearching = searchViewModel.isSearching
                 }) {
                     HStack {
                         Image(systemName: "clock")
@@ -382,10 +378,8 @@ struct SearchView: View {
                 ForEach(["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"], id: \.self) { word in
                     Button(action: {
                         searchText = word
-                        isSearching = true
                         searchViewModel.searchQuery = searchText
                         searchViewModel.search()
-                        isSearching = searchViewModel.isSearching
                     }) {
                         Text(word)
                             .font(.system(size: 14))
@@ -599,9 +593,7 @@ struct SearchView: View {
                 .multilineTextAlignment(.center)
             
             Button(action: {
-                isSearching = true
                 searchViewModel.search()
-                isSearching = searchViewModel.isSearching
             }) {
                 Text("重试")
                     .font(.headline)
