@@ -22,6 +22,9 @@ struct SearchView: View {
     @State private var selectedWordId: String? = nil
     @State private var showWordDetail = false
     
+    // 初始搜索文本，用于从HomeView传递
+    var initialSearchText: String = ""
+    
     // 搜索类型选项
     private let searchTypes: [(type: SearchTypeViewModel, name: String, icon: String)] = [
         (.auto, "自动", "sparkles"),
@@ -80,6 +83,16 @@ struct SearchView: View {
             // 启动渐变动画
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
+            }
+            
+            // 如果有初始搜索文本，则自动执行搜索
+            if !initialSearchText.isEmpty {
+                searchText = initialSearchText
+                isSearching = true
+                searchViewModel.searchQuery = searchText
+                searchViewModel.searchType = selectedSearchType
+                searchViewModel.search()
+                isSearching = searchViewModel.isSearching
             }
         }
         .sheet(isPresented: $showVoiceInput) {

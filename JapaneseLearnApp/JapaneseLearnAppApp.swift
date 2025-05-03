@@ -16,10 +16,13 @@ struct JapaneseLearnAppApp: App {
     var body: some Scene {
         WindowGroup {
             // 使用新的HomeView作为主视图
-            HomeView(
-                searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
-                userViewModel: UserViewModel(userService: userService)
-            )
+            NavigationView {
+                HomeView(
+                    searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
+                    userViewModel: UserViewModel(userService: userService)
+                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

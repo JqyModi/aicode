@@ -144,41 +144,46 @@ struct HomeView: View {
 //                .foregroundColor(Color("Primary"))
 //                .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color("Primary"))
-                
-                TextField("搜索单词、语法、例句", text: $searchText)
-                    .font(.system(size: 16))
-                
-                if !searchText.isEmpty {
-                    Button(action: { searchText = "" }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
-                    }
-                } else {
-                    // 语音输入按钮
-                    Button(action: { /* 语音输入功能 */ }) {
-                        Image(systemName: "mic.fill")
-                            .foregroundColor(Color("Primary"))
-                    }
+            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, initialSearchText: searchText)) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(Color("Primary"))
                     
-                    // 手写识别按钮
-                    Button(action: { /* 手写识别功能 */ }) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(Color("Primary"))
+                    Text(searchText.isEmpty ? "搜索单词、语法、例句" : searchText)
+                        .font(.system(size: 16))
+                        .foregroundColor(searchText.isEmpty ? .gray : .primary)
+                    
+                    Spacer()
+                    
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.gray)
+                        }
+                    } else {
+                        // 语音输入按钮
+                        Button(action: { /* 语音输入功能 */ }) {
+                            Image(systemName: "mic.fill")
+                                .foregroundColor(Color("Primary"))
+                        }
+                        
+                        // 手写识别按钮
+                        Button(action: { /* 手写识别功能 */ }) {
+                            Image(systemName: "pencil")
+                                .foregroundColor(Color("Primary"))
+                        }
                     }
                 }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color(UIColor.secondarySystemBackground))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                )
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color(UIColor.secondarySystemBackground))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
-            )
         }
         .padding(.top, 10)
     }
@@ -347,7 +352,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    Button(action: { /* 查看全部 */ }) {
+                    NavigationLink(destination: SearchView(searchViewModel: searchViewModel)) {
                         Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
@@ -357,10 +362,7 @@ struct HomeView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ForEach(recentSearches, id: \.self) { word in
-                            Button(action: {
-                                searchText = word
-                                searchViewModel.searchQuery = word
-                            }) {
+                            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, initialSearchText: word)) {
                                 Text(word)
                                     .font(.system(size: 16))
                                     .padding(.horizontal, 15)
@@ -404,7 +406,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    Button(action: { /* 查看全部 */ }) {
+                    NavigationLink(destination: SearchView(searchViewModel: searchViewModel)) {
                         Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
