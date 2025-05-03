@@ -486,6 +486,6 @@ struct DetailView_Previews: PreviewProvider {
         let favoriteService = FavoriteService(favoriteRepository: FavoriteDataRepository())
         let viewModel = DetailViewModel(dictionaryService: dictionaryService, favoriteService: favoriteService)
         
-        return DetailView(viewModel: viewModel, wordId: "sample-id")
+        return DetailView(viewModel: viewModel, wordId: "1989103009")
     }
 }
