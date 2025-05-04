@@ -103,8 +103,8 @@ struct HomeView: View {
     // 顶部区域
     private var topSection: some View {
         HStack {
-            // 用户头像
-            Button(action: { /* 用户资料操作 */ }) {
+            // 用户头像 - 导航到个人页面
+            NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
                 Image(systemName: userViewModel.isLoggedIn ? "person.crop.circle.fill" : "person.crop.circle")
                     .font(.system(size: 28))
                     .foregroundColor(Color("Primary"))
