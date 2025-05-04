@@ -361,7 +361,12 @@ struct UserProfileView: View {
                 
                 Spacer()
                 
-                Button(action: { /* 查看全部 */ }) {
+                NavigationLink(destination: FavoritesView(
+                    favoriteViewModel: DetailViewModel(
+                        dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                    )
+                )) {
                     Text("查看全部")
                         .font(.subheadline)
                         .foregroundColor(Color("Primary"))
@@ -372,7 +377,7 @@ struct UserProfileView: View {
                 emptyStateView(message: "暂无收藏单词", icon: "star.slash")
             } else {
                 VStack(spacing: 12) {
-                    ForEach(favoriteWords, id: \.0) { word in
+                    ForEach(favoriteWords.prefix(3), id: \.0) { word in
                         Button(action: {
                             selectedWordId = word.3
                             showWordDetail = true

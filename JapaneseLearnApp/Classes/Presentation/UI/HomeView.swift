@@ -70,7 +70,14 @@ struct HomeView: View {
                         recentSearchesCard
                         
                         // 收藏夹快速访问
-                        favoritesCard
+                        NavigationLink(destination: FavoritesView(
+                            favoriteViewModel: DetailViewModel(
+                                dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                            )
+                        )) {
+                            favoritesCard
+                        }
                         
                         // 学习建议
                         learningTipsCard

@@ -41,6 +41,7 @@
 		C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */; };
 		C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */; };
 		C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */; };
+		C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserDemo.swift; sourceTree = "<group>"; };
 		C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserViewController.swift; sourceTree = "<group>"; };
 		C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */,
 				C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */,
 				C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */,
 				C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */,
@@ -428,6 +431,7 @@
 				C59604752DB4876200123ED1 /* word-core-model.swift in Sources */,
 				C596047F2DB4D7DB00123ED1 /* UserViewModel.swift in Sources */,
 				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
+				C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */,
 				C596047B2DB4961D00123ED1 /* DetailViewModel.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
 				C596048C2DB55C1800123ED1 /* DictionaryDataRepository.swift in Sources */,
