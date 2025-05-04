@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 
-
 struct HomeView: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var userViewModel: UserViewModel
@@ -260,6 +259,18 @@ struct HomeView: View {
                         .foregroundColor(Color("Primary"))
                     
                     Spacer()
+                    
+                    NavigationLink(destination: LearningGoalSettingsView()) {
+                        Text("设置目标")
+                            .font(.caption)
+                            .foregroundColor(Color("Primary"))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(
+                                Capsule()
+                                    .stroke(Color("Primary").opacity(0.5), lineWidth: 1)
+                            )
+                    }
                 }
                 
                 HStack(spacing: 20) {
