@@ -115,7 +115,9 @@ struct WordDetailView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
-            
+        }
+        // 使用task修饰符确保在视图出现前就开始加载数据
+        .task {
             // 加载单词详情
             detailViewModel.loadWordDetails(id: wordId)
         }

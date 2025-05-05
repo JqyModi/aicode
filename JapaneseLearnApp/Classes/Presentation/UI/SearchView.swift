@@ -112,21 +112,20 @@ struct SearchView: View {
         .sheet(isPresented: $showWordDetail) {
             // 单词详情页面
             if let wordId = selectedWordId {
+                let detailVM = DetailViewModel(
+                    dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                )
+                
                 if #available(iOS 16.4, *) {
                     WordDetailView(
-                        detailViewModel: DetailViewModel(
-                            dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
-                        ),
+                        detailViewModel: detailVM,
                         wordId: wordId
                     )
                     .presentationCompactAdaptation(.fullScreenCover)
                 } else {
                     WordDetailView(
-                        detailViewModel: DetailViewModel(
-                            dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
-                        ),
+                        detailViewModel: detailVM,
                         wordId: wordId
                     )
                 }
@@ -481,7 +480,10 @@ struct SearchView: View {
                         .onTapGesture {
                             selectedWordId = result.id
                             searchViewModel.selectWord(id: result.id)
-                            showWordDetail = true
+                            // 确保在显示详情页面前已设置好ID
+                            DispatchQueue.main.async {
+                                showWordDetail = true
+                            }
                         }
                 }
                 
@@ -553,7 +555,10 @@ struct SearchView: View {
                 Button(action: {
                     selectedWordId = result.id
                     searchViewModel.selectWord(id: result.id)
-                    showWordDetail = true
+                    // 确保在显示详情页面前已设置好ID
+                    DispatchQueue.main.async {
+                        showWordDetail = true
+                    }
                 }) {
                     HStack(spacing: 5) {
                         Text("查看详情")
