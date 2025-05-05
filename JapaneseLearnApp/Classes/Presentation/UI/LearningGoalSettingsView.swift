@@ -355,25 +355,39 @@ struct LearningGoalSettingsView: View {
     
     // 加载已保存的目标设置
     private func loadSavedGoals() {
-        // 这里应该从UserDefaults或其他持久化存储中加载数据
-        // 目前使用模拟数据
-        wordGoal = 20
-        grammarGoal = 10
-        readingGoal = 5
-        goalPeriod = .daily
+        // 从LearningGoalService加载已保存的目标设置
+        let savedGoal = learningGoalService.currentGoal
+        
+        // 更新UI状态
+        wordGoal = Double(savedGoal.wordGoal)
+        grammarGoal = Double(savedGoal.grammarGoal)
+        readingGoal = Double(savedGoal.readingGoal)
+        goalPeriod = savedGoal.isPeriodDaily ? .daily : .weekly
     }
     
     // 保存目标设置
     private func saveGoals() {
-        // 这里应该将数据保存到UserDefaults或其他持久化存储
-        // 目前仅显示成功动画
+        // 创建新的学习目标对象
+        let newGoal = LearningGoal(
+            wordGoal: Int(wordGoal),
+            grammarGoal: Int(grammarGoal),
+            readingGoal: Int(readingGoal),
+            isPeriodDaily: goalPeriod == .daily,
+            wordProgress: learningGoalService.currentGoal.wordProgress,
+            grammarProgress: learningGoalService.currentGoal.grammarProgress,
+            readingProgress: learningGoalService.currentGoal.readingProgress
+        )
+        
+        // 保存到LearningGoalService
+        learningGoalService.saveGoal(goal: newGoal)
+        
+        // 显示成功动画
         withAnimation {
             showConfetti = true
         }
         
-        // 显示成功提示
+        // 显示成功提示并返回
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // 这里可以添加成功提示动画或反馈
             presentationMode.wrappedValue.dismiss()
         }
     }
