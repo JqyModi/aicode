@@ -43,6 +43,8 @@
 		C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */; };
 		C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */; };
 		C5AE4A6F2DC7C04D00A12B42 /* LearningGoalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */; };
+		C5AE4A712DC7D29100A12B42 /* LearningGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A702DC7D29100A12B42 /* LearningGoalService.swift */; };
+		C5AE4A732DC7D2B200A12B42 /* LearningProgressTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */; };
 		C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */; };
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
@@ -97,6 +99,8 @@
 		C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningGoalSettingsView.swift; sourceTree = "<group>"; };
+		C5AE4A702DC7D29100A12B42 /* LearningGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningGoalService.swift; sourceTree = "<group>"; };
+		C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningProgressTestView.swift; sourceTree = "<group>"; };
 		C5AEDA4A2DA261520031B210 /* JapaneseLearnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JapaneseLearnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseLearnAppApp.swift; sourceTree = "<group>"; };
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 		C59604862DB5400000123ED1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C5AE4A702DC7D29100A12B42 /* LearningGoalService.swift */,
 				C59604822DB5400000123ED1 /* DictionaryService.swift */,
 				C59604832DB5400000123ED1 /* FavoriteService.swift */,
 				C59604842DB5400000123ED1 /* SyncService.swift */,
@@ -275,6 +280,7 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */,
 				C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */,
 				C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */,
 				C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */,
@@ -420,6 +426,8 @@
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */,
 				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
+				C5AE4A712DC7D29100A12B42 /* LearningGoalService.swift in Sources */,
+				C5AE4A732DC7D2B200A12B42 /* LearningProgressTestView.swift in Sources */,
 				C59604812DB50F8800123ED1 /* SyncViewModel.swift in Sources */,
 				C59604992DB5F06300123ED1 /* Components.swift in Sources */,
 				C596049A2DB5F06300123ED1 /* HomeView.swift in Sources */,

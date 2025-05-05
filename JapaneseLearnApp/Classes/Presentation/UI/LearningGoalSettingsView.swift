@@ -18,6 +18,9 @@ struct LearningGoalSettingsView: View {
     @State private var goalPeriod: GoalPeriod = .daily
     @State private var showConfetti = false
     
+    // 学习目标服务
+    private let learningGoalService = LearningGoalService.shared
+    
     // 目标周期选项
     enum GoalPeriod: String, CaseIterable, Identifiable {
         case daily = "每日"

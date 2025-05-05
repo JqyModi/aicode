@@ -17,6 +17,12 @@ struct HomeView: View {
     @State private var selectedTab = 0
     @State private var animateGradient = false
     @State private var isShowWordDetailView = false
+    @State private var isShowProgressTestView = false
+    
+    // 学习目标数据
+    @State private var learningGoal: LearningGoal = LearningGoal.defaultGoal
+    private let learningGoalService = LearningGoalService.shared
+    @State private var cancellables = Set<AnyCancellable>()
     
     // 获取当前时间段的问候语
     private var greetingText: String {
@@ -94,6 +100,13 @@ struct HomeView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
+            
+            // 订阅学习目标变化
+            learningGoalService.goalPublisher
+                .sink { updatedGoal in
+                    self.learningGoal = updatedGoal
+                }
+                .store(in: &cancellables)
         }
         .sheet(isPresented: $isShowWordDetailView) {
             WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
@@ -103,6 +116,10 @@ struct HomeView: View {
 //            UIViewControllerPreview {
 //                JapaneseTextParserViewController()
 //            }
+        }
+        .sheet(isPresented: $isShowProgressTestView) {
+            // 学习进度测试视图
+            LearningProgressTestView()
         }
     }
     
@@ -282,17 +299,17 @@ struct HomeView: View {
                                 .frame(width: 70, height: 70)
                             
                             Circle()
-                                .trim(from: 0, to: 0.65)
+                                .trim(from: 0, to: CGFloat(learningGoal.wordProgressPercentage))
                                 .stroke(Color("Primary"), lineWidth: 8)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
-                            Text("65%")
+                            Text("\(Int(learningGoal.wordProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("单词")
+                        Text("单词 \(learningGoal.wordProgress)/\(learningGoal.wordGoal)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -305,17 +322,17 @@ struct HomeView: View {
                                 .frame(width: 70, height: 70)
                             
                             Circle()
-                                .trim(from: 0, to: 0.4)
+                                .trim(from: 0, to: CGFloat(learningGoal.grammarProgressPercentage))
                                 .stroke(Color("Primary"), lineWidth: 8)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
-                            Text("40%")
+                            Text("\(Int(learningGoal.grammarProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("语法")
+                        Text("语法 \(learningGoal.grammarProgress)/\(learningGoal.grammarGoal)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -328,17 +345,17 @@ struct HomeView: View {
                                 .frame(width: 70, height: 70)
                             
                             Circle()
-                                .trim(from: 0, to: 0.25)
+                                .trim(from: 0, to: CGFloat(learningGoal.readingProgressPercentage))
                                 .stroke(Color("Primary"), lineWidth: 8)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
-                            Text("25%")
+                            Text("\(Int(learningGoal.readingProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
                         
-                        Text("阅读")
+                        Text("阅读 \(learningGoal.readingProgress)/\(learningGoal.readingGoal)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -487,6 +504,7 @@ struct HomeView: View {
             HStack {
                 Spacer()
                 
+                // 学习进度测试按钮（长按触发）
                 Button(action: {
                     /* 打开学习中心 */
                     isShowWordDetailView.toggle()
@@ -502,6 +520,16 @@ struct HomeView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .simultaneousGesture(
+                    LongPressGesture(minimumDuration: 1.0)
+                        .onEnded { _ in
+                            // 长按打开学习进度测试视图
+                            isShowWordDetailView = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                isShowProgressTestView = true
+                            }
+                        }
+                )
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
             }
@@ -552,9 +580,11 @@ struct HomeView_Previews: PreviewProvider {
         let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
         let userService = UserService(userRepository: UserAuthDataRepository())
         
-        HomeView(
-            searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
-            userViewModel: UserViewModel(userService: userService)
-        )
+        NavigationView {
+            HomeView(
+                searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
+                userViewModel: UserViewModel(userService: userService)
+            )
+        }
     }
 }
