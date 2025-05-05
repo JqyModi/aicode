@@ -34,39 +34,27 @@ struct FavoritesView: View {
     // 分类选项
     private let categories = ["全部", "单词", "语法", "例句", "笔记"]
     
-    // 模拟收藏夹数据
-    private let folders = [
-        ("默认收藏夹", 42),
-        ("N5词汇", 28),
-        ("常用会话", 15),
-        ("旅行必备", 8)
-    ]
+    // 收藏夹数据
+    @State private var folders: [(String, Int)] = []
     
-    // 模拟收藏单词数据
-    private let favoriteWords = [
-        ("こんにちは", "你好", "konnichiwa", "1", "单词"),
-        ("ありがとう", "谢谢", "arigatou", "2", "单词"),
-        ("さようなら", "再见", "sayounara", "3", "单词"),
-        ("お願いします", "拜托了", "onegaishimasu", "4", "单词"),
-        ("すみません", "对不起/打扰了", "sumimasen", "5", "单词"),
-        ("「〜てください」", "请~（请求）", "te kudasai", "6", "语法"),
-        ("「〜ています」", "正在~（进行时）", "te imasu", "7", "语法"),
-        ("明日は晴れるでしょう", "明天可能会放晴", "ashita wa hareru deshou", "8", "例句")
-    ]
+    // 收藏项数据
+    @State private var favoriteItems: [FavoriteItemViewModel] = []
+    @State private var isLoading = false
+    @State private var errorMessage: String? = nil
     
     // 过滤后的收藏内容
-    private var filteredFavorites: [(String, String, String, String, String)] {
+    private var filteredFavorites: [FavoriteItemViewModel] {
         let categoryFiltered = selectedCategory == 0 ?
-            favoriteWords :
-            favoriteWords.filter { $0.4 == categories[selectedCategory] }
+            favoriteItems :
+            favoriteItems.filter { $0.type == categories[selectedCategory] }
         
         if searchText.isEmpty {
             return categoryFiltered
         } else {
             return categoryFiltered.filter {
-                $0.0.localizedCaseInsensitiveContains(searchText) ||
-                $0.1.localizedCaseInsensitiveContains(searchText) ||
-                $0.2.localizedCaseInsensitiveContains(searchText)
+                $0.word.localizedCaseInsensitiveContains(searchText) ||
+                $0.meaning.localizedCaseInsensitiveContains(searchText) ||
+                $0.reading.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
@@ -78,30 +66,58 @@ struct FavoritesView: View {
             Color(UIColor.systemBackground)
                 .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                // 顶部导航栏
-                topNavigationBar
-                
-                // 搜索栏
-                searchBar
-                    .padding(.horizontal)
-                    .padding(.top, 10)
-                    .padding(.bottom, 5)
-                
-                // 分类选择器
-                categorySelector
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
-                
-                // 收藏夹横向滚动
-                foldersScrollView
-                    .padding(.top, 5)
-                
-                // 收藏内容列表
-                if filteredFavorites.isEmpty {
-                    emptyStateView
-                } else {
-                    favoritesList
+            if isLoading {
+                // 加载中视图
+                ProgressView("加载中...")
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(1.2)
+            } else if let error = errorMessage {
+                // 错误视图
+                VStack(spacing: 20) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.system(size: 60))
+                        .foregroundColor(.orange)
+                    
+                    Text(error)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    
+                    Button(action: { loadFavoriteData() }) {
+                        Text("重试")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 12)
+                            .background(Capsule().fill(Color("Primary")))
+                    }
+                }
+            } else {
+                VStack(spacing: 0) {
+                    // 顶部导航栏
+                    topNavigationBar
+                    
+                    // 搜索栏
+                    searchBar
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                        .padding(.bottom, 5)
+                    
+                    // 分类选择器
+                    categorySelector
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                    
+                    // 收藏夹横向滚动
+                    foldersScrollView
+                        .padding(.top, 5)
+                    
+                    // 收藏内容列表
+                    if filteredFavorites.isEmpty {
+                        emptyStateView
+                    } else {
+                        favoritesList
+                    }
                 }
             }
         }
@@ -111,6 +127,9 @@ struct FavoritesView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
+            
+            // 加载收藏数据
+            loadFavoriteData()
         }
         .sheet(isPresented: $showWordDetail) {
             // 单词详情页面
@@ -127,6 +146,55 @@ struct FavoritesView: View {
         .sheet(isPresented: $showCreateFolder) {
             createFolderView
         }
+    }
+    
+    // MARK: - 加载收藏数据
+    private func loadFavoriteData() {
+        isLoading = true
+        errorMessage = nil
+        
+        // 加载收藏夹
+        favoriteViewModel.favoriteService.getAllFolders()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        self.errorMessage = "加载收藏夹失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { folderSummaries in
+                    // 更新收藏夹数据
+                    self.folders = folderSummaries.map { ($0.name, $0.itemCount) }
+                    
+                    // 如果有收藏夹，加载第一个收藏夹的内容
+                    if let firstFolder = folderSummaries.first {
+                        self.loadFolderItems(folderId: firstFolder.id)
+                    } else {
+                        self.isLoading = false
+                        self.favoriteItems = []
+                    }
+                }
+            )
+            .store(in: &favoriteViewModel.cancellables)
+    }
+    
+    // 加载收藏夹内容
+    private func loadFolderItems(folderId: String) {
+        favoriteViewModel.favoriteService.getFolderItems(folderId: folderId, limit: 100, offset: 0)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { completion in
+                    self.isLoading = false
+                    if case .failure(let error) = completion {
+                        self.errorMessage = "加载收藏内容失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { folderContent in
+                    // 将领域模型转换为视图模型
+                    self.favoriteItems = folderContent.items.map { FavoriteItemViewModel.fromDomain($0) }
+                }
+            )
+            .store(in: &favoriteViewModel.cancellables)
     }
     
     // MARK: - 顶部导航栏

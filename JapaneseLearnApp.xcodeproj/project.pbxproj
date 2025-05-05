@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52D432D2DC91A8800D46D56 /* FavoriteItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */; };
 		C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C551C4052DB8B467003A0242 /* WordDetailView.swift */; };
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItemViewModel.swift; sourceTree = "<group>"; };
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		C59604782DB4912300123ED1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */,
 				C59604802DB50F8800123ED1 /* SyncViewModel.swift */,
 				C596047E2DB4D7DB00123ED1 /* UserViewModel.swift */,
 				C596047C2DB49CC200123ED1 /* FavoriteViewModel.swift */,
@@ -429,6 +432,7 @@
 				C5AE4A712DC7D29100A12B42 /* LearningGoalService.swift in Sources */,
 				C5AE4A732DC7D2B200A12B42 /* LearningProgressTestView.swift in Sources */,
 				C59604812DB50F8800123ED1 /* SyncViewModel.swift in Sources */,
+				C52D432D2DC91A8800D46D56 /* FavoriteItemViewModel.swift in Sources */,
 				C59604992DB5F06300123ED1 /* Components.swift in Sources */,
 				C596049A2DB5F06300123ED1 /* HomeView.swift in Sources */,
 				C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */,

@@ -12,8 +12,8 @@ import AVFoundation
 class DetailViewModel: DetailViewModelProtocol {
     // MARK: - 依赖注入
     private let dictionaryService: DictionaryServiceProtocol
-    private let favoriteService: FavoriteServiceProtocol
-    private var cancellables = Set<AnyCancellable>()
+    public let favoriteService: FavoriteServiceProtocol
+    public var cancellables = Set<AnyCancellable>()
     
     // MARK: - 音频播放器
     private var audioPlayer: AVAudioPlayer?
