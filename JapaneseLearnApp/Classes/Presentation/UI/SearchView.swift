@@ -112,13 +112,24 @@ struct SearchView: View {
         .sheet(isPresented: $showWordDetail) {
             // 单词详情页面
             if let wordId = selectedWordId {
-                WordDetailView(
-                    detailViewModel: DetailViewModel(
-                        dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
-                    ),
-                    wordId: wordId
-                )
+                if #available(iOS 16.4, *) {
+                    WordDetailView(
+                        detailViewModel: DetailViewModel(
+                            dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                        ),
+                        wordId: wordId
+                    )
+                    .presentationCompactAdaptation(.fullScreenCover)
+                } else {
+                    WordDetailView(
+                        detailViewModel: DetailViewModel(
+                            dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                        ),
+                        wordId: wordId
+                    )
+                }
             }
         }
     }
@@ -466,10 +477,11 @@ struct SearchView: View {
             LazyVStack(spacing: 15) {
                 ForEach(searchViewModel.searchResults, id: \.id) { result in
                     wordResultCard(result)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             selectedWordId = result.id
-                            showWordDetail = true
                             searchViewModel.selectWord(id: result.id)
+                            showWordDetail = true
                         }
                 }
                 
@@ -540,8 +552,8 @@ struct SearchView: View {
                 
                 Button(action: {
                     selectedWordId = result.id
-                    showWordDetail = true
                     searchViewModel.selectWord(id: result.id)
+                    showWordDetail = true
                 }) {
                     HStack(spacing: 5) {
                         Text("查看详情")

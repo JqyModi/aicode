@@ -103,7 +103,12 @@ struct UserProfileView: View {
         }
         .sheet(isPresented: $showSettings) {
             // 设置视图（占位）
-            settingsView
+            if #available(iOS 16.4, *) {
+                settingsView
+                    .presentationCompactAdaptation(.fullScreenCover)
+            } else {
+                settingsView
+            }
         }
         .sheet(isPresented: $showWordDetail) {
             // 单词详情页面

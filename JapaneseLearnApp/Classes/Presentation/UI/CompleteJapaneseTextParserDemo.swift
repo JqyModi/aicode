@@ -113,6 +113,7 @@ struct CompleteRichTextView: UIViewRepresentable {
         textView.isScrollEnabled = true
         textView.backgroundColor = .clear
         textView.delegate = context.coordinator
+        textView.showsVerticalScrollIndicator = false
         
         // 设置富文本内容
         updateTextView(textView)
