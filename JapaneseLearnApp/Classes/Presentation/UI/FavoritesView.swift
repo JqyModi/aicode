@@ -350,52 +350,52 @@ struct FavoritesView: View {
     private var favoritesList: some View {
         ScrollView {
             LazyVStack(spacing: 15) {
-                ForEach(filteredFavorites, id: \.0) { item in
+                ForEach(filteredFavorites) { item in
                     Button(action: {
                         if isEditMode {
-                            if selectedItems.contains(item.3) {
-                                selectedItems.remove(item.3)
+                            if selectedItems.contains(item.id) {
+                                selectedItems.remove(item.id)
                             } else {
-                                selectedItems.insert(item.3)
+                                selectedItems.insert(item.id)
                             }
                         } else {
-                            selectedWordId = item.3
+                            selectedWordId = item.wordId
                             showWordDetail = true
                         }
                     }) {
                         HStack {
                             // 选择指示器（编辑模式）
                             if isEditMode {
-                                Image(systemName: selectedItems.contains(item.3) ? "checkmark.circle.fill" : "circle")
+                                Image(systemName: selectedItems.contains(item.id) ? "checkmark.circle.fill" : "circle")
                                     .font(.system(size: 22))
-                                    .foregroundColor(selectedItems.contains(item.3) ? Color("Primary") : .gray)
+                                    .foregroundColor(selectedItems.contains(item.id) ? Color("Primary") : .gray)
                                     .padding(.trailing, 5)
                             }
                             
                             // 内容类型标签
-                            Text(item.4)
+                            Text(item.type)
                                 .font(.system(size: 12))
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
                                 .background(
                                     Capsule()
-                                        .fill(categoryColor(for: item.4))
+                                        .fill(categoryColor(for: item.type))
                                 )
                             
                             VStack(alignment: .leading, spacing: 5) {
-                                Text(item.0)
+                                Text(item.word)
                                     .font(.system(size: 18, weight: .medium))
                                     .foregroundColor(.primary)
                                 
-                                Text(item.2)
+                                Text(item.reading)
                                     .font(.system(size: 14))
                                     .foregroundColor(.secondary)
                             }
                             
                             Spacer()
                             
-                            Text(item.1)
+                            Text(item.meaning)
                                 .font(.system(size: 16))
                                 .foregroundColor(.secondary)
                             
@@ -413,7 +413,7 @@ struct FavoritesView: View {
                         )
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(selectedItems.contains(item.3) && isEditMode ? Color("Primary") : Color.clear, lineWidth: 2)
+                                .stroke(selectedItems.contains(item.id) && isEditMode ? Color("Primary") : Color.clear, lineWidth: 2)
                         )
                     }
                     .buttonStyle(PlainButtonStyle())
