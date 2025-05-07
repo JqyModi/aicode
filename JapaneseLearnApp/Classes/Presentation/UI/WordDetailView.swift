@@ -15,6 +15,7 @@ struct WordDetailView: View {
     @ObservedObject var detailViewModel: DetailViewModel
     @Environment(\.presentationMode) var presentationMode
     @State private var showNoteEditor = false
+    @State private var showFolderSelection = false
     @State private var noteText = ""
     @State private var animateGradient = false
     @State private var showAllExamples = false
@@ -107,6 +108,14 @@ struct WordDetailView: View {
                 
                 // 浮动收藏按钮
                 floatingActionButton
+                
+                // 收藏夹选择视图
+                .sheet(isPresented: $showFolderSelection) {
+                    FolderSelectionView(
+                        viewModel: detailViewModel,
+                        wordId: wordId
+                    )
+                }
             }
         }
         .navigationBarHidden(true)
@@ -579,7 +588,15 @@ struct WordDetailView: View {
                 .padding(.trailing, 15)
                 
                 // 收藏按钮
-                Button(action: { detailViewModel.toggleFavorite() }) {
+                Button(action: {
+                    if detailViewModel.isFavorited {
+                        // 如果已收藏，则取消收藏
+                        detailViewModel.toggleFavorite()
+                    } else {
+                        // 如果未收藏，显示收藏夹选择视图
+                        showFolderSelection = true
+                    }
+                }) {
                     ZStack {
                         Circle()
                             .fill(themeGradient)

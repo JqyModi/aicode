@@ -23,6 +23,7 @@ class DetailViewModel: DetailViewModelProtocol {
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var isFavorited: Bool = false
+    @Published var folders: [FolderSummaryDomain] = []
     
     // MARK: - 当前单词ID
     private var currentWordId: String? = nil
@@ -87,12 +88,9 @@ class DetailViewModel: DetailViewModelProtocol {
             return
         }
         
-        isLoading = true
-        
         if isFavorited {
             // 从收藏中删除
-            // 注意：这里简化处理，实际应用中需要先获取收藏项ID
-            // 这里假设favoriteService有一个方法可以通过wordId删除收藏
+            isLoading = true
             favoriteService.deleteFavorite(id: wordId)
                 .receive(on: DispatchQueue.main)
                 .sink(
@@ -110,31 +108,93 @@ class DetailViewModel: DetailViewModelProtocol {
                 )
                 .store(in: &cancellables)
         } else {
-            // 添加到收藏
-            // 注意：这里简化处理，使用默认收藏夹
-            // 实际应用中可能需要让用户选择收藏夹
-            favoriteService.getAllFolders()
-                .receive(on: DispatchQueue.main)
-                .flatMap { [weak self] folders -> AnyPublisher<FavoriteItemDetailDomain, FavoriteErrorDomain> in
-                    guard let self = self, let defaultFolder = folders.first else {
-                        return Fail(error: FavoriteErrorDomain.folderNotFound).eraseToAnyPublisher()
-                    }
-                    return self.favoriteService.addFavorite(wordId: wordId, folderId: defaultFolder.id, note: nil)
-                }
-                .receive(on: DispatchQueue.main)
-                .sink(
-                    receiveCompletion: { [weak self] completion in
-                        self?.isLoading = false
-                        if case .failure(let error) = completion {
-                            self?.errorMessage = "添加收藏失败: \(error.localizedDescription)"
-                        }
-                    },
-                    receiveValue: { [weak self] _ in
-                        self?.isFavorited = true
-                    }
-                )
-                .store(in: &cancellables)
+            // 显示收藏夹选择视图，让用户选择要收藏到的文件夹
+            // 这部分逻辑在WordDetailView中实现
         }
+    }
+    
+    // MARK: - 收藏夹相关方法
+    func loadFolders() {
+        isLoading = true
+        errorMessage = nil
+        
+        favoriteService.getAllFolders()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.isLoading = false
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "获取收藏夹失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] folders in
+                    self?.folders = folders
+                    
+                    // 如果没有收藏夹，创建一个默认收藏夹
+                    if folders.isEmpty {
+                        self?.createDefaultFolder()
+                    }
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func createFolder(name: String, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        errorMessage = nil
+        
+        favoriteService.createFolder(name: name)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completionStatus in
+                    self?.isLoading = false
+                    if case .failure(let error) = completionStatus {
+                        self?.errorMessage = "创建收藏夹失败: \(error.localizedDescription)"
+                        completion(false)
+                    }
+                },
+                receiveValue: { [weak self] folder in
+                    self?.folders.append(folder)
+                    completion(true)
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    private func createDefaultFolder() {
+        favoriteService.createFolder(name: "默认收藏夹")
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "创建默认收藏夹失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] folder in
+                    self?.folders.append(folder)
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    func addToFolder(wordId: String, folderId: String) {
+        isLoading = true
+        errorMessage = nil
+        
+        favoriteService.addFavorite(wordId: wordId, folderId: folderId, note: nil)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.isLoading = false
+                    if case .failure(let error) = completion {
+                        self?.errorMessage = "添加收藏失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] _ in
+                    self?.isFavorited = true
+                }
+            )
+            .store(in: &cancellables)
     }
     
     func addNote(note: String) {
