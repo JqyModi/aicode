@@ -84,6 +84,7 @@ struct HomeView: View {
                             favoritesCard
                         }
                         
+                        
                         // 学习建议
                         learningTipsCard
                     }
@@ -107,6 +108,11 @@ struct HomeView: View {
                     self.learningGoal = updatedGoal
                 }
                 .store(in: &cancellables)
+            
+            // 加载用户收藏夹数据
+            if userViewModel.isLoggedIn {
+                loadUserFolders()
+            }
         }
         .sheet(isPresented: $isShowWordDetailView) {
             WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
@@ -422,6 +428,34 @@ struct HomeView: View {
         .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
     
+    // 收藏夹数据
+    @State private var userFolders: [(String, String, Int)] = [] // (id, name, itemCount)
+    @State private var isFoldersLoading = false
+    @State private var folderErrorMessage: String? = nil
+    private let favoriteService = FavoriteService(favoriteRepository: FavoriteDataRepository())
+    
+    // 加载用户收藏夹数据
+    private func loadUserFolders() {
+        isFoldersLoading = true
+        folderErrorMessage = nil
+        
+        favoriteService.getAllFolders()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { completion in
+                    self.isFoldersLoading = false
+                    if case .failure(let error) = completion {
+                        self.folderErrorMessage = "加载收藏夹失败: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { folderSummaries in
+                    // 更新收藏夹数据
+                    self.userFolders = folderSummaries.map { ($0.id, $0.name, $0.itemCount) }
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
     // 收藏夹快速访问
     private var favoritesCard: some View {
         ZStack {
@@ -441,7 +475,12 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: SearchView(searchViewModel: searchViewModel)) {
+                    NavigationLink(destination: FavoritesView(
+                        favoriteViewModel: DetailViewModel(
+                            dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                        )
+                    )) {
                         Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
@@ -449,31 +488,100 @@ struct HomeView: View {
                 }
                 
                 if userViewModel.isLoggedIn {
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
-                        ForEach(["日常对话", "JLPT N3", "拟态语", "旅行"], id: \.self) { category in
-                            Button(action: { /* 查看分类 */ }) {
-                                HStack {
-                                    Text(category)
-                                        .font(.system(size: 16))
-                                        .foregroundColor(Color("Primary"))
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "chevron.right")
-                                        .font(.caption)
-                                        .foregroundColor(Color("Primary").opacity(0.7))
-                                }
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color(UIColor.systemBackground))
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
-                                )
+                    if isFoldersLoading {
+                        // 加载中状态
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .scaleEffect(1.0)
+                            Spacer()
+                        }
+                        .frame(height: 100)
+                    } else if let error = folderErrorMessage {
+                        // 错误状态
+                        VStack(spacing: 10) {
+                            Text(error)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.center)
+                            
+                            Button(action: { loadUserFolders() }) {
+                                Text("重试")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 8)
+                                    .background(Capsule().fill(Color("Primary")))
                             }
-                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .frame(height: 100)
+                    } else if userFolders.isEmpty {
+                        // 空状态
+                        VStack(spacing: 10) {
+                            Text("暂无收藏夹")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            
+                            NavigationLink(destination: FavoritesView(
+                                favoriteViewModel: DetailViewModel(
+                                    dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                                )
+                            )) {
+                                Text("创建收藏夹")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 8)
+                                    .background(Capsule().fill(Color("Primary")))
+                            }
+                        }
+                        .frame(height: 100)
+                    } else {
+                        // 显示收藏夹
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
+                            ForEach(userFolders, id: \.0) { folder in
+                                NavigationLink(destination: FavoritesView(
+                                    favoriteViewModel: DetailViewModel(
+                                        dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                                    ),
+                                    initialFolderId: folder.0 // 传递收藏夹ID
+                                )) {
+                                    HStack {
+                                        Text(folder.1) // 文件夹名称
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color("Primary"))
+                                        
+                                        Spacer()
+                                        
+                                        Text("\(folder.2)")
+                                            .font(.caption)
+                                            .foregroundColor(Color("Primary").opacity(0.7))
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 2)
+                                            .background(
+                                                Capsule()
+                                                    .fill(Color("Primary").opacity(0.1))
+                                            )
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption)
+                                            .foregroundColor(Color("Primary").opacity(0.7))
+                                    }
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color(UIColor.systemBackground))
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
                         }
                     }
                 } else {
@@ -536,6 +644,8 @@ struct HomeView: View {
         }
     }
 }
+
+// 学习建议卡片
 
 // 学习建议卡片
 private var learningTipsCard: some View {

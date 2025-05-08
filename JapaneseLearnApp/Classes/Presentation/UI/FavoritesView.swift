@@ -22,6 +22,9 @@ struct FavoritesView: View {
     @State private var isEditMode = false
     @State private var selectedItems = Set<String>()
     
+    // 初始选中的收藏夹ID
+    var initialFolderId: String? = nil
+    
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
@@ -35,7 +38,7 @@ struct FavoritesView: View {
     private let categories = ["全部", "单词", "语法", "例句", "笔记"]
     
     // 收藏夹数据
-    @State private var folders: [(String, Int)] = []
+    @State private var folders: [(String, String, Int)] = [] // (id, name, itemCount)
     
     // 收藏项数据
     @State private var favoriteItems: [FavoriteItemViewModel] = []
@@ -164,10 +167,14 @@ struct FavoritesView: View {
                 },
                 receiveValue: { folderSummaries in
                     // 更新收藏夹数据
-                    self.folders = folderSummaries.map { ($0.name, $0.itemCount) }
+                    self.folders = folderSummaries.map { ($0.id, $0.name, $0.itemCount) }
                     
-                    // 如果有收藏夹，加载第一个收藏夹的内容
-                    if let firstFolder = folderSummaries.first {
+                    // 如果有初始指定的收藏夹ID，则加载该收藏夹内容
+                    if let initialId = self.initialFolderId, let folder = folderSummaries.first(where: { $0.id == initialId }) {
+                        self.loadFolderItems(folderId: folder.id)
+                    }
+                    // 否则，如果有收藏夹，加载第一个收藏夹的内容
+                    else if let firstFolder = folderSummaries.first {
                         self.loadFolderItems(folderId: firstFolder.id)
                     } else {
                         self.isLoading = false
@@ -312,33 +319,39 @@ struct FavoritesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(folders, id: \.0) { folder in
-                        VStack(spacing: 10) {
-                            ZStack {
-                                Circle()
-                                    .fill(themeGradient)
-                                    .frame(width: 60, height: 60)
+                        Button(action: {
+                            // 点击加载该收藏夹内容
+                            self.loadFolderItems(folderId: folder.0)
+                        }) {
+                            VStack(spacing: 10) {
+                                ZStack {
+                                    Circle()
+                                        .fill(themeGradient)
+                                        .frame(width: 60, height: 60)
+                                    
+                                    Image(systemName: "folder.fill")
+                                        .font(.system(size: 28))
+                                        .foregroundColor(.white)
+                                }
                                 
-                                Image(systemName: "folder.fill")
-                                    .font(.system(size: 28))
-                                    .foregroundColor(.white)
+                                Text(folder.1)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.primary)
+                                    .lineLimit(1)
+                                
+                                Text("\(folder.2)项")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.secondary)
                             }
-                            
-                            Text(folder.0)
-                                .font(.system(size: 14))
-                                .foregroundColor(.primary)
-                                .lineLimit(1)
-                            
-                            Text("\(folder.1)项")
-                                .font(.system(size: 12))
-                                .foregroundColor(.secondary)
+                            .frame(width: 90)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                            )
                         }
-                        .frame(width: 90)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
-                        )
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .padding(.horizontal)
