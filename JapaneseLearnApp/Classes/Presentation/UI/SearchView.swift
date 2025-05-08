@@ -85,9 +85,9 @@ struct SearchView: View {
         .navigationBarHidden(true)
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                animateGradient.toggle()
-            }
+//            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                animateGradient.toggle()
+//            }
             
             // 如果有初始搜索文本，则自动执行搜索
             if !initialSearchText.isEmpty {
@@ -255,7 +255,7 @@ struct SearchView: View {
     // MARK: - 历史记录和建议视图
     private var historyAndSuggestionsView: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 20) { // 增加整体垂直间距
                 // 搜索建议卡片
                 if !searchViewModel.suggestions.isEmpty {
                     suggestionsCard
@@ -273,7 +273,8 @@ struct SearchView: View {
                 learningTipsCard
             }
             .padding(.horizontal)
-            .padding(.bottom, 30)
+            .padding(.bottom, 50) // 增加底部间距
+            .padding(.top, 10) // 添加顶部间距
         }
     }
     
@@ -377,32 +378,39 @@ struct SearchView: View {
     
     // MARK: - 热门搜索卡片
     private var trendingSearchesCard: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: -10) {
             Text("热门搜索")
                 .font(.headline)
                 .foregroundColor(.primary)
             
             // 热门搜索标签云
-            FlowLayout(spacing: 10) {
-                // 模拟数据
-                ForEach(["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"], id: \.self) { word in
-                    Button(action: {
-                        searchText = word
-                        searchViewModel.searchQuery = searchText
-                        searchViewModel.search()
-                    }) {
-                        Text(word)
-                            .font(.system(size: 14))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(Color("Primary").opacity(0.1))
-                            )
-                            .foregroundColor(Color("Primary"))
+            // 使用固定高度容器包裹FlowLayout，确保内容不会溢出
+            VStack {
+                FlowLayout(spacing: 2) {
+                    // 模拟数据
+                    ForEach(["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"], id: \.self) { word in
+                        Button(action: {
+                            searchText = word
+                            searchViewModel.searchQuery = searchText
+                            searchViewModel.search()
+                        }) {
+                            Text(word)
+                                .font(.system(size: 14))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(
+                                    Capsule()
+                                        .fill(Color("Primary").opacity(0.1))
+                                )
+                                .foregroundColor(Color("Primary"))
+                        }
                     }
                 }
+                .padding([.leading, .trailing], 10)
+                .frame(height: 120) // 设置固定高度，确保有足够空间显示所有标签
             }
+            // 确保有足够的底部间距
+            .padding(.bottom, 5)
         }
         .padding()
         .background(
@@ -466,8 +474,9 @@ struct SearchView: View {
             }
             .padding(20)
         }
-        .frame(height: 200)
+        .frame(height: 180) // 调整卡片高度，使其更紧凑
         .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+        .padding(.top, 10) // 顶部添加额外间距
     }
     
     // MARK: - 搜索结果视图
@@ -681,10 +690,8 @@ struct FlowLayout<Content: View>: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: spacing) {
-            GeometryReader { geometry in
-                self.generateContent(in: geometry)
-            }
+        GeometryReader { geometry in
+            self.generateContent(in: geometry)
         }
     }
     
@@ -715,7 +722,7 @@ struct FlowLayout<Content: View>: View {
                     return result
                 }
         }
-        .frame(width: geometry.size.width)
+        .frame(width: geometry.size.width, height: -height + spacing * 2)
     }
 }
 
