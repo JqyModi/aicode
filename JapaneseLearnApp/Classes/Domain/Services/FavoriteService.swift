@@ -109,7 +109,7 @@ class FavoriteService: FavoriteServiceProtocol {
             id: entity.id,
             name: entity.name,
             createdAt: entity.createdAt,
-            itemCount: 0, // 这个值可能需要单独查询
+            itemCount: entity.itemCount, // 使用从数据库查询的实际项目数量
             syncStatus: syncStatus
         )
     }

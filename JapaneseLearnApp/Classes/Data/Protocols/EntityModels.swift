@@ -76,6 +76,7 @@ struct FolderEntity {
     let name: String
     let createdAt: Date
     let syncStatus: Int
+    let itemCount: Int
 }
 
 struct FavoriteItemEntity {

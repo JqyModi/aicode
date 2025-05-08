@@ -33,11 +33,15 @@ class FavoriteDataRepository: FavoriteDataRepositoryProtocol {
                 let folders = realm.objects(DBFolder.self).sorted(byKeyPath: "createdAt", ascending: false)
                 
                 let entities = folders.map { folder in
-                    FolderEntity(
+                    // 获取该收藏夹中的项目数量
+                    let itemCount = realm.objects(DBFavoriteItem.self).filter("folderId == %@", folder.objectId).count
+                    
+                    return FolderEntity(
                         id: folder.objectId,
                         name: folder.name,
                         createdAt: folder.createdAt,
-                        syncStatus: folder.syncStatus
+                        syncStatus: folder.syncStatus,
+                        itemCount: itemCount
                     )
                 }
                 
@@ -79,7 +83,8 @@ class FavoriteDataRepository: FavoriteDataRepositoryProtocol {
                     id: folder.objectId,
                     name: folder.name,
                     createdAt: folder.createdAt,
-                    syncStatus: folder.syncStatus
+                    syncStatus: folder.syncStatus,
+                    itemCount: 0 // 新创建的收藏夹没有项目
                 )
                 
                 promise(.success(entity))
@@ -121,7 +126,8 @@ class FavoriteDataRepository: FavoriteDataRepositoryProtocol {
                     id: folder.objectId,
                     name: folder.name,
                     createdAt: folder.createdAt,
-                    syncStatus: folder.syncStatus
+                    syncStatus: folder.syncStatus,
+                    itemCount: 0 // 新创建的收藏夹没有项目
                 )
                 
                 promise(.success(entity))
