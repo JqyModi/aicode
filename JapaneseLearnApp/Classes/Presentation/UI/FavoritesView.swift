@@ -100,26 +100,37 @@ struct FavoritesView: View {
                     // 顶部导航栏
                     topNavigationBar
                     
-                    // 搜索栏
-                    searchBar
-                        .padding(.horizontal)
-                        .padding(.top, 10)
-                        .padding(.bottom, 5)
+                    // 主内容区域
+                    ScrollView {
+                        VStack(spacing: 15) {
+                            // 搜索栏
+                            searchBar
+                                .padding(.horizontal)
+                                .padding(.top, 10)
+                                .padding(.bottom, 5)
+                            
+                            // 分类选择器
+                            categorySelector
+                                .padding(.horizontal)
+                                .padding(.vertical, 5)
+                            
+                            // 收藏夹横向滚动
+                            foldersScrollView
+                                .padding(.top, 5)
+                            
+                            // 收藏内容列表
+                            if filteredFavorites.isEmpty {
+                                emptyStateView
+                            } else {
+                                favoriteItemsList
+                            }
+                        }
+                        .padding(.bottom, 30)
+                    }
                     
-                    // 分类选择器
-                    categorySelector
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                    
-                    // 收藏夹横向滚动
-                    foldersScrollView
-                        .padding(.top, 5)
-                    
-                    // 收藏内容列表
-                    if filteredFavorites.isEmpty {
-                        emptyStateView
-                    } else {
-                        favoritesList
+                    // 编辑模式下的底部操作栏
+                    if isEditMode {
+                        bottomActionBar
                     }
                 }
             }
@@ -360,116 +371,107 @@ struct FavoritesView: View {
     }
     
     // MARK: - 收藏内容列表
-    private var favoritesList: some View {
-        ScrollView {
-            LazyVStack(spacing: 15) {
-                ForEach(filteredFavorites) { item in
-                    Button(action: {
-                        if isEditMode {
-                            if selectedItems.contains(item.id) {
-                                selectedItems.remove(item.id)
-                            } else {
-                                selectedItems.insert(item.id)
-                            }
+    private var favoriteItemsList: some View {
+        LazyVStack(spacing: 15) {
+            ForEach(filteredFavorites) { item in
+                Button(action: {
+                    if isEditMode {
+                        if selectedItems.contains(item.id) {
+                            selectedItems.remove(item.id)
                         } else {
-                            selectedWordId = item.wordId
-                            showWordDetail = true
+                            selectedItems.insert(item.id)
                         }
-                    }) {
-                        HStack {
-                            // 选择指示器（编辑模式）
-                            if isEditMode {
-                                Image(systemName: selectedItems.contains(item.id) ? "checkmark.circle.fill" : "circle")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(selectedItems.contains(item.id) ? Color("Primary") : .gray)
-                                    .padding(.trailing, 5)
-                            }
+                    } else {
+                        selectedWordId = item.wordId
+                        showWordDetail = true
+                    }
+                }) {
+                    HStack {
+                        // 选择指示器（编辑模式）
+                        if isEditMode {
+                            Image(systemName: selectedItems.contains(item.id) ? "checkmark.circle.fill" : "circle")
+                                .font(.system(size: 22))
+                                .foregroundColor(selectedItems.contains(item.id) ? Color("Primary") : .gray)
+                                .padding(.trailing, 5)
+                        }
+                        
+                        // 内容类型标签
+                        Text(item.type)
+                            .font(.system(size: 12))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Capsule()
+                                    .fill(categoryColor(for: item.type))
+                            )
+                        
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(item.word)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.primary)
                             
-                            // 内容类型标签
-                            Text(item.type)
-                                .font(.system(size: 12))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(
-                                    Capsule()
-                                        .fill(categoryColor(for: item.type))
-                                )
-                            
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(item.word)
-                                    .font(.system(size: 18, weight: .medium))
-                                    .foregroundColor(.primary)
-                                
-                                Text(item.reading)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            Spacer()
-                            
-                            Text(item.meaning)
-                                .font(.system(size: 16))
+                            Text(item.reading)
+                                .font(.system(size: 14))
                                 .foregroundColor(.secondary)
-                            
-                            if !isEditMode {
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                                .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(selectedItems.contains(item.id) && isEditMode ? Color("Primary") : Color.clear, lineWidth: 2)
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .contextMenu {
-                        Button(action: {
-                            // 移动到其他收藏夹
-                        }) {
-                            Label("移动到", systemImage: "folder")
                         }
                         
-                        Button(action: {
-                            // 添加笔记
-                        }) {
-                            Label("添加笔记", systemImage: "note.text")
-                        }
+                        Spacer()
                         
-                        Button(action: {
-                            // 取消收藏
-                        }) {
-                            Label("取消收藏", systemImage: "star.slash")
+                        Text(item.meaning)
+                            .font(.system(size: 16))
+                            .foregroundColor(.secondary)
+                        
+                        if !isEditMode {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
-                        .foregroundColor(.red)
                     }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(UIColor.secondarySystemBackground))
+                            .shadow(color: Color.black.opacity(0.03), radius: 3, x: 0, y: 1)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(selectedItems.contains(item.id) && isEditMode ? Color("Primary") : Color.clear, lineWidth: 2)
+                    )
+                }
+                .buttonStyle(PlainButtonStyle())
+                .contextMenu {
+                    Button(action: {
+                        // 移动到其他收藏夹
+                    }) {
+                        Label("移动到", systemImage: "folder")
+                    }
+                    
+                    Button(action: {
+                        // 添加笔记
+                    }) {
+                        Label("添加笔记", systemImage: "note.text")
+                    }
+                    
+                    Button(action: {
+                        // 取消收藏
+                    }) {
+                        Label("取消收藏", systemImage: "star.slash")
+                    }
+                    .foregroundColor(.red)
                 }
             }
             .padding()
-            .padding(.bottom, 30)
-            
-            // 编辑模式下的底部操作栏
-            if isEditMode {
-                bottomActionBar
-            }
         }
     }
     
     // MARK: - 空状态视图
     private var emptyStateView: some View {
         VStack(spacing: 20) {
-            Spacer()
-            
             Image(systemName: "star.slash")
                 .font(.system(size: 60))
                 .foregroundColor(Color("Primary").opacity(0.5))
+                .padding(.top, 40)
             
             Text("暂无收藏内容")
                 .font(.title2)
@@ -494,9 +496,9 @@ struct FavoritesView: View {
                     )
             }
             .padding(.top, 10)
-            
-            Spacer()
+            .padding(.bottom, 40)
         }
+        .frame(maxWidth: .infinity)
         .padding()
     }
     
@@ -537,7 +539,7 @@ struct FavoritesView: View {
                 .fill(Color(UIColor.secondarySystemBackground))
                 .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -3)
         )
-        .padding(.bottom, 30) // 为底部安全区域留出空间
+//        .padding(.bottom, 30) // 为底部安全区域留出空间
     }
     
     // MARK: - 创建收藏夹视图
