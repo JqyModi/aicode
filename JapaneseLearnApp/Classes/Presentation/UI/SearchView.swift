@@ -377,15 +377,16 @@ struct SearchView: View {
     
     // MARK: - 热门搜索卡片
     private var trendingSearchesCard: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("热门搜索")
                 .font(.headline)
                 .foregroundColor(.primary)
             
             // 热门搜索标签云
-            FlowLayout(spacing: 10) {
+            FlowLayout(spacing: 2) {
                 // 模拟数据
-                ForEach(["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"], id: \.self) { word in
+                let hotArr = ["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"]
+                ForEach(hotArr, id: \.self) { word in
                     Button(action: {
                         searchText = word
                         searchViewModel.searchQuery = searchText
@@ -393,7 +394,7 @@ struct SearchView: View {
                     }) {
                         Text(word)
                             .font(.system(size: 14))
-                            .padding(.horizontal, 12)
+                            .padding(.horizontal, 8)
                             .padding(.vertical, 8)
                             .background(
                                 Capsule()
@@ -403,6 +404,7 @@ struct SearchView: View {
                     }
                 }
             }
+            .frame(minHeight: 150)
         }
         .padding()
         .background(
@@ -715,7 +717,7 @@ struct FlowLayout<Content: View>: View {
                     return result
                 }
         }
-        .frame(width: geometry.size.width)
+        .frame(width: geometry.size.width, height: height)
     }
 }
 
