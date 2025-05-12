@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C52D432D2DC91A8800D46D56 /* FavoriteItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */; };
 		C52D43372DC9EA9100D46D56 /* FolderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */; };
+		C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */; };
 		C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C551C4052DB8B467003A0242 /* WordDetailView.swift */; };
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItemViewModel.swift; sourceTree = "<group>"; };
 		C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSelectionView.swift; sourceTree = "<group>"; };
+		C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCloudView.swift; sourceTree = "<group>"; };
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C53ABAB12DD18D0100C0D44B /* wordcloud */ = {
+			isa = PBXGroup;
+			children = (
+				C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */,
+			);
+			path = wordcloud;
+			sourceTree = "<group>";
+		};
 		C592EF5F2DA5290100784427 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +295,7 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C53ABAB12DD18D0100C0D44B /* wordcloud */,
 				C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */,
 				C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */,
 				C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */,
@@ -428,6 +439,7 @@
 				C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */,
 				C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */,
 				C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */,
+				C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */,

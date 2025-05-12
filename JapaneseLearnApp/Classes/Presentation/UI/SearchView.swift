@@ -383,35 +383,38 @@ struct SearchView: View {
                 .foregroundColor(.primary)
             
             // 热门搜索标签云
-            FlowLayout(spacing: 2) {
-                // 模拟数据
-                let hotArr = ["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"]
-                ForEach(hotArr, id: \.self) { word in
-                    Button(action: {
-                        searchText = word
-                        searchViewModel.searchQuery = searchText
-                        searchViewModel.search()
-                    }) {
-                        Text(word)
-                            .font(.system(size: 14))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(Color("Primary").opacity(0.1))
-                            )
-                            .foregroundColor(Color("Primary"))
-                    }
-                }
-            }
-            .frame(minHeight: 150)
+//            FlowLayout(spacing: 2) {
+//                // 模拟数据
+//                let hotArr = ["こんにちは", "ありがとう", "日本語", "勉強", "学校", "先生", "友達", "美味しい", "楽しい"]
+//                ForEach(hotArr, id: \.self) { word in
+//                    Button(action: {
+//                        searchText = word
+//                        searchViewModel.searchQuery = searchText
+//                        searchViewModel.search()
+//                    }) {
+//                        Text(word)
+//                            .font(.system(size: 14))
+//                            .padding(.horizontal, 8)
+//                            .padding(.vertical, 8)
+//                            .background(
+//                                Capsule()
+//                                    .fill(Color("Primary").opacity(0.1))
+//                            )
+//                            .foregroundColor(Color("Primary"))
+//                    }
+//                }
+//            }
+//            .frame(minHeight: 150)
+            
+            WordCloudView()
+                .frame(width: .infinity, height: 180)
         }
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(UIColor.secondarySystemBackground))
-        )
-        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
+//        .background(
+//            RoundedRectangle(cornerRadius: 16)
+//                .fill(Color(UIColor.secondarySystemBackground))
+//        )
+//        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
     }
     
     // MARK: - 学习提示卡片
