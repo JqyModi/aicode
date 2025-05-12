@@ -581,7 +581,8 @@ struct WordCloudView: View {
 
                 let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
 
-                if !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -2, dy: -2)) }) {
+//                if !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -2, dy: -2)) }) {
+                if !occupiedRects.contains(where: { $0.intersects(candidateRect.offsetBy(dx: -2, dy: -2)) }) {
                     foundPosition = CGPoint(x: x, y: y)
                     occupiedRects.append(candidateRect)
                     break

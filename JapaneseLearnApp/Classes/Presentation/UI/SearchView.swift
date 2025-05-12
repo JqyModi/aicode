@@ -255,7 +255,7 @@ struct SearchView: View {
     // MARK: - 历史记录和建议视图
     private var historyAndSuggestionsView: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 16) {
                 // 搜索建议卡片
                 if !searchViewModel.suggestions.isEmpty {
                     suggestionsCard
@@ -407,7 +407,7 @@ struct SearchView: View {
 //            .frame(minHeight: 150)
             
             WordCloudView()
-                .frame(width: .infinity, height: 180)
+                .frame(width: .infinity, height: 170)
         }
         .padding()
 //        .background(
