@@ -472,6 +472,8 @@ struct WordCloudView: View {
 
     let words: [WordCloudWord]
     
+    var tapItem: ((String) -> Void)? = nil
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -483,6 +485,7 @@ struct WordCloudView: View {
                     .position(item.position)
                     .onTapGesture {
                         tappedWord = item.word.text
+                        tapItem?(item.word.text)
                     }
                 }
                 
@@ -517,9 +520,9 @@ struct WordCloudView: View {
                 }
             }
             
-            .alert(item: $tappedWord) { word in
-                Alert(title: Text("你点击了"), message: Text(word), dismissButton: .default(Text("好的")))
-            }
+//            .alert(item: $tappedWord) { word in
+//                Alert(title: Text("你点击了"), message: Text(word), dismissButton: .default(Text("好的")))
+//            }
         }
     }
 

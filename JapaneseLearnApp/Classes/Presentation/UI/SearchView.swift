@@ -407,7 +407,9 @@ struct SearchView: View {
 //            }
 //            .frame(minHeight: 150)
             
-            WordCloudView(words: hotWordViewModel.hotWords)
+            WordCloudView(words: hotWordViewModel.hotWords, tapItem: { text in
+                self.searchText = text
+            })
                 .frame(width: .infinity, height: 170)
         }
         .padding()
