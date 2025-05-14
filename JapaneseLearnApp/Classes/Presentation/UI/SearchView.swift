@@ -11,6 +11,7 @@ import Combine
 struct SearchView: View {
     // MARK: - 属性
     @ObservedObject var searchViewModel: SearchViewModel
+    @ObservedObject var hotWordViewModel: HotWordViewModel
     @Environment(\.presentationMode) var presentationMode
     @State private var searchText = ""
     @State private var showVoiceInput = false
@@ -406,7 +407,7 @@ struct SearchView: View {
 //            }
 //            .frame(minHeight: 150)
             
-            WordCloudView()
+            WordCloudView(words: hotWordViewModel.hotWords)
                 .frame(width: .infinity, height: 170)
         }
         .padding()
@@ -727,6 +728,6 @@ struct FlowLayout<Content: View>: View {
 // MARK: - 预览
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(searchViewModel: SearchViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository())))
+        SearchView(searchViewModel: SearchViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository())), hotWordViewModel: HotWordViewModel(hotWordService: HotWordService(hotWordRepository: HotWordDataRepository())))
     }
 }

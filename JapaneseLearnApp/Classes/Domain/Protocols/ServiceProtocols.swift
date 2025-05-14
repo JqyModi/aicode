@@ -86,6 +86,13 @@ protocol SyncServiceProtocol {
     func resolveSyncConflict(conflictId: String, resolution: ConflictResolutionDomain) -> AnyPublisher<Bool, SyncErrorDomain>
 }
 
+// MARK: - 热门词汇服务协议
+protocol HotWordServiceProtocol {
+    /// 获取热门词汇列表
+    func getHotWords(limit: Int) -> AnyPublisher<[WordCloudWord], Error>
+}
+
+
 // MARK: - 业务层枚举和数据模型
 enum SearchTypeDomain {
     case auto      // 自动识别

@@ -10,6 +10,10 @@
 		C52D432D2DC91A8800D46D56 /* FavoriteItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */; };
 		C52D43372DC9EA9100D46D56 /* FolderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */; };
 		C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */; };
+		C53ABAB92DD477A400C0D44B /* HotWordDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53ABAB72DD477A400C0D44B /* HotWordDataRepository.swift */; };
+		C53ABABB2DD477C100C0D44B /* HotWordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53ABABA2DD477C000C0D44B /* HotWordService.swift */; };
+		C53ABABD2DD477CF00C0D44B /* HotWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53ABABC2DD477CF00C0D44B /* HotWordViewModel.swift */; };
+		C53ABAC02DD4798600C0D44B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = C53ABABF2DD4798600C0D44B /* SwiftSoup */; };
 		C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C551C4052DB8B467003A0242 /* WordDetailView.swift */; };
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
@@ -72,6 +76,9 @@
 		C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItemViewModel.swift; sourceTree = "<group>"; };
 		C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSelectionView.swift; sourceTree = "<group>"; };
 		C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCloudView.swift; sourceTree = "<group>"; };
+		C53ABAB72DD477A400C0D44B /* HotWordDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotWordDataRepository.swift; sourceTree = "<group>"; };
+		C53ABABA2DD477C000C0D44B /* HotWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotWordService.swift; sourceTree = "<group>"; };
+		C53ABABC2DD477CF00C0D44B /* HotWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotWordViewModel.swift; sourceTree = "<group>"; };
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
@@ -121,6 +128,7 @@
 			files = (
 				C592EF652DA5291100784427 /* RealmSwift in Frameworks */,
 				C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */,
+				C53ABAC02DD4798600C0D44B /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +141,13 @@
 				C53ABAB22DD18D1B00C0D44B /* WordCloudView.swift */,
 			);
 			path = wordcloud;
+			sourceTree = "<group>";
+		};
+		C53ABAB82DD477A400C0D44B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		C592EF5F2DA5290100784427 /* Frameworks */ = {
@@ -166,6 +181,7 @@
 				C596048F2DB55C7200123ED1 /* UserAuthDataRepository.swift */,
 				C596048D2DB55C6100123ED1 /* FavoriteDataRepository.swift */,
 				C596048B2DB55C1800123ED1 /* DictionaryDataRepository.swift */,
+				C53ABAB72DD477A400C0D44B /* HotWordDataRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -182,6 +198,7 @@
 		C59604642DB4876200123ED1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				C53ABAB82DD477A400C0D44B /* Services */,
 				C596045C2DB4876200123ED1 /* Models */,
 				C596045F2DB4876200123ED1 /* Protocols */,
 				C59604602DB4876200123ED1 /* Repositories */,
@@ -270,6 +287,7 @@
 		C59604782DB4912300123ED1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C53ABABC2DD477CF00C0D44B /* HotWordViewModel.swift */,
 				C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */,
 				C59604802DB50F8800123ED1 /* SyncViewModel.swift */,
 				C596047E2DB4D7DB00123ED1 /* UserViewModel.swift */,
@@ -283,6 +301,7 @@
 		C59604862DB5400000123ED1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C53ABABA2DD477C000C0D44B /* HotWordService.swift */,
 				C5AE4A702DC7D29100A12B42 /* LearningGoalService.swift */,
 				C59604822DB5400000123ED1 /* DictionaryService.swift */,
 				C59604832DB5400000123ED1 /* FavoriteService.swift */,
@@ -400,6 +419,7 @@
 			packageReferences = (
 				C592EF5A2DA525C200784427 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				C53ABABE2DD4798600C0D44B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = C5AEDA4B2DA261520031B210 /* Products */;
 			projectDirPath = "";
@@ -428,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C59604942DB5BD9E00123ED1 /* SyncDataRepository.swift in Sources */,
+				C53ABAB92DD477A400C0D44B /* HotWordDataRepository.swift in Sources */,
 				C59604872DB5400000123ED1 /* DictionaryService.swift in Sources */,
 				C59604882DB5400000123ED1 /* FavoriteService.swift in Sources */,
 				C59604902DB55C7200123ED1 /* UserAuthDataRepository.swift in Sources */,
@@ -435,12 +456,14 @@
 				C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */,
 				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
 				C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */,
+				C53ABABD2DD477CF00C0D44B /* HotWordViewModel.swift in Sources */,
 				C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */,
 				C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */,
 				C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */,
 				C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */,
 				C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
+				C53ABABB2DD477C100C0D44B /* HotWordService.swift in Sources */,
 				C59604702DB4876200123ED1 /* EntityModels.swift in Sources */,
 				C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */,
 				C59604712DB4876200123ED1 /* ServiceProtocols.swift in Sources */,
@@ -680,6 +703,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C53ABABE2DD4798600C0D44B /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.7;
+			};
+		};
 		C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
@@ -699,6 +730,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C53ABABF2DD4798600C0D44B /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C53ABABE2DD4798600C0D44B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
 		C55B561B2DAC9F5000418E4C /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C55B561A2DAC9F5000418E4C /* XCRemoteSwiftPackageReference "ZIPFoundation" */;

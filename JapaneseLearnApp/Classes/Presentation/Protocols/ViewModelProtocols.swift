@@ -82,6 +82,16 @@ protocol UserViewModelProtocol: ObservableObject {
     func updateSettings(darkMode: Bool, fontSize: Int, autoSync: Bool)
 }
 
+
+// MARK: - 热门词汇视图模型协议
+protocol HotWordViewModelProtocol: ObservableObject {
+    var hotWords: [WordCloudWord] { get }
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
+    func loadHotWords()
+}
+
+
 // MARK: - 表现层枚举类型
 enum SearchTypeViewModel {
     case auto      // 自动识别

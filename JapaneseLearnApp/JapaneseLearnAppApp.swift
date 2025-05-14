@@ -13,6 +13,7 @@ struct JapaneseLearnAppApp: App {
     // 创建视图模型实例
     let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
     let userService = UserService(userRepository: UserAuthDataRepository())
+    let hotWordService = HotWordService(hotWordRepository: HotWordDataRepository())
     
     var body: some Scene {
         WindowGroup {
@@ -20,7 +21,8 @@ struct JapaneseLearnAppApp: App {
             NavigationView {
                 HomeView(
                     searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
-                    userViewModel: UserViewModel(userService: userService)
+                    userViewModel: UserViewModel(userService: userService),
+                    hotWordViewModel: HotWordViewModel(hotWordService: hotWordService)
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())

@@ -99,6 +99,13 @@ protocol SyncDataRepositoryProtocol {
     func setAutoSync(enabled: Bool) -> AnyPublisher<Bool, Error>
 }
 
+
+// MARK: - 热门词汇服务协议
+protocol HotWordDataRepositoryProtocol {
+    /// 获取热门词汇列表
+    func getHotWords(limit: Int) -> AnyPublisher<[WordCloudWord], Error>
+}
+
 // MARK: - 数据层枚举类型
 enum SearchTypeEntity {
     case auto      // 自动识别

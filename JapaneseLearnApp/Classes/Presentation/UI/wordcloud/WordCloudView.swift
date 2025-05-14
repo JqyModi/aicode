@@ -470,23 +470,7 @@ struct WordCloudView: View {
     @State private var positionedWords: [PositionedWord] = []
     @State private var measuredSizes: [String: CGSize] = [:]
 
-    let words = [
-        WordCloudWord(text: "苹果", frequency: 15),
-        WordCloudWord(text: "香蕉", frequency: 12),
-        WordCloudWord(text: "橘子", frequency: 9),
-        WordCloudWord(text: "西瓜", frequency: 7),
-        WordCloudWord(text: "桃子", frequency: 8),
-        WordCloudWord(text: "葡萄", frequency: 5),
-        WordCloudWord(text: "芒果", frequency: 6),
-        WordCloudWord(text: "柠檬", frequency: 4),
-        WordCloudWord(text: "草莓", frequency: 6),
-        WordCloudWord(text: "pitch4", frequency: 5),
-        WordCloudWord(text: "pitch3", frequency: 4),
-        WordCloudWord(text: "pitch2", frequency: 3),
-        WordCloudWord(text: "pitch1", frequency: 2),
-        WordCloudWord(text: "pitch", frequency: 1),
-        WordCloudWord(text: "李子", frequency: 8)
-    ]
+    let words: [WordCloudWord]
     
     var body: some View {
         GeometryReader { geo in
@@ -631,7 +615,24 @@ extension String: @retroactive Identifiable {
 
 
 #Preview {
-    WordCloudView()
+    let words = [
+        WordCloudWord(text: "苹果", frequency: 15),
+        WordCloudWord(text: "香蕉", frequency: 12),
+        WordCloudWord(text: "橘子", frequency: 9),
+        WordCloudWord(text: "西瓜", frequency: 7),
+        WordCloudWord(text: "桃子", frequency: 8),
+        WordCloudWord(text: "葡萄", frequency: 5),
+        WordCloudWord(text: "芒果", frequency: 6),
+        WordCloudWord(text: "柠檬", frequency: 4),
+        WordCloudWord(text: "草莓", frequency: 6),
+        WordCloudWord(text: "pitch4", frequency: 5),
+        WordCloudWord(text: "pitch3", frequency: 4),
+        WordCloudWord(text: "pitch2", frequency: 3),
+        WordCloudWord(text: "pitch1", frequency: 2),
+        WordCloudWord(text: "pitch", frequency: 1),
+        WordCloudWord(text: "李子", frequency: 8)
+    ]
+    WordCloudView(words: words)
 }
 
 

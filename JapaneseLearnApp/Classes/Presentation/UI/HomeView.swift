@@ -12,6 +12,7 @@ import Combine
 struct HomeView: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var userViewModel: UserViewModel
+    @ObservedObject var hotWordViewModel: HotWordViewModel
     @State private var searchText = ""
     @State private var showingSettings = false
     @State private var selectedTab = 0
@@ -173,7 +174,7 @@ struct HomeView: View {
 //                .foregroundColor(Color("Primary"))
 //                .frame(maxWidth: .infinity, alignment: .leading)
             
-            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, initialSearchText: searchText)) {
+            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, hotWordViewModel: hotWordViewModel, initialSearchText: searchText)) {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(Color("Primary"))
@@ -393,7 +394,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: SearchView(searchViewModel: searchViewModel)) {
+                    NavigationLink(destination: SearchView(searchViewModel: searchViewModel, hotWordViewModel: hotWordViewModel)) {
                         Text("全部")
                             .font(.caption)
                             .foregroundColor(Color("Primary"))
@@ -403,7 +404,7 @@ struct HomeView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ForEach(recentSearches, id: \.self) { word in
-                            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, initialSearchText: word)) {
+                            NavigationLink(destination: SearchView(searchViewModel: searchViewModel, hotWordViewModel: hotWordViewModel, initialSearchText: word)) {
                                 Text(word)
                                     .font(.system(size: 16))
                                     .padding(.horizontal, 15)
@@ -689,11 +690,12 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
         let userService = UserService(userRepository: UserAuthDataRepository())
+        let hotWordService = HotWordService(hotWordRepository: HotWordDataRepository())
         
         NavigationView {
             HomeView(
                 searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
-                userViewModel: UserViewModel(userService: userService)
+                userViewModel: UserViewModel(userService: userService), hotWordViewModel: HotWordViewModel(hotWordService: hotWordService)
             )
         }
     }
