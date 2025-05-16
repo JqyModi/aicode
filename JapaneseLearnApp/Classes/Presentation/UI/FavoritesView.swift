@@ -97,8 +97,7 @@ struct FavoritesView: View {
                 }
             } else {
                 VStack(spacing: 0) {
-                    // 顶部导航栏
-                    topNavigationBar
+                    // topNavigationBar // <-- 删除这一行
                     
                     // 主内容区域
                     ScrollView {
@@ -135,7 +134,40 @@ struct FavoritesView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
+        // .navigationBarHidden(true) // <-- 删除这一行
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundColor(Color("Primary"))
+                        .frame(width: 36, height: 36)
+                        .background(
+                            Circle()
+                                .fill(Color(UIColor.secondarySystemBackground))
+                        )
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                Text("我的收藏")
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color("Primary"))
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { isEditMode.toggle() }) {
+                    Text(isEditMode ? "完成" : "编辑")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(Color("Primary"))
+                        .frame(width: 60, height: 36)
+                        .background(
+                            Capsule()
+                                .fill(Color(UIColor.secondarySystemBackground))
+                        )
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true) // 新增这一行
         .onAppear {
             // 启动渐变动画
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
