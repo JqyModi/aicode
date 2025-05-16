@@ -39,7 +39,8 @@ protocol DetailViewModelProtocol: ObservableObject {
     var isFavorited: Bool { get }
     
     // 方法
-    func loadWordDetails(id: String)
+//    func loadWordDetails(id: String)
+    func loadWordDetails()
     func playPronunciation(speed: Float)
     func toggleFavorite()
     func addNote(note: String)

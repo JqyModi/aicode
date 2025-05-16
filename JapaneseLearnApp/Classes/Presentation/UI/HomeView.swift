@@ -79,7 +79,7 @@ struct HomeView: View {
                         NavigationLink(destination: FavoritesView(
                             favoriteViewModel: DetailViewModel(
                                 dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "" // #warning 补充逻辑
                             )
                         )) {
                             favoritesCard
@@ -116,7 +116,7 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $isShowWordDetailView) {
-            WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())), wordId: "1989103009")
+            WordDetailView(detailViewModel: DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "1989103009"))
 //            CompleteJapaneseTextParserDemo()
 //            JapaneseTextParserDemo()
 //            AdvancedJapaneseTextParserDemo()
@@ -479,7 +479,7 @@ struct HomeView: View {
                     NavigationLink(destination: FavoritesView(
                         favoriteViewModel: DetailViewModel(
                             dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                            favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "" // #warning 补充逻辑
                         )
                     )) {
                         Text("全部")
@@ -527,7 +527,7 @@ struct HomeView: View {
                             NavigationLink(destination: FavoritesView(
                                 favoriteViewModel: DetailViewModel(
                                     dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "1989103009"
                                 )
                             )) {
                                 Text("创建收藏夹")
@@ -546,7 +546,7 @@ struct HomeView: View {
                                 NavigationLink(destination: FavoritesView(
                                     favoriteViewModel: DetailViewModel(
                                         dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: ""
                                     ),
                                     initialFolderId: folder.0 // 传递收藏夹ID
                                 )) {

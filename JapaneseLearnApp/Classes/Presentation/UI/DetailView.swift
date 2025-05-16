@@ -69,7 +69,7 @@ struct DetailView: View {
         }
         .navigationBarHidden(true)
         .onAppear {
-            viewModel.loadWordDetails(id: wordId)
+            viewModel.loadWordDetails()
         }
         .sheet(isPresented: $showNoteEditor) {
             noteEditorView
@@ -341,7 +341,7 @@ struct DetailView: View {
                     ForEach(details.relatedWords) { relatedWord in
                         Button(action: {
                             // 加载相关词汇的详情
-                            viewModel.loadWordDetails(id: relatedWord.id)
+                            viewModel.loadWordDetails()
                         }) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
@@ -462,7 +462,7 @@ struct DetailView: View {
                 .foregroundColor(DesignSystem.Colors.textSecondaryHex)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, DesignSystem.Spacing.standard)
-            Button(action: { viewModel.loadWordDetails(id: wordId) }) {
+            Button(action: { viewModel.loadWordDetails() }) {
                 Text("重试")
                     .font(DesignSystem.Typography.body)
                     .foregroundColor(.white)
@@ -484,7 +484,7 @@ struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
         let favoriteService = FavoriteService(favoriteRepository: FavoriteDataRepository())
-        let viewModel = DetailViewModel(dictionaryService: dictionaryService, favoriteService: favoriteService)
+        let viewModel = DetailViewModel(dictionaryService: dictionaryService, favoriteService: favoriteService, wordId: "1989103009")
         
         return DetailView(viewModel: viewModel, wordId: "1989103009")
     }

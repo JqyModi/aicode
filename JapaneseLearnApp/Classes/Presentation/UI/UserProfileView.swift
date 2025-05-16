@@ -116,9 +116,8 @@ struct UserProfileView: View {
                 WordDetailView(
                     detailViewModel: DetailViewModel(
                         dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
-                    ),
-                    wordId: wordId
+                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: wordId
+                    )
                 )
             }
         }
@@ -369,7 +368,7 @@ struct UserProfileView: View {
                 NavigationLink(destination: FavoritesView(
                     favoriteViewModel: DetailViewModel(
                         dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: ""
                     )
                 )) {
                     Text("查看全部")

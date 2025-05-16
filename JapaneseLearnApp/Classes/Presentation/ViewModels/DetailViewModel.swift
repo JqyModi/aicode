@@ -28,14 +28,23 @@ class DetailViewModel: DetailViewModelProtocol {
     // MARK: - 当前单词ID
     private var currentWordId: String? = nil
     
+    public var wordId: String {
+        currentWordId ?? ""
+    }
+    
     // MARK: - 初始化
-    init(dictionaryService: DictionaryServiceProtocol, favoriteService: FavoriteServiceProtocol) {
+    init(dictionaryService: DictionaryServiceProtocol, favoriteService: FavoriteServiceProtocol, wordId: String) {
         self.dictionaryService = dictionaryService
         self.favoriteService = favoriteService
+        
+        self.currentWordId = wordId
+        self.loadWordDetails()
     }
     
     // MARK: - 公开方法
-    func loadWordDetails(id: String) {
+    func loadWordDetails() {
+        guard let id = currentWordId else { return }
+        
         isLoading = true
         errorMessage = nil
         currentWordId = id

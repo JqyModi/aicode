@@ -25,7 +25,7 @@ struct WordDetailView: View {
     @State private var headerHeight: CGFloat = 250
     
     // 单词ID参数，用于初始加载
-    let wordId: String
+//    let wordId: String
     
     // 用于动画过渡的命名空间
     @Namespace private var namespace
@@ -43,9 +43,9 @@ struct WordDetailView: View {
     private let tabs = ["释义", "例句", "相关词"]
     
     // MARK: - 初始化
-    init(detailViewModel: DetailViewModel, wordId: String) {
+    init(detailViewModel: DetailViewModel) {
         self.detailViewModel = detailViewModel
-        self.wordId = wordId
+//        self.wordId = wordId
     }
     
     // MARK: - 视图
@@ -113,7 +113,7 @@ struct WordDetailView: View {
                 .sheet(isPresented: $showFolderSelection) {
                     FolderSelectionView(
                         viewModel: detailViewModel,
-                        wordId: wordId
+                        wordId: detailViewModel.wordId
                     )
                 }
             }
@@ -128,7 +128,7 @@ struct WordDetailView: View {
         // 使用task修饰符确保在视图出现前就开始加载数据
         .task {
             // 加载单词详情
-            detailViewModel.loadWordDetails(id: wordId)
+//            detailViewModel.loadWordDetails(id: wordId)
         }
         .sheet(isPresented: $showNoteEditor) {
             noteEditorView
@@ -501,7 +501,7 @@ struct WordDetailView: View {
                     ForEach(details.relatedWords) { relatedWord in
                         Button(action: {
                             // 加载相关词汇的详情
-                            detailViewModel.loadWordDetails(id: relatedWord.id)
+                            detailViewModel.loadWordDetails()
                         }) {
                             // 相关词汇卡片 - 更现代的设计
                             VStack(alignment: .leading, spacing: 8) {
@@ -648,7 +648,7 @@ struct WordDetailView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             
-            Button(action: { detailViewModel.loadWordDetails(id: wordId) }) {
+            Button(action: { detailViewModel.loadWordDetails() }) {
                 Text("重试")
                     .font(.headline)
                     .foregroundColor(.white)
@@ -732,9 +732,8 @@ struct WordDetailView_Previews: PreviewProvider {
         WordDetailView(
             detailViewModel: DetailViewModel(
                 dictionaryService: dictionaryService,
-                favoriteService: favoriteService
-            ),
-            wordId: "1989103009"
+                favoriteService: favoriteService, wordId: "1989103009"
+            )
         )
     }
 }

@@ -122,19 +122,17 @@ struct SearchView: View {
             if let wordId = selectedWordId {
                 let detailVM = DetailViewModel(
                     dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: wordId
                 )
                 
                 if #available(iOS 16.4, *) {
                     WordDetailView(
-                        detailViewModel: detailVM,
-                        wordId: wordId
+                        detailViewModel: detailVM
                     )
                     .presentationCompactAdaptation(.fullScreenCover)
                 } else {
                     WordDetailView(
-                        detailViewModel: detailVM,
-                        wordId: wordId
+                        detailViewModel: detailVM
                     )
                 }
             }

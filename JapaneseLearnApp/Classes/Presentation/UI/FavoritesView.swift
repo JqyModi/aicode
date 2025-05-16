@@ -151,9 +151,8 @@ struct FavoritesView: View {
                 WordDetailView(
                     detailViewModel: DetailViewModel(
                         dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
-                    ),
-                    wordId: wordId
+                        favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: wordId
+                    )
                 )
             }
         }
@@ -610,7 +609,7 @@ struct FavoritesView_Previews: PreviewProvider {
         FavoritesView(
             favoriteViewModel: DetailViewModel(
                 dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository())
+                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "1989103009"
             )
         )
     }
