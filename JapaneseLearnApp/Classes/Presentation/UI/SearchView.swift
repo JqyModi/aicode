@@ -47,6 +47,15 @@ struct SearchView: View {
         )
     }
     
+    // MARK: - 私有方法
+    private func loadSearch() {
+        if !searchText.isEmpty {
+            searchViewModel.searchQuery = searchText
+            searchViewModel.searchType = selectedSearchType
+            searchViewModel.search()
+        }
+    }
+    
     // MARK: - 视图
     var body: some View {
         ZStack {
@@ -93,9 +102,7 @@ struct SearchView: View {
             // 如果有初始搜索文本，则自动执行搜索
             if !initialSearchText.isEmpty {
                 searchText = initialSearchText
-                searchViewModel.searchQuery = searchText
-                searchViewModel.searchType = selectedSearchType
-                searchViewModel.search()
+                loadSearch()
             }
         }
         .sheet(isPresented: $showVoiceInput) {
@@ -187,12 +194,11 @@ struct SearchView: View {
                 // 搜索输入框
                 TextField("搜索日语单词、短语或例句", text: $searchText)
                     .font(.system(size: 16))
+                    .onChange(of: searchText, perform: { newValue in
+                        loadSearch()
+                    })
                     .onSubmit {
-                        if !searchText.isEmpty {
-                            searchViewModel.searchQuery = searchText
-                            searchViewModel.searchType = selectedSearchType
-                            searchViewModel.search()
-                        }
+                        loadSearch()
                     }
                 
                 // 清除按钮
@@ -288,8 +294,7 @@ struct SearchView: View {
             ForEach(searchViewModel.suggestions, id: \.self) { suggestion in
                 Button(action: {
                     searchText = suggestion
-                    searchViewModel.searchQuery = searchText
-                    searchViewModel.search()
+                    loadSearch()
                 }) {
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -342,8 +347,7 @@ struct SearchView: View {
             ForEach(searchViewModel.searchHistory.prefix(5), id: \.id) { historyItem in
                 Button(action: {
                     searchText = historyItem.word
-                    searchViewModel.searchQuery = searchText
-                    searchViewModel.search()
+                    loadSearch()
                 }) {
                     HStack {
                         Image(systemName: "clock")
@@ -409,6 +413,7 @@ struct SearchView: View {
             
             WordCloudView(words: hotWordViewModel.hotWords, tapItem: { text in
                 self.searchText = text
+                loadSearch()
             })
                 .frame(width: .infinity, height: 170)
         }
