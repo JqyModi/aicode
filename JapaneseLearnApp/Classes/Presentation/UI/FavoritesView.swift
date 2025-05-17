@@ -21,6 +21,7 @@ struct FavoritesView: View {
     @State private var newFolderName = ""
     @State private var isEditMode = false
     @State private var selectedItems = Set<String>()
+    @State private var selectedFolderId: String? = nil  // 添加这一行来跟踪选中的文件夹
     
     // 初始选中的收藏夹ID
     var initialFolderId: String? = nil
@@ -331,6 +332,7 @@ struct FavoritesView: View {
                     ForEach(folders, id: \.0) { folder in
                         Button(action: {
                             // 点击加载该收藏夹内容
+                            self.selectedFolderId = folder.0
                             self.loadFolderItems(folderId: folder.0)
                         }) {
                             VStack(spacing: 10) {
@@ -362,6 +364,10 @@ struct FavoritesView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color(UIColor.secondarySystemBackground))
                                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(selectedFolderId == folder.0 ? AppTheme.Colors.primary : Color.clear, lineWidth: 2)
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
