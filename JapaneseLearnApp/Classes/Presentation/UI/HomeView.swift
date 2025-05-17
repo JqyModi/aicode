@@ -8,6 +8,15 @@
 import SwiftUI
 import Combine
 
+// 导入主题样式系统
+import Foundation
+
+// 确保可以访问AppTheme
+@available(*, deprecated, message: "请使用AppTheme中定义的样式")
+typealias DeprecatedStyles = Never
+
+// 这里我们假设AppTheme.swift在同一模块中，不需要额外导入
+// 如果AppTheme在不同模块，则需要导入对应模块
 
 struct HomeView: View {
     @ObservedObject var searchViewModel: SearchViewModel
@@ -42,17 +51,13 @@ struct HomeView: View {
     
     // 主题色渐变
     private var themeGradient: LinearGradient {
-        LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
-            startPoint: animateGradient ? .topLeading : .bottomLeading,
-            endPoint: animateGradient ? .bottomTrailing : .topTrailing
-        )
+        AppTheme.Gradients.primaryGradient(animate: animateGradient)
     }
     
     var body: some View {
         ZStack {
             // 背景层
-            Color(UIColor.systemBackground)
+            AppTheme.Colors.background
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -93,8 +98,8 @@ struct HomeView: View {
                         // 学习建议
                         learningTipsCard
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 80) // 为浮动按钮留出空间
+                    .padding(.horizontal, AppTheme.Spacing.screenPadding)
+                .padding(.bottom, 80) // 为浮动按钮留出空间
                 }
             }
             
@@ -103,7 +108,7 @@ struct HomeView: View {
         }
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+            withAnimation(AppTheme.Animations.gradientAnimation) {
                 animateGradient.toggle()
             }
             
@@ -140,28 +145,28 @@ struct HomeView: View {
             // 用户头像 - 导航到个人页面
             NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
                 Image(systemName: userViewModel.isLoggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                    .font(.system(size: 28))
-                    .foregroundColor(Color("Primary"))
+                    .font(.system(size: AppTheme.Sizes.largeIcon))
+                    .foregroundColor(AppTheme.Colors.primary)
             }
             
             Spacer()
             
             // 动态问候语
             Text(greetingText)
-                .font(.title2)
-                .fontWeight(.medium)
-                .foregroundColor(Color("Primary"))
+                .font(AppTheme.Fonts.title2)
+                .fontWeight(AppTheme.FontWeights.medium)
+                .foregroundColor(AppTheme.Colors.primary)
             
             Spacer()
             
             // 设置入口
             Button(action: { showingSettings = true }) {
                 Image(systemName: "gearshape")
-                    .font(.system(size: 22))
-                    .foregroundColor(Color("Primary"))
+                    .font(.system(size: AppTheme.Sizes.mediumIcon))
+                    .foregroundColor(AppTheme.Colors.primary)
             }
         }
-        .padding()
+        .padding(AppTheme.Spacing.cardPadding)
 //        .background(
 //            Rectangle()
 //                .fill(Color(UIColor.secondarySystemBackground))
@@ -198,24 +203,24 @@ struct HomeView: View {
                         // 语音输入按钮
                         Button(action: { /* 语音输入功能 */ }) {
                             Image(systemName: "mic.fill")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                         
                         // 手写识别按钮
                         Button(action: { /* 手写识别功能 */ }) {
                             Image(systemName: "pencil")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                     }
                 }
-                .padding()
+                .padding(AppTheme.Spacing.cardPadding)
                 .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color(UIColor.secondarySystemBackground))
+                    RoundedRectangle(cornerRadius: AppTheme.CornerRadius.large)
+                        .fill(AppTheme.Colors.secondaryBackground)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: AppTheme.CornerRadius.large)
+                        .stroke(AppTheme.Colors.primaryLightest, lineWidth: AppTheme.Borders.thin)
                 )
             }
         }
@@ -225,10 +230,10 @@ struct HomeView: View {
     // 学习建议卡片
     private var learningRecommendationCard: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: AppTheme.CornerRadius.extraLarge)
                 .fill(themeGradient)
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.medium) {
                 HStack {
                     Image(systemName: "lightbulb.fill")
                         .font(.title2)
@@ -263,19 +268,19 @@ struct HomeView: View {
                         .foregroundColor(.white.opacity(0.8))
                 }
             }
-            .padding()
+            .padding(AppTheme.Spacing.cardPadding)
         }
-        .frame(height: 180)
-        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+        .frame(height: AppTheme.Sizes.recommendationCardHeight)
+        .shadow(color: AppTheme.Shadows.large.color, radius: AppTheme.Shadows.large.radius, x: AppTheme.Shadows.large.x, y: AppTheme.Shadows.large.y)
     }
     
     // 学习进度卡片
     private var learningProgressCard: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(UIColor.secondarySystemBackground))
+            RoundedRectangle(cornerRadius: AppTheme.CornerRadius.extraLarge)
+                .fill(AppTheme.Colors.secondaryBackground)
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.medium) {
                 HStack {
                     Image(systemName: "chart.bar.fill")
                         .font(.title2)
@@ -290,13 +295,13 @@ struct HomeView: View {
                     
                     NavigationLink(destination: LearningGoalSettingsView()) {
                         Text("设置目标")
-                            .font(.caption)
-                            .foregroundColor(Color("Primary"))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
+                            .font(AppTheme.Fonts.caption)
+                            .foregroundColor(AppTheme.Colors.primary)
+                            .padding(.horizontal, AppTheme.Spacing.small)
+                            .padding(.vertical, AppTheme.Spacing.tiny)
                             .background(
                                 Capsule()
-                                    .stroke(Color("Primary").opacity(0.5), lineWidth: 1)
+                                    .stroke(AppTheme.Colors.primaryLighter, lineWidth: AppTheme.Borders.thin)
                             )
                     }
                 }
@@ -317,7 +322,7 @@ struct HomeView: View {
                             
                             Text("\(Int(learningGoal.wordProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                         .padding(.bottom, 8)
                         
@@ -341,7 +346,7 @@ struct HomeView: View {
                             
                             Text("\(Int(learningGoal.grammarProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                         .padding(.bottom, 8)
                         
@@ -365,7 +370,7 @@ struct HomeView: View {
                             
                             Text("\(Int(learningGoal.readingProgressPercentage * 100))%")
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                         .padding(.bottom, 8)
                         
@@ -377,19 +382,19 @@ struct HomeView: View {
                 .padding(.top, 8)
                 .frame(maxWidth: .infinity)
             }
-            .padding()
+            .padding(AppTheme.Spacing.cardPadding)
         }
-        .frame(height: 200)
-        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
+        .frame(height: AppTheme.Sizes.progressCardHeight)
+        .shadow(color: AppTheme.Shadows.medium.color, radius: AppTheme.Shadows.medium.radius, x: AppTheme.Shadows.medium.x, y: AppTheme.Shadows.medium.y)
     }
     
     // 最近查询词汇
     private var recentSearchesCard: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(UIColor.secondarySystemBackground))
+            RoundedRectangle(cornerRadius: AppTheme.CornerRadius.extraLarge)
+                .fill(AppTheme.Colors.secondaryBackground)
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.medium) {
                 HStack {
                     Image(systemName: "clock.fill")
                         .font(.title2)
@@ -431,10 +436,10 @@ struct HomeView: View {
                     }
                 }
             }
-            .padding()
+            .padding(AppTheme.Spacing.cardPadding)
         }
-        .frame(height: 130)
-        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
+        .frame(height: AppTheme.Sizes.searchCardHeight)
+        .shadow(color: AppTheme.Shadows.medium.color, radius: AppTheme.Shadows.medium.radius, x: AppTheme.Shadows.medium.x, y: AppTheme.Shadows.medium.y)
     }
     
     // 收藏夹数据
@@ -468,10 +473,10 @@ struct HomeView: View {
     // 收藏夹快速访问
     private var favoritesCard: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(UIColor.secondarySystemBackground))
+            RoundedRectangle(cornerRadius: AppTheme.CornerRadius.extraLarge)
+                .fill(AppTheme.Colors.secondaryBackground)
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.medium) {
                 HStack {
                     Image(systemName: "star.fill")
                         .font(.title2)
@@ -493,7 +498,7 @@ struct HomeView: View {
                         VStack {
                             Text("全部")
                                 .font(.caption)
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                     }
                 }
@@ -564,13 +569,13 @@ struct HomeView: View {
                                     HStack {
                                         Text(folder.1) // 文件夹名称
                                             .font(.system(size: 16))
-                                            .foregroundColor(Color("Primary"))
+                                            .foregroundColor(AppTheme.Colors.primary)
                                         
                                         Spacer()
                                         
                                         Text("\(folder.2)")
-                                            .font(.caption)
-                                            .foregroundColor(Color("Primary").opacity(0.7))
+                                            .font(AppTheme.Fonts.caption)
+                            .foregroundColor(AppTheme.Colors.primaryLight)
                                             .padding(.horizontal, 8)
                                             .padding(.vertical, 2)
                                             .background(
@@ -579,10 +584,10 @@ struct HomeView: View {
                                             )
                                         
                                         Image(systemName: "chevron.right")
-                                            .font(.caption)
-                                            .foregroundColor(Color("Primary").opacity(0.7))
+                                            .font(AppTheme.Fonts.caption)
+                            .foregroundColor(AppTheme.Colors.primaryLight)
                                     }
-                                    .padding()
+                                    .padding(AppTheme.Spacing.cardPadding)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(Color(UIColor.systemBackground))
@@ -601,7 +606,7 @@ struct HomeView: View {
                         Text("登录以显示收藏内容")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
-                            .padding()
+                            .padding(AppTheme.Spacing.cardPadding)
                             .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
@@ -610,7 +615,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .padding()
+            .padding(AppTheme.Spacing.cardPadding)
         }
 //        .frame(height: userViewModel.isLoggedIn ? 220 : 150)
         .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
@@ -668,13 +673,13 @@ private var learningTipsCard: some View {
         VStack(alignment: .leading, spacing: 15) {
             HStack {
                 Image(systemName: "lightbulb.fill")
-                    .font(.title2)
-                    .foregroundColor(Color("Primary"))
+                    .font(AppTheme.Fonts.title2)
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 Text("学习提示")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("Primary"))
+                    .font(AppTheme.Fonts.title3)
+                    .fontWeight(AppTheme.FontWeights.bold)
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 Spacer()
             }
@@ -690,7 +695,7 @@ private var learningTipsCard: some View {
             }
             .padding(.vertical, 5)
         }
-        .padding()
+        .padding(AppTheme.Spacing.cardPadding)
     }
     .frame(height: 130)
     .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)

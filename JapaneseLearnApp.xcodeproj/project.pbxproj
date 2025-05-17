@@ -16,6 +16,8 @@
 		C53ABAC02DD4798600C0D44B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = C53ABABF2DD4798600C0D44B /* SwiftSoup */; };
 		C551C4062DB8B467003A0242 /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C551C4052DB8B467003A0242 /* WordDetailView.swift */; };
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
+		C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C5749D382DD8A45000AA0EC0 /* README.md */; };
+		C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D372DD8A45000AA0EC0 /* AppTheme.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
@@ -80,6 +82,8 @@
 		C53ABABA2DD477C000C0D44B /* HotWordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotWordService.swift; sourceTree = "<group>"; };
 		C53ABABC2DD477CF00C0D44B /* HotWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotWordViewModel.swift; sourceTree = "<group>"; };
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
+		C5749D372DD8A45000AA0EC0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		C5749D382DD8A45000AA0EC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -152,6 +156,15 @@
 			children = (
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		C5749D392DD8A45000AA0EC0 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				C5749D372DD8A45000AA0EC0 /* AppTheme.swift */,
+				C5749D382DD8A45000AA0EC0 /* README.md */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		C592EF5F2DA5290100784427 /* Frameworks */ = {
@@ -270,6 +283,7 @@
 		C596046E2DB4876200123ED1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C5749D392DD8A45000AA0EC0 /* Theme */,
 				C5749D342DD88B1900AA0EC0 /* Utils */,
 				C59604982DB5F06300123ED1 /* UI */,
 				C59604782DB4912300123ED1 /* ViewModels */,
@@ -443,6 +457,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */,
 				C5AEDA552DA261560031B210 /* Preview Assets.xcassets in Resources */,
 				C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */,
 			);
@@ -493,6 +508,7 @@
 				C59604752DB4876200123ED1 /* word-core-model.swift in Sources */,
 				C596047F2DB4D7DB00123ED1 /* UserViewModel.swift in Sources */,
 				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
+				C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */,
 				C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */,
 				C596047B2DB4961D00123ED1 /* DetailViewModel.swift in Sources */,
 				C5AE4A6F2DC7C04D00A12B42 /* LearningGoalSettingsView.swift in Sources */,
