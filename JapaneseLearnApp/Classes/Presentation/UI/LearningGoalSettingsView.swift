@@ -62,7 +62,7 @@ struct LearningGoalSettingsView: View {
                             range: 1...100,
                             step: 1,
                             color: Color("Primary"),
-                            description: "每(goalPeriod.rawValue)学习的单词数量"
+                            description: "\(goalPeriod.rawValue)学习的单词数量"
                         )
                         
                         // 语法学习目标
@@ -73,7 +73,7 @@ struct LearningGoalSettingsView: View {
                             range: 1...50,
                             step: 1,
                             color: Color("Primary"),
-                            description: "每(goalPeriod.rawValue)学习的语法点数量"
+                            description: "\(goalPeriod.rawValue)学习的语法点数量"
                         )
                         
                         // 阅读学习目标
@@ -84,8 +84,9 @@ struct LearningGoalSettingsView: View {
                             range: 1...30,
                             step: 1,
                             color: Color("Primary"),
-                            description: "每(goalPeriod.rawValue)阅读的文章数量"
+                            description: "\(goalPeriod.rawValue)阅读的文章数量"
                         )
+                        .padding(.bottom, 16)
                         
                         // 目标总结卡片
                         goalSummaryCard
@@ -101,9 +102,9 @@ struct LearningGoalSettingsView: View {
         .navigationBarHidden(true)
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                animateGradient.toggle()
-            }
+//            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                animateGradient.toggle()
+//            }
             
             // 加载已保存的目标设置（这里使用模拟数据）
             loadSavedGoals()
@@ -153,12 +154,13 @@ struct LearningGoalSettingsView: View {
     
     // MARK: - 目标周期选择器
     private var goalPeriodSelector: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("目标周期")
-                .font(.headline)
-                .foregroundColor(Color("Primary"))
+        VStack(alignment: .leading, spacing: 0) {
+//            Text("目标周期")
+//                .font(.headline)
+//                .foregroundColor(Color("Primary"))
             
             HStack(spacing: 15) {
+//                Spacer()
                 ForEach(GoalPeriod.allCases) { period in
                     Button(action: { goalPeriod = period }) {
                         Text(period.rawValue)
@@ -174,13 +176,14 @@ struct LearningGoalSettingsView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
+//                Spacer()
             }
         }
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(UIColor.secondarySystemBackground))
-        )
+//        .background(
+//            RoundedRectangle(cornerRadius: 20)
+//                .fill(Color(UIColor.secondarySystemBackground))
+//        )
         .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
     
@@ -194,7 +197,7 @@ struct LearningGoalSettingsView: View {
         color: Color,
         description: String
     ) -> some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             // 标题和图标
             HStack {
                 Image(systemName: icon)
@@ -251,6 +254,8 @@ struct LearningGoalSettingsView: View {
             
             // 数值指示器
             HStack {
+                Spacer()
+                    .frame(width: 12)
                 Text("\(Int(range.lowerBound))")
                     .font(.caption)
                     .foregroundColor(.gray)
@@ -260,6 +265,8 @@ struct LearningGoalSettingsView: View {
                 Text("\(Int(range.upperBound))")
                     .font(.caption)
                     .foregroundColor(.gray)
+                Spacer()
+                    .frame(width: 5)
             }
         }
         .padding()
@@ -294,7 +301,7 @@ struct LearningGoalSettingsView: View {
                     .background(Color.white.opacity(0.5))
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("你的(goalPeriod.rawValue)学习计划:")
+                    Text("你的\(goalPeriod.rawValue)学习计划:")
                         .font(.headline)
                         .foregroundColor(.white)
                     
