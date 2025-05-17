@@ -72,10 +72,10 @@ struct HomeView: View {
                         searchSection
                         
                         // 学习建议卡片
-//                        learningRecommendationCard
+                        learningRecommendationCard
                         
                         // 学习进度卡片
-//                        learningProgressCard
+                        learningProgressCard
                         
                         if !recentSearches.isEmpty {
                             // 最近查询词汇

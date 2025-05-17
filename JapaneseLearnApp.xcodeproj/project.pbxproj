@@ -44,7 +44,6 @@
 		C596049A2DB5F06300123ED1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604972DB5F06300123ED1 /* HomeView.swift */; };
 		C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604962DB5F06300123ED1 /* DesignSystem.swift */; };
 		C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604B72DB633AA00123ED1 /* SearchView.swift */; };
-		C59604E12DB698DB00123ED1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604E02DB698DB00123ED1 /* DetailView.swift */; };
 		C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */; };
 		C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */; };
 		C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */; };
@@ -108,7 +107,6 @@
 		C59604962DB5F06300123ED1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		C59604972DB5F06300123ED1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C59604B72DB633AA00123ED1 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		C59604E02DB698DB00123ED1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
 		C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
 		C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserDemo.swift; sourceTree = "<group>"; };
@@ -344,7 +342,6 @@
 				C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */,
 				C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */,
 				C551C4052DB8B467003A0242 /* WordDetailView.swift */,
-				C59604E02DB698DB00123ED1 /* DetailView.swift */,
 				C59604B72DB633AA00123ED1 /* SearchView.swift */,
 				C59604952DB5F06300123ED1 /* Components.swift */,
 				C59604962DB5F06300123ED1 /* DesignSystem.swift */,
@@ -503,7 +500,6 @@
 				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
 				C59604742DB4876200123ED1 /* RealmManager.swift in Sources */,
 				C596047D2DB49CC200123ED1 /* FavoriteViewModel.swift in Sources */,
-				C59604E12DB698DB00123ED1 /* DetailView.swift in Sources */,
 				C59604792DB4912300123ED1 /* SearchViewModel.swift in Sources */,
 				C59604752DB4876200123ED1 /* word-core-model.swift in Sources */,
 				C596047F2DB4D7DB00123ED1 /* UserViewModel.swift in Sources */,
