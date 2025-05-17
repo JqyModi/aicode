@@ -41,7 +41,7 @@ struct SearchView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -146,7 +146,7 @@ struct SearchView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -160,7 +160,7 @@ struct SearchView: View {
             Text("搜索查词")
                 .font(.headline)
                 .fontWeight(.medium)
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             Spacer()
             
@@ -168,7 +168,7 @@ struct SearchView: View {
             Button(action: { searchViewModel.clearHistory() }) {
                 Image(systemName: "trash")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -187,7 +187,7 @@ struct SearchView: View {
             HStack(spacing: 12) {
                 // 搜索图标
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 // 搜索输入框
                 TextField("搜索日语单词、短语或例句", text: $searchText)
@@ -212,13 +212,13 @@ struct SearchView: View {
                     // 语音输入按钮
                     Button(action: { showVoiceInput = true }) {
                         Image(systemName: "mic.fill")
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                     }
                     
                     // 手写识别按钮
                     Button(action: { showHandwritingInput = true }) {
                         Image(systemName: "scribble")
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                     }
                 }
             }
@@ -244,10 +244,10 @@ struct SearchView: View {
                             }
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .foregroundColor(selectedSearchType == searchType.type ? .white : Color("Primary"))
+                            .foregroundColor(selectedSearchType == searchType.type ? .white : AppTheme.Colors.primary)
                             .background(
                                 Capsule()
-                                    .fill(selectedSearchType == searchType.type ? Color("Primary") : Color("Primary").opacity(0.1))
+                                    .fill(selectedSearchType == searchType.type ? AppTheme.Colors.primary : AppTheme.Colors.primaryLightest)
                             )
                         }
                     }
@@ -307,7 +307,7 @@ struct SearchView: View {
                         
                         Image(systemName: "arrow.up.left")
                             .font(.system(size: 12))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                     }
                     .padding(.vertical, 8)
                 }
@@ -338,7 +338,7 @@ struct SearchView: View {
                 Button(action: { searchViewModel.clearHistory() }) {
                     Text("清除")
                         .font(.subheadline)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                 }
             }
             
@@ -401,9 +401,9 @@ struct SearchView: View {
 //                            .padding(.vertical, 8)
 //                            .background(
 //                                Capsule()
-//                                    .fill(Color("Primary").opacity(0.1))
+//                                    .fill(AppTheme.Colors.primaryLightest)
 //                            )
-//                            .foregroundColor(Color("Primary"))
+//                            .foregroundColor(AppTheme.Colors.primary)
 //                    }
 //                }
 //            }
@@ -478,7 +478,7 @@ struct SearchView: View {
             .padding(20)
         }
         .frame(height: 200)
-        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+        .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
     }
     
     // MARK: - 搜索结果视图
@@ -509,7 +509,7 @@ struct SearchView: View {
                         } else {
                             Text("加载更多结果")
                                 .font(.subheadline)
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                                 .padding(.vertical, 10)
                         }
                     }
@@ -541,12 +541,12 @@ struct SearchView: View {
                 // 词性标签
                 Text(result.partOfSpeech)
                     .font(.system(size: 12))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
                     .background(
                         Capsule()
-                            .fill(Color("Primary").opacity(0.1))
+                            .fill(AppTheme.Colors.primaryLightest)
                     )
             }
             
@@ -578,7 +578,7 @@ struct SearchView: View {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 12))
                     }
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 }
             }
         }
@@ -630,7 +630,7 @@ struct SearchView: View {
                     .padding(.vertical, 12)
                     .background(
                         Capsule()
-                            .fill(Color("Primary"))
+                            .fill(AppTheme.Colors.primary)
                     )
             }
             .padding(.top, 10)
@@ -644,7 +644,7 @@ struct SearchView: View {
         VStack(spacing: 15) {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 50))
-                .foregroundColor(Color("Primary").opacity(0.7))
+                .foregroundColor(AppTheme.Colors.primaryLight)
             
             Text("未找到结果")
                 .font(.title2)
@@ -663,7 +663,7 @@ struct SearchView: View {
                     .padding(.vertical, 12)
                     .background(
                         Capsule()
-                            .fill(Color("Primary"))
+                            .fill(AppTheme.Colors.primary)
                     )
             }
             .padding(.top, 10)

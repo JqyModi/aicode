@@ -72,10 +72,10 @@ struct HomeView: View {
                         searchSection
                         
                         // 学习建议卡片
-                        learningRecommendationCard
+//                        learningRecommendationCard
                         
                         // 学习进度卡片
-                        learningProgressCard
+//                        learningProgressCard
                         
                         if !recentSearches.isEmpty {
                             // 最近查询词汇
@@ -180,13 +180,13 @@ struct HomeView: View {
 //            Text("学习日语")
 //                .font(.title)
 //                .fontWeight(.bold)
-//                .foregroundColor(Color("Primary"))
+//                .foregroundColor(AppTheme.Colors.primary)
 //                .frame(maxWidth: .infinity, alignment: .leading)
             
             NavigationLink(destination: SearchView(searchViewModel: searchViewModel, hotWordViewModel: hotWordViewModel, initialSearchText: searchText)) {
                 HStack {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Text(searchText.isEmpty ? "搜索单词、语法、例句" : searchText)
                         .font(.system(size: 16))
@@ -284,12 +284,12 @@ struct HomeView: View {
                 HStack {
                     Image(systemName: "chart.bar.fill")
                         .font(.title2)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Text("学习进度")
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Spacer()
                     
@@ -316,7 +316,7 @@ struct HomeView: View {
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.wordProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -324,7 +324,7 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(AppTheme.Colors.primary)
                         }
-                        .padding(.bottom, 8)
+                        .padding(.bottom, AppTheme.Spacing.medium)
                         
                         Text("单词 \(learningGoal.wordProgress)/\(learningGoal.wordGoal)")
                             .font(.caption)
@@ -340,7 +340,7 @@ struct HomeView: View {
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.grammarProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -348,7 +348,7 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(AppTheme.Colors.primary)
                         }
-                        .padding(.bottom, 8)
+                        .padding(.bottom, AppTheme.Spacing.medium)
                         
                         Text("语法 \(learningGoal.grammarProgress)/\(learningGoal.grammarGoal)")
                             .font(.caption)
@@ -364,7 +364,7 @@ struct HomeView: View {
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.readingProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -372,7 +372,7 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(AppTheme.Colors.primary)
                         }
-                        .padding(.bottom, 8)
+                        .padding(.bottom, AppTheme.Spacing.medium)
                         
                         Text("阅读 \(learningGoal.readingProgress)/\(learningGoal.readingGoal)")
                             .font(.caption)
@@ -398,19 +398,19 @@ struct HomeView: View {
                 HStack {
                     Image(systemName: "clock.fill")
                         .font(.title2)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Text("最近搜索")
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Spacer()
                     
                     NavigationLink(destination: SearchView(searchViewModel: searchViewModel, hotWordViewModel: hotWordViewModel)) {
                         Text("全部")
                             .font(.caption)
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                     }
                 }
                 
@@ -428,7 +428,7 @@ struct HomeView: View {
                                     )
                                     .overlay(
                                         Capsule()
-                                            .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: 1)
                                     )
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -480,12 +480,12 @@ struct HomeView: View {
                 HStack {
                     Image(systemName: "star.fill")
                         .font(.title2)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Text("收藏夹")
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Spacer()
                     
@@ -528,7 +528,7 @@ struct HomeView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 8)
-                                    .background(Capsule().fill(Color("Primary")))
+                                    .background(Capsule().fill(AppTheme.Colors.primary))
                             }
                         }
                         .frame(height: 100)
@@ -550,7 +550,7 @@ struct HomeView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 8)
-                                    .background(Capsule().fill(Color("Primary")))
+                                    .background(Capsule().fill(AppTheme.Colors.primary))
                             }
                             Spacer()
                         }
@@ -569,6 +569,8 @@ struct HomeView: View {
                                     HStack {
                                         Text(folder.1) // 文件夹名称
                                             .font(.system(size: 16))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.5)
                                             .foregroundColor(AppTheme.Colors.primary)
                                         
                                         Spacer()
@@ -580,7 +582,7 @@ struct HomeView: View {
                                             .padding(.vertical, 2)
                                             .background(
                                                 Capsule()
-                                                    .fill(Color("Primary").opacity(0.1))
+                                                    .fill(AppTheme.Colors.primaryLightest)
                                             )
                                         
                                         Image(systemName: "chevron.right")
@@ -594,7 +596,7 @@ struct HomeView: View {
                                     )
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color("Primary").opacity(0.3), lineWidth: 1)
+                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: 1)
                                     )
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -610,7 +612,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color("Primary"))
+                                    .fill(AppTheme.Colors.primary)
                             )
                     }
                 }
@@ -638,7 +640,7 @@ struct HomeView: View {
                         Circle()
                             .fill(themeGradient)
                             .frame(width: 60, height: 60)
-                            .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+                            .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
                         
                         Image(systemName: "book.fill")
                             .font(.system(size: 24))
@@ -687,7 +689,7 @@ private var learningTipsCard: some View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("每天15分钟的学习让你进步")
                     .font(.headline)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 Text("坚持就是力量！定期复习很重要。")
                     .font(.subheadline)

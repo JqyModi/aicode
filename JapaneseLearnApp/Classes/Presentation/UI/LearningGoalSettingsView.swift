@@ -32,7 +32,7 @@ struct LearningGoalSettingsView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -61,7 +61,7 @@ struct LearningGoalSettingsView: View {
                             value: $wordGoal,
                             range: 1...100,
                             step: 1,
-                            color: Color("Primary"),
+                            color: AppTheme.Colors.primary,
                             description: "\(goalPeriod.rawValue)学习的单词数量"
                         )
                         
@@ -72,7 +72,7 @@ struct LearningGoalSettingsView: View {
                             value: $grammarGoal,
                             range: 1...50,
                             step: 1,
-                            color: Color("Primary"),
+                            color: AppTheme.Colors.primary,
                             description: "\(goalPeriod.rawValue)学习的语法点数量"
                         )
                         
@@ -83,7 +83,7 @@ struct LearningGoalSettingsView: View {
                             value: $readingGoal,
                             range: 1...30,
                             step: 1,
-                            color: Color("Primary"),
+                            color: AppTheme.Colors.primary,
                             description: "\(goalPeriod.rawValue)阅读的文章数量"
                         )
                         .padding(.bottom, 16)
@@ -118,7 +118,7 @@ struct LearningGoalSettingsView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -132,7 +132,7 @@ struct LearningGoalSettingsView: View {
             Text("学习目标设置")
                 .font(.headline)
                 .fontWeight(.medium)
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             Spacer()
             
@@ -140,7 +140,7 @@ struct LearningGoalSettingsView: View {
             Button(action: resetGoals) {
                 Image(systemName: "arrow.counterclockwise")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -157,7 +157,7 @@ struct LearningGoalSettingsView: View {
         VStack(alignment: .leading, spacing: 0) {
 //            Text("目标周期")
 //                .font(.headline)
-//                .foregroundColor(Color("Primary"))
+//                .foregroundColor(AppTheme.Colors.primary)
             
             HStack(spacing: 15) {
 //                Spacer()
@@ -172,7 +172,7 @@ struct LearningGoalSettingsView: View {
                                 Capsule()
                                     .fill(goalPeriod == period ? themeGradient : LinearGradient(colors: [Color(UIColor.secondarySystemBackground)], startPoint: .leading, endPoint: .trailing))
                             )
-                            .foregroundColor(goalPeriod == period ? .white : Color("Primary"))
+                            .foregroundColor(goalPeriod == period ? .white : AppTheme.Colors.primary)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
@@ -338,7 +338,7 @@ struct LearningGoalSettingsView: View {
             .padding()
         }
         .frame(height: 200)
-        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+        .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
     }
     
     // MARK: - 保存按钮
@@ -353,7 +353,7 @@ struct LearningGoalSettingsView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .fill(themeGradient)
                 )
-                .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+                .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
         }
         .padding(.top, 10)
     }

@@ -22,7 +22,7 @@ struct UserProfileView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -130,7 +130,7 @@ struct UserProfileView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -144,7 +144,7 @@ struct UserProfileView: View {
             Text("个人中心")
                 .font(.headline)
                 .fontWeight(.medium)
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             Spacer()
             
@@ -152,7 +152,7 @@ struct UserProfileView: View {
             Button(action: { showSettings = true }) {
                 Image(systemName: "gearshape")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -199,7 +199,7 @@ struct UserProfileView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 80, height: 80)
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                         
                         // 头像框装饰
                         Circle()
@@ -234,7 +234,7 @@ struct UserProfileView: View {
                     Button(action: { showEditProfile = true }) {
                         Text("编辑资料")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 8)
                             .background(
@@ -246,7 +246,7 @@ struct UserProfileView: View {
                     Button(action: { userViewModel.signInWithApple() }) {
                         Text("登录")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 8)
                             .background(
@@ -259,7 +259,7 @@ struct UserProfileView: View {
             .padding(25)
         }
         .frame(height: 280)
-        .shadow(color: Color("Primary").opacity(0.3), radius: 10, x: 0, y: 5)
+        .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
     }
     
     // MARK: - 学习统计卡片
@@ -274,12 +274,12 @@ struct UserProfileView: View {
                     VStack(spacing: 10) {
                         ZStack {
                             Circle()
-                                .fill(Color("Primary").opacity(0.1))
+                                .fill(AppTheme.Colors.primaryLightest)
                                 .frame(width: 60, height: 60)
                             
                             Image(systemName: stat.2)
                                 .font(.system(size: 24))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                         
                         Text(stat.1)
@@ -319,11 +319,11 @@ struct UserProfileView: View {
                     VStack(spacing: 8) {
                         Text(tabs[index])
                             .font(.system(size: 16, weight: selectedTab == index ? .semibold : .regular))
-                            .foregroundColor(selectedTab == index ? Color("Primary") : .secondary)
+                            .foregroundColor(selectedTab == index ? AppTheme.Colors.primary : .secondary)
                         
                         // 下划线指示器
                         Rectangle()
-                            .fill(selectedTab == index ? Color("Primary") : Color.clear)
+                            .fill(selectedTab == index ? AppTheme.Colors.primary : Color.clear)
                             .frame(height: 3)
                             .cornerRadius(1.5)
                     }
@@ -373,7 +373,7 @@ struct UserProfileView: View {
                 )) {
                     Text("查看全部")
                         .font(.subheadline)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                 }
             }
             
@@ -438,7 +438,7 @@ struct UserProfileView: View {
                 Button(action: { /* 查看全部 */ }) {
                     Text("查看全部")
                         .font(.subheadline)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                 }
             }
             
@@ -453,7 +453,7 @@ struct UserProfileView: View {
                     HStack {
                         Image(systemName: "clock")
                             .font(.system(size: 16))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                             .frame(width: 30)
                         
                         VStack(alignment: .leading, spacing: 5) {
@@ -505,7 +505,7 @@ struct UserProfileView: View {
                 
                 Text("60%")
                     .font(.subheadline)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
             }
             
             // 进度条
@@ -517,7 +517,7 @@ struct UserProfileView: View {
                         .cornerRadius(4)
                     
                     Rectangle()
-                        .fill(Color("Primary"))
+                        .fill(AppTheme.Colors.primary)
                         .frame(width: geometry.size.width * 0.6, height: 8)
                         .cornerRadius(4)
                 }
@@ -532,7 +532,7 @@ struct UserProfileView: View {
                         // 成就图标
                         ZStack {
                             Circle()
-                                .fill(achievement.3 ? Color("Primary") : Color.gray.opacity(0.2))
+                                .fill(achievement.3 ? AppTheme.Colors.primary : Color.gray.opacity(0.2))
                                 .frame(width: 50, height: 50)
                             
                             Image(systemName: achievement.2)
@@ -590,7 +590,7 @@ struct UserProfileView: View {
                         Rectangle()
                             .fill(
                                 LinearGradient(
-                                    gradient: Gradient(colors: [Color("Primary"), Color("Primary").opacity(0.5)]),
+                                    gradient: Gradient(colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLighter]),
                                     startPoint: .top,
                                     endPoint: .bottom
                                 )
@@ -611,7 +611,7 @@ struct UserProfileView: View {
             // 图表说明
             HStack {
                 Circle()
-                    .fill(Color("Primary"))
+                    .fill(AppTheme.Colors.primary)
                     .frame(width: 8, height: 8)
                 
                 Text("每日学习单词数")
@@ -622,7 +622,7 @@ struct UserProfileView: View {
                 
                 Text("本周平均: 25词/天")
                     .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
             }
             .padding(.top, 8)
         }
@@ -681,7 +681,7 @@ struct UserProfileView: View {
                     } else {
                         Button(action: { userViewModel.signInWithApple() }) {
                             Text("登录")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                         }
                     }
                 }

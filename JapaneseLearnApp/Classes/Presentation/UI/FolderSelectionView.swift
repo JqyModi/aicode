@@ -22,7 +22,7 @@ struct FolderSelectionView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -36,7 +36,7 @@ struct FolderSelectionView: View {
                 VStack(spacing: 15) {
                     Text("选择收藏夹")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                     
                     Text("请选择要将单词添加到的收藏夹")
                         .font(.system(size: 16))
@@ -67,12 +67,12 @@ struct FolderSelectionView: View {
                             Text("创建新收藏夹")
                                 .font(.system(size: 16, weight: .medium))
                         }
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color("Primary"), lineWidth: 1.5)
+                                .stroke(AppTheme.Colors.primary, lineWidth: 1.5)
                         )
                     }
                     
@@ -125,11 +125,11 @@ struct FolderSelectionView: View {
                             // 收藏夹图标
                             Image(systemName: "folder.fill")
                                 .font(.system(size: 22))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                                 .frame(width: 40, height: 40)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("Primary").opacity(0.1))
+                                        .fill(AppTheme.Colors.primaryLightest)
                                 )
                             
                             // 收藏夹名称
@@ -191,7 +191,7 @@ struct FolderSelectionView: View {
             // 标题
             Text("创建新收藏夹")
                 .font(.system(size: 22, weight: .bold))
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             // 输入框
             TextField("收藏夹名称", text: $newFolderName)
@@ -239,7 +239,7 @@ struct FolderSelectionView: View {
                         .padding(.vertical, 14)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(newFolderName.isEmpty ? Color("Primary").opacity(0.5) : Color("Primary"))
+                                .fill(newFolderName.isEmpty ? AppTheme.Colors.primaryLighter : AppTheme.Colors.primary)
                         )
                 }
                 .disabled(newFolderName.isEmpty)
@@ -255,7 +255,7 @@ struct FolderSelectionView: View {
             Spacer()
             ProgressView()
                 .scaleEffect(1.5)
-                .progressViewStyle(CircularProgressViewStyle(tint: Color("Primary")))
+                .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.Colors.primary))
                 .padding()
             Text("加载中...")
                 .font(.system(size: 16))
@@ -290,7 +290,7 @@ struct FolderSelectionView: View {
                     .padding(.vertical, 10)
                     .background(
                         Capsule()
-                            .fill(Color("Primary"))
+                            .fill(AppTheme.Colors.primary)
                     )
             }
             .padding(.top, 10)

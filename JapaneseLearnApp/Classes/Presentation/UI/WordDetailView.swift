@@ -33,7 +33,7 @@ struct WordDetailView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -142,7 +142,7 @@ struct WordDetailView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -157,7 +157,7 @@ struct WordDetailView: View {
                 Text("单词详情")
                     .font(.headline)
                     .fontWeight(.medium)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .transition(.opacity)
                     .animation(.easeInOut, value: scrollOffset < -50)
             }
@@ -168,7 +168,7 @@ struct WordDetailView: View {
             Button(action: { /* 分享功能 */ }) {
                 Image(systemName: "square.and.arrow.up")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -303,13 +303,13 @@ struct WordDetailView: View {
                     VStack(spacing: 8) {
                         Text(tabs[index])
                             .font(.system(size: 16, weight: selectedTab == index ? .bold : .regular))
-                            .foregroundColor(selectedTab == index ? Color("Primary") : .gray)
+                            .foregroundColor(selectedTab == index ? AppTheme.Colors.primary : .gray)
                         
                         // 选中指示器
                         ZStack {
                             if selectedTab == index {
                                 Capsule()
-                                    .fill(Color("Primary"))
+                                    .fill(AppTheme.Colors.primary)
                                     .frame(width: 30, height: 4)
                                     .matchedGeometryEffect(id: "TAB", in: namespace)
                             } else {
@@ -370,7 +370,7 @@ struct WordDetailView: View {
                             .frame(width: 28, height: 28)
                             .background(
                                 Circle()
-                                    .fill(Color("Primary"))
+                                    .fill(AppTheme.Colors.primary)
                             )
                         
                         // 释义文本
@@ -417,11 +417,11 @@ struct WordDetailView: View {
                                 .frame(width: 24, height: 24)
                                 .background(
                                     Circle()
-                                        .fill(Color("Primary"))
+                                        .fill(AppTheme.Colors.primary)
                                 )
                             
                             Rectangle()
-                                .fill(Color("Primary").opacity(0.3))
+                                .fill(AppTheme.Colors.primaryLightest)
                                 .frame(width: 2)
                                 .frame(maxHeight: .infinity)
                         }
@@ -455,12 +455,12 @@ struct WordDetailView: View {
                                     Text("播放例句")
                                         .font(.system(size: 13))
                                 }
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(AppTheme.Colors.primary)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
                                 .background(
                                     Capsule()
-                                        .fill(Color("Primary").opacity(0.1))
+                                        .fill(AppTheme.Colors.primaryLightest)
                                 )
                             }
                             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -525,7 +525,7 @@ struct WordDetailView: View {
                                     .fill(Color(UIColor.secondarySystemBackground))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 16)
-                                            .stroke(Color("Primary").opacity(0.2), lineWidth: 1)
+                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: 1)
                                     )
                             )
                         }
@@ -542,11 +542,11 @@ struct WordDetailView: View {
             HStack {
                 Image(systemName: "lightbulb.fill")
                     .font(.system(size: 18))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 Text("学习提示")
                     .font(.headline)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 Spacer()
             }
@@ -582,7 +582,7 @@ struct WordDetailView: View {
                         
                         Image(systemName: "pencil")
                             .font(.system(size: 20))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(AppTheme.Colors.primary)
                     }
                 }
                 .padding(.trailing, 15)
@@ -601,7 +601,7 @@ struct WordDetailView: View {
                         Circle()
                             .fill(themeGradient)
                             .frame(width: 56, height: 56)
-                            .shadow(color: Color("Primary").opacity(0.3), radius: 8, x: 0, y: 3)
+                            .shadow(color: AppTheme.Colors.primaryLightest, radius: 8, x: 0, y: 3)
                         
                         Image(systemName: detailViewModel.isFavorited ? "star.fill" : "star")
                             .font(.system(size: 22))
@@ -621,7 +621,7 @@ struct WordDetailView: View {
             Spacer()
             ProgressView()
                 .scaleEffect(1.5)
-                .progressViewStyle(CircularProgressViewStyle(tint: Color("Primary")))
+                .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.Colors.primary))
             Text("加载中...")
                 .font(.system(size: 16))
                 .foregroundColor(.gray)
@@ -654,7 +654,7 @@ struct WordDetailView: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 30)
                     .padding(.vertical, 12)
-                    .background(Color("Primary"))
+                    .background(AppTheme.Colors.primary)
                     .cornerRadius(10)
             }
             .padding(.top, 10)
@@ -669,7 +669,7 @@ struct WordDetailView: View {
             HStack {
                 Button(action: { showNoteEditor = false }) {
                     Text("取消")
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                 }
                 
                 Spacer()
@@ -684,7 +684,7 @@ struct WordDetailView: View {
                     showNoteEditor = false
                 }) {
                     Text("保存")
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(AppTheme.Colors.primary)
                         .fontWeight(.bold)
                 }
             }

@@ -28,7 +28,7 @@ struct FavoritesView: View {
     // 主题色渐变
     private var themeGradient: LinearGradient {
         LinearGradient(
-            colors: [Color("Primary"), Color("Primary").opacity(0.7)],
+            colors: [AppTheme.Colors.primary, AppTheme.Colors.primaryLight],
             startPoint: animateGradient ? .topLeading : .bottomLeading,
             endPoint: animateGradient ? .bottomTrailing : .topTrailing
         )
@@ -92,7 +92,7 @@ struct FavoritesView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 30)
                             .padding(.vertical, 12)
-                            .background(Capsule().fill(Color("Primary")))
+                            .background(Capsule().fill(AppTheme.Colors.primary))
                     }
                 }
             } else {
@@ -221,7 +221,7 @@ struct FavoritesView: View {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Image(systemName: "arrow.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
@@ -235,7 +235,7 @@ struct FavoritesView: View {
             Text("我的收藏")
                 .font(.headline)
                 .fontWeight(.medium)
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             Spacer()
             
@@ -243,7 +243,7 @@ struct FavoritesView: View {
             Button(action: { isEditMode.toggle() }) {
                 Text(isEditMode ? "完成" : "编辑")
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                     .frame(width: 60, height: 36)
                     .background(
                         Capsule()
@@ -259,7 +259,7 @@ struct FavoritesView: View {
     private var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             TextField("搜索收藏内容", text: $searchText)
                 .font(.system(size: 16))
@@ -290,12 +290,12 @@ struct FavoritesView: View {
                     }) {
                         Text(categories[index])
                             .font(.system(size: 15, weight: selectedCategory == index ? .semibold : .regular))
-                            .foregroundColor(selectedCategory == index ? .white : Color("Primary"))
+                            .foregroundColor(selectedCategory == index ? .white : AppTheme.Colors.primary)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
                             .background(
                                 Capsule()
-                                    .fill(selectedCategory == index ? Color("Primary") : Color(UIColor.secondarySystemBackground))
+                                    .fill(selectedCategory == index ? AppTheme.Colors.primary : Color(UIColor.secondarySystemBackground))
                             )
                     }
                 }
@@ -321,7 +321,7 @@ struct FavoritesView: View {
                         Text("新建")
                             .font(.system(size: 14))
                     }
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 }
             }
             .padding(.horizontal)
@@ -337,10 +337,10 @@ struct FavoritesView: View {
                                 ZStack {
                                     Circle()
                                         .fill(themeGradient)
-                                        .frame(width: 60, height: 60)
+                                        .frame(width: 50, height: 50)
                                     
                                     Image(systemName: "folder.fill")
-                                        .font(.system(size: 28))
+                                        .font(.system(size: 22))
                                         .foregroundColor(.white)
                                 }
                                 
@@ -348,12 +348,15 @@ struct FavoritesView: View {
                                     .font(.system(size: 14))
                                     .foregroundColor(.primary)
                                     .lineLimit(1)
+                                    .minimumScaleFactor(0.5)
+                                    .padding(.leading)
+                                    .padding(.trailing)
                                 
                                 Text("\(folder.2)项")
                                     .font(.system(size: 12))
                                     .foregroundColor(.secondary)
                             }
-                            .frame(width: 90)
+                            .frame(width: 140)
                             .padding(.vertical, 10)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
@@ -390,13 +393,14 @@ struct FavoritesView: View {
                         if isEditMode {
                             Image(systemName: selectedItems.contains(item.id) ? "checkmark.circle.fill" : "circle")
                                 .font(.system(size: 22))
-                                .foregroundColor(selectedItems.contains(item.id) ? Color("Primary") : .gray)
+                                .foregroundColor(selectedItems.contains(item.id) ? AppTheme.Colors.primary : .gray)
                                 .padding(.trailing, 5)
                         }
                         
                         // 内容类型标签
                         Text(item.type)
                             .font(.system(size: 12))
+                            .lineLimit(3)
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
@@ -408,6 +412,7 @@ struct FavoritesView: View {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(item.word)
                                 .font(.system(size: 18, weight: .medium))
+                                .lineLimit(2)
                                 .foregroundColor(.primary)
                             
                             Text(item.reading)
@@ -419,6 +424,7 @@ struct FavoritesView: View {
                         
                         Text(item.meaning)
                             .font(.system(size: 16))
+                            .lineLimit(3)
                             .foregroundColor(.secondary)
                         
                         if !isEditMode {
@@ -435,7 +441,7 @@ struct FavoritesView: View {
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(selectedItems.contains(item.id) && isEditMode ? Color("Primary") : Color.clear, lineWidth: 2)
+                            .stroke(selectedItems.contains(item.id) && isEditMode ? AppTheme.Colors.primary : Color.clear, lineWidth: 2)
                     )
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -469,7 +475,7 @@ struct FavoritesView: View {
         VStack(spacing: 20) {
             Image(systemName: "star.slash")
                 .font(.system(size: 60))
-                .foregroundColor(Color("Primary").opacity(0.5))
+                .foregroundColor(AppTheme.Colors.primaryLighter)
                 .padding(.top, 40)
             
             Text("暂无收藏内容")
@@ -491,7 +497,7 @@ struct FavoritesView: View {
                     .padding(.vertical, 12)
                     .background(
                         Capsule()
-                            .fill(Color("Primary"))
+                            .fill(AppTheme.Colors.primary)
                     )
             }
             .padding(.top, 10)
@@ -513,7 +519,7 @@ struct FavoritesView: View {
                     Text("移动到")
                         .font(.system(size: 12))
                 }
-                .foregroundColor(selectedItems.isEmpty ? .gray : Color("Primary"))
+                .foregroundColor(selectedItems.isEmpty ? .gray : AppTheme.Colors.primary)
                 .frame(maxWidth: .infinity)
             }
             .disabled(selectedItems.isEmpty)
@@ -571,7 +577,7 @@ struct FavoritesView: View {
                     Text("创建")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color("Primary"))
+                        .background(AppTheme.Colors.primary)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
@@ -624,7 +630,7 @@ extension View {
             
             Image(systemName: icon)
                 .font(.system(size: 60))
-                .foregroundColor(Color("Primary").opacity(0.5))
+                .foregroundColor(AppTheme.Colors.primaryLighter)
             
             Text(message)
                 .font(.title3)

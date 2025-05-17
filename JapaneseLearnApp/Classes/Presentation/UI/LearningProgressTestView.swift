@@ -19,13 +19,13 @@ struct LearningProgressTestView: View {
             Text("学习进度测试")
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(Color("Primary"))
+                .foregroundColor(AppTheme.Colors.primary)
             
             // 当前目标显示
             VStack(alignment: .leading, spacing: 10) {
                 Text("当前学习目标")
                     .font(.headline)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 HStack {
                     Text("单词: \(learningGoal.wordGoal)")
@@ -49,7 +49,7 @@ struct LearningProgressTestView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("当前学习进度")
                     .font(.headline)
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(AppTheme.Colors.primary)
                 
                 HStack {
                     Text("单词: \(learningGoal.wordProgress)/\(learningGoal.wordGoal)")
@@ -87,7 +87,7 @@ struct LearningProgressTestView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
+                        .background(AppTheme.Colors.primary)
                         .cornerRadius(10)
                 }
                 
@@ -101,7 +101,7 @@ struct LearningProgressTestView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
+                        .background(AppTheme.Colors.primary)
                         .cornerRadius(10)
                 }
                 
@@ -115,7 +115,7 @@ struct LearningProgressTestView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
+                        .background(AppTheme.Colors.primary)
                         .cornerRadius(10)
                 }
                 
