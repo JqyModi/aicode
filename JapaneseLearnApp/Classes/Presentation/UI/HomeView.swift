@@ -72,17 +72,21 @@ struct HomeView: View {
                         // 学习进度卡片
                         learningProgressCard
                         
-                        // 最近查询词汇
-                        recentSearchesCard
+                        if !recentSearches.isEmpty {
+                            // 最近查询词汇
+                            recentSearchesCard
+                        }
                         
-                        // 收藏夹快速访问
-                        NavigationLink(destination: FavoritesView(
-                            favoriteViewModel: DetailViewModel(
-                                dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                                favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "" // #warning 补充逻辑
-                            )
-                        )) {
-                            favoritesCard
+                        if !userFolders.isEmpty {
+                            // 收藏夹快速访问
+                            NavigationLink(destination: FavoritesView(
+                                favoriteViewModel: DetailViewModel(
+                                    dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
+                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "" // #warning 补充逻辑
+                                )
+                            )) {
+                                favoritesCard
+                            }
                         }
                         
                         
@@ -297,17 +301,17 @@ struct HomeView: View {
                     }
                 }
                 
-                HStack(spacing: 20) {
+                HStack(spacing: 32) {
                     // 单词学习进度
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.wordProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 8)
+                                .stroke(Color("Primary"), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -315,6 +319,7 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
+                        .padding(.bottom, 8)
                         
                         Text("单词 \(learningGoal.wordProgress)/\(learningGoal.wordGoal)")
                             .font(.caption)
@@ -325,12 +330,12 @@ struct HomeView: View {
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.grammarProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 8)
+                                .stroke(Color("Primary"), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -338,6 +343,7 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
+                        .padding(.bottom, 8)
                         
                         Text("语法 \(learningGoal.grammarProgress)/\(learningGoal.grammarGoal)")
                             .font(.caption)
@@ -348,12 +354,12 @@ struct HomeView: View {
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.readingProgressPercentage))
-                                .stroke(Color("Primary"), lineWidth: 8)
+                                .stroke(Color("Primary"), lineWidth: 4)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -361,12 +367,14 @@ struct HomeView: View {
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(Color("Primary"))
                         }
+                        .padding(.bottom, 8)
                         
                         Text("阅读 \(learningGoal.readingProgress)/\(learningGoal.readingGoal)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
                 }
+                .padding(.top, 8)
                 .frame(maxWidth: .infinity)
             }
             .padding()
@@ -482,9 +490,11 @@ struct HomeView: View {
                             favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "" // #warning 补充逻辑
                         )
                     )) {
-                        Text("全部")
-                            .font(.caption)
-                            .foregroundColor(Color("Primary"))
+                        VStack {
+                            Text("全部")
+                                .font(.caption)
+                                .foregroundColor(Color("Primary"))
+                        }
                     }
                 }
                 
@@ -519,11 +529,11 @@ struct HomeView: View {
                         .frame(height: 100)
                     } else if userFolders.isEmpty {
                         // 空状态
-                        VStack(spacing: 10) {
-                            Text("暂无收藏夹")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                            
+                        HStack {
+//                            Text("暂无收藏夹")
+//                                .font(.subheadline)
+//                                .foregroundColor(.gray)
+                            Spacer()
                             NavigationLink(destination: FavoritesView(
                                 favoriteViewModel: DetailViewModel(
                                     dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
@@ -537,8 +547,9 @@ struct HomeView: View {
                                     .padding(.vertical, 8)
                                     .background(Capsule().fill(Color("Primary")))
                             }
+                            Spacer()
                         }
-                        .frame(height: 100)
+//                        .frame(height: 100)
                     } else {
                         // 显示收藏夹
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
@@ -601,7 +612,7 @@ struct HomeView: View {
             }
             .padding()
         }
-        .frame(height: userViewModel.isLoggedIn ? 220 : 150)
+//        .frame(height: userViewModel.isLoggedIn ? 220 : 150)
         .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
     

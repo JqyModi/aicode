@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -120,6 +120,10 @@
 		C5AEDA512DA261560031B210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5AEDA542DA261560031B210 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C5749D342DD88B1900AA0EC0 /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C5AEDA472DA261520031B210 /* Frameworks */ = {
@@ -266,6 +270,7 @@
 		C596046E2DB4876200123ED1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C5749D342DD88B1900AA0EC0 /* Utils */,
 				C59604982DB5F06300123ED1 /* UI */,
 				C59604782DB4912300123ED1 /* ViewModels */,
 				C596046B2DB4876200123ED1 /* Models */,
@@ -386,6 +391,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C5749D342DD88B1900AA0EC0 /* Utils */,
 			);
 			name = JapaneseLearnApp;
 			productName = JapaneseLearnApp;
