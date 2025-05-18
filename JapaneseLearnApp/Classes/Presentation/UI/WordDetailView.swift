@@ -62,46 +62,27 @@ struct WordDetailView: View {
             } else if let details = detailViewModel.wordDetails {
                 // 主内容
                 VStack(spacing: 0) {
-                    // 顶部导航栏 - 半透明效果
+                    // 顶部导航栏
                     topNavigationBar
-                        .background(
-                            Color(UIColor.systemBackground)
-                                .opacity(scrollOffset > 30 ? 0.9 : 0)
-                                .animation(.easeInOut(duration: 0.3), value: scrollOffset > 30)
-                        )
+                        .background(Color(UIColor.systemBackground))
                         .zIndex(1)
                     
                     // 内容区域
-                    GeometryReader { geometry in
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 0) {
-                                // 单词卡片 - 修改视差效果，确保初始状态可见
-                                wordCard(details)
-                                    .offset(y: min(0, -scrollOffset * 0.1))
-                                    .scaleEffect(
-                                        scrollOffset > 0 ? 1 : max(0.95, 1 - scrollOffset.magnitude / 500),  // 调整最小缩放比例
-                                        anchor: .center
-                                    )
-                                    .opacity(scrollOffset > 120 ? 0.3 : 1)
-                                    .animation(.easeOut(duration: 0.2), value: scrollOffset)
-                                
-                                // 内容选项卡
-                                tabView
-                                    .background(Color(UIColor.systemBackground))
-                                    .cornerRadius(25, corners: [.topLeft, .topRight])
-                                    .offset(y: -25)
-                                
-                                // 选项卡内容
-                                tabContent(details)
-                                    .padding(.top, -15)
-                                    .padding(.bottom, 100) // 为浮动按钮留出空间
-                            }
-                            .background(GeometryReader { proxy -> Color in
-                                DispatchQueue.main.async {
-                                    scrollOffset = proxy.frame(in: .global).minY - geometry.safeAreaInsets.top
-                                }
-                                return Color.clear
-                            })
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 0) {
+                            // 单词卡片
+                            wordCard(details)
+                            
+                            // 内容选项卡
+                            tabView
+                                .background(Color(UIColor.systemBackground))
+                                .cornerRadius(25, corners: [.topLeft, .topRight])
+                                .offset(y: -25)
+                            
+                            // 选项卡内容
+                            tabContent(details)
+                                .padding(.top, -15)
+                                .padding(.bottom, 100) // 为浮动按钮留出空间
                         }
                     }
                 }
@@ -124,11 +105,6 @@ struct WordDetailView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
-        }
-        // 使用task修饰符确保在视图出现前就开始加载数据
-        .task {
-            // 加载单词详情
-//            detailViewModel.loadWordDetails(id: wordId)
         }
         .sheet(isPresented: $showNoteEditor) {
             noteEditorView
@@ -182,113 +158,48 @@ struct WordDetailView: View {
     
     // MARK: - 单词卡片
     private func wordCard(_ details: WordDetailsViewModel) -> some View {
-        ZStack {
-            // 背景渐变
-            themeGradient
-                .ignoresSafeArea()
-            
-            // 背景装饰元素
-            Circle()
-                .fill(Color.white.opacity(0.1))
-                .frame(width: 200, height: 200)
-                .offset(x: 150, y: -100)
-                .blur(radius: 20)
-            
-            Circle()
-                .fill(Color.white.opacity(0.1))
-                .frame(width: 150, height: 150)
-                .offset(x: -150, y: 50)
-                .blur(radius: 15)
-            
-            // 内容
-            VStack(spacing: 25) {
-                // 单词和读音
-                VStack(spacing: 10) {
-                    Text(details.word)
-                        .font(.system(size: 42, weight: .bold))
-                        .foregroundColor(.white)
-                        .shadow(color: Color.black.opacity(0.2), radius: 2, x: 0, y: 2)
-                    
-                    Text(details.reading)
-                        .font(.system(size: 24))
-                        .foregroundColor(.white.opacity(0.9))
-                    
-                    // 词性标签 - 胶囊形状
+        VStack(spacing: 20) {
+            // 单词和读音
+            VStack(spacing: 8) {
+                Text(details.word)
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.primary)
+                
+                Text(details.reading)
+                    .font(.system(size: 20))
+                    .foregroundColor(.secondary)
+                
+                HStack {
+                    // 词性标签
                     Text(details.partOfSpeech)
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 5)
+                        .foregroundColor(AppTheme.Colors.primary)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
                         .background(
                             Capsule()
-                                .fill(Color.white.opacity(0.25))
+                                .fill(AppTheme.Colors.primaryLightest)
                         )
-                }
-                .padding(.top, 20)
-                
-                // 发音控制 - 简化为单行小按钮
-                HStack(spacing: 20) {
-                    Spacer()
                     
-                    // 慢速发音 - 更小的按钮
-                    Button(action: { detailViewModel.playPronunciation(speed: 0.75) }) {
-                        HStack(spacing: 5) {
-                            Image(systemName: "tortoise.fill")
-                                .font(.system(size: 14))
-                            Text("慢速")
-                                .font(.system(size: 12))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(Color.white.opacity(0.2))
-                        )
-                    }
-                    
-                    // 正常发音
+                    // 发音按钮
                     Button(action: { detailViewModel.playPronunciation(speed: 1.0) }) {
-                        HStack(spacing: 5) {
-                            Image(systemName: "speaker.wave.2.fill")
-                                .font(.system(size: 14))
-                            Text("播放")
-                                .font(.system(size: 12))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(Color.white.opacity(0.3))
-                        )
+                        Image(systemName: "speaker.wave.2")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(AppTheme.Colors.primary)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(
+                                Capsule()
+                                    .stroke(AppTheme.Colors.primary, lineWidth: 1)
+                            )
                     }
-                    
-                    // 快速发音
-                    Button(action: { detailViewModel.playPronunciation(speed: 1.25) }) {
-                        HStack(spacing: 5) {
-                            Image(systemName: "hare.fill")
-                                .font(.system(size: 14))
-                            Text("快速")
-                                .font(.system(size: 12))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(Color.white.opacity(0.2))
-                        )
-                    }
-                    
-                    Spacer()
                 }
-                .padding(.top, 5)
-                .padding(.bottom, 15)
             }
-            .padding()
+            .padding(.top, 16)
+            .padding(.bottom, 32)
         }
-        .frame(height: 250)
+        .frame(maxWidth: .infinity)
+        .background(Color(UIColor.systemBackground))
     }
     
     // MARK: - 选项卡视图
@@ -611,7 +522,7 @@ struct WordDetailView: View {
                 .padding(.trailing, 20)
             }
             .padding(.bottom, 20)
-            .offset(y: scrollOffset > 0 ? min(0, -scrollOffset * 0.5) : 0) // 滚动时调整位置
+//            .offset(y: scrollOffset > 0 ? min(0, -scrollOffset * 0.5) : 0) // 滚动时调整位置
         }
     }
     
