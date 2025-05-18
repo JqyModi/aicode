@@ -13,7 +13,8 @@ struct CompleteJapaneseTextParserDemo: View {
     @State private var selectedWord: String = ""
     @State private var selectedLemma: String = ""
     @State private var selectedFurigana: String = ""
-    @State private var inputText: String = "<ruby ><rb>債務</rb><rp>(</rp><rt roma=\"saimu\" hiragana=\"さいむ\" lemma=\"債務\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"を\" lemma-t=\"\">を</span><ruby n1><rb>返済</rb><rp>(</rp><rt roma=\"hensai\" hiragana=\"へんさい\" lemma=\"返済\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"為る\" lemma-t=\"\">する</span><span class=\"moji-toolkit-org\"  lemma=\"。\" lemma-t=\"\">。</span>"
+    //    @State private var inputText: String = "<ruby ><rb>債務</rb><rp>(</rp><rt roma=\"saimu\" hiragana=\"さいむ\" lemma=\"債務\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"を\" lemma-t=\"\">を</span><ruby n1><rb>返済</rb><rp>(</rp><rt roma=\"hensai\" hiragana=\"へんさい\" lemma=\"返済\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"為る\" lemma-t=\"\">する</span><span class=\"moji-toolkit-org\"  lemma=\"。\" lemma-t=\"\">。</span>"
+    @State private var inputText: String = "<span class=\"moji-toolkit-org\" n5 lemma=\"其の\" lemma-t=\"\">その</span><ruby n3><rb>借金</rb><rp>(</rp><rt roma=\"shakkin\" hiragana=\"しゃっきん\" lemma=\"借金\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"の\" lemma-t=\"\">の</span><ruby n1><rb>返済</rb><rp>(</rp><rt roma=\"hensai\" hiragana=\"へんさい\" lemma=\"返済\" lemma-t=\"\"></rt><rp>)</rp></ruby><ruby n3><rb>期限</rb><rp>(</rp><rt roma=\"kigen\" hiragana=\"きげん\" lemma=\"期限\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"は\" lemma-t=\"\">は</span><ruby n5><rb>今月</rb><rp>(</rp><rt roma=\"kongetsu\" hiragana=\"こんげつ\" lemma=\"今月\" lemma-t=\"\"></rt><rp>)</rp></ruby><ruby n3><rb>末</rb><rp>(</rp><rt roma=\"matsu\" hiragana=\"まつ\" lemma=\"末\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"だ\" lemma-t=\"\">だ</span><span class=\"moji-toolkit-org\"  lemma=\"。\" lemma-t=\"\">。</span>"
     
     var body: some View {
         VStack(spacing: 20) {
@@ -54,7 +55,7 @@ struct CompleteJapaneseTextParserDemo: View {
                     self.selectedLemma = lemma
                     self.selectedFurigana = furigana
                 }
-                .frame(height: 150)
+                .frame(width: 100, height: 150)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
@@ -128,6 +129,7 @@ struct CompleteRichTextView: UIViewRepresentable {
     
     private func updateTextView(_ textView: UITextView) {
         if let attributedText = parseJapaneseHTML(htmlString) {
+            print("sentence", htmlString)
             textView.attributedText = attributedText
         }
     }
@@ -171,14 +173,14 @@ struct CompleteRichTextView: UIViewRepresentable {
                             let value = keyValue[1].removingPercentEncoding ?? keyValue[1]
                             
                             switch key {
-                            case "word":
-                                word = value
-                            case "lemma":
-                                lemma = value
-                            case "furigana":
-                                furigana = value
-                            default:
-                                break
+                                case "word":
+                                    word = value
+                                case "lemma":
+                                    lemma = value
+                                case "furigana":
+                                    furigana = value
+                                default:
+                                    break
                             }
                         }
                     }
@@ -193,73 +195,37 @@ struct CompleteRichTextView: UIViewRepresentable {
             return false
         }
         
-        // // 添加高亮效果
-        // private func addHighlight(textView: UITextView, range: NSRange) {
-        //     // 保存当前高亮范围
-        //     currentHighlightRange = range
+        // 添加高亮效果
+        private func addHighlight(textView: UITextView, range: NSRange) {
+            // 保存当前高亮范围
+            currentHighlightRange = range
             
-        //     // 获取文本范围的位置信息
-        //     guard let textRange = textView.layoutManager.textRange(for: range) else { return }
+            // 获取文本范围的位置信息
+            guard let textRange = textView.layoutManager.textRange(for: range, in: textView) else { return }
             
-        //     // 创建高亮背景视图
-        //     let highlightView = UIView()
-        //     highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-        //     highlightView.layer.cornerRadius = 3
-        //     highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
-        //     textView.addSubview(highlightView)
+            // 创建高亮背景视图
+            let highlightView = UIView()
+            highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
+            highlightView.layer.cornerRadius = 3
+            highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
+            textView.addSubview(highlightView)
             
-        //     // 设置高亮视图的位置和大小
-        //     highlightView.frame = textRange
+            // 设置高亮视图的位置和大小
+            highlightView.frame = textRange
             
-        //     // 保存高亮视图的引用
-        //     self.highlightView = highlightView
+            // 保存高亮视图的引用
+            self.highlightView = highlightView
             
-        //     // 添加淡入动画
-        //     UIView.animate(withDuration: 0.3, animations: {
-        //         highlightView.alpha = 1
-        //     }) { _ in
-        //         // 淡入完成后，延迟一段时间后淡出
-        //         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-        //             self.fadeOutHighlight()
-        //         }
-        //     }
-        // }
-
-        // ... existing code ...
-
-// 添加高亮效果
-private func addHighlight(textView: UITextView, range: NSRange) {
-    // 保存当前高亮范围
-    currentHighlightRange = range
-    
-    // 获取文本范围的位置信息
-    guard let textRange = textView.layoutManager.textRange(for: range, in: textView) else { return }
-    
-    // 创建高亮背景视图
-    let highlightView = UIView()
-    highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-    highlightView.layer.cornerRadius = 3
-    highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
-    textView.addSubview(highlightView)
-    
-    // 设置高亮视图的位置和大小
-    highlightView.frame = textRange
-    
-    // 保存高亮视图的引用
-    self.highlightView = highlightView
-    
-    // 添加淡入动画
-    UIView.animate(withDuration: 0.3, animations: {
-        highlightView.alpha = 1
-    }) { _ in
-        // 淡入完成后，延迟一段时间后淡出
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.fadeOutHighlight()
+            // 添加淡入动画
+            UIView.animate(withDuration: 0.3, animations: {
+                highlightView.alpha = 1
+            }) { _ in
+                // 淡入完成后，延迟一段时间后淡出
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.fadeOutHighlight()
+                }
+            }
         }
-    }
-}
-
-// ... existing code ...
         
         // 淡出高亮效果
         private func fadeOutHighlight() {
@@ -416,25 +382,6 @@ private func addHighlight(textView: UITextView, range: NSRange) {
 }
 
 // MARK: - UITextView布局管理器扩展
-// extension NSLayoutManager {
-//     // 获取文本范围的位置信息
-//     func textRange(for range: NSRange) -> CGRect? {
-//         guard let textContainer = textContainers.first else { return nil }
-        
-//         // 获取字形范围
-//         let glyphRange = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
-        
-//         // 计算字形范围的边界矩形
-//         var boundingRect = CGRect.zero
-//         boundingRect = self.boundingRect(forGlyphRange: glyphRange, in: textContainer)
-        
-//         return boundingRect
-//     }
-// }
-
-// ... existing code ...
-
-// MARK: - UITextView布局管理器扩展
 extension NSLayoutManager {
     // 获取文本范围的位置信息
     func textRange(for range: NSRange, in textView: UITextView) -> CGRect? {
@@ -463,8 +410,6 @@ extension NSLayoutManager {
         return boundingRect
     }
 }
-
-// ... existing code ...
 
 // MARK: - 预览
 struct CompleteJapaneseTextParserDemo_Previews: PreviewProvider {
