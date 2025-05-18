@@ -11,30 +11,40 @@ import SwiftUI
 struct CompleteRichTextView: UIViewRepresentable {
     let htmlString: String
     let onWordTapped: (String, String, String) -> Void
-    
+
+    // 新增：用于缓存上一次的内容
+    class TextViewWrapper: UITextView {
+        var lastHtmlString: String?
+    }
+
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+        let textView = TextViewWrapper()
         textView.isEditable = false
         textView.isSelectable = true
         textView.isScrollEnabled = true
         textView.backgroundColor = .clear
         textView.delegate = context.coordinator
         textView.showsVerticalScrollIndicator = false
-        
+
         // 设置富文本内容
         updateTextView(textView)
-        
         return textView
     }
-    
+
     func updateUIView(_ uiView: UITextView, context: Context) {
-        // 更新视图
-        updateTextView(uiView)
+        // 只在内容变化时才更新
+        if let textView = uiView as? TextViewWrapper {
+            if textView.lastHtmlString != htmlString {
+                updateTextView(textView)
+                textView.lastHtmlString = htmlString
+            }
+        } else {
+            updateTextView(uiView)
+        }
     }
-    
+
     private func updateTextView(_ textView: UITextView) {
         if let attributedText = parseJapaneseHTML(htmlString) {
-            print("sentence", htmlString)
             textView.attributedText = attributedText
         }
     }
@@ -46,24 +56,22 @@ struct CompleteRichTextView: UIViewRepresentable {
     // 协调器处理点击事件
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: CompleteRichTextView
-        // 当前高亮的文本范围
+        private var originalAttributedText: NSAttributedString?
         private var currentHighlightRange: NSRange?
-        // 当前高亮的背景视图
-        private var highlightView: UIView?
-        
+    
         init(_ parent: CompleteRichTextView) {
             self.parent = parent
         }
-        
+    
         func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
             // 处理点击事件，获取被点击的单词信息
             if URL.scheme == "word" {
-                // 移除之前的高亮效果
-                removeHighlight()
-                
-                // 添加新的高亮效果
+                // 保存原始文本
+                originalAttributedText = textView.attributedText
+    
+                // 添加高亮
                 addHighlight(textView: textView, range: characterRange)
-                
+    
                 let components = URL.absoluteString.components(separatedBy: "?")
                 if components.count > 1 {
                     let queryItems = components[1].components(separatedBy: "&")
@@ -99,55 +107,23 @@ struct CompleteRichTextView: UIViewRepresentable {
             }
             return false
         }
-        
-        // 添加高亮效果
+    
         private func addHighlight(textView: UITextView, range: NSRange) {
-            // 保存当前高亮范围
+            guard let original = textView.attributedText.mutableCopy() as? NSMutableAttributedString else { return }
+            original.addAttribute(.backgroundColor, value: UIColor.red.withAlphaComponent(0.3), range: range)
+            textView.attributedText = original
             currentHighlightRange = range
-            
-            // 获取文本范围的位置信息
-            guard let textRange = textView.layoutManager.textRange(for: range, in: textView) else { return }
-            
-            // 创建高亮背景视图
-            let highlightView = UIView()
-            highlightView.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-            highlightView.layer.cornerRadius = 3
-            highlightView.alpha = 0 // 初始透明度为0，用于淡入效果
-            textView.addSubview(highlightView)
-            
-            // 设置高亮视图的位置和大小
-            highlightView.frame = textRange
-            
-            // 保存高亮视图的引用
-            self.highlightView = highlightView
-            
-            // 添加淡入动画
-            UIView.animate(withDuration: 0.3, animations: {
-                highlightView.alpha = 1
-            }) { _ in
-                // 淡入完成后，延迟一段时间后淡出
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.fadeOutHighlight()
-                }
+    
+            // 1.5秒后移除高亮
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.removeHighlight(textView: textView)
             }
         }
-        
-        // 淡出高亮效果
-        private func fadeOutHighlight() {
-            guard let highlightView = self.highlightView else { return }
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                highlightView.alpha = 0
-            }) { _ in
-                self.removeHighlight()
+    
+        private func removeHighlight(textView: UITextView) {
+            if let original = originalAttributedText {
+                textView.attributedText = original
             }
-        }
-        
-        // 移除高亮效果
-        private func removeHighlight() {
-            // 移除高亮视图
-            highlightView?.removeFromSuperview()
-            highlightView = nil
             currentHighlightRange = nil
         }
     }

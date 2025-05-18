@@ -381,8 +381,8 @@ struct WordDetailView: View {
                                 // 将点击事件传递给ViewModel处理
                                 detailViewModel.handleWordTapped(word: word, lemma: lemma, furigana: furigana)
                             }
-                            .frame(minHeight: 30) // 设置最小高度，允许根据内容自动扩展
-//                            .background(Color(UIColor.systemBackground))
+                            .frame(minHeight: 50) // 设置最小高度，允许根据内容自动扩展
+                            .background(Color(UIColor.systemBackground))
                             .cornerRadius(8)
                             
                             // 中文翻译
