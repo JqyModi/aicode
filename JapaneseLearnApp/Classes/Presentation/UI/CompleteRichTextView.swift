@@ -210,6 +210,11 @@ struct CompleteRichTextView: UIViewRepresentable {
                 }
             }
             
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.minimumLineHeight = 32 // 可根据字体大小调整
+            paragraphStyle.lineSpacing = 4        // 适当增加行间
+            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+            
             return attributedString
         } catch {
             print("正则表达式错误: \(error)")

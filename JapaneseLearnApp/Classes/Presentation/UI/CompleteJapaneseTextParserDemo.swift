@@ -55,7 +55,7 @@ struct CompleteJapaneseTextParserDemo: View {
                     self.selectedLemma = lemma
                     self.selectedFurigana = furigana
                 }
-                .frame(width: 100, height: 150)
+                .frame(width: 180, height: 150)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
