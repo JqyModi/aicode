@@ -18,6 +18,7 @@
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C5749D382DD8A45000AA0EC0 /* README.md */; };
 		C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D372DD8A45000AA0EC0 /* AppTheme.swift */; };
+		C5749D3D2DD987D700AA0EC0 /* CompleteRichTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D3C2DD987D700AA0EC0 /* CompleteRichTextView.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
@@ -45,9 +46,6 @@
 		C596049B2DB5F06300123ED1 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604962DB5F06300123ED1 /* DesignSystem.swift */; };
 		C59604B82DB633AA00123ED1 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59604B72DB633AA00123ED1 /* SearchView.swift */; };
 		C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */; };
-		C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */; };
-		C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */; };
-		C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */; };
 		C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */; };
 		C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */; };
 		C5AE4A6F2DC7C04D00A12B42 /* LearningGoalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */; };
@@ -83,6 +81,7 @@
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C5749D372DD8A45000AA0EC0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		C5749D382DD8A45000AA0EC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C5749D3C2DD987D700AA0EC0 /* CompleteRichTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRichTextView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -107,10 +106,7 @@
 		C59604962DB5F06300123ED1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		C59604972DB5F06300123ED1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C59604B72DB633AA00123ED1 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
 		C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteJapaneseTextParserDemo.swift; sourceTree = "<group>"; };
-		C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserDemo.swift; sourceTree = "<group>"; };
-		C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseTextParserViewController.swift; sourceTree = "<group>"; };
 		C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningGoalSettingsView.swift; sourceTree = "<group>"; };
@@ -337,15 +333,13 @@
 				C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */,
 				C5AE4A6C2DC766B500A12B42 /* FavoritesView.swift */,
 				C5AE4A6A2DC741FC00A12B42 /* UserProfileView.swift */,
-				C5AE4A622DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift */,
 				C5AE4A632DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift */,
-				C5AE4A642DBB82C300A12B42 /* JapaneseTextParserDemo.swift */,
-				C5AE4A652DBB82C300A12B42 /* JapaneseTextParserViewController.swift */,
 				C551C4052DB8B467003A0242 /* WordDetailView.swift */,
 				C59604B72DB633AA00123ED1 /* SearchView.swift */,
 				C59604952DB5F06300123ED1 /* Components.swift */,
 				C59604962DB5F06300123ED1 /* DesignSystem.swift */,
 				C59604972DB5F06300123ED1 /* HomeView.swift */,
+				C5749D3C2DD987D700AA0EC0 /* CompleteRichTextView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -478,9 +472,6 @@
 				C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */,
 				C53ABABD2DD477CF00C0D44B /* HotWordViewModel.swift in Sources */,
 				C5AE4A662DBB82C300A12B42 /* CompleteJapaneseTextParserDemo.swift in Sources */,
-				C5AE4A672DBB82C300A12B42 /* JapaneseTextParserViewController.swift in Sources */,
-				C5AE4A682DBB82C300A12B42 /* AdvancedJapaneseTextParserDemo.swift in Sources */,
-				C5AE4A692DBB82C300A12B42 /* JapaneseTextParserDemo.swift in Sources */,
 				C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C53ABABB2DD477C100C0D44B /* HotWordService.swift in Sources */,
@@ -503,6 +494,7 @@
 				C59604792DB4912300123ED1 /* SearchViewModel.swift in Sources */,
 				C59604752DB4876200123ED1 /* word-core-model.swift in Sources */,
 				C596047F2DB4D7DB00123ED1 /* UserViewModel.swift in Sources */,
+				C5749D3D2DD987D700AA0EC0 /* CompleteRichTextView.swift in Sources */,
 				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
 				C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */,
 				C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */,
