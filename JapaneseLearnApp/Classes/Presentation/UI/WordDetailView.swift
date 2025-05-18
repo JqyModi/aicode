@@ -62,28 +62,57 @@ struct WordDetailView: View {
             } else if let details = detailViewModel.wordDetails {
                 // 主内容
                 VStack(spacing: 0) {
-                    // 顶部导航栏
+                    // 顶部导航栏 - 半透明效果
                     topNavigationBar
-                        .background(Color(UIColor.systemBackground))
+                        .background(
+                            Color(UIColor.systemBackground)
+                                .opacity(scrollOffset > 30 ? 0.9 : 0)
+                                .animation(.easeInOut(duration: 0.3), value: scrollOffset > 30)
+                        )
                         .zIndex(1)
                     
                     // 内容区域
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            // 单词卡片
-                            wordCard(details)
-                            
-                            // 内容选项卡
-                            tabView
-                                .background(Color(UIColor.systemBackground))
-                                .cornerRadius(25, corners: [.topLeft, .topRight])
-                                .offset(y: -25)
-                            
-                            // 选项卡内容
-                            tabContent(details)
-                                .padding(.top, -15)
-                                .padding(.bottom, 100) // 为浮动按钮留出空间
+                    GeometryReader { geometry in
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 0) {
+                                // 单词卡片 - 修改视差效果，确保初始状态可见
+                                wordCard(details)
+//                                    .offset(y: min(0, -scrollOffset * 0.1))
+//                                    .scaleEffect(
+//                                        scrollOffset > 0 ? 1 : max(0.95, 1 - scrollOffset.magnitude / 500),  // 调整最小缩放比例
+//                                        anchor: .center
+//                                    )
+//                                    .opacity(scrollOffset > 120 ? 0.3 : 1)
+//                                    .animation(.easeOut(duration: 0.2), value: scrollOffset)
+                                
+                                // 内容选项卡
+                                tabView
+                                    .background(Color(UIColor.systemBackground))
+                                    .cornerRadius(25, corners: [.topLeft, .topRight])
+                                    .offset(y: -25)
+                                    .padding(.top, AppTheme.Spacing.tiny)
+                                    .padding(.bottom, AppTheme.Spacing.tiny)
+                                
+                                // 选项卡内容
+                                tabContent(details)
+                                    .padding(.top, -15)
+                                    .padding(.bottom, 100) // 为浮动按钮留出空间
+                            }
+                            .background(GeometryReader { proxy -> Color in
+                                DispatchQueue.main.async {
+                                    scrollOffset = proxy.frame(in: .global).minY - geometry.safeAreaInsets.top
+                                }
+                                return Color.clear
+                            })
                         }
+//                        .overlay(
+//                            Text(String(format: "Scroll Offset: %.0f", scrollOffset))
+//                                .padding()
+//                                .background(.ultraThinMaterial)
+//                                .cornerRadius(12)
+//                                .padding(),
+//                            alignment: .topTrailing
+//                        )
                     }
                 }
                 
@@ -105,6 +134,11 @@ struct WordDetailView: View {
             withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
                 animateGradient.toggle()
             }
+        }
+        // 使用task修饰符确保在视图出现前就开始加载数据
+        .task {
+            // 加载单词详情
+//            detailViewModel.loadWordDetails(id: wordId)
         }
         .sheet(isPresented: $showNoteEditor) {
             noteEditorView
@@ -129,13 +163,13 @@ struct WordDetailView: View {
             Spacer()
             
             // 页面标题 - 动态显示
-            if scrollOffset < -50 {
-                Text("单词详情")
-                    .font(.headline)
+            if scrollOffset < 67 {
+                Text(detailViewModel.wordDetails?.word ?? "")
+                    .font(AppTheme.Fonts.title2)
                     .fontWeight(.medium)
                     .foregroundColor(AppTheme.Colors.primary)
                     .transition(.opacity)
-                    .animation(.easeInOut, value: scrollOffset < -50)
+                    .animation(.easeInOut, value: scrollOffset < 67)
             }
             
             Spacer()
@@ -162,7 +196,7 @@ struct WordDetailView: View {
             // 单词和读音
             VStack(spacing: 8) {
                 Text(details.word)
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 26, weight: .bold))
                     .foregroundColor(.primary)
                 
                 Text(details.reading)
