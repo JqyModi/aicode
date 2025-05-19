@@ -311,12 +311,12 @@ struct HomeView: View {
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: AppTheme.Borders.medium)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.wordProgressPercentage))
-                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary,style: .roundStyle)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -335,12 +335,12 @@ struct HomeView: View {
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: AppTheme.Borders.medium)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.grammarProgressPercentage))
-                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary,style: .roundStyle)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -359,12 +359,12 @@ struct HomeView: View {
                     VStack {
                         ZStack {
                             Circle()
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 4)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: AppTheme.Borders.medium)
                                 .frame(width: 70, height: 70)
                             
                             Circle()
                                 .trim(from: 0, to: CGFloat(learningGoal.readingProgressPercentage))
-                                .stroke(AppTheme.Colors.primary, lineWidth: 4)
+                                .stroke(AppTheme.Colors.primary,style: .roundStyle)
                                 .frame(width: 70, height: 70)
                                 .rotationEffect(.degrees(-90))
                             
@@ -428,7 +428,7 @@ struct HomeView: View {
                                     )
                                     .overlay(
                                         Capsule()
-                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: 1)
+                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: AppTheme.Borders.thin)
                                     )
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -596,7 +596,7 @@ struct HomeView: View {
                                     )
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: 1)
+                                            .stroke(AppTheme.Colors.primaryLightest, lineWidth: AppTheme.Borders.thin)
                                     )
                                 }
                                 .buttonStyle(PlainButtonStyle())

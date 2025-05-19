@@ -26,6 +26,14 @@ extension View {
     }
 }
 
+extension StrokeStyle {
+    static let roundStyle: StrokeStyle = StrokeStyle(
+        lineWidth: AppTheme.Borders.medium,
+        lineCap: .round, // ✅ 两端圆角
+        lineJoin: .round
+    )
+}
+
 struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
 
