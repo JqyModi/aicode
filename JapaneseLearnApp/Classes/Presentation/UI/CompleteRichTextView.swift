@@ -12,41 +12,101 @@ struct CompleteRichTextView: UIViewRepresentable {
     let htmlString: String
     let onWordTapped: (String, String, String) -> Void
 
-    // 新增：用于缓存上一次的内容
+    // TextViewWrapper 保持不变，其 attributedText.didSet 中的 invalidateIntrinsicContentSize() 是正确的
     class TextViewWrapper: UITextView {
         var lastHtmlString: String?
+        private var lastKnownWidth: CGFloat = 0 // 新增：用于跟踪上一次已知的宽度
+
+        override var attributedText: NSAttributedString! {
+            didSet {
+                if oldValue != attributedText {
+                    // 当文本内容变化时，通知系统固有内容大小已更改
+                    self.invalidateIntrinsicContentSize()
+                }
+            }
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            // 如果 UITextView 的宽度发生变化，并且是一个有效值，
+            // 则记录新宽度并使固有内容大小无效，以便 SwiftUI 重新查询。
+            if self.bounds.width > 0 && self.bounds.width != lastKnownWidth {
+                lastKnownWidth = self.bounds.width
+                self.invalidateIntrinsicContentSize()
+            }
+        }
+        
+        override var intrinsicContentSize: CGSize {
+            // 如果宽度仍然未定义或为0（可能在初始布局阶段），
+            // 返回 .noIntrinsicMetric。layoutSubviews 中的逻辑将确保在宽度确定后重新计算。
+            if bounds.width <= 0 {
+                // 移除之前的 print(UIView.noIntrinsicMetric) 以减少控制台噪音，
+                // 因为在宽度确定前，这个路径被执行是正常的。
+                return CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+            }
+
+            // 使用当前已确定的 bounds.width 来计算内容所需的大小。
+            // sizeThatFits 是 UITextView 计算其内容大小的推荐方法。
+            let constrainingSize = CGSize(width: bounds.width, height: .greatestFiniteMagnitude)
+            var calculatedSize = self.sizeThatFits(constrainingSize)
+            
+            // 确保即使内容为空，也有一个最小高度，例如基于字体行高。
+            // parseJapaneseHTML 中设置的 minimumLineHeight (32) 应该会被 sizeThatFits 尊重。
+            // 此处额外处理 htmlString 为空，导致 attributedText 为空的情况。
+            if attributedText.length == 0 {
+                let minHeightBasedOnFont = self.font?.lineHeight ?? 18 // 如果字体未设置，则默认为18
+                if calculatedSize.height < minHeightBasedOnFont {
+                    calculatedSize.height = minHeightBasedOnFont
+                }
+            }
+            
+            // 对于宽度，我们返回 UIView.noIntrinsicMetric，因为 SwiftUI 会根据其约束来控制宽度。
+            // 对于高度，我们返回基于内容计算出的高度。
+            // print("intrinsicContentSize - calculatedSize: \(calculatedSize) for width: \(bounds.width)") // 调试日志
+            return CGSize(width: UIView.noIntrinsicMetric, height: calculatedSize.height)
+        }
     }
 
     func makeUIView(context: Context) -> UITextView {
         let textView = TextViewWrapper()
         textView.isEditable = false
-        textView.isSelectable = true
-        textView.isScrollEnabled = true
+        textView.isSelectable = true // 允许选择文本以触发链接
+        textView.isScrollEnabled = false // 关键：禁用滚动以实现内容自适应高度
         textView.backgroundColor = .clear
         textView.delegate = context.coordinator
         textView.showsVerticalScrollIndicator = false
+//        textView.backgroundColor = .red
+        textView.tintColor = UIColor(AppTheme.Colors.primary)
 
-        // 设置富文本内容
-        updateTextView(textView)
+        // 移除文本容器的内边距和行片段边距，确保精确计算内容大小
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        
+        // 设置内容拥抱和抗压缩优先级，帮助 SwiftUI 正确处理动态高度
+        textView.setContentHuggingPriority(.required, for: .vertical)
+        textView.setContentCompressionResistancePriority(.required, for: .vertical)
+
+        // updateTextView(textView) // 初始内容设置将由 updateUIView 首次调用时处理
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        // 只在内容变化时才更新
-        if let textView = uiView as? TextViewWrapper {
-            if textView.lastHtmlString != htmlString {
-                updateTextView(textView)
-                textView.lastHtmlString = htmlString
-            }
-        } else {
-            updateTextView(uiView)
-        }
-    }
+        guard let textView = uiView as? TextViewWrapper else { return }
 
-    private func updateTextView(_ textView: UITextView) {
-        if let attributedText = parseJapaneseHTML(htmlString) {
-            textView.attributedText = attributedText
+        // 仅当 htmlString 实际更改时才更新文本
+        if textView.lastHtmlString != htmlString {
+            if let newAttributedText = parseJapaneseHTML(htmlString) {
+                textView.attributedText = newAttributedText
+            } else {
+                textView.attributedText = NSAttributedString(string: "")
+            }
+            textView.lastHtmlString = htmlString
+            // attributedText 的 didSet 中已经调用了 invalidateIntrinsicContentSize()，
+            // 所以这里通常不需要再次调用。
+            // textView.invalidateIntrinsicContentSize() // 可以移除或注释掉
         }
+        // 移除这里的 sizeToFit()，让 SwiftUI 和 intrinsicContentSize 处理尺寸。
+        // textView.sizeToFit() // REMOVE THIS LINE
     }
     
     func makeCoordinator() -> Coordinator {
@@ -191,6 +251,10 @@ struct CompleteRichTextView: UIViewRepresentable {
             paragraphStyle.lineSpacing = 4        // 适当增加行间
             attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
             
+            // 移除这里的日志，因为它在 intrinsicContentSize 中使用 bounds.width 更为关键
+            // let size2 = attributedString.boundingRect(with: CGSize(width: 120, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
+            // print("size2: \(size2)") 
+            
             return attributedString
         } catch {
             print("正则表达式错误: \(error)")
@@ -296,3 +360,23 @@ extension NSLayoutManager {
         return boundingRect
     }
 }
+
+#Preview(body: {
+    let inputText: String = "<span class=\"moji-toolkit-org\" n5 lemma=\"其の\" lemma-t=\"\">その</span><ruby n3><rb>借金</rb><rp>(</rp><rt roma=\"shakkin\" hiragana=\"しゃっきん\" lemma=\"借金\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"の\" lemma-t=\"\">の</span><ruby n1><rb>返済</rb><rp>(</rp><rt roma=\"hensai\" hiragana=\"へんさい\" lemma=\"返済\" lemma-t=\"\"></rt><rp>)</rp></ruby><ruby n3><rb>期限</rb><rp>(</rp><rt roma=\"kigen\" hiragana=\"きげん\" lemma=\"期限\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"は\" lemma-t=\"\">は</span><ruby n5><rb>今月</rb><rp>(</rp><rt roma=\"kongetsu\" hiragana=\"こんげつ\" lemma=\"今月\" lemma-t=\"\"></rt><rp>)</rp></ruby><ruby n3><rb>末</rb><rp>(</rp><rt roma=\"matsu\" hiragana=\"まつ\" lemma=\"末\" lemma-t=\"\"></rt><rp>)</rp></ruby><span class=\"moji-toolkit-org\"  lemma=\"だ\" lemma-t=\"\">だ</span><span class=\"moji-toolkit-org\"  lemma=\"。\" lemma-t=\"\">。</span>"
+    VStack(alignment: .leading, spacing: 12) {
+        CompleteRichTextView(htmlString: inputText) { word, lemma, furigana in
+            // 处理单词点击事件
+            print("点击了单词: \(word), 词元: \(lemma), 假名: \(furigana)")
+        }
+        // 将 frame 修饰符直接应用于 CompleteRichTextView，而不是其父 VStack，以便更直接地传递宽度约束
+        .frame(maxWidth: 100) //  <-- 尝试将宽度约束直接应用在这里
+//        .frame(width: 120)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(8)
+        
+        Text("点击 console 输出日志，查看单词点击事件。")
+        Spacer()
+    }
+//     .frame(maxWidth: 200, maxHeight: .infinity) // 如果上面已经对 CompleteRichTextView 设置了 maxWidth，这里的 VStack frame 可能不需要再限制宽度
+    .padding() // 给 VStack 一些边距，使其内容不会紧贴屏幕边缘
+})
