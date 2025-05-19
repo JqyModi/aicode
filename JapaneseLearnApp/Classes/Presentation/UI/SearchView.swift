@@ -410,7 +410,7 @@ struct SearchView: View {
 //            }
 //            .frame(minHeight: 150)
             
-            WordCloudView(words: hotWordViewModel.hotWords, tapItem: { text in
+            WordCloudView(words: hotWordViewModel.hotWords, shape: .ellipse, tapItem: { text in
                 self.searchText = text
                 loadSearch()
             })

@@ -464,6 +464,14 @@ struct MeasuredWord: Identifiable {
     let size: CGSize
 }
 
+enum WordCloudShape {
+    case circle
+    case rect
+    case ellipse
+    case heart
+    case custom(mask: UIImage)
+}
+
 
 struct WordCloudView: View {
     @State private var tappedWord: String? = nil
@@ -471,6 +479,7 @@ struct WordCloudView: View {
     @State private var measuredSizes: [String: CGSize] = [:]
 
     let words: [WordCloudWord]
+    let shape: WordCloudShape
     
     var tapItem: ((String) -> Void)? = nil
     
@@ -547,6 +556,48 @@ struct WordCloudView: View {
         }
     }
     
+//     func computePrecisePositions(measuredWords: [MeasuredWord], in size: CGSize) -> [PositionedWord] {
+//         var result: [PositionedWord] = []
+//         var occupiedRects: [CGRect] = []
+//         let center = CGPoint(x: size.width / 2, y: size.height / 2)
+
+//         for item in measuredWords.sorted(by: { $0.word.frequency > $1.word.frequency }) {
+//             let estWidth = item.size.width
+//             let estHeight = item.size.height
+
+//             var angle: CGFloat = 0
+//             var radius: CGFloat = 0
+//             let maxRadius = min(size.width, size.height) / 2
+
+//             var foundPosition: CGPoint? = nil
+
+//             while radius < maxRadius {
+//                 let x = center.x + radius * cos(angle)
+//                 let y = center.y + radius * sin(angle)
+
+//                 let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+
+// //                if !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -2, dy: -2)) }) {
+//                 if !occupiedRects.contains(where: { $0.intersects(candidateRect.offsetBy(dx: -2, dy: -2)) }) {
+//                     foundPosition = CGPoint(x: x, y: y)
+//                     occupiedRects.append(candidateRect)
+//                     break
+//                 }
+
+//                 angle += 0.3
+//                 radius += 1
+//             }
+
+//             if let pos = foundPosition {
+//                 result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+//             } else {
+//                 result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+//             }
+//         }
+
+//         return result
+//     }
+
     func computePrecisePositions(measuredWords: [MeasuredWord], in size: CGSize) -> [PositionedWord] {
         var result: [PositionedWord] = []
         var occupiedRects: [CGRect] = []
@@ -563,13 +614,12 @@ struct WordCloudView: View {
             var foundPosition: CGPoint? = nil
 
             while radius < maxRadius {
-                let x = center.x + radius * cos(angle)
-                let y = center.y + radius * sin(angle)
-
-                let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
-
-//                if !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -2, dy: -2)) }) {
-                if !occupiedRects.contains(where: { $0.intersects(candidateRect.offsetBy(dx: -2, dy: -2)) }) {
+            let x = center.x + radius * cos(angle)
+            let y = center.y + radius * sin(angle)
+            let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+            let candidateCenter = CGPoint(x: x, y: y)
+            if isPointInShape(candidateCenter, in: size) &&
+                !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
                     foundPosition = CGPoint(x: x, y: y)
                     occupiedRects.append(candidateRect)
                     break
@@ -587,6 +637,39 @@ struct WordCloudView: View {
         }
 
         return result
+    }
+
+    func isPointInShape(_ point: CGPoint, in size: CGSize) -> Bool {
+        switch shape {
+        case .circle:
+            let center = CGPoint(x: size.width/2, y: size.height/2)
+            let radius = min(size.width, size.height)/2
+            let dx = point.x - center.x
+            let dy = point.y - center.y
+            return dx*dx + dy*dy <= radius*radius
+        case .rect:
+            return CGRect(origin: .zero, size: size).contains(point)
+        case .ellipse:
+            let center = CGPoint(x: size.width/2, y: size.height/2)
+            let rx = size.width/2
+            let ry = size.height/2
+            let dx = point.x - center.x
+            let dy = point.y - center.y
+            return (dx*dx)/(rx*rx) + (dy*dy)/(ry*ry) <= 1
+        case .heart:
+            // 心形公式判定
+            let center = CGPoint(x: size.width/2, y: size.height/2)
+            let scale = min(size.width, size.height)/2
+            let x = (point.x - center.x)/scale
+            let y = (point.y - center.y)/scale
+            let value = pow(x*x + y*y - 1, 3) - x*x*y*y*y
+            return value <= 0
+        case .custom(let mask):
+            // 根据mask图片像素判定
+            // 伪代码：取point对应像素，判断是否为有效区域
+//            return mask.isPointOpaque(point: point, in: size)
+            return false
+        }
     }
 
 }
@@ -635,7 +718,7 @@ extension String: @retroactive Identifiable {
         WordCloudWord(text: "pitch", frequency: 1),
         WordCloudWord(text: "李子", frequency: 8)
     ]
-    WordCloudView(words: words)
+    WordCloudView(words: words, shape: .heart)
 }
 
 
