@@ -24,7 +24,7 @@ class HotWordViewModel: HotWordViewModelProtocol {
     func loadHotWords() {
         isLoading = true
         errorMessage = nil
-        hotWordService.getHotWords(limit: 8)
+        hotWordService.getHotWords(limit: 15)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in

@@ -66,7 +66,7 @@ struct WordCloudView: View {
 
     let words: [WordCloudWord]
     let shape: WordCloudShape
-    let showShapeOverlay: Bool = true // 新增变量，控制可视化
+    let showShapeOverlay: Bool = false // 新增变量，控制可视化
 
     var tapItem: ((String) -> Void)? = nil
 
@@ -191,9 +191,111 @@ struct WordCloudView: View {
                 }
             }
         case .rect:
-            // 保持原有横向优先即可
-            // ... existing code ...
-                break
+            // 水平优先，充分利用矩形空间
+            let a = size.width / 2
+            let b = size.height / 2
+            let spiralStep: CGFloat = 0.25
+            let radiusStep: CGFloat = 2.0
+            for item in sortedWords {
+                let estWidth = item.size.width
+                let estHeight = item.size.height
+                var angle: CGFloat = 0
+                var radius: CGFloat = 0
+                let maxRadius = 1.0 // 归一化到1，后面乘a/b
+                var foundPosition: CGPoint? = nil
+                while radius < maxRadius {
+                    // x方向最大到a，y方向最大到b，实现真正的矩形填充
+                    let x = center.x + (radius * a) * cos(angle)
+                    let y = center.y + (radius * b) * sin(angle)
+                    let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+                    let rectBounds = CGRect(origin: .zero, size: size)
+                    if rectBounds.contains(candidateRect) &&
+                        !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
+                        foundPosition = CGPoint(x: x, y: y)
+                        occupiedRects.append(candidateRect)
+                        break
+                    }
+                    angle += spiralStep
+                    radius += radiusStep * spiralStep / (2 * .pi * max(a, b))
+                }
+                if let pos = foundPosition {
+                    result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+                } else {
+                    result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+                }
+            }
+        case .rect:
+            // 矩形水平方向螺旋发散
+            let maxRadius = min(size.width, size.height) / 2
+            let spiralStep: CGFloat = 0.25
+            let radiusStep: CGFloat = 2.0
+            for item in sortedWords {
+                let estWidth = item.size.width
+                let estHeight = item.size.height
+                var angle: CGFloat = 0
+                var radius: CGFloat = 0
+                var foundPosition: CGPoint? = nil
+                while radius < maxRadius {
+                    // angle=0时向右，π时向左，π/2和3π/2时上下
+                    // 这里让x方向的变化更大，y方向变化更小，实现水平方向优先
+                    let x = center.x + radius * cos(angle)
+                    let y = center.y + (radius * 0.4) * sin(angle)
+                    let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+                    let candidateCenter = CGPoint(x: x, y: y)
+                    if isPointInShape(candidateCenter, in: size) &&
+                        !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
+                        foundPosition = candidateCenter
+                        occupiedRects.append(candidateRect)
+                        break
+                    }
+                    angle += spiralStep
+                    radius += radiusStep * spiralStep / (2 * .pi)
+                }
+                if let pos = foundPosition {
+                    result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+                } else {
+                    result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+                }
+            }
+        case .heart:
+            // 心形螺旋发散，动态适配容器宽高
+            let a = size.width / 2
+            let b = size.height / 2
+            let spiralStep: CGFloat = 0.25
+            let radiusStep: CGFloat = 2.0
+            for item in sortedWords {
+                let estWidth = item.size.width
+                let estHeight = item.size.height
+                var angle: CGFloat = 0
+                var radius: CGFloat = 0
+                let maxRadius = 1.0 // 归一化到1，后面乘a/b
+                var foundPosition: CGPoint? = nil
+                while radius < maxRadius {
+                    // 心形极坐标公式
+                    // t ∈ [0, 2π]，r = 1 - sin(t)
+                    // 这里用 radius 归一化，angle 螺旋递增
+                    let t = angle
+                    let r = 1 - sin(t)
+                    let x = size.width / 2 + (radius * r * a * cos(t))
+                    let y = size.height / 2 - (radius * r * b * sin(t))
+                    let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+                    let candidateCenter = CGPoint(x: x, y: y)
+                    // 判断点是否在心形内且不重叠
+                    if isPointInShape(candidateCenter, in: size) &&
+                        !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
+                        foundPosition = candidateCenter
+                        occupiedRects.append(candidateRect)
+                        break
+                    }
+                    angle += spiralStep
+                    radius += radiusStep * spiralStep / (2 * .pi)
+                }
+                if let pos = foundPosition {
+                    result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+                } else {
+                    result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+                }
+            }
         default:
             // 其他形状仍用螺旋方式
             for item in sortedWords {
@@ -334,8 +436,8 @@ extension String: @retroactive Identifiable {
         WordCloudWord(text: "pitch", frequency: 1),
         WordCloudWord(text: "李子", frequency: 8)
     ]
-    WordCloudView(words: words, shape: .ellipse)
-        .frame(width: 300, height:160)
+    WordCloudView(words: words, shape: .rect)
+        .frame(width: 300, height:90)
 }
 
 // 新增心形 Shape

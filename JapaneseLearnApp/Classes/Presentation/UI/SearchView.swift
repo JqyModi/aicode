@@ -417,15 +417,14 @@ struct SearchView: View {
                 self.searchText = text
                 loadSearch()
             })
-//            .frame(width: .infinity, height: 170)
-                .frame(width: 300, height: 160)
+            .frame(width: .infinity, height: 170)
         }
         .padding()
-//        .background(
-//            RoundedRectangle(cornerRadius: 16)
-//                .fill(Color(UIColor.secondarySystemBackground))
-//        )
-//        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
     }
     
     // MARK: - 学习提示卡片
