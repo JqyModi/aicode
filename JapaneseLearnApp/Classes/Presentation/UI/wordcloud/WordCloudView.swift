@@ -149,86 +149,81 @@ struct WordCloudView: View {
         }
     }
     
-//     func computePrecisePositions(measuredWords: [MeasuredWord], in size: CGSize) -> [PositionedWord] {
-//         var result: [PositionedWord] = []
-//         var occupiedRects: [CGRect] = []
-//         let center = CGPoint(x: size.width / 2, y: size.height / 2)
-
-//         for item in measuredWords.sorted(by: { $0.word.frequency > $1.word.frequency }) {
-//             let estWidth = item.size.width
-//             let estHeight = item.size.height
-
-//             var angle: CGFloat = 0
-//             var radius: CGFloat = 0
-//             let maxRadius = min(size.width, size.height) / 2
-
-//             var foundPosition: CGPoint? = nil
-
-//             while radius < maxRadius {
-//                 let x = center.x + radius * cos(angle)
-//                 let y = center.y + radius * sin(angle)
-
-//                 let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
-
-// //                if !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -2, dy: -2)) }) {
-//                 if !occupiedRects.contains(where: { $0.intersects(candidateRect.offsetBy(dx: -2, dy: -2)) }) {
-//                     foundPosition = CGPoint(x: x, y: y)
-//                     occupiedRects.append(candidateRect)
-//                     break
-//                 }
-
-//                 angle += 0.3
-//                 radius += 1
-//             }
-
-//             if let pos = foundPosition {
-//                 result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
-//             } else {
-//                 result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
-//             }
-//         }
-
-//         return result
-//     }
-
     func computePrecisePositions(measuredWords: [MeasuredWord], in size: CGSize) -> [PositionedWord] {
         var result: [PositionedWord] = []
         var occupiedRects: [CGRect] = []
         let center = CGPoint(x: size.width / 2, y: size.height / 2)
-
-        for item in measuredWords.sorted(by: { $0.word.frequency > $1.word.frequency }) {
-            let estWidth = item.size.width
-            let estHeight = item.size.height
-
-            var angle: CGFloat = 0
-            var radius: CGFloat = 0
-            let maxRadius = min(size.width, size.height) / 2
-
-            var foundPosition: CGPoint? = nil
-
-            while radius < maxRadius {
-            let x = center.x + radius * cos(angle)
-            let y = center.y + radius * sin(angle)
-            let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
-            let candidateCenter = CGPoint(x: x, y: y)
-            if isPointInShape(candidateCenter, in: size) &&
-                !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
-                    foundPosition = CGPoint(x: x, y: y)
-                    occupiedRects.append(candidateRect)
-                    break
+        let sortedWords = measuredWords.sorted { $0.word.frequency > $1.word.frequency }
+    
+        switch shape {
+        case .ellipse:
+            // 椭圆螺旋发散
+            let a = size.width / 2
+            let b = size.height / 2
+            let spiralStep: CGFloat = 0.25
+            let radiusStep: CGFloat = 2.0
+            for item in sortedWords {
+                let estWidth = item.size.width
+                let estHeight = item.size.height
+                var angle: CGFloat = 0
+                var radius: CGFloat = 0
+                let maxRadius = min(a, b)
+                var foundPosition: CGPoint? = nil
+                while radius < maxRadius {
+                    // 椭圆极坐标变换
+                    let x = center.x + radius * cos(angle) * (a / maxRadius)
+                    let y = center.y + radius * sin(angle) * (b / maxRadius)
+                    let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+                    let candidateCenter = CGPoint(x: x, y: y)
+                    if isPointInShape(candidateCenter, in: size) &&
+                        !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
+                        foundPosition = candidateCenter
+                        occupiedRects.append(candidateRect)
+                        break
+                    }
+                    angle += spiralStep
+                    radius += radiusStep * spiralStep / (2 * .pi)
                 }
-
-                angle += 0.3
-                radius += 1
+                if let pos = foundPosition {
+                    result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+                } else {
+                    result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+                }
             }
-
-            if let pos = foundPosition {
-                result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
-            } else {
-                result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+        case .rect:
+            // 保持原有横向优先即可
+            // ... existing code ...
+                break
+        default:
+            // 其他形状仍用螺旋方式
+            for item in sortedWords {
+                let estWidth = item.size.width
+                let estHeight = item.size.height
+                var angle: CGFloat = 0
+                var radius: CGFloat = 0
+                let maxRadius = min(size.width, size.height) / 2
+                var foundPosition: CGPoint? = nil
+                while radius < maxRadius {
+                    let x = center.x + radius * cos(angle)
+                    let y = center.y + radius * sin(angle)
+                    let candidateRect = CGRect(x: x - estWidth / 2, y: y - estHeight / 2, width: estWidth, height: estHeight)
+                    let candidateCenter = CGPoint(x: x, y: y)
+                    if isPointInShape(candidateCenter, in: size) &&
+                        !occupiedRects.contains(where: { $0.intersects(candidateRect.insetBy(dx: -1, dy: -1)) }) {
+                        foundPosition = CGPoint(x: x, y: y)
+                        occupiedRects.append(candidateRect)
+                        break
+                    }
+                    angle += 0.3
+                    radius += 1
+                }
+                if let pos = foundPosition {
+                    result.append(PositionedWord(word: item.word, position: pos, estimatedSize: item.size))
+                } else {
+                    result.append(PositionedWord(word: item.word, position: center, estimatedSize: item.size))
+                }
             }
         }
-
         return result
     }
 
@@ -340,7 +335,7 @@ extension String: @retroactive Identifiable {
         WordCloudWord(text: "李子", frequency: 8)
     ]
     WordCloudView(words: words, shape: .ellipse)
-        .frame(width: .infinity, height: 200)
+        .frame(width: 300, height:160)
 }
 
 // 新增心形 Shape

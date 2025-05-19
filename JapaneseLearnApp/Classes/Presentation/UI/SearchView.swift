@@ -382,9 +382,12 @@ struct SearchView: View {
     // MARK: - 热门搜索卡片
     private var trendingSearchesCard: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("热门搜索")
-                .font(.headline)
-                .foregroundColor(.primary)
+            HStack {
+                Text("热门搜索")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                Spacer()
+            }
             
             // 热门搜索标签云
 //            FlowLayout(spacing: 2) {
@@ -414,7 +417,8 @@ struct SearchView: View {
                 self.searchText = text
                 loadSearch()
             })
-                .frame(width: .infinity, height: 170)
+//            .frame(width: .infinity, height: 170)
+                .frame(width: 300, height: 160)
         }
         .padding()
 //        .background(
