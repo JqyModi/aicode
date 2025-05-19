@@ -235,6 +235,7 @@ struct SearchView: View {
                     ForEach(searchTypes, id: \.type) { searchType in
                         Button(action: {
                             selectedSearchType = searchType.type
+                            loadSearch()
                         }) {
                             HStack(spacing: 6) {
                                 Image(systemName: searchType.icon)
