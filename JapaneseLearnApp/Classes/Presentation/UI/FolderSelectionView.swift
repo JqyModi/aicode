@@ -96,9 +96,9 @@ struct FolderSelectionView: View {
             .navigationBarHidden(true)
             .onAppear {
                 // 启动渐变动画
-                withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                    animateGradient.toggle()
-                }
+//                withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                    animateGradient.toggle()
+//                }
                 
                 // 加载收藏夹列表 - 仅在文件夹为空时加载，避免循环调用
                 if viewModel.folders.isEmpty {
@@ -299,4 +299,12 @@ struct FolderSelectionView: View {
         }
         .padding()
     }
+}
+
+#Preview {
+    let detailViewModel =  DetailViewModel(dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()), favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "1989103009")
+    FolderSelectionView(
+        viewModel: detailViewModel,
+        wordId: detailViewModel.wordId
+    )
 }
