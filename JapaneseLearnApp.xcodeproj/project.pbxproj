@@ -18,6 +18,7 @@
 		C55B561C2DAC9F5000418E4C /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C55B561B2DAC9F5000418E4C /* ZIPFoundation */; };
 		C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C5749D382DD8A45000AA0EC0 /* README.md */; };
 		C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D372DD8A45000AA0EC0 /* AppTheme.swift */; };
+		C5749D462DDC11DC00AA0EC0 /* CreateFolderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
@@ -79,6 +80,7 @@
 		C551C4052DB8B467003A0242 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
 		C5749D372DD8A45000AA0EC0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		C5749D382DD8A45000AA0EC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderDialog.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -158,6 +160,16 @@
 				C5749D382DD8A45000AA0EC0 /* README.md */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		C5749D452DDC11DC00AA0EC0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C53ABAB12DD18D0100C0D44B /* WordCloud */,
+				C5749D3E2DDB920700AA0EC0 /* RichTextView */,
+				C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C592EF5F2DA5290100784427 /* Frameworks */ = {
@@ -276,6 +288,7 @@
 		C596046E2DB4876200123ED1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C5749D452DDC11DC00AA0EC0 /* Components */,
 				C5749D392DD8A45000AA0EC0 /* Theme */,
 				C5749D342DD88B1900AA0EC0 /* Utils */,
 				C59604982DB5F06300123ED1 /* UI */,
@@ -326,8 +339,6 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C5749D3E2DDB920700AA0EC0 /* RichTextView */,
-				C53ABAB12DD18D0100C0D44B /* WordCloud */,
 				C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */,
 				C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */,
 				C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */,
@@ -496,6 +507,7 @@
 				C596047B2DB4961D00123ED1 /* DetailViewModel.swift in Sources */,
 				C5AE4A6F2DC7C04D00A12B42 /* LearningGoalSettingsView.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,
+				C5749D462DDC11DC00AA0EC0 /* CreateFolderDialog.swift in Sources */,
 				C596048C2DB55C1800123ED1 /* DictionaryDataRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

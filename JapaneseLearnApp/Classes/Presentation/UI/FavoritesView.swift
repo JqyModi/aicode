@@ -135,6 +135,35 @@ struct FavoritesView: View {
                     }
                 }
             }
+
+            // 弹窗（全屏遮罩+卡片）
+            if showCreateFolder {
+                CreateFolderDialog(
+                    isPresented: $showCreateFolder,
+                    folderName: $newFolderName,
+                    title: "新建收藏夹",
+                    onCreate: {
+                        if !newFolderName.isEmpty {
+                            favoriteViewModel.createFolder(name: newFolderName) { success in
+                                if success {
+                                    newFolderName = ""
+                                    showCreateFolder = false
+                                    
+                                    loadFavoriteData()
+                                }
+                            }
+                        }
+                    },
+                    onCancel: {
+                        newFolderName = ""
+                        showCreateFolder = false
+                    },
+                    isLoading: favoriteViewModel.isLoading,
+                    errorMessage: favoriteViewModel.errorMessage
+                )
+                .transition(.opacity)
+                .zIndex(1000)
+            }
         }
         .navigationBarHidden(true)
         .onAppear {
@@ -156,9 +185,6 @@ struct FavoritesView: View {
                     )
                 )
             }
-        }
-        .sheet(isPresented: $showCreateFolder) {
-            createFolderView
         }
     }
     
@@ -194,6 +220,9 @@ struct FavoritesView: View {
                 }
             )
             .store(in: &favoriteViewModel.cancellables)
+        
+        // 默认选择第一项
+        folderSelected(folderId: self.folders.first?.0 ?? "")
     }
     
     // 加载收藏夹内容
@@ -306,7 +335,13 @@ struct FavoritesView: View {
     }
     
     // MARK: - 收藏夹横向滚动
-    private var foldersScrollView: some View {
+    private func folderSelected(folderId: String) {
+        // 点击加载该收藏夹内容
+        self.selectedFolderId = folderId
+        self.loadFolderItems(folderId: folderId)
+    }
+    
+    var foldersScrollView: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("收藏夹")
@@ -331,9 +366,7 @@ struct FavoritesView: View {
                 HStack(spacing: 15) {
                     ForEach(folders, id: \.0) { folder in
                         Button(action: {
-                            // 点击加载该收藏夹内容
-                            self.selectedFolderId = folder.0
-                            self.loadFolderItems(folderId: folder.0)
+                            folderSelected(folderId: folder.0)
                         }) {
                             VStack(spacing: 10) {
                                 ZStack {
@@ -367,7 +400,8 @@ struct FavoritesView: View {
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedFolderId == folder.0 ? AppTheme.Colors.primary : Color.clear, lineWidth: 2)
+                                    .stroke(selectedFolderId == folder.0 ? AppTheme.Colors.primary : Color.clear, lineWidth: 1)
+                                    .padding(.vertical, 1)
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -551,51 +585,6 @@ struct FavoritesView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -3)
         )
 //        .padding(.bottom, 30) // 为底部安全区域留出空间
-    }
-    
-    // MARK: - 创建收藏夹视图
-    private var createFolderView: some View {
-        VStack(spacing: 20) {
-            Text("新建收藏夹")
-                .font(.headline)
-                .padding(.top, 20)
-            
-            TextField("收藏夹名称", text: $newFolderName)
-                .padding()
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                .padding(.horizontal)
-            
-            HStack(spacing: 20) {
-                Button(action: { showCreateFolder = false }) {
-                    Text("取消")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(UIColor.secondarySystemBackground))
-                        .cornerRadius(10)
-                }
-                
-                Button(action: {
-                    // 创建收藏夹逻辑
-                    showCreateFolder = false
-                    newFolderName = ""
-                }) {
-                    Text("创建")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(AppTheme.Colors.primary)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .disabled(newFolderName.isEmpty)
-                .opacity(newFolderName.isEmpty ? 0.6 : 1)
-            }
-            .padding(.horizontal)
-            
-            Spacer()
-        }
-        .padding()
-        .frame(height: 250)
     }
     
     // MARK: - 辅助方法

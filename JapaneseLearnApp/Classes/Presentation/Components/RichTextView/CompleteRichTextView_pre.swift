@@ -10,7 +10,7 @@ import UIKit
 import CoreText
 
 // MARK: - 完整富文本视图
-struct CompleteRichTextView: UIViewRepresentable {
+struct CompleteRichTextView_pre: UIViewRepresentable {
     let htmlString: String
     let onWordTapped: (String, String, String) -> Void
     
@@ -45,13 +45,13 @@ struct CompleteRichTextView: UIViewRepresentable {
     
     // 协调器处理点击事件
     class Coordinator: NSObject, UITextViewDelegate {
-        var parent: CompleteRichTextView
+        var parent: CompleteRichTextView_pre
         // 当前高亮的文本范围
         private var currentHighlightRange: NSRange?
         // 当前高亮的背景视图
         private var highlightView: UIView?
         
-        init(_ parent: CompleteRichTextView) {
+        init(_ parent: CompleteRichTextView_pre) {
             self.parent = parent
         }
         

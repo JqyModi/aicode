@@ -31,68 +31,96 @@ struct FolderSelectionView: View {
     // MARK: - 视图
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                // 顶部标题区域
-                VStack(spacing: 15) {
-                    Text("选择收藏夹")
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(AppTheme.Colors.primary)
+            ZStack {
+                VStack(spacing: 0) {
+                    // 顶部标题区域
+                    VStack(spacing: 15) {
+                        Text("选择收藏夹")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundColor(AppTheme.Colors.primary)
+                        
+                        Text("请选择要将单词添加到的收藏夹")
+                            .font(.system(size: 16))
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
                     
-                    Text("请选择要将单词添加到的收藏夹")
-                        .font(.system(size: 16))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-                
-                // 收藏夹列表
-                if viewModel.isLoading {
-                    loadingView
-                } else if let error = viewModel.errorMessage {
-                    errorView(message: error)
-                } else if viewModel.folders.isEmpty {
-                    emptyFoldersView
-                } else {
-                    folderListView
-                }
-                
-                // 底部按钮区域
-                VStack(spacing: 15) {
-                    // 创建新收藏夹按钮
-                    Button(action: { showCreateFolder = true }) {
-                        HStack {
-                            Image(systemName: "folder.badge.plus")
-                                .font(.system(size: 16))
-                            Text("创建新收藏夹")
-                                .font(.system(size: 16, weight: .medium))
-                        }
-                        .foregroundColor(AppTheme.Colors.primary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(AppTheme.Colors.primary, lineWidth: 1.5)
-                        )
+                    // 收藏夹列表
+                    if viewModel.isLoading {
+                        loadingView
+                    } else if let error = viewModel.errorMessage {
+                        errorView(message: error)
+                    } else if viewModel.folders.isEmpty {
+                        emptyFoldersView
+                    } else {
+                        folderListView
                     }
                     
-                    // 取消按钮
-                    Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                        Text("取消")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.gray)
+                    // 底部按钮区域
+                    VStack(spacing: 15) {
+                        // 创建新收藏夹按钮
+                        Button(action: { showCreateFolder = true }) {
+                            HStack {
+                                Image(systemName: "folder.badge.plus")
+                                    .font(.system(size: 16))
+                                Text("创建新收藏夹")
+                                    .font(.system(size: 16, weight: .medium))
+                            }
+                            .foregroundColor(AppTheme.Colors.primary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color(UIColor.secondarySystemBackground))
+                                    .stroke(AppTheme.Colors.primary, lineWidth: 1.5)
                             )
+                        }
+                        
+                        // 取消按钮
+                        Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                            Text("取消")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.gray)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color(UIColor.secondarySystemBackground))
+                                )
+                        }
                     }
+                    .padding(.horizontal)
+                    .padding(.bottom, 30)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 30)
+                
+                // 弹窗（全屏遮罩+卡片）
+                if showCreateFolder {
+                    CreateFolderDialog(
+                        isPresented: $showCreateFolder,
+                        folderName: $newFolderName,
+                        title: "新建收藏夹",
+                        onCreate: {
+                            if !newFolderName.isEmpty {
+                                viewModel.createFolder(name: newFolderName) { success in
+                                    if success {
+                                        newFolderName = ""
+                                        showCreateFolder = false
+                                    }
+                                }
+                            }
+                        },
+                        onCancel: {
+                            newFolderName = ""
+                            showCreateFolder = false
+                        },
+                        isLoading: viewModel.isLoading,
+                        errorMessage: viewModel.errorMessage
+                    )
+                    .transition(.opacity)
+                    .zIndex(1000)
+                }
             }
-            .padding(.horizontal)
             .navigationBarHidden(true)
             .onAppear {
                 // 启动渐变动画
@@ -104,9 +132,6 @@ struct FolderSelectionView: View {
                 if viewModel.folders.isEmpty {
                     viewModel.loadFolders()
                 }
-            }
-            .sheet(isPresented: $showCreateFolder) {
-                createFolderView
             }
         }
     }
@@ -159,6 +184,7 @@ struct FolderSelectionView: View {
                 }
             }
             .padding(.vertical)
+            .padding(.horizontal)
         }
     }
     
@@ -181,70 +207,6 @@ struct FolderSelectionView: View {
                 .multilineTextAlignment(.center)
             
             Spacer()
-        }
-        .padding()
-    }
-    
-    // MARK: - 创建收藏夹视图
-    private var createFolderView: some View {
-        VStack(spacing: 20) {
-            // 标题
-            Text("创建新收藏夹")
-                .font(.system(size: 22, weight: .bold))
-                .foregroundColor(AppTheme.Colors.primary)
-            
-            // 输入框
-            TextField("收藏夹名称", text: $newFolderName)
-                .font(.system(size: 16))
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(UIColor.secondarySystemBackground))
-                )
-                .padding(.horizontal)
-            
-            // 按钮区域
-            HStack(spacing: 15) {
-                // 取消按钮
-                Button(action: {
-                    newFolderName = ""
-                    showCreateFolder = false
-                }) {
-                    Text("取消")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.gray)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                        )
-                }
-                
-                // 创建按钮
-                Button(action: {
-                    if !newFolderName.isEmpty {
-                        viewModel.createFolder(name: newFolderName) { success in
-                            if success {
-                                newFolderName = ""
-                                showCreateFolder = false
-                            }
-                        }
-                    }
-                }) {
-                    Text("创建")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(newFolderName.isEmpty ? AppTheme.Colors.primaryLighter : AppTheme.Colors.primary)
-                        )
-                }
-                .disabled(newFolderName.isEmpty)
-            }
-            .padding(.horizontal)
         }
         .padding()
     }

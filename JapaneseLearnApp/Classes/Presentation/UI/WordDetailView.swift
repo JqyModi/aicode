@@ -118,14 +118,6 @@ struct WordDetailView: View {
                 
                 // 浮动收藏按钮
                 floatingActionButton
-                
-                // 收藏夹选择视图
-                .sheet(isPresented: $showFolderSelection) {
-                    FolderSelectionView(
-                        viewModel: detailViewModel,
-                        wordId: detailViewModel.wordId
-                    )
-                }
             }
         }
         .navigationBarHidden(true)
@@ -142,6 +134,14 @@ struct WordDetailView: View {
         }
         .sheet(isPresented: $showNoteEditor) {
             noteEditorView
+        }
+        
+        // 收藏夹选择视图
+        .sheet(isPresented: $showFolderSelection) {
+            FolderSelectionView(
+                viewModel: detailViewModel,
+                wordId: detailViewModel.wordId
+            )
         }
     }
     

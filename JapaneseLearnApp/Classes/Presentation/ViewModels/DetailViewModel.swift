@@ -92,7 +92,7 @@ class DetailViewModel: DetailViewModelProtocol {
     }
     
     func toggleFavorite() {
-        guard let wordId = currentWordId, let wordDetails = wordDetails else {
+        guard let wordId = currentWordId, let _ = wordDetails else {
             errorMessage = "无法收藏：单词详情不存在"
             return
         }
