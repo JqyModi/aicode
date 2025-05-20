@@ -192,19 +192,19 @@ struct UserProfileView: View {
                     ZStack {
                         Circle()
                             .fill(Color.white)
-                            .frame(width: 100, height: 100)
+                            .frame(width: 72, height: 72)
                             .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
                         
                         Image(systemName: userViewModel.isLoggedIn ? "person.crop.circle.fill" : "person.crop.circle")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 80, height: 80)
+                            .frame(width: 70, height: 70)
                             .foregroundColor(AppTheme.Colors.primary)
                         
                         // 头像框装饰
                         Circle()
-                            .strokeBorder(Color.white, lineWidth: 3)
-                            .frame(width: 100, height: 100)
+                            .strokeBorder(Color.white, lineWidth: 2)
+                            .frame(width: 72, height: 72)
                     }
                     
                     // 用户名和等级
@@ -213,6 +213,7 @@ struct UserProfileView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .padding(.bottom, 8)
                         
                         HStack {
                             // 等级标签
@@ -258,7 +259,7 @@ struct UserProfileView: View {
             }
             .padding(25)
         }
-        .frame(height: 280)
+//        .frame(height: 280)
         .shadow(color: AppTheme.Colors.primaryLightest, radius: 10, x: 0, y: 5)
     }
     
