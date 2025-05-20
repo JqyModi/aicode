@@ -45,6 +45,11 @@ class RealmManager {
     private init() {
 //        copyBundleRealmToDocuments()
         checkAndUpdateDatabase()
+        
+        if FileManager.default.fileExists(atPath: localRealmPath.path) {
+            print("Realm数据库已存在于沙盒中")
+            setupRealm()
+        }
     }
     
     // 将Bundle中的Realm文件复制到沙盒中

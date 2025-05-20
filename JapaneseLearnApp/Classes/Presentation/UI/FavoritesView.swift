@@ -209,10 +209,15 @@ struct FavoritesView: View {
                     // 如果有初始指定的收藏夹ID，则加载该收藏夹内容
                     if let initialId = self.initialFolderId, let folder = folderSummaries.first(where: { $0.id == initialId }) {
                         self.loadFolderItems(folderId: folder.id)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {                        
+                            self.selectedFolderId = initialId
+                        }
                     }
                     // 否则，如果有收藏夹，加载第一个收藏夹的内容
                     else if let firstFolder = folderSummaries.first {
                         self.loadFolderItems(folderId: firstFolder.id)
+                        // 默认选择第一项
+                        self.selectedFolderId = firstFolder.id
                     } else {
                         self.isLoading = false
                         self.favoriteItems = []
@@ -220,9 +225,6 @@ struct FavoritesView: View {
                 }
             )
             .store(in: &favoriteViewModel.cancellables)
-        
-        // 默认选择第一项
-        folderSelected(folderId: self.folders.first?.0 ?? "")
     }
     
     // 加载收藏夹内容
@@ -361,53 +363,63 @@ struct FavoritesView: View {
                 }
             }
             .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    ForEach(folders, id: \.0) { folder in
-                        Button(action: {
-                            folderSelected(folderId: folder.0)
-                        }) {
-                            VStack(spacing: 10) {
-                                ZStack {
-                                    Circle()
-                                        .fill(themeGradient)
-                                        .frame(width: 50, height: 50)
+            // 读取滚动距离，将选中项滚动到中间
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(folders, id: \.0) { folder in
+                            Button(action: {
+                                folderSelected(folderId: folder.0)
+                            }) {
+                                VStack(spacing: 10) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(themeGradient)
+                                            .frame(width: 50, height: 50)
+                                        
+                                        Image(systemName: "folder.fill")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(.white)
+                                    }
                                     
-                                    Image(systemName: "folder.fill")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(.white)
+                                    Text(folder.1)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.primary)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.5)
+                                        .padding(.leading)
+                                        .padding(.trailing)
+                                    
+                                    Text("\(folder.2)项")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.secondary)
                                 }
-                                
-                                Text(folder.1)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.primary)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                                    .padding(.leading)
-                                    .padding(.trailing)
-                                
-                                Text("\(folder.2)项")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.secondary)
+                                .frame(width: 140)
+                                .padding(.vertical, 10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color(UIColor.secondarySystemBackground))
+                                        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(selectedFolderId == folder.0 ? AppTheme.Colors.primary : Color.clear, lineWidth: 1)
+                                        .padding(.vertical, 1)
+                                )
                             }
-                            .frame(width: 140)
-                            .padding(.vertical, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color(UIColor.secondarySystemBackground))
-                                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedFolderId == folder.0 ? AppTheme.Colors.primary : Color.clear, lineWidth: 1)
-                                    .padding(.vertical, 1)
-                            )
+                            .buttonStyle(PlainButtonStyle())
+                            .id(folder.0) // 关键：为每个项设置唯一id
                         }
-                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(.horizontal)
+                }
+                .onChange(of: selectedFolderId) { id in
+                    if let id = id {
+                        withAnimation {
+                            proxy.scrollTo(id, anchor: .center)
+                        }
                     }
                 }
-                .padding(.horizontal)
             }
         }
     }

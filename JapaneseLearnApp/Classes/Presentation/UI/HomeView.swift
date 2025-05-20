@@ -535,14 +535,11 @@ struct HomeView: View {
                     } else if userFolders.isEmpty {
                         // 空状态
                         HStack {
-//                            Text("暂无收藏夹")
-//                                .font(.subheadline)
-//                                .foregroundColor(.gray)
                             Spacer()
                             NavigationLink(destination: FavoritesView(
                                 favoriteViewModel: DetailViewModel(
                                     dictionaryService: DictionaryService(dictionaryRepository: DictionaryDataRepository()),
-                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: "1989103009"
+                                    favoriteService: FavoriteService(favoriteRepository: FavoriteDataRepository()), wordId: ""
                                 )
                             )) {
                                 Text("创建收藏夹")
@@ -554,7 +551,6 @@ struct HomeView: View {
                             }
                             Spacer()
                         }
-//                        .frame(height: 100)
                     } else {
                         // 显示收藏夹
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
@@ -619,7 +615,6 @@ struct HomeView: View {
             }
             .padding(AppTheme.Spacing.cardPadding)
         }
-//        .frame(height: userViewModel.isLoggedIn ? 220 : 150)
         .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
     
@@ -663,8 +658,6 @@ struct HomeView: View {
         }
     }
 }
-
-// 学习建议卡片
 
 // 学习建议卡片
 private var learningTipsCard: some View {
