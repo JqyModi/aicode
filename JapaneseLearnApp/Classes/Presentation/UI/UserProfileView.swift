@@ -325,6 +325,7 @@ struct UserProfileView: View {
                         Rectangle()
                             .fill(selectedTab == index ? AppTheme.Colors.primary : Color.clear)
                             .frame(height: 3)
+                            .padding(.horizontal, 32)
                             .cornerRadius(1.5)
                     }
                 }
@@ -332,7 +333,7 @@ struct UserProfileView: View {
             }
         }
         .padding(.vertical, 5)
-        .background(Color(UIColor.secondarySystemBackground))
+//        .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(12)
     }
     
