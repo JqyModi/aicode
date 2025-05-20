@@ -168,9 +168,9 @@ struct FavoritesView: View {
         .navigationBarHidden(true)
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                animateGradient.toggle()
-            }
+//            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                animateGradient.toggle()
+//            }
             
             // 加载收藏数据
             loadFavoriteData()

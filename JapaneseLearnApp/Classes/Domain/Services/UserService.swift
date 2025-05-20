@@ -19,19 +19,14 @@ class UserService: UserServiceProtocol {
     
     // MARK: - UserServiceProtocol 实现
     func signInWithApple() -> AnyPublisher<UserProfileDomain, UserErrorDomain> {
-        // 注意：这里简化了Apple登录流程，实际应用中需要处理ASAuthorizationController
-        // 这里假设Apple登录的令牌和授权码已经在UI层获取并传递给数据层
-        return userRepository.getCurrentUser()
-            .flatMap { user -> AnyPublisher<UserEntity, Error> in
-                if let user = user {
-                    return Just(user)
-                        .setFailureType(to: Error.self)
-                        .eraseToAnyPublisher()
-                } else {
-                    return Fail(error: NSError(domain: "UserService", code: 401, userInfo: [NSLocalizedDescriptionKey: "用户未登录"]))
-                        .eraseToAnyPublisher()
-                }
-            }
+        // 已废弃的简化版方法，保留以兼容旧代码
+        return Fail(error: UserErrorDomain.authenticationFailed)
+            .eraseToAnyPublisher()
+    }
+    
+    func signInWithApple(identityToken: Data, authorizationCode: Data, fullName: PersonNameComponents?, email: String?, userIdentifier: String) -> AnyPublisher<UserProfileDomain, UserErrorDomain> {
+        // 将UI层获取的Apple登录信息传递给数据层
+        return userRepository.signInWithApple(identityToken: identityToken, authorizationCode: String(data: authorizationCode, encoding: .utf8) ?? "", fullName: fullName, email: email, userIdentifier: userIdentifier)
             .map { entity -> UserProfileDomain in
                 return self.mapToUserProfileDomain(from: entity)
             }

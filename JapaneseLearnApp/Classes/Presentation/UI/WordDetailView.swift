@@ -123,9 +123,9 @@ struct WordDetailView: View {
         .navigationBarHidden(true)
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                animateGradient.toggle()
-            }
+//            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                animateGradient.toggle()
+//            }
         }
         // 使用task修饰符确保在视图出现前就开始加载数据
         .task {

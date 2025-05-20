@@ -88,9 +88,9 @@ struct UserProfileView: View {
         .navigationBarHidden(true)
         .onAppear {
             // 启动渐变动画
-            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
-                animateGradient.toggle()
-            }
+//            withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: true)) {
+//                animateGradient.toggle()
+//            }
             
             // 加载用户数据
             userViewModel.loadUserProfile()

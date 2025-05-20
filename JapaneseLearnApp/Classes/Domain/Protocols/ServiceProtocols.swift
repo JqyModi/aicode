@@ -55,8 +55,11 @@ protocol FavoriteServiceProtocol {
 
 // MARK: - 用户服务协议
 protocol UserServiceProtocol {
-    // Apple ID登录
+    // Apple ID登录（简化版，已废弃）
     func signInWithApple() -> AnyPublisher<UserProfileDomain, UserErrorDomain>
+    
+    // Apple ID登录（完整版）
+    func signInWithApple(identityToken: Data, authorizationCode: Data, fullName: PersonNameComponents?, email: String?, userIdentifier: String) -> AnyPublisher<UserProfileDomain, UserErrorDomain>
     
     // 获取用户信息
     func getUserProfile() -> AnyPublisher<UserProfileDomain, UserErrorDomain>

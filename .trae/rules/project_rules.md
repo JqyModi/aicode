@@ -7,6 +7,7 @@
 - 严格遵循MVVM + Clean Architecture架构
 - 项目分为表现层(Presentation)、业务层(Domain)和数据层(Data)三层结构
 - 各层职责明确分离，遵循单一职责原则
+- 采用了"无后端"架构，主要依靠Realm本地数据库、CloudKit云同步和AppleAuth用户认证
 
 ### 1.2 目录结构
 

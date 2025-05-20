@@ -62,6 +62,10 @@ class UserAuthDataRepository: UserAuthDataRepositoryProtocol {
                             lastSyncTime: existingUser.lastSyncTime
                         )
                         
+                        // 保存当前用户ID到UserDefaults
+                        UserDefaults.standard.set(existingUser.objectId, forKey: "currentUserId")
+                        UserDefaults.standard.synchronize()
+                        
                         promise(.success(userEntity))
                     } else {
                         // 创建新用户
@@ -97,6 +101,10 @@ class UserAuthDataRepository: UserAuthDataRepositoryProtocol {
                             settings: settingsEntity,
                             lastSyncTime: nil
                         )
+                        
+                        // 保存当前用户ID到UserDefaults
+                        UserDefaults.standard.set(newUser.objectId, forKey: "currentUserId")
+                        UserDefaults.standard.synchronize()
                         
                         promise(.success(userEntity))
                     }
@@ -182,7 +190,7 @@ class UserAuthDataRepository: UserAuthDataRepositoryProtocol {
     
     func signOut() -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { [weak self] promise in
-            guard let self = self else {
+            guard self != nil else {
                 promise(.failure(NSError(domain: "UserAuthDataRepository", code: 0, userInfo: [NSLocalizedDescriptionKey: "实例已被释放"])))
                 return
             }
@@ -196,9 +204,6 @@ class UserAuthDataRepository: UserAuthDataRepositoryProtocol {
     }
     
     func isUserLoggedIn() -> Bool {
-//#if DEBUG
-//        return true
-//#endif
         return UserDefaults.standard.string(forKey: "currentUserId") != nil
     }
 }
