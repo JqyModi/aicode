@@ -15,12 +15,12 @@ struct SettingsView: View {
                             Text("外观")
                                 .font(.headline)
                                 .foregroundColor(AppTheme.Colors.primary)
-                            Toggle("深色模式", isOn: .constant(userViewModel.userSettings.darkMode))
+                            Toggle("深色模式", isOn: $userViewModel.darkMode)
                                 .toggleStyle(SwitchToggleStyle(tint: AppTheme.Colors.primary))
                             HStack {
                                 Text("字体大小")
                                 Spacer()
-                                Text("\(userViewModel.userSettings.fontSize)")
+                                Text("\(userViewModel.fontSize)")
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -32,7 +32,7 @@ struct SettingsView: View {
                             Text("数据")
                                 .font(.headline)
                                 .foregroundColor(AppTheme.Colors.primary)
-                            Toggle("自动同步", isOn: .constant(userViewModel.userSettings.autoSync))
+                            Toggle("自动同步", isOn: $userViewModel.autoSync)
                                 .toggleStyle(SwitchToggleStyle(tint: AppTheme.Colors.primary))
                             HStack(spacing: 15) {
                                 Button(action: { /* 同步数据 */ }) {

@@ -17,6 +17,11 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
     @Published private(set) var errorMessage: String?
     @Published private(set) var userSettings: UserPreferencesViewModel = UserPreferencesViewModel(darkMode: false, fontSize: 16, autoSync: true)
     
+    // 新增：单独的@Published属性用于双向绑定
+    @Published var darkMode: Bool = false
+    @Published var fontSize: Int = 16
+    @Published var autoSync: Bool = true
+    
     private let userService: UserServiceProtocol
     private var cancellables = Set<AnyCancellable>()
     
@@ -147,11 +152,15 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
                     self?.errorMessage = "更新设置失败: \(error.localizedDescription)"
                 }
             } receiveValue: { [weak self] updatedSettings in
+                // 同步所有设置项
                 self?.userSettings = UserPreferencesViewModel(
                     darkMode: updatedSettings.darkMode,
                     fontSize: updatedSettings.fontSize,
                     autoSync: updatedSettings.autoSync
                 )
+                self?.darkMode = updatedSettings.darkMode
+                self?.fontSize = updatedSettings.fontSize
+                self?.autoSync = updatedSettings.autoSync
             }
             .store(in: &cancellables)
     }
@@ -171,5 +180,9 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
             fontSize: domainProfile.settings.fontSize,
             autoSync: domainProfile.settings.autoSync
         )
+        // 同步到单独的@Published属性
+        darkMode = domainProfile.settings.darkMode
+        fontSize = domainProfile.settings.fontSize
+        autoSync = domainProfile.settings.autoSync
     }
 }
