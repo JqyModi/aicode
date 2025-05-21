@@ -120,14 +120,19 @@ struct SettingsView: View {
                 .padding(.bottom, 30)
             }
             .background(AppTheme.Colors.background.ignoresSafeArea())
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
             .navigationTitle("设置")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { isPresented = false }) {
                         Image(systemName: "xmark")
-                            .font(.system(size: 18, weight: .medium))
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(AppTheme.Colors.primary)
+                            .frame(width: 36, height: 36)
+                            .background(
+                                Circle()
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                            )
                     }
                 }
             }
