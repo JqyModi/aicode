@@ -20,6 +20,9 @@
 		C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D372DD8A45000AA0EC0 /* AppTheme.swift */; };
 		C5749D462DDC11DC00AA0EC0 /* CreateFolderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */; };
 		C5749D492DDCDD1600AA0EC0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D482DDCDD1600AA0EC0 /* SettingsView.swift */; };
+		C5749D4B2DDD7AD600AA0EC0 /* applaunch.png in Resources */ = {isa = PBXBuildFile; fileRef = C5749D4A2DDD7AD600AA0EC0 /* applaunch.png */; };
+		C5749D4D2DDD7B5600AA0EC0 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D4C2DDD7B5600AA0EC0 /* LaunchView.swift */; };
+		C5749D4F2DDD7BB900AA0EC0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5749D4E2DDD7BB900AA0EC0 /* Launch Screen.storyboard */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
@@ -84,6 +87,9 @@
 		C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderDialog.swift; sourceTree = "<group>"; };
 		C5749D472DDC8BE800AA0EC0 /* JapaneseLearnApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JapaneseLearnApp.entitlements; sourceTree = "<group>"; };
 		C5749D482DDCDD1600AA0EC0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C5749D4A2DDD7AD600AA0EC0 /* applaunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = applaunch.png; sourceTree = "<group>"; };
+		C5749D4C2DDD7B5600AA0EC0 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		C5749D4E2DDD7BB900AA0EC0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -351,6 +357,8 @@
 				C551C4052DB8B467003A0242 /* WordDetailView.swift */,
 				C59604B72DB633AA00123ED1 /* SearchView.swift */,
 				C59604972DB5F06300123ED1 /* HomeView.swift */,
+				C5749D4C2DDD7B5600AA0EC0 /* LaunchView.swift */,
+				C5749D4E2DDD7BB900AA0EC0 /* Launch Screen.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -380,6 +388,7 @@
 				C5AEDA4D2DA261520031B210 /* JapaneseLearnAppApp.swift */,
 				C5AEDA4F2DA261520031B210 /* ContentView.swift */,
 				C5AEDA512DA261560031B210 /* Assets.xcassets */,
+				C5749D4A2DDD7AD600AA0EC0 /* applaunch.png */,
 				C5AEDA532DA261560031B210 /* Preview Content */,
 			);
 			path = JapaneseLearnApp;
@@ -461,8 +470,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5749D4B2DDD7AD600AA0EC0 /* applaunch.png in Resources */,
 				C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */,
 				C5AEDA552DA261560031B210 /* Preview Assets.xcassets in Resources */,
+				C5749D4F2DDD7BB900AA0EC0 /* Launch Screen.storyboard in Resources */,
 				C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +495,7 @@
 				C596048A2DB5400000123ED1 /* UserService.swift in Sources */,
 				C5AE4A6B2DC741FC00A12B42 /* UserProfileView.swift in Sources */,
 				C53ABABD2DD477CF00C0D44B /* HotWordViewModel.swift in Sources */,
+				C5749D4D2DDD7B5600AA0EC0 /* LaunchView.swift in Sources */,
 				C53ABAB32DD18D1B00C0D44B /* WordCloudView.swift in Sources */,
 				C5AEDA502DA261520031B210 /* ContentView.swift in Sources */,
 				C53ABABB2DD477C100C0D44B /* HotWordService.swift in Sources */,
@@ -645,6 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = JapaneseLearnApp/JapaneseLearnApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -656,6 +669,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -679,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = JapaneseLearnApp/JapaneseLearnApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -690,6 +705,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
