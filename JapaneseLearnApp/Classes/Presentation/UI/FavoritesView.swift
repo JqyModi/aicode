@@ -102,7 +102,7 @@ struct FavoritesView: View {
                     topNavigationBar
                     
                     // 主内容区域
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         VStack(spacing: 15) {
                             // 搜索栏
                             searchBar

@@ -138,7 +138,7 @@ struct FolderSelectionView: View {
     
     // MARK: - 收藏夹列表视图
     private var folderListView: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 15) {
                 ForEach(viewModel.folders, id: \.id) { folder in
                     // 收藏夹项

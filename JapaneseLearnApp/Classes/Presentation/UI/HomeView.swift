@@ -165,6 +165,14 @@ struct HomeView: View {
                     .font(.system(size: AppTheme.Sizes.mediumIcon))
                     .foregroundColor(AppTheme.Colors.primary)
             }
+            .sheet(isPresented: $showingSettings) {
+                if #available(iOS 16.4, *) {
+                    SettingsView(userViewModel: userViewModel, isPresented: $showingSettings)
+                        .presentationCompactAdaptation(.fullScreenCover)
+                } else {
+                    SettingsView(userViewModel: userViewModel, isPresented: $showingSettings)
+                }
+            }
         }
         .padding(AppTheme.Spacing.cardPadding)
 //        .background(

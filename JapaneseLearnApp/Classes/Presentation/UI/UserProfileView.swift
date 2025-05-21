@@ -14,7 +14,7 @@ struct UserProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var animateGradient = false
     @State private var showEditProfile = false
-    @State private var showSettings = false
+//    @State private var showSettings = false
     @State private var selectedTab = 0
     @State private var showWordDetail = false
     @State private var selectedWordId: String? = nil
@@ -66,7 +66,7 @@ struct UserProfileView: View {
                 // 顶部导航栏
                 topNavigationBar
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         // 用户信息卡片
                         userInfoCard
@@ -101,15 +101,15 @@ struct UserProfileView: View {
                 .font(.title)
                 .padding()
         }
-        .sheet(isPresented: $showSettings) {
-            // 设置视图（占位）
-            if #available(iOS 16.4, *) {
-                settingsView
-                    .presentationCompactAdaptation(.fullScreenCover)
-            } else {
-                settingsView
-            }
-        }
+//        .sheet(isPresented: $showSettings) {
+//            // 使用独立的设置视图组件
+//            if #available(iOS 16.4, *) {
+//                SettingsView(userViewModel: userViewModel, isPresented: $showSettings)
+//                    .presentationCompactAdaptation(.fullScreenCover)
+//            } else {
+//                SettingsView(userViewModel: userViewModel, isPresented: $showSettings)
+//            }
+//        }
         .sheet(isPresented: $showWordDetail) {
             // 单词详情页面
             if let wordId = selectedWordId {
@@ -149,16 +149,16 @@ struct UserProfileView: View {
             Spacer()
             
             // 设置按钮
-            Button(action: { showSettings = true }) {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(AppTheme.Colors.primary)
-                    .frame(width: 36, height: 36)
-                    .background(
-                        Circle()
-                            .fill(Color(UIColor.secondarySystemBackground))
-                    )
-            }
+//            Button(action: { showSettings = true }) {
+//                Image(systemName: "gearshape")
+//                    .font(.system(size: 18, weight: .medium))
+//                    .foregroundColor(AppTheme.Colors.primary)
+//                    .frame(width: 36, height: 36)
+//                    .background(
+//                        Circle()
+//                            .fill(Color(UIColor.secondarySystemBackground))
+//                    )
+//            }
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
@@ -644,73 +644,6 @@ struct UserProfileView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
-    }
-    
-    // MARK: - 设置视图
-    private var settingsView: some View {
-        NavigationView {
-            List {
-                Section(header: Text("外观")) {
-                    Toggle("深色模式", isOn: .constant(userViewModel.userSettings.darkMode))
-                    
-                    HStack {
-                        Text("字体大小")
-                        Spacer()
-                        Text("(userViewModel.userSettings.fontSize)")
-                            .foregroundColor(.secondary)
-                    }
-                }
-                
-                Section(header: Text("数据")) {
-                    Toggle("自动同步", isOn: .constant(userViewModel.userSettings.autoSync))
-                    
-                    Button(action: { /* 同步数据 */ }) {
-                        Text("立即同步")
-                    }
-                    
-                    Button(action: { /* 清除缓存 */ }) {
-                        Text("清除缓存")
-                            .foregroundColor(.red)
-                    }
-                }
-                
-                Section(header: Text("账户")) {
-                    if userViewModel.isLoggedIn {
-                        Button(action: { userViewModel.signOut() }) {
-                            Text("退出登录")
-                                .foregroundColor(.red)
-                        }
-                    } else {
-                        Button(action: { userViewModel.signInWithApple() }) {
-                            Text("登录")
-                                .foregroundColor(AppTheme.Colors.primary)
-                        }
-                    }
-                }
-                
-                Section(header: Text("关于")) {
-                    HStack {
-                        Text("版本")
-                        Spacer()
-                        Text("1.0.0")
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Button(action: { /* 隐私政策 */ }) {
-                        Text("隐私政策")
-                    }
-                    
-                    Button(action: { /* 用户协议 */ }) {
-                        Text("用户协议")
-                    }
-                }
-            }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("设置")
-            .navigationBarItems(trailing: Button("完成") {
-                showSettings = false
-            })
-        }
     }
 }
 

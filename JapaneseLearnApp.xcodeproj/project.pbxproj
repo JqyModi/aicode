@@ -19,6 +19,7 @@
 		C5749D3A2DD8A45000AA0EC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C5749D382DD8A45000AA0EC0 /* README.md */; };
 		C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D372DD8A45000AA0EC0 /* AppTheme.swift */; };
 		C5749D462DDC11DC00AA0EC0 /* CreateFolderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */; };
+		C5749D492DDCDD1600AA0EC0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5749D482DDCDD1600AA0EC0 /* SettingsView.swift */; };
 		C592EF652DA5291100784427 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; };
 		C592EF662DA5291100784427 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C592EF642DA5291100784427 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C59604702DB4876200123ED1 /* EntityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596045E2DB4876200123ED1 /* EntityModels.swift */; };
@@ -82,6 +83,7 @@
 		C5749D382DD8A45000AA0EC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C5749D442DDC11DC00AA0EC0 /* CreateFolderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderDialog.swift; sourceTree = "<group>"; };
 		C5749D472DDC8BE800AA0EC0 /* JapaneseLearnApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JapaneseLearnApp.entitlements; sourceTree = "<group>"; };
+		C5749D482DDCDD1600AA0EC0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C596045B2DB4876200123ED1 /* word-core-model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "word-core-model.swift"; sourceTree = "<group>"; };
 		C596045D2DB4876200123ED1 /* DataRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocols.swift; sourceTree = "<group>"; };
 		C596045E2DB4876200123ED1 /* EntityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityModels.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		C59604982DB5F06300123ED1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C5749D482DDCDD1600AA0EC0 /* SettingsView.swift */,
 				C52D43362DC9EA9100D46D56 /* FolderSelectionView.swift */,
 				C5AE4A722DC7D2B200A12B42 /* LearningProgressTestView.swift */,
 				C5AE4A6E2DC7C04D00A12B42 /* LearningGoalSettingsView.swift */,
@@ -498,6 +501,7 @@
 				C59604722DB4876200123ED1 /* DataRepositoryProtocols.swift in Sources */,
 				C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */,
 				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
+				C5749D492DDCDD1600AA0EC0 /* SettingsView.swift in Sources */,
 				C59604742DB4876200123ED1 /* RealmManager.swift in Sources */,
 				C596047D2DB49CC200123ED1 /* FavoriteViewModel.swift in Sources */,
 				C59604792DB4912300123ED1 /* SearchViewModel.swift in Sources */,

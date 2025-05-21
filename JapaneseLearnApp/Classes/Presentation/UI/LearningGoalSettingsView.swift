@@ -49,7 +49,7 @@ struct LearningGoalSettingsView: View {
                 // 顶部导航栏
                 topNavigationBar
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 25) {
                         // 目标周期选择
                         goalPeriodSelector

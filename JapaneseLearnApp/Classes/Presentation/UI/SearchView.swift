@@ -260,7 +260,7 @@ struct SearchView: View {
     
     // MARK: - 历史记录和建议视图
     private var historyAndSuggestionsView: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
                 // 搜索建议卡片
                 if !searchViewModel.suggestions.isEmpty {
@@ -487,7 +487,7 @@ struct SearchView: View {
     
     // MARK: - 搜索结果视图
     private var searchResultsView: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 15) {
                 ForEach(searchViewModel.searchResults, id: \.id) { result in
                     wordResultCard(result)
