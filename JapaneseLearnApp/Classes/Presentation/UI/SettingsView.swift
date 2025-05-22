@@ -31,17 +31,29 @@ struct SettingsView: View {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 14) {
                                         Spacer()
-                                            .padding(.trailing, 8)
                                         ForEach(Color.Theme.allCases, id: \.self) { theme in
                                             ZStack {
+                                                if theme == .default {
+                                                    // 混色色轮
+                                                    Circle()
+                                                        .fill(
+                                                            AngularGradient(
+                                                                gradient: Gradient(colors: [
+                                                                    .red, .yellow, .green, .cyan, .blue, .purple, Color(UIColor.magenta), .red
+                                                                ]),
+                                                                center: .center
+                                                            )
+                                                        )
+                                                        .frame(width: 32, height: 32)
+                                                } else {
+                                                    Circle()
+                                                        .fill(theme.color)
+                                                        .frame(width: 32, height: 32)
+                                                }
+                                                // 选中高亮
                                                 Circle()
-                                                    .fill(theme.color)
+                                                    .stroke(userViewModel.themeColorTheme == theme ? Color.accentColor : Color.clear, lineWidth: 3)
                                                     .frame(width: 32, height: 32)
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(userViewModel.themeColorTheme == theme ? Color.accentColor : Color.clear, lineWidth: 3)
-                                                    )
-                                                    .shadow(color: Color.black.opacity(0.08), radius: 2, x: 0, y: 1)
                                                 if userViewModel.themeColorTheme == theme {
                                                     Image(systemName: "checkmark")
                                                         .font(.system(size: 16, weight: .bold))
