@@ -40,7 +40,7 @@ struct SettingsView: View {
                                         .font(.body)
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 14)
                                         .background(AppTheme.Colors.primary)
                                         .cornerRadius(10)
                                 }
@@ -49,7 +49,7 @@ struct SettingsView: View {
                                         .font(.body)
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 14)
                                         .background(Color.red)
                                         .cornerRadius(10)
                                 }
@@ -69,7 +69,7 @@ struct SettingsView: View {
                                         .font(.body)
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 14)
                                         .background(Color.red)
                                         .cornerRadius(10)
                                 }
@@ -79,7 +79,7 @@ struct SettingsView: View {
                                         .font(.body)
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 14)
                                         .background(AppTheme.Colors.primary)
                                         .cornerRadius(10)
                                 }
