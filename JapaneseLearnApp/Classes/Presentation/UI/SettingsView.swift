@@ -137,6 +137,7 @@ struct SettingsView: View {
                 }
             }
         }
+        .preferredColorScheme(userViewModel.darkMode ? .dark : .light)
     }
 
     // MARK: - 卡片分组

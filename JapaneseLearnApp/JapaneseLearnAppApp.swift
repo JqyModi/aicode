@@ -26,18 +26,22 @@ struct JapaneseLearnAppApp: App {
     let dictionaryService = DictionaryService(dictionaryRepository: DictionaryDataRepository())
     let userService = UserService(userRepository: UserAuthDataRepository())
     let hotWordService = HotWordService(hotWordRepository: HotWordDataRepository())
-    
+
+    // 新增：用StateObject持有UserViewModel，便于全局绑定
+    @StateObject private var userViewModel = UserViewModel(userService: UserService(userRepository: UserAuthDataRepository()))
+
     var body: some Scene {
         WindowGroup {
-            // 使用新的HomeView作为主视图
             NavigationView {
                 HomeView(
                     searchViewModel: SearchViewModel(dictionaryService: dictionaryService),
-                    userViewModel: UserViewModel(userService: userService),
+                    userViewModel: userViewModel,
                     hotWordViewModel: HotWordViewModel(hotWordService: hotWordService)
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            // 关键：根据userViewModel.darkMode切换主题
+            .preferredColorScheme(userViewModel.darkMode ? .dark : .light)
         }
     }
 }
