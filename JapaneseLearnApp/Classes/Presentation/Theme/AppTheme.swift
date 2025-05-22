@@ -16,11 +16,21 @@ struct AppTheme {
     struct Colors {
         // 主题色
 //        static let primary = Color("Primary")
-        static let primary = Color.randomColor()
-        static let primaryLight = primary.opacity(0.7)
-        static let primaryLighter = primary.opacity(0.5)
-        static let primaryLightest = primary.opacity(0.3)
-        static let primaryDark = primary.opacity(1.2)
+        static var primary: Color {
+            UserViewModel.globalThemeColor
+        }
+        static var primaryLight: Color {
+            UserViewModel.globalThemeColor.opacity(0.7)
+        }
+        static var primaryLighter: Color {
+            UserViewModel.globalThemeColor.opacity(0.5)
+        }
+        static var primaryLightest: Color {
+            UserViewModel.globalThemeColor.opacity(0.3)
+        }
+        static var primaryDark: Color {
+            UserViewModel.globalThemeColor.opacity(1.2)
+        }
         
         // 背景色
         static let background = Color(UIColor.systemBackground)

@@ -21,7 +21,7 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
     @Published var darkMode: Bool = false
     @Published var fontSize: Int = 16
     @Published var autoSync: Bool = true
-    
+    @Published var themeColorTheme: Color.Theme = .default
     private let userService: UserServiceProtocol
     private var cancellables = Set<AnyCancellable>()
     
@@ -30,12 +30,26 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
         return userService.isUserLoggedIn()
     }
     
+    // MARK: - 主题色切换
+    /// 切换主题色并持久化
+    func changeThemeColor(to theme: Color.Theme) {
+        themeColorTheme = theme
+        // 持久化到UserDefaults
+        UserDefaults.standard.set(theme.id, forKey: "themeColorThemeId")
+        // 可扩展：如有云端同步需求，可在此调用同步方法
+    }
+    /// 加载主题色（启动时调用）
+    func loadThemeColor() {
+        let id = UserDefaults.standard.integer(forKey: "themeColorThemeId")
+        themeColorTheme = Color.Theme.from(id: id)
+    }
+    
     // MARK: - 初始化
     init(userService: UserServiceProtocol) {
         self.userService = userService
-        
         super.init()
         loadUserProfile()
+        loadThemeColor()
     }
     
     // MARK: - 公共方法
@@ -184,5 +198,13 @@ class UserViewModel: NSObject, UserViewModelProtocol, ASAuthorizationControllerD
         darkMode = domainProfile.settings.darkMode
         fontSize = domainProfile.settings.fontSize
         autoSync = domainProfile.settings.autoSync
+    }
+    
+    // MARK: - 静态属性：全局主题色
+    /// 获取当前全局主题色（供全局UI引用）
+    static var globalThemeColor: Color {
+        // 通过UserDefaults获取当前主题色id
+        let id = UserDefaults.standard.integer(forKey: "themeColorThemeId")
+        return Color.Theme.from(id: id).color
     }
 }

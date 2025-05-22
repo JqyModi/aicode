@@ -17,11 +17,46 @@ struct SettingsView: View {
                                 .foregroundColor(AppTheme.Colors.primary)
                             Toggle("深色模式", isOn: $userViewModel.darkMode)
                                 .toggleStyle(SwitchToggleStyle(tint: AppTheme.Colors.primary))
-                            HStack {
-                                Text("字体大小")
-                                Spacer()
-                                Text("\(userViewModel.fontSize)")
-                                    .foregroundColor(.secondary)
+//                            HStack {
+//                                Text("字体大小")
+//                                Spacer()
+//                                Text("\(userViewModel.fontSize)")
+//                                    .foregroundColor(.secondary)
+//                            }
+                            // 新增：主题色选择器
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("主题色")
+//                                    .font(.subheadline)
+//                                    .foregroundColor(.secondary)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 14) {
+                                        Spacer()
+                                            .padding(.trailing, 8)
+                                        ForEach(Color.Theme.allCases, id: \.self) { theme in
+                                            ZStack {
+                                                Circle()
+                                                    .fill(theme.color)
+                                                    .frame(width: 32, height: 32)
+                                                    .overlay(
+                                                        Circle()
+                                                            .stroke(userViewModel.themeColorTheme == theme ? Color.accentColor : Color.clear, lineWidth: 3)
+                                                    )
+                                                    .shadow(color: Color.black.opacity(0.08), radius: 2, x: 0, y: 1)
+                                                if userViewModel.themeColorTheme == theme {
+                                                    Image(systemName: "checkmark")
+                                                        .font(.system(size: 16, weight: .bold))
+                                                        .foregroundColor(.white)
+                                                }
+                                            }
+                                            .onTapGesture {
+                                                userViewModel.changeThemeColor(to: theme)
+                                            }
+                                            .accessibilityLabel(theme.displayName)
+                                        }
+                                        Spacer()
+                                    }
+                                    .padding(.vertical, 4)
+                                }
                             }
                         }
                     }
