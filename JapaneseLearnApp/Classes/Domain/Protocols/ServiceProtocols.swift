@@ -93,6 +93,7 @@ protocol SyncServiceProtocol {
 protocol HotWordServiceProtocol {
     /// 获取热门词汇列表
     func getHotWords(limit: Int) -> AnyPublisher<[WordCloudWord], Error>
+    func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error>
 }
 
 

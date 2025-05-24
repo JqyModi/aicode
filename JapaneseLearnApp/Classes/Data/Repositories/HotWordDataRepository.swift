@@ -57,6 +57,83 @@ class HotWordDataRepository: HotWordDataRepositoryProtocol {
             }
         }.resume()
     }
+    
+    /// 解析Weblio主页内容
+    func parseWeblioHomepage(completion: @escaping (Result<WeblioHomeContent, Error>) -> Void) {
+        guard let url = URL(string: "https://www.weblio.jp/") else {
+            completion(.failure(NSError(domain: "InvalidURL", code: -1)))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data, let html = String(data: data, encoding: .utf8) else {
+                completion(.failure(NSError(domain: "DataError", code: -2)))
+                return
+            }
+            
+            do {
+                let doc = try SwiftSoup.parse(html)
+                
+                // 解析网站标题
+                let title = try doc.title()
+                
+                // 解析搜索框信息
+                let searchForm = try doc.select("form#searchForm").first()
+                let searchPlaceholder = try searchForm?.select("input#searchWord").attr("placeholder") ?? ""
+                
+                // 解析字典类型列表
+                let dictionaryTypes = try doc.select(".dictListBoxCl a").map { element in
+                    try element.text()
+                }
+                
+                // 解析功能区块
+                let features = try doc.select(".mainBoxCl .mainBoxBtm h2").map { element in
+                    try element.text()
+                }
+                
+                // 创建结果对象
+                let content = WeblioHomeContent(
+                    title: title,
+                    searchPlaceholder: searchPlaceholder,
+                    dictionaryTypes: dictionaryTypes,
+                    features: features
+                )
+                
+                completion(.success(content))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    /// 将解析结果转换为AnyPublisher
+    func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error> {
+        return Future<WeblioHomeContent, Error> { promise in
+            self.parseWeblioHomepage { result in
+                switch result {
+                case .success(let content):
+                    promise(.success(content))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+
+}
+
+/// Weblio主页内容模型
+struct WeblioHomeContent {
+    let title: String
+    let searchPlaceholder: String
+    let dictionaryTypes: [String]
+    let features: [String]
 }
 
 /*

@@ -23,4 +23,8 @@ class HotWordService: HotWordServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+
+    func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error> {
+        return hotWordRepository.getWeblioHomeContent()
+    }
 }

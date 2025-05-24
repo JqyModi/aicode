@@ -73,6 +73,7 @@ class DBWord: Object {
     let examples = List<DBExample>()
     @objc dynamic var relatedWord: DBRelatedWord?
     @objc dynamic var conjugate: DBConjugate?
+    /// 1 单词 2 文法
     let type = RealmOptional<Int>()
     @objc dynamic var romajiHepburn: String? = nil
     @objc dynamic var romajiHepburnCN: String? = nil
@@ -89,6 +90,26 @@ class DBWord: Object {
 class DBWordDetail: Object {
     @objc dynamic var objectId: String = ""
     @objc dynamic var wordId: String = ""
+//    1 名
+//    2 代名
+//    3 形动
+//    4 连体词
+//    5 副词
+//    6 接续
+//    7 感动
+//    8 动
+//    9 形
+//    10 助动
+//    11 助词
+//    12 接头
+//    13 接尾
+//    14 惯用
+//    15 形動ナリ
+//    16 形動タリ
+//    17 形ク
+//    18 形シク
+//    19 枕詞
+//    20 文法
     let partOfSpeech = List<Int>()
 
     override static func primaryKey() -> String? {

@@ -296,6 +296,7 @@ struct UserProfileView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(UIColor.secondarySystemBackground))
+                            .shadow(color: Color.black.opacity(0.03), radius: 8, x: 0, y: 2)
                     )
                 }
             }

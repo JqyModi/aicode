@@ -104,6 +104,9 @@ protocol SyncDataRepositoryProtocol {
 protocol HotWordDataRepositoryProtocol {
     /// 获取热门词汇列表
     func getHotWords(limit: Int) -> AnyPublisher<[WordCloudWord], Error>
+    
+    /// 获取Weblio主页内容
+    func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error>
 }
 
 // MARK: - 数据层枚举类型
