@@ -77,6 +77,7 @@ class DBWord: Object {
     let type = RealmOptional<Int>()
     @objc dynamic var romajiHepburn: String? = nil
     @objc dynamic var romajiHepburnCN: String? = nil
+    /// 音调符号
     @objc dynamic var accent: String? = nil
     @objc dynamic var spell: String? = nil
     @objc dynamic var pron: String? = nil

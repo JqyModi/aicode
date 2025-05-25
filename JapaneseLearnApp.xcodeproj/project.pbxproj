@@ -58,6 +58,8 @@
 		C5AEDA502DA261520031B210 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEDA4F2DA261520031B210 /* ContentView.swift */; };
 		C5AEDA522DA261560031B210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA512DA261560031B210 /* Assets.xcassets */; };
 		C5AEDA552DA261560031B210 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5AEDA542DA261560031B210 /* Preview Assets.xcassets */; };
+		C5F80E322DE2BE1D001B1F12 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F80E312DE2BE1D001B1F12 /* DomainModels.swift */; };
+		C5F80E342DE2BE32001B1F12 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F80E332DE2BE32001B1F12 /* ViewModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -124,6 +126,8 @@
 		C5AEDA4F2DA261520031B210 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C5AEDA512DA261560031B210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5AEDA542DA261560031B210 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C5F80E312DE2BE1D001B1F12 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
+		C5F80E332DE2BE32001B1F12 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -241,6 +245,7 @@
 		C59604652DB4876200123ED1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5F80E312DE2BE1D001B1F12 /* DomainModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 		C59604782DB4912300123ED1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C5F80E332DE2BE32001B1F12 /* ViewModels.swift */,
 				C53ABABC2DD477CF00C0D44B /* HotWordViewModel.swift */,
 				C52D432C2DC91A8800D46D56 /* FavoriteItemViewModel.swift */,
 				C59604802DB50F8800123ED1 /* SyncViewModel.swift */,
@@ -514,6 +520,7 @@
 				C596048E2DB55C6100123ED1 /* FavoriteDataRepository.swift in Sources */,
 				C59604732DB4876200123ED1 /* NetworkManager.swift in Sources */,
 				C5749D492DDCDD1600AA0EC0 /* SettingsView.swift in Sources */,
+				C5F80E322DE2BE1D001B1F12 /* DomainModels.swift in Sources */,
 				C59604742DB4876200123ED1 /* RealmManager.swift in Sources */,
 				C596047D2DB49CC200123ED1 /* FavoriteViewModel.swift in Sources */,
 				C59604792DB4912300123ED1 /* SearchViewModel.swift in Sources */,
@@ -522,6 +529,7 @@
 				C59604762DB4876200123ED1 /* ViewModelProtocols.swift in Sources */,
 				C5749D3B2DD8A45000AA0EC0 /* AppTheme.swift in Sources */,
 				C5AE4A6D2DC766B500A12B42 /* FavoritesView.swift in Sources */,
+				C5F80E342DE2BE32001B1F12 /* ViewModels.swift in Sources */,
 				C596047B2DB4961D00123ED1 /* DetailViewModel.swift in Sources */,
 				C5AE4A6F2DC7C04D00A12B42 /* LearningGoalSettingsView.swift in Sources */,
 				C5AEDA4E2DA261520031B210 /* JapaneseLearnAppApp.swift in Sources */,

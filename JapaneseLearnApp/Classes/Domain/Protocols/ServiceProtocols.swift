@@ -96,6 +96,48 @@ protocol HotWordServiceProtocol {
     func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error>
 }
 
+// MARK: - Weblio功能服务协议
+protocol WeblioServiceProtocol {
+    /// 获取热词排行榜
+    func getHotWordsRanking(limit: Int) -> AnyPublisher<[HotWordRankingDomain], WeblioErrorDomain>
+    
+    /// 获取今日词汇
+    func getTodayWord() -> AnyPublisher<TodayWordDomain, WeblioErrorDomain>
+    
+    /// 获取季节词汇
+    func getSeasonalWords(limit: Int) -> AnyPublisher<[SeasonalWordDomain], WeblioErrorDomain>
+    
+    /// 获取注目词汇
+    func getFeaturedWords(category: FeaturedCategoryDomain, limit: Int) -> AnyPublisher<[FeaturedWordDomain], WeblioErrorDomain>
+    
+    /// 获取主页内容
+    func getHomePageContent() -> AnyPublisher<HomePageContentDomain, WeblioErrorDomain>
+}
+
+// MARK: - 推荐服务协议
+protocol RecommendationServiceProtocol {
+    /// 获取个性化推荐
+    func getPersonalizedRecommendations(limit: Int) -> AnyPublisher<[RecommendedWordDomain], RecommendationErrorDomain>
+    
+    /// 获取智能推荐
+    func getSmartRecommendations(basedOn wordId: String, limit: Int) -> AnyPublisher<[SmartRecommendationDomain], RecommendationErrorDomain>
+    
+    /// 更新推荐偏好
+    func updateRecommendationPreferences(preferences: RecommendationPreferencesDomain) -> AnyPublisher<Bool, RecommendationErrorDomain>
+}
+
+// MARK: - 内容管理服务协议
+protocol ContentManagementServiceProtocol {
+    /// 获取内容分类
+    func getContentCategories() -> AnyPublisher<[ContentCategoryDomain], ContentErrorDomain>
+    
+    /// 按分类获取内容
+    func getContentByCategory(categoryId: String, limit: Int, offset: Int) -> AnyPublisher<CategoryContentDomain, ContentErrorDomain>
+    
+    /// 搜索内容
+    func searchContent(query: String, filters: ContentFiltersDomain) -> AnyPublisher<ContentSearchResultDomain, ContentErrorDomain>
+}
+
 
 // MARK: - 业务层枚举和数据模型
 enum SearchTypeDomain {
@@ -259,4 +301,72 @@ struct SyncProgressInfoDomain {
     let itemsSynced: Int
     let totalItems: Int
     let estimatedTimeRemaining: Int?
+}
+
+
+// MARK: - 业务层数据模型
+struct HotWordRankingDomain {
+    let rank: Int
+    let word: String
+    let reading: String?
+    let searchCount: Int
+    let trend: TrendType
+}
+
+struct TodayWordDomain {
+    let date: Date
+    let word: String
+    let reading: String
+    let meaning: String
+    let example: String?
+    let imageUrl: String?
+}
+
+struct SeasonalWordDomain {
+    let word: String
+    let reading: String
+    let meaning: String
+    let season: SeasonType
+    let relevanceScore: Double
+}
+
+struct FeaturedWordDomain {
+    let word: String
+    let reading: String
+    let meaning: String
+    let category: FeaturedCategoryDomain
+    let featuredReason: String
+}
+
+// MARK: - 枚举类型
+enum SeasonType {
+    case spring, summer, autumn, winter
+}
+
+enum FeaturedCategoryDomain {
+    case trending, educational, cultural, business
+}
+
+enum TrendType {
+    case up, down, stable, new
+}
+
+// MARK: - 错误类型定义
+enum WeblioErrorDomain: Error {
+    case networkError(String)
+    case parsingError(String)
+    case dataNotFound
+    case rateLimitExceeded
+}
+
+enum RecommendationErrorDomain: Error {
+    case userNotLoggedIn
+    case insufficientData
+    case algorithmError(String)
+}
+
+enum ContentErrorDomain: Error {
+    case categoryNotFound
+    case contentUnavailable
+    case filterError(String)
 }

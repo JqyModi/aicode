@@ -92,6 +92,56 @@ protocol HotWordViewModelProtocol: ObservableObject {
     func loadHotWords()
 }
 
+// MARK: - 主页视图模型协议
+protocol HomeViewModelProtocol: ObservableObject {
+    // 输出属性
+    var todayWord: TodayWordViewModel? { get }
+    var hotWordsRanking: [HotWordRankingViewModel] { get }
+    var featuredWords: [FeaturedWordViewModel] { get }
+    var seasonalWords: [SeasonalWordViewModel] { get }
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
+    
+    // 方法
+    func loadHomeContent()
+    func refreshContent()
+    func selectWord(id: String)
+    func viewAllHotWords()
+    func viewAllFeaturedWords()
+}
+
+// MARK: - 推荐视图模型协议
+protocol RecommendationViewModelProtocol: ObservableObject {
+    // 输出属性
+    var personalizedRecommendations: [RecommendedWordViewModel] { get }
+    var smartRecommendations: [SmartRecommendationViewModel] { get }
+    var recommendationCategories: [RecommendationCategoryViewModel] { get }
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
+    
+    // 方法
+    func loadRecommendations()
+    func loadSmartRecommendations(basedOn wordId: String)
+    func updatePreferences(preferences: RecommendationPreferencesViewModel)
+    func dismissRecommendation(id: String)
+}
+
+// MARK: - 分类浏览视图模型协议
+protocol CategoryBrowseViewModelProtocol: ObservableObject {
+    // 输出属性
+    var categories: [WordCategoryViewModel] { get }
+    var selectedCategory: WordCategoryViewModel? { get }
+    var categoryWords: [CategorizedWordViewModel] { get }
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
+    
+    // 方法
+    func loadCategories()
+    func selectCategory(id: String)
+    func loadCategoryWords(categoryId: String)
+    func loadMoreWords()
+}
+
 
 // MARK: - 表现层枚举类型
 enum SearchTypeViewModel {

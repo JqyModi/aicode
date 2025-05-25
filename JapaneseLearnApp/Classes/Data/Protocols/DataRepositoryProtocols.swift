@@ -109,6 +109,42 @@ protocol HotWordDataRepositoryProtocol {
     func getWeblioHomeContent() -> AnyPublisher<WeblioHomeContent, Error>
 }
 
+// MARK: - Weblio功能数据仓库协议
+protocol WeblioDataRepositoryProtocol {
+    /// 获取热词排行榜
+    func getHotWordsRanking(limit: Int) -> AnyPublisher<[HotWordRankingEntity], Error>
+    
+    /// 获取今日词汇
+    func getTodayWord(date: Date) -> AnyPublisher<TodayWordEntity, Error>
+    
+    /// 获取季节词汇
+    func getSeasonalWords(season: SeasonType, limit: Int) -> AnyPublisher<[SeasonalWordEntity], Error>
+    
+    /// 获取注目词汇
+    func getFeaturedWords(category: FeaturedCategory, limit: Int) -> AnyPublisher<[FeaturedWordEntity], Error>
+    
+    /// 获取词汇分类列表
+    func getWordCategories() -> AnyPublisher<[WordCategoryEntity], Error>
+    
+    /// 按分类获取词汇
+    func getWordsByCategory(categoryId: String, limit: Int, offset: Int) -> AnyPublisher<[CategorizedWordEntity], Error>
+    
+    /// 获取Weblio主页配置
+    func getHomePageConfig() -> AnyPublisher<HomePageConfigEntity, Error>
+}
+
+// MARK: - 推荐系统数据仓库协议
+protocol RecommendationDataRepositoryProtocol {
+    /// 获取个性化推荐词汇
+    func getPersonalizedRecommendations(userId: String, limit: Int) -> AnyPublisher<[RecommendedWordEntity], Error>
+    
+    /// 记录用户行为
+    func recordUserBehavior(behavior: UserBehaviorEntity) -> AnyPublisher<Void, Error>
+    
+    /// 获取相关词汇推荐
+    func getRelatedWords(wordId: String, limit: Int) -> AnyPublisher<[RelatedWordEntity], Error>
+}
+
 // MARK: - 数据层枚举类型
 enum SearchTypeEntity {
     case auto      // 自动识别
